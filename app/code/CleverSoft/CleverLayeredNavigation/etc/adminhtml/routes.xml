@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="clevershopby_option" frontName="clevershopby_option">
+            <module name="CleverSoft_CleverLayeredNavigation" />
+        </route>
+
+        <route id="cleversoft_shopby" frontName="cleversoft_shopby">
+            <module name="CleverSoft_CleverLayeredNavigation" before="Magento_Backend" />
+        </route>
+    </router>
+</config>

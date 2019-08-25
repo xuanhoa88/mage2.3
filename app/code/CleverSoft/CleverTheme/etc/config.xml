@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <clevernewsletter>
+            <display_options>
+                <enable>1</enable>
+                <background_color>#FFFFFF</background_color>
+                <background_image></background_image>
+                <intro></intro>
+                <width>700</width>
+                <height>300</height>
+            </display_options>
+            <selected_pages>
+                <showon_allpage>1</showon_allpage>
+            </selected_pages>
+            <advanced_options>
+                <show_type>1</show_type>
+                <load_after>10</load_after>
+                <scroll_pxl>800</scroll_pxl>
+            </advanced_options>
+        </clevernewsletter>
+        <cleversofttheme>
+            <responsive>
+                <page_layout>wide-layout</page_layout>
+                <page_maxi_width>1200</page_maxi_width>
+                <rtl_language>0</rtl_language>
+                <iconlazyload>loading.gif</iconlazyload>
+                <promo_box_enable>0</promo_box_enable>
+                <promo_box_text>Promotion Box Text</promo_box_text>
+                <promo_box_link>Promotion Box Link</promo_box_link>
+                <threshold>0</threshold>
+            </responsive>
+            <header>
+                <sticky_enable>1</sticky_enable>
+                <compare>1</compare>
+                <wishlist>1</wishlist>
+                <layout>layout1</layout>
+                <full_header_width>0</full_header_width>
+                <img_flag>0</img_flag>
+                <canvas_cart>1</canvas_cart>
+            </header>
+            <category>
+                <aspect_ratio>0</aspect_ratio>
+                <aspect_ratio_size></aspect_ratio_size>
+                <alt_image>0</alt_image>
+                <alt_image_column>position</alt_image_column>
+                <alt_image_column_value>2</alt_image_column_value>
+                <image_width>424</image_width>
+                <image_height>541</image_height>
+                <thumbnail_width>150</thumbnail_width>
+                <thumbnail_height>150</thumbnail_height>
+                <small_width>320</small_width>
+                <small_height>320</small_height>
+                <medium_width>640</medium_width>
+                <medium_height>640</medium_height>
+                <large_width>1024</large_width>
+                <large_height>1024</large_height>
+            </category>
+            <category_grid>
+                <display_productname>1</display_productname>
+                <display_name_single_line>0</display_name_single_line>
+                <display_rating>2</display_rating>
+                <display_addtocart>2</display_addtocart>
+                <display_addtolinks>2</display_addtolinks>
+                <addtolinks_simple>2</addtolinks_simple>
+                <addtolinks_position>1</addtolinks_position>
+                <column_count>3</column_count>
+                <column_count_1439>3</column_count_1439>
+                <column_count_1199>2</column_count_1199>
+                <column_count_767>2</column_count_767>
+                <equal_height>1</equal_height>
+
+                <centered>0</centered>
+                <enable_border_boxshadow>1</enable_border_boxshadow>
+                <disable_border_radius>0</disable_border_radius>
+            </category_grid>
+            <infinite_scroll>
+                <ic_type>manual</ic_type>
+                <scroll_buffer>20</scroll_buffer>
+                <load_more_button_text>Load More Posts</load_more_button_text>
+                <load_more_post_text>Loading...</load_more_post_text>
+            </infinite_scroll>
+            <product_page>
+                <image_column>4</image_column>
+                <primary_column>5</primary_column>
+                <secondary_column>3</secondary_column>
+                <lower_primary_column>9</lower_primary_column>
+                <lower_secondary_column>3</lower_secondary_column>
+                <tabs>1</tabs>
+                <tabs_mode>1</tabs_mode>
+                <tabs_threshold>1024</tabs_threshold>
+                <tabs_collapsed>1</tabs_collapsed>
+                <tabs_style>style1</tabs_style>
+                <collateral_position>lowerPrimCol_1</collateral_position>
+                <collateral_reviews>1</collateral_reviews>
+                <collateral_tags>1</collateral_tags>
+                <collateral_related>0</collateral_related>
+                <collateral_upsell>0</collateral_upsell>
+                <related_position>lowerSecCol_1</related_position>
+                <related_template>CleverSoft_CleverTheme::product/list/slider.phtml</related_template>
+                <related_breakpoints>[0, 1], [320, 2], [480, 3], [768, 1]</related_breakpoints>
+                <related_timeout>6000</related_timeout>
+                <related_checkbox>0</related_checkbox>
+                <brand_position>secCol_1</brand_position>
+                <prev_next>1</prev_next>
+                <prev_text><![CDATA[<i class="cs-font clever-icon-caret-left"></i>]]></prev_text>
+                <next_text><![CDATA[<i class="cs-font clever-icon-caret-right"></i>]]></next_text>
+                <enable_sticky_addtocart>1</enable_sticky_addtocart>
+
+                <tab_style></tab_style>
+                <main_image_width>600</main_image_width>
+                <main_image_height>600</main_image_height>
+                <thumb_image_width>75</thumb_image_width>
+                <enable_product_left_stock>1</enable_product_left_stock>
+                <instock_min_value>5</instock_min_value>
+                <instock_max_value>25</instock_max_value>
+                <percent_min_value>3</percent_min_value>
+                <percent_max_value>8</percent_max_value>
+                <quantity_min_value>5</quantity_min_value>
+                <quantity_max_value>25</quantity_max_value>
+                <time_min_value>3</time_min_value>
+                <time_max_value>8</time_max_value>
+                <visitor_min_value>10</visitor_min_value>
+                <visitor_max_value>25</visitor_max_value>
+                <visitor_max_value_stroke>4</visitor_max_value_stroke>
+                <visitor_min_interval>2</visitor_min_interval>
+                <visitor_max_interval>6</visitor_max_interval>
+                <hours_reset_delivery>2</hours_reset_delivery>
+                <time_of_delivery>3</time_of_delivery>
+                <enable_delivery_return>1</enable_delivery_return>
+                <delivery_and_return_title><![CDATA[Delivery & Return]]></delivery_and_return_title>
+                <delivery_and_return_content>
+                    <![CDATA[<h6>SHIPPING</h6>
+                    <ul>
+                        <li>Complimentary ground shipping within 1 to 7 business days</li>
+                        <li>In-store collection available within 1 to 7 business days</li>
+                        <li>Next-day and Express delivery options also available</li>
+                        <li>Purchases are delivered in an orange box tied with a Bolduc ribbon, with the exception of certain items</li>
+                        <li>See the delivery FAQs for details on shipping methods, costs and delivery times</li>
+                    </ul>
+                    <h6>RETURNS AND EXCHANGES</h6>
+                    <ul>
+                        <li>Easy and complimentary, within 14 days</li>
+                        <li>See conditions and procedure in our return FAQs</li>
+                    </ul>]]>
+                </delivery_and_return_content>
+                <enable_ask_product>1</enable_ask_product>
+                <ask_product_title>Ask about this product</ask_product_title>
+                <contact_title_form>Have a question?</contact_title_form>
+                <enable_size_guide>1</enable_size_guide>
+                <size_guide_title>Size Guide</size_guide_title>
+                <size_guide_content>
+                    <![CDATA[<img src="{{media url=&quot;wysiwyg/size_2048x.png&quot;}}" alt="" />]]>
+                </size_guide_content>
+            </product_page>
+            <product_labels>
+                <new>1</new>
+                <new_label_text>NEW</new_label_text>
+                <sale>1</sale>
+                <sale_label_text>SALE</sale_label_text>
+                <sale_label_percent>1</sale_label_percent>
+            </product_labels>
+            <product_slider>
+                <timeout></timeout>
+                <speed>400</speed>
+                <move_items>0</move_items>
+            </product_slider>
+            <magento_blocks>
+                <top_links>1</top_links>
+                <!--<footer_links>1</footer_links>-->
+                <footer_newsletter>1</footer_newsletter>
+            </magento_blocks>
+            <install>
+                <overwrite_blocks>0</overwrite_blocks>
+                <overwrite_pages>0</overwrite_pages>
+            </install>
+        </cleversofttheme>
+        <cleversofttheme_design>
+            <colors>
+                <text_color>#3b3b3b</text_color>
+                <link_color>#3b3b3b</link_color>
+                <link_hover_color>#fc6a21</link_hover_color>
+                <button_bg_color>#fc6a21</button_bg_color>
+                <button_color>#ffffff</button_color>
+                <button_border_color>#ffffff</button_border_color>
+                <button_hover_color>#ffffff</button_hover_color>
+                <button_bg_hover_color>#ef5d14</button_bg_hover_color>
+                <button_border_hover_color>#ffffff</button_border_hover_color>
+                <label_sale_bg_color>#fc6a21</label_sale_bg_color>
+                <label_sale_color>#fff</label_sale_color>
+                <price_color>#f9bf3b</price_color>
+                <heading_color_title>#333333</heading_color_title>
+                <rating_active_color>#f9bf3b</rating_active_color>
+            </colors>
+            <font>
+                <body_font>0</body_font>
+                <font_size>14px</font_size>
+                <primary_font_family_group>google</primary_font_family_group>
+                <primary_font_family_custom>Arial, "Helvetica Neue", Helvetica, sans-serif</primary_font_family_custom>
+                <primary_font_family>Bitter</primary_font_family>
+                <primary_char_subset>latin</primary_char_subset>
+                <primary_font_weight>400</primary_font_weight>
+                <h1_font>0</h1_font>
+                <h1_primary_font_family_group>0</h1_primary_font_family_group>
+                <h2_font>0</h2_font>
+                <h2_primary_font_family_group>0</h2_primary_font_family_group>
+                <h3_font>0</h3_font>
+                <h3_primary_font_family_group>0</h3_primary_font_family_group>
+                <h4_font>0</h4_font>
+                <h4_primary_font_family_group>0</h4_primary_font_family_group>
+                <h5_font>0</h5_font>
+                <h5_primary_font_family_group>0</h5_primary_font_family_group>
+                <h6_font>0</h6_font>
+                <h6_primary_font_family_group>0</h6_primary_font_family_group>
+            </font>
+            <page>
+                <bg_color>#ffffff</bg_color>
+                <bg_image></bg_image>
+                <bg_repeat>repeat</bg_repeat>
+                <bg_attachment>scroll</bg_attachment>
+                <bg_positionx>center</bg_positionx>
+                <bg_positiony>top</bg_positiony>
+                <tex>0</tex>
+                <content_padding_side>15</content_padding_side>
+            </page>
+            <header>
+                <color>#000000</color>
+                <link_color>#383838</link_color>
+                <link_hover_color>#fc6a21</link_hover_color>
+                <header_opacity>1</header_opacity>
+                <bg_color>transparent</bg_color>
+                <bg_image></bg_image>
+                <bg_repeat>no-repeat</bg_repeat>
+                <bg_attachment>scroll</bg_attachment>
+                <bg_positionx>center</bg_positionx>
+                <bg_positiony>top</bg_positiony>
+                <padding_top>10</padding_top>
+                <padding_bottom>10</padding_bottom>
+                <inner_bg_color>#ffffff</inner_bg_color>
+            </header>
+            <header_top>
+                <color>#ffffff</color>
+                <link_color>#ffffff</link_color>
+                <link_hover_color>#fc6a21</link_hover_color>
+                <line_height>36</line_height>
+                <bg_color>#000000</bg_color>
+                <padding_top>10</padding_top>
+                <padding_bottom>10</padding_bottom>
+                <inner_bg_color>transparent</inner_bg_color>
+            </header_top>
+            <header_primary>
+                <line_height>36</line_height>
+                <bg_color>transparent</bg_color>
+                <padding_top>10</padding_top>
+                <padding_bottom>10</padding_bottom>
+                <inner_bg_color>transparent</inner_bg_color>
+            </header_primary>
+            <m_header>
+                <bg_color>transparent</bg_color>
+                <padding_top>10</padding_top>
+                <padding_bottom>10</padding_bottom>
+                <inner_bg_color>transparent</inner_bg_color>
+                <content_padding_side>10</content_padding_side>
+            </m_header>
+            <nav>
+                <font_size>14</font_size>
+                <font_uppercase>1</font_uppercase>
+                <sticky_header>#ffffff</sticky_header>
+                <inner_bg_color>#ffffff</inner_bg_color>
+                <bg_color>transparent</bg_color>
+                <color>#222222</color>
+                <hover_bg_color>transparent</hover_bg_color>
+                <hover_color>#fc6a21</hover_color>
+
+                <canvas_bg_content_color>#1F1F1F</canvas_bg_content_color>
+                <canvas_color>#ffffff</canvas_color>
+                <canvas_hover_color>#fff</canvas_hover_color>
+            </nav>
+            <main>
+                <bg_color>#ffffff</bg_color>
+                <tex>0</tex>
+                <padding_top>10</padding_top>
+                <padding_bottom>10</padding_bottom>
+                <inner_bg_color>#fff</inner_bg_color>
+                <content_padding_top>0</content_padding_top>
+                <content_padding_bottom>0</content_padding_bottom>
+                <content_padding_side>10</content_padding_side>
+            </main>
+            <page_footer>
+                <bg_color>transparent</bg_color>
+                <link_color>#ffffff</link_color>
+                <color>#ffffff</color>
+                <hover_color>#fc6a21</hover_color>
+            </page_footer>
+            <!-- <footer_container>
+                <bg_color>#f7f7f7</bg_color>
+                <link_color>#666666</link_color>
+                <color>#666666</color>
+                <hover_color>#fc6a21</hover_color>
+            </footer_container> -->
+            <product_detail>
+                <bg_color>transparent</bg_color>
+                <color>#ffffff</color>
+            </product_detail>
+        </cleversofttheme_design>
+        <cleversofttheme_custom_css>
+            <css_swing_editor>
+                <custom_css>0</custom_css>
+                <custom_css_enable>0</custom_css_enable>
+            </css_swing_editor>
+        </cleversofttheme_custom_css>
+    </default>
+</config>

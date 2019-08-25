@@ -1,0 +1,93 @@
+{
+  "name": "Video",
+  "title": "Video",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "widget",
+  "icon" : "",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Video",
+  "code": "clever-video",
+  "layouts":[
+  ],
+  "content_fields": [
+    {
+      "type": "text",
+      "name": "youtube_id",
+      "required": false,
+      "visible": true,
+      "label": "Youtube Video ID"
+    },
+    {
+      "type": "text",
+      "name": "video_mp4",
+      "required": false,
+      "visible": true,
+      "label": "Video Mp4"
+    },
+    {
+      "type": "text",
+      "name": "video_ogg",
+      "required": false,
+      "visible": true,
+      "label": "Video Ogg"
+    },
+    {
+      "type": "text",
+      "name": "video_webm",
+      "required": false,
+      "visible": true,
+      "label": "Video Webm"
+    },
+    {
+      "type": "toggle",
+      "name": "auto_play",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Auto Play"
+    },
+    {
+      "type": "toggle",
+      "name": "auto_loop",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Loop"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "toggle",
+      "name": "parallax",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Parallax"
+    },
+    {
+      "type": "slider",
+      "name": "volume",
+      "required": false,
+      "min":0,
+      "max":100,
+      "visible": true,
+      "label": "Volume(Not effect with Slider)"
+    }
+  ]
+}

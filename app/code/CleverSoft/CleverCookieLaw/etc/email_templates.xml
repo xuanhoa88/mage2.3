@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="cookielaw_general_delete_email_template" label="Delete Email" file="delete_email_template.html" type="html" module="CleverSoft_CleverCookieLaw" area="frontend"/>
+    <template id="cookielaw_general_rectify_email_template" label="Rectify Email" file="rectify_email_template.html" type="html" module="CleverSoft_CleverCookieLaw" area="frontend"/>
+    <template id="cookielaw_general_complaint_email_template" label="Complaint Email" file="complaint_email_template.html" type="html" module="CleverSoft_CleverCookieLaw" area="frontend"/>
+    <template id="cookielaw_general_data_email_template" label="Data Email" file="data_email_template.html" type="html" module="CleverSoft_CleverCookieLaw" area="frontend"/>
+    <template id="cookielaw_general_confirm_email_template" label="Confirm Email" file="confirm_email_template.html" type="html" module="CleverSoft_CleverCookieLaw" area="frontend"/>
+    <template id="cookielaw_general_cancel_email_template" label="Cancel Email" file="cancel_email_template.html" type="html" module="CleverSoft_CleverCookieLaw" area="frontend"/>
+</config>

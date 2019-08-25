@@ -1,0 +1,130 @@
+<?php
+$footerDesktop = json_decode($this->getFooterDesktop());
+$footerMobile = json_decode($this->getFooterMobile());
+$footerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\FooterData');
+$settingData = $footerBuilderHelper->getSettingData();
+?>
+
+<link rel="stylesheet" media="all" href="<?php echo $this->helper('CleverSoft\CleverTheme\Helper\FooterCssgen')->getStyleFile();?>" />
+<div class="footer">
+<?php if($footerDesktop):?>
+	<?php
+	    $tops = isset($footerDesktop->top) ? $footerDesktop->top : '';
+	    $mains = isset($footerDesktop->main) ? $footerDesktop->main : '';
+	    $bottoms = isset($footerDesktop->bottom) ? $footerDesktop->bottom : '';
+    ?>
+    <div class="show-on-desktop d-none d-lg-block">
+        <!-- top -->
+        <?php if($tops):?>
+            <div class=" footer-top">
+                <?php if (isset($settingData->{'_customize-radio-footer_top_width'}) && $settingData->{'_customize-radio-footer_top_width'}): ?>
+                <div class="container">
+                    <?php endif;?>
+                    <div class="<?php echo isset($settingData->{'_customize-radio-footer_top_width'}) && $settingData->{'_customize-radio-footer_top_width'} ? '': 'container' ?>">
+                        <div class="row <?php echo isset($settingData->{'_customize_footer-top_align-item'}) && $settingData->{'_customize_footer-top_align-item'} ? $settingData->{'_customize_footer-top_align-item'}: '' ?> <?php echo isset($settingData->{'_customize_footer-top_justify-content'}) && $settingData->{'_customize_footer-top_justify-content'} ? $settingData->{'_customize_footer-top_justify-content'}: '' ?>">
+                            <?php echo $this->renderRow($tops, '', 'desktop');?>
+                        </div>
+                    </div>
+                    <?php if (isset($settingData->{'_customize-radio-footer_top_width'}) && $settingData->{'_customize-radio-footer_top_width'}): ?>
+                </div>
+            <?php endif;?>
+            </div>
+        <?php endif;?>
+
+        <!-- mains -->
+        <?php if($mains):?>
+            <div class=" footer-middle">
+                <?php if (isset($settingData->{'_customize-radio-footer_middle_width'}) && $settingData->{'_customize-radio-footer_middle_width'}): ?>
+                <div class="container">
+                    <?php endif;?>
+                    <div class="<?php echo isset($settingData->{'_customize-radio-footer_middle_width'}) && $settingData->{'_customize-radio-footer_middle_width'} ? '': 'container' ?>">
+                        <div class="row <?php echo isset($settingData->{'_customize_footer-middle_align-item'}) && $settingData->{'_customize_footer-middle_align-item'} ? $settingData->{'_customize_footer-middle_align-item'}: '' ?> <?php echo isset($settingData->{'_customize_footer-middle_justify-content'}) && $settingData->{'_customize_footer-middle_justify-content'} ? $settingData->{'_customize_footer-middle_justify-content'}: '' ?>">
+                            <?php echo $this->renderRow($mains, '', 'desktop');?>
+                        </div>
+                    </div>
+                    <?php if (isset($settingData->{'_customize-radio-footer_middle_width'}) && $settingData->{'_customize-radio-footer_middle_width'}): ?>
+                </div>
+            <?php endif;?>
+            </div>
+        <?php endif;?>
+
+        <!-- bottom -->
+        <?php if($bottoms):?>
+            <div class=" footer-bottom">
+                <?php if (isset($settingData->{'_customize-radio-footer_bottom_width'}) && $settingData->{'_customize-radio-footer_bottom_width'}): ?>
+                <div class="container">
+                    <?php endif;?>
+                    <div class="<?php echo isset($settingData->{'_customize-radio-footer_bottom_width'}) && $settingData->{'_customize-radio-footer_bottom_width'} ? '': 'container' ?>">
+                        <div class="row <?php echo isset($settingData->{'_customize_footer-bottom_align-item'}) && $settingData->{'_customize_footer-bottom_align-item'} ? $settingData->{'_customize_footer-bottom_align-item'}: '' ?> <?php echo isset($settingData->{'_customize_footer-bottom_justify-content'}) && $settingData->{'_customize_footer-bottom_justify-content'} ? $settingData->{'_customize_footer-bottom_justify-content'}: '' ?>">
+                            <?php echo $this->renderRow($bottoms, '', 'desktop');?>
+                        </div>
+                    </div>
+                    <?php if (isset($settingData->{'_customize-radio-footer_bottom_width'}) && $settingData->{'_customize-radio-footer_bottom_width'}): ?>
+                </div>
+            <?php endif;?>
+            </div>
+        <?php endif;?>
+    </div>
+
+<?php endif;?>
+
+<?php if($footerMobile):?>
+	<?php
+	    $tops = isset($footerMobile->top) ? $footerMobile->top : '';
+	    $mains = isset($footerMobile->main) ? $footerMobile->main : '';
+	    $bottoms = isset($footerMobile->bottom) ? $footerMobile->bottom : '';
+   	?>
+    <div class="show-on-mobile d-lg-none">
+        <!-- top -->
+        <?php if($tops):?>
+            <div class=" footer-top">
+                <?php if (isset($settingData->{'_customize-radio-footer_top_mobile_width'}) && $settingData->{'_customize-radio-footer_top_mobile_width'}): ?>
+                <div class="container">
+                    <?php endif;?>
+                    <div class="<?php echo isset($settingData->{'_customize-radio-footer_top_mobile_width'}) && $settingData->{'_customize-radio-footer_top_mobile_width'} ? '': 'container' ?>">
+                        <div class="row <?php echo isset($settingData->{'_customize_footer-top_mobile_align-item'}) && $settingData->{'_customize_footer-top_mobile_align-item'} ? $settingData->{'_customize_footer-top_mobile_align-item'}: '' ?> <?php echo isset($settingData->{'_customize_footer-top_mobile_justify-content'}) && $settingData->{'_customize_footer-top_mobile_justify-content'} ? $settingData->{'_customize_footer-top_mobile_justify-content'}: '' ?>">
+                            <?php echo $this->renderRow($tops, '', 'mobile');?>
+                        </div>
+                    </div>
+                    <?php if (isset($settingData->{'_customize-radio-footer_top_mobile_width'}) && $settingData->{'_customize-radio-footer_top_mobile_width'}): ?>
+                </div>
+            <?php endif;?>
+            </div>
+        <?php endif;?>
+
+        <!-- mains -->
+        <?php if($mains):?>
+            <div class=" footer-middle">
+                <?php if (isset($settingData->{'_customize-radio-footer_middle_mobile_width'}) && $settingData->{'_customize-radio-footer_middle_mobile_width'}): ?>
+                <div class="container">
+                    <?php endif;?>
+                    <div class="<?php echo isset($settingData->{'_customize-radio-footer_middle_mobile_width'}) && $settingData->{'_customize-radio-footer_middle_mobile_width'} ? '': 'container' ?>">
+                        <div class="row <?php echo isset($settingData->{'_customize_footer-middle_mobile_align-item'}) && $settingData->{'_customize_footer-middle_mobile_align-item'} ? $settingData->{'_customize_footer-middle_mobile_align-item'}: '' ?> <?php echo isset($settingData->{'_customize_footer-middle_mobile_justify-content'}) && $settingData->{'_customize_footer-middle_mobile_justify-content'} ? $settingData->{'_customize_footer-middle_mobile_justify-content'}: '' ?>">
+                            <?php echo $this->renderRow($mains, '', 'mobile');?>
+                        </div>
+                    </div>
+                    <?php if (isset($settingData->{'_customize-radio-footer_middle_mobile_width'}) && $settingData->{'_customize-radio-footer_middle_mobile_width'}): ?>
+                </div>
+            <?php endif;?>
+            </div>
+        <?php endif;?>
+
+        <!-- bottom -->
+        <?php if($bottoms):?>
+            <div class=" footer-bottom">
+                <?php if (isset($settingData->{'_customize-radio-footer_bottom_mobile_width'}) && $settingData->{'_customize-radio-footer_bottom_mobile_width'}): ?>
+                <div class="container">
+                    <?php endif;?>
+                    <div class="<?php echo isset($settingData->{'_customize-radio-footer_bottom_mobile_width'}) && $settingData->{'_customize-radio-footer_bottom_mobile_width'} ? '': 'container' ?>">
+                        <div class="row <?php echo isset($settingData->{'_customize_footer-bottom_mobile_align-item'}) && $settingData->{'_customize_footer-bottom_mobile_align-item'} ? $settingData->{'_customize_footer-bottom_mobile_align-item'}: '' ?> <?php echo isset($settingData->{'_customize_footer-bottom_mobile_justify-content'}) && $settingData->{'_customize_footer-bottom_mobile_justify-content'} ? $settingData->{'_customize_footer-bottom_mobile_justify-content'}: '' ?>">
+                            <?php echo $this->renderRow($bottoms, '', 'mobile');?>
+                        </div>
+                    </div>
+                    <?php if (isset($settingData->{'_customize-radio-footer_bottom_mobile_width'}) && $settingData->{'_customize-radio-footer_bottom_mobile_width'}): ?>
+                </div>
+            <?php endif;?>
+            </div>
+        <?php endif;?>
+    </div>
+<?php endif;?>
+</div>

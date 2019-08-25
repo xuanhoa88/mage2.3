@@ -1,0 +1,11 @@
+<?php
+$headerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\HeaderData');
+$settingData = $headerBuilderHelper->getSettingData();
+
+	$menu = isset($settingData->{'_customize-select-top_menu'}) && $settingData->{'_customize-select-top_menu'} ? $settingData->{'_customize-select-top_menu'} : '';
+?>
+<?php if($menu):?>
+	<div class="top-menu">
+		<?php echo $this->getLayout()->createBlock("CleverSoft\CleverMegaMenus\Block\Widget\Megamenu")->setMenu($menu)->setTemplate("menu.phtml")->toHtml(); ?>
+	</div>
+<?php endif;?>

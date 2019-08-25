@@ -1,0 +1,903 @@
+<?php
+use Magento\Framework\App\Action\Action;
+?>
+
+<?php
+$mediaUrl = $this->helper('CleverSoft\CleverPinMarker\Helper\Wysiwyg\Images')->getBaseUrl();
+$pinIds = $this->getPinIds();
+$col = 1;
+if ($this->getCollectionData('column')) {
+    $col = $this->getCollectionData('column');
+}
+if (count($pinIds)) {
+    if ($this->getCollectionData('display_type') == 'slider') {
+        echo '<div class="pin-maker pin__wrapper_slider pm-'.$col.'col owl-carousel owl-theme">';
+    } else if($this->getCollectionData('display_type') == 'masonry') {
+        echo '<div class="pin-maker pin__wrapper_masonry grid pm-'.$col.'col">';
+    } else {
+        echo '<div class="pin-maker pm-'.$col.'col">';
+    }
+    foreach ($pinIds as $id) {
+        $pinMarker = $this->getPinMarker($id);
+        $pins = $this->getPinInfo($id);
+
+        if ( $pins ) {
+            $css = array();
+            $css[] = '<style type="text/css" scoped>';
+            $pin_icon_html = '';
+            $pin_icon_html .= '<div id="pin-'.$id.'" class="pin__wrapper grid-item">';
+            $pin_icon_html .= '<div class="pin__image"><img src="'.$mediaUrl.$pinMarker->getImage().'" alt=""></div>';
+            foreach ( $pins as $pin ) {
+                $setting    = $pin->{'settings'};
+                $pin_type   = $setting->{'pin-type'};
+                $popup_type = $setting->{'popup-type'};
+
+                switch ( $pin_type ) {
+                    case 'pin-icon':
+                        $pin_icon_html .= '<div class="pin__type pin__type--icon pin__item--' . ( $pin->{'settings'}->{'id'} ) . '">';
+                            if ( $popup_type == 'link' && $setting->{'link-link'} ) {
+                                $pin_icon_html .= '<a target="' . ( $setting->{'link-link-target'} ) . '" href="' . ( $setting->{'link-link'} ) . '">';
+                            }
+                                $pin_icon_html .= '<i class="pin__icon--add ' . ( $setting->{'icon-size'} ) . '"></i>';
+                            if ( $popup_type == 'link' && $setting->{'link-link'} ) {
+                                $pin_icon_html .= '</a>';
+                            }
+                            if ( $setting->{'popup-title'} && $popup_type != 'product' ) {
+                                $pin_icon_html .= '<div class="pin__title">' . ( $setting->{'popup-title'} ) . '</div>';
+                            }
+
+                            if ( $popup_type == 'product' ) {
+                                if ( $setting->{'product'} ) {
+                                $p_id = $setting->{'product'};
+                                $pin_product = $this->getProductById( $p_id );
+                                    $pin_icon_html .= '<div class="pin__title">' . ( $pin_product->getName() ) . '</div>';
+                                }
+                            }
+
+                            if ( $popup_type != 'link' ) {
+                                $pin_icon_html .= '<div class="pin__popup pin__popup--' . ( $setting->{'popup-position'} ) . ' pin__popup--' . ( $setting->{'popup-anm'} ) . '">';
+
+
+                                $pin_icon_html .= '<div class="pin__close"><span class="cs-font clever-icon-close-1"></span></div>';
+                                    if ( $setting->{'popup-title'} && $popup_type != 'link' && $popup_type != 'product' ) {
+                                        $pin_icon_html .= '<div class="popup__title">' . ( $setting->{'popup-title'} ) . '</div>';
+                                    }
+
+                                    switch ( $popup_type ) {
+                                        case 'text':
+                                            if ( $setting->{'text'} ) {
+                                                $pin_icon_html .= '<div class="popup__content">' . ( $setting->{'text'} ) . '</div>';
+                                            }
+                                            break;
+                                        
+                                        case 'image':
+                                            if ( $setting->{'image'} ) {
+                                                $pin_icon_html .= '<div class="popup__content">';
+                                                    if ( $setting->{'image-link-to'} ) {
+                                                        $pin_icon_html .= '<a target="' . ( $setting->{'image-link-target'} ) . '" href="' . ( $setting->{'image-link-to'} ) . '">';
+                                                    }
+                                                        $pin_icon_html .= '<img src="' . $mediaUrl . ( $setting->{'image'} ) . '" width="" height="" alt="' . ( $setting->{'popup-title'} ) . '" />';
+                                                    if ( $setting->{'image-link-to'} ) {
+                                                        $pin_icon_html .= '</a>';
+                                                    }
+                                                $pin_icon_html .= '</div>';
+                                            }
+                                            break;
+
+                                        case 'video':
+                                            if ( $setting->{'video-link'} ) {
+                                                $id = "";
+                                                $link = explode( 'v=', $setting->{'video-link'} );
+                                                if ( isset( $link[1] ) ) {
+                                                    $link = explode( '&', $link[1] );
+
+                                                    $id = $link[0];
+
+                                                    if ( ! $id ) {
+                                                        $link = explode( '/', $link );
+                                                        $id = $link[ count( $link ) - 1 ];
+                                                    }
+                                                }
+                                                if ( $id ) {
+                                                    $pin_icon_html .= '<div class="popup__content">';
+                                                        $pin_icon_html .= '<iframe src="" source="https://www.youtube.com/embed/' . $id . '?rel=0' . ( $setting->{'video-control'} ? '&controls=1' : '&controls=0' ) . ( $setting->{'video-autoplay'} ? '&autoplay=1' : '' ) . '" frameborder="0"></iframe>';
+                                                    $pin_icon_html .= '</div>';
+                                                }
+                                            }
+                                            break;
+
+                                        case 'product':
+                                            if ( $setting->{'product'} ) {
+                                                $p_id = $setting->{'product'};
+                                                $pin_product = $this->getProductById( $p_id );
+
+                                                if ( $pin_product ) {
+                                                    $pin_icon_html .= '<div class="product-items popup__content popup__content--product">';
+                                                    $pin_icon_html .= '<div class="product-item-info" data-container="product-grid">';
+                                                    $pin_icon_html .= '<div class="zoo-inner-product-item-info product-item">';
+                                                    if ( $setting->{'product-thumbnail'} ) {
+                                                        $pin_icon_html .= '<a href="'.$block->getProductUrl($pin_product).'" class="product photo product-item-photo" tabindex="-1">';
+                                                        $pin_icon_html .= $block->getImage($pin_product,'category_page_grid')->toHtml();
+                                                        $pin_icon_html .= '</a>';
+                                                    }
+
+                                                    $pin_icon_html .= '<div class="product details product-item-details">';
+                                                    if ( $setting->{'product-title'} ) {
+                                                        $pin_icon_html .= '<h5 class="product name product-item-name">';
+                                                        $pin_icon_html .= '<a title="'.$block->escapeHtml($pin_product->getName()).'" href="'.$block->getProductUrl($pin_product).'" class="product-item-link">';
+                                                        $pin_icon_html .= $block->escapeHtml($pin_product->getName());
+                                                        $pin_icon_html .= '</a>';
+                                                        $pin_icon_html .= '</h5>';
+                                                    }
+                                                    $pin_icon_html .= $block->getReviewsSummaryHtml($pin_product, \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW);
+                                                    if ( $setting->{'product-price'} ) {
+                                                        $pin_icon_html .= $block->getProductPrice($pin_product);
+                                                    }
+                                                    $pin_icon_html .= $block->getColorSwatchDetailsHtml($pin_product);
+
+                                                    if ( $setting->{'product-button'} ) {
+                                                        $pin_icon_html .= '<div class="product-item-inner">';    
+                                                        $pin_icon_html .= '<div class="product actions">';    
+                                                        $pin_icon_html .= '<div class="actions-primary">';    
+                                                        if ($pin_product->isSaleable()) {
+                                                            $postParams = $block->getAddToCartPostParams($pin_product);
+                                                            $pin_icon_html .= '<form data-role="tocart-form" data-product-sku="'.$block->escapeHtml($pin_product->getSku()).'" action="'.$postParams['action'].'" method="post">';
+                                                            $pin_icon_html .= '<input type="hidden" name="product" value="'.$postParams['data']['product'].'">';
+                                                            $pin_icon_html .= '<input type="hidden" name="'.Action::PARAM_NAME_URL_ENCODED.'" value="'.$postParams['data'][Action::PARAM_NAME_URL_ENCODED].'">';
+                                                            $pin_icon_html .= $block->getBlockHtml('formkey');
+                                                            $pin_icon_html .= '<button type="submit" title="'.$block->escapeHtml(__('Add to Cart')).'" class="action tocart primary">';
+                                                            $pin_icon_html .= '<span>'.__('Add to Cart').'</span>';
+                                                            $pin_icon_html .= '</button>';
+                                                            $pin_icon_html .= '</form>';
+                                                        } else {
+                                                            if ($pin_product->isAvailable()) {
+                                                                $pin_icon_html .= '<div class="stock available"><span>'.__('In stock').'</span></div>';
+                                                            } else {
+                                                                $pin_icon_html .= '<div class="stock unavailable"><span>'.__('Out of stock').'</span></div>';
+                                                            }
+                                                        }
+                                                        $pin_icon_html .= '</div>';
+                                                        $pin_icon_html .= '</div>';
+                                                    }
+
+                                                    $pin_icon_html .= '</div>';
+                                                    $pin_icon_html .= '</div>';
+                                                    $pin_icon_html .= '</div>';
+                                                    $pin_icon_html .= '</div>';
+                                                    $pin_icon_html .= '</div>';
+
+                                                    if (!$block->isRedirectToCartEnabled()) {
+                                                        $pin_icon_html .= '<script type="text/x-magento-init">';
+                                                        $pin_icon_html .= '{';
+                                                        $pin_icon_html .= '"[data-role=tocart-form], .form.map.checkout": {';
+                                                        $pin_icon_html .= '"catalogAddToCart": {';
+                                                        $pin_icon_html .= '"product_sku": "'.$pin_product->getSku().'"';
+                                                        $pin_icon_html .= '}';
+                                                        $pin_icon_html .= '}';
+                                                        $pin_icon_html .= '}';
+                                                        $pin_icon_html .= '</script>';
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                    }
+                                $pin_icon_html .= '</div>';
+                            }
+                        $pin_icon_html .= '</div>';
+                        break;
+                    
+                    case 'pin-area':
+                        $pin_icon_html .= '<div class="pin__type pin__type--area pin__item--' . ( $pin->{'settings'}->{'id'} ) . '">';
+                            if ( $popup_type == 'link' && $setting->{'link-link'} ) {
+                                $pin_icon_html .= '<a target="' . ( $setting->{'link-link-target'} ) . '" href="' . ( $setting->{'link-link'} ) . '">';
+                            }
+                                if ( $setting->{'area-text'} ) {
+                                    $pin_icon_html .= '<span>' . ( $setting->{'area-text'} ) . '</span>';
+                                }
+                            if ( $popup_type == 'link' && $setting->{'link-link'} ) {
+                                $pin_icon_html .= '</a>';
+                            }
+                            if ( $setting->{'popup-title'} && $popup_type != 'product' ) {
+                                $pin_icon_html .= '<div class="pin__title">' . ( $setting->{'popup-title'} ) . '</div>';
+                            }
+
+                            if ( $popup_type == 'product' ) {
+                                if ( $setting->{'product'} ) {
+                                    $p_id = $setting->{'product'};
+                                    $pin_product = $this->getProductById( $p_id );
+                                    $pin_icon_html .= '<div class="pin__title">' . ( $pin_product->getName() ) . '</div>';
+                                }
+                            }
+
+                            $pin_icon_html .= '<div class="pin__popup pin__popup--' . ( $setting->{'popup-position'} ) . ' pin__popup--' . ( $setting->{'popup-anm'} ) . '">';
+
+                            $pin_icon_html .= '<div class="pin__close"><span class="cs-font clever-icon-close-1"></span></div>';
+                                if ( $setting->{'popup-title'} && $popup_type != 'link' && $popup_type != 'product' ) {
+                                    $pin_icon_html .= '<div class="popup__title">' . ( $setting->{'popup-title'} ) . '</div>';
+                                }
+
+                                switch ( $popup_type ) {
+                                    case 'text':
+                                        if ( $setting->{'text'} ) {
+                                            $pin_icon_html .= '<div class="popup__content">' . ( $setting->{'text'} ) . '</div>';
+                                        }
+                                        break;
+                                    
+                                    case 'image':
+                                        if ( $setting->{'image'} ) {
+                                            $pin_icon_html .= '<div class="popup__content">';
+                                                if ( $setting->{'image-link-to'} ) {
+                                                    $pin_icon_html .= '<a target="' . ( $setting->{'image-link-target'} ) . '" href="' . ( $setting->{'image-link-to'} ) . '">';
+                                                }
+                                                    $pin_icon_html .= '<img src="' . $mediaUrl . ( $setting->{'image'} ) . '" width="" height="" alt="' . ( $setting->{'popup-title'} ) . '" />';
+                                                if ( $setting->{'image-link-to'} ) {
+                                                    $pin_icon_html .= '</a>';
+                                                }
+                                            $pin_icon_html .= '</div>';
+                                        }
+                                        break;
+
+                                    case 'video':
+                                        if ( $setting->{'video-link'} ) {
+                                            $link = explode( 'v=', $setting->{'video-link'} );
+                                            if ( isset( $link[1] ) ) {
+                                                $link = explode( '&', $link[1] );
+
+                                                $id = $link[0];
+
+                                                if ( ! $id ) {
+                                                    $link = explode( '/', $link );
+                                                    $id = $link[ count( $link ) - 1 ];
+                                                }
+                                            }
+                                            if ( $id ) {
+                                                $pin_icon_html .= '<div class="popup__content">';
+                                                    $pin_icon_html .= '<iframe src="" source="https://www.youtube.com/embed/' . $id . '?rel=0' . ( $setting->{'video-control'} ? '&controls=1' : '&controls=0' ) . ( $setting->{'video-autoplay'} ? '&autoplay=1' : '' ) . '" frameborder="0"></iframe>';
+                                                $pin_icon_html .= '</div>';
+                                            }
+                                        }
+                                        break;
+
+                                    case 'product':
+                                        if ( $setting->{'product'} ) {
+                                                $p_id = $setting->{'product'};
+                                                $pin_product = $this->getProductById( $p_id );
+
+                                                if ( $pin_product ) {
+                                                    $pin_icon_html .= '<div class="product-items popup__content popup__content--product">';
+                                                    $pin_icon_html .= '<div class="product-item-info" data-container="product-grid">';
+                                                    $pin_icon_html .= '<div class="zoo-inner-product-item-info product-item">';
+                                                    if ( $setting->{'product-thumbnail'} ) {
+                                                        $pin_icon_html .= '<a href="'.$block->getProductUrl($pin_product).'" class="product photo product-item-photo" tabindex="-1">';
+                                                        $pin_icon_html .= $block->getImage($pin_product,'category_page_grid')->toHtml();
+                                                        $pin_icon_html .= '</a>';
+                                                    }
+
+                                                    $pin_icon_html .= '<div class="product details product-item-details">';
+                                                    if ( $setting->{'product-title'} ) {
+                                                        $pin_icon_html .= '<h5 class="product name product-item-name">';
+                                                        $pin_icon_html .= '<a title="'.$block->escapeHtml($pin_product->getName()).'" href="'.$block->getProductUrl($pin_product).'" class="product-item-link">';
+                                                        $pin_icon_html .= $block->escapeHtml($pin_product->getName());
+                                                        $pin_icon_html .= '</a>';
+                                                        $pin_icon_html .= '</h5>';
+                                                    }
+                                                    $pin_icon_html .= $block->getReviewsSummaryHtml($pin_product, \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW);
+                                                    if ( $setting->{'product-price'} ) {
+                                                        $pin_icon_html .= $block->getProductPrice($pin_product);
+                                                    }
+                                                    $pin_icon_html .= $block->getColorSwatchDetailsHtml($pin_product);
+
+                                                    if ( $setting->{'product-button'} ) {
+                                                        $pin_icon_html .= '<div class="product-item-inner">';    
+                                                        $pin_icon_html .= '<div class="product actions">';    
+                                                        $pin_icon_html .= '<div class="actions-primary">';    
+                                                        if ($pin_product->isSaleable()) {
+                                                            $postParams = $block->getAddToCartPostParams($pin_product);
+                                                            $pin_icon_html .= '<form data-role="tocart-form" data-product-sku="'.$block->escapeHtml($pin_product->getSku()).'" action="'.$postParams['action'].'" method="post">';
+                                                            $pin_icon_html .= '<input type="hidden" name="product" value="'.$postParams['data']['product'].'">';
+                                                            $pin_icon_html .= '<input type="hidden" name="'.Action::PARAM_NAME_URL_ENCODED.'" value="'.$postParams['data'][Action::PARAM_NAME_URL_ENCODED].'">';
+                                                            $pin_icon_html .= $block->getBlockHtml('formkey');
+                                                            $pin_icon_html .= '<button type="submit" title="'.$block->escapeHtml(__('Add to Cart')).'" class="action tocart primary">';
+                                                            $pin_icon_html .= '<span>'.__('Add to Cart').'</span>';
+                                                            $pin_icon_html .= '</button>';
+                                                            $pin_icon_html .= '</form>';
+                                                        } else {
+                                                            if ($pin_product->isAvailable()) {
+                                                                $pin_icon_html .= '<div class="stock available"><span>'.__('In stock').'</span></div>';
+                                                            } else {
+                                                                $pin_icon_html .= '<div class="stock unavailable"><span>'.__('Out of stock').'</span></div>';
+                                                            }
+                                                        }
+                                                        $pin_icon_html .= '</div>';
+                                                        $pin_icon_html .= '</div>';
+                                                    }
+
+                                                    $pin_icon_html .= '</div>';
+                                                    $pin_icon_html .= '</div>';
+                                                    $pin_icon_html .= '</div>';
+                                                    $pin_icon_html .= '</div>';
+                                                    $pin_icon_html .= '</div>';
+
+                                                    if (!$block->isRedirectToCartEnabled()) {
+                                                        $pin_icon_html .= '<script type="text/x-magento-init">';
+                                                        $pin_icon_html .= '{';
+                                                        $pin_icon_html .= '"[data-role=tocart-form], .form.map.checkout": {';
+                                                        $pin_icon_html .= '"catalogAddToCart": {';
+                                                        $pin_icon_html .= '"product_sku": "'.$pin_product->getSku().'"';
+                                                        $pin_icon_html .= '}';
+                                                        $pin_icon_html .= '}';
+                                                        $pin_icon_html .= '}';
+                                                        $pin_icon_html .= '</script>';
+                                                    }
+                                                }
+                                            }
+                                        break;
+                                }
+                            $pin_icon_html .= '</div>';
+                        $pin_icon_html .= '</div>';
+                        break;
+
+                    case 'pin-image':
+                        $pin_icon_html .= '<div class="pin__type pin__type--image pin__item--' . ( $pin->{'settings'}->{'id'} ) . '">';
+                            if ( $popup_type == 'link' && $setting->{'link-link'} ) {
+                                $pin_icon_html .= '<a target="' . ( $setting->{'link-link-target'} ) . '" href="' . ( $setting->{'link-link'} ) . '">';
+                            }
+                                if ( $setting->{'image-file'} ) {
+                                    $pin_icon_html .= '<img src="' . $mediaUrl . ( $setting->{'image-file'} ) . '" width="' . ( $setting->{'image-width'} ) . '" height="' . ( $setting->{'image-height'} ) . '" alt="Pin Image" />';
+                                }
+                            if ( $popup_type == 'link' && $setting->{'link-link'} ) {
+                                $pin_icon_html .= '</a>';
+                            }
+                            if ( $setting->{'popup-title'} && $popup_type != 'product' ) {
+                                $pin_icon_html .= '<div class="pin__title">' . ( $setting->{'popup-title'} ) . '</div>';
+                            }
+
+                            if ( $popup_type == 'product' ) {
+                                if ( $setting->{'product'} ) {
+                                    $p_id = $setting->{'product'};
+                                    $pin_product = $this->getProductById( $p_id );
+                                    $pin_icon_html .= '<div class="pin__title">' . ( $pin_product->getName() ) . '</div>';
+                                }
+                            }
+
+                            $pin_icon_html .= '<div class="pin__popup pin__popup--' . ( $setting->{'popup-position'} ) . ' pin__popup--' . ( $setting->{'popup-anm'} ) . '">';
+
+                            $pin_icon_html .= '<div class="pin__close"><span class="cs-font clever-icon-close-1"></span></div>';
+                                if ( $setting->{'popup-title'} && $popup_type != 'link' && $popup_type != 'product' ) {
+                                    $pin_icon_html .= '<div class="popup__title">' . ( $setting->{'popup-title'} ) . '</div>';
+                                }
+
+                                switch ( $popup_type ) {
+                                    case 'text':
+                                        if ( $setting->{'text'} ) {
+                                            $pin_icon_html .= '<div class="popup__content">' . ( $setting->{'text'} ) . '</div>';
+                                        }
+                                        break;
+                                    
+                                    case 'image':
+                                        if ( $setting->{'image'} ) {
+                                            $pin_icon_html .= '<div class="popup__content">';
+                                                if ( $setting->{'image-link-to'} ) {
+                                                    $pin_icon_html .= '<a target="' . ( $setting->{'image-link-target'} ) . '" href="' . ( $setting->{'image-link-to'} ) . '">';
+                                                }
+                                                    $pin_icon_html .= '<img src="' . $mediaUrl . ( $setting->{'image'} ) . '" width="" height="" alt="' . ( $setting->{'popup-title'} ) . '" />';
+                                                if ( $setting->{'image-link-to'} ) {
+                                                    $pin_icon_html .= '</a>';
+                                                }
+                                            $pin_icon_html .= '</div>';
+                                        }
+                                        break;
+
+                                    case 'video':
+                                        if ( $setting->{'video-link'} ) {
+                                            $link = explode( 'v=', $setting->{'video-link'} );
+                                            if ( isset( $link[1] ) ) {
+                                                $link = explode( '&', $link[1] );
+
+                                                $id = $link[0];
+
+                                                if ( ! $id ) {
+                                                    $link = explode( '/', $link );
+                                                    $id = $link[ count( $link ) - 1 ];
+                                                }
+                                            }
+                                            if ( $id ) {
+                                                $pin_icon_html .= '<div class="popup__content">';
+                                                    $pin_icon_html .= '<iframe src="" source="https://www.youtube.com/embed/' . $id . '?rel=0' . ( $setting->{'video-control'} ? '&controls=1' : '&controls=0' ) . ( $setting->{'video-autoplay'} ? '&autoplay=1' : '' ) . '" frameborder="0"></iframe>';
+                                                $pin_icon_html .= '</div>';
+                                            }
+                                        }
+                                        break;
+
+                                    case 'product':
+                                        if ( $setting->{'product'} ) {
+                                                $p_id = $setting->{'product'};
+                                                $pin_product = $this->getProductById( $p_id );
+
+                                                if ( $pin_product ) {
+                                                    $pin_icon_html .= '<div class="product-items popup__content popup__content--product">';
+                                                    $pin_icon_html .= '<div class="product-item-info" data-container="product-grid">';
+                                                    $pin_icon_html .= '<div class="zoo-inner-product-item-info product-item">';
+                                                    if ( $setting->{'product-thumbnail'} ) {
+                                                        $pin_icon_html .= '<a href="'.$block->getProductUrl($pin_product).'" class="product photo product-item-photo" tabindex="-1">';
+                                                        $pin_icon_html .= $block->getImage($pin_product,'category_page_grid')->toHtml();
+                                                        $pin_icon_html .= '</a>';
+                                                    }
+
+                                                    $pin_icon_html .= '<div class="product details product-item-details">';
+                                                    if ( $setting->{'product-title'} ) {
+                                                        $pin_icon_html .= '<h5 class="product name product-item-name">';
+                                                        $pin_icon_html .= '<a title="'.$block->escapeHtml($pin_product->getName()).'" href="'.$block->getProductUrl($pin_product).'" class="product-item-link">';
+                                                        $pin_icon_html .= $block->escapeHtml($pin_product->getName());
+                                                        $pin_icon_html .= '</a>';
+                                                        $pin_icon_html .= '</h5>';
+                                                    }
+                                                    $pin_icon_html .= $block->getReviewsSummaryHtml($pin_product, \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW);
+                                                    if ( $setting->{'product-price'} ) {
+                                                        $pin_icon_html .= $block->getProductPrice($pin_product);
+                                                    }
+                                                    $pin_icon_html .= $block->getColorSwatchDetailsHtml($pin_product);
+
+                                                    if ( $setting->{'product-button'} ) {
+                                                        $pin_icon_html .= '<div class="product-item-inner">';    
+                                                        $pin_icon_html .= '<div class="product actions">';    
+                                                        $pin_icon_html .= '<div class="actions-primary">';    
+                                                        if ($pin_product->isSaleable()) {
+                                                            $postParams = $block->getAddToCartPostParams($pin_product);
+                                                            $pin_icon_html .= '<form data-role="tocart-form" data-product-sku="'.$block->escapeHtml($pin_product->getSku()).'" action="'.$postParams['action'].'" method="post">';
+                                                            $pin_icon_html .= '<input type="hidden" name="product" value="'.$postParams['data']['product'].'">';
+                                                            $pin_icon_html .= '<input type="hidden" name="'.Action::PARAM_NAME_URL_ENCODED.'" value="'.$postParams['data'][Action::PARAM_NAME_URL_ENCODED].'">';
+                                                            $pin_icon_html .= $block->getBlockHtml('formkey');
+                                                            $pin_icon_html .= '<button type="submit" title="'.$block->escapeHtml(__('Add to Cart')).'" class="action tocart primary">';
+                                                            $pin_icon_html .= '<span>'.__('Add to Cart').'</span>';
+                                                            $pin_icon_html .= '</button>';
+                                                            $pin_icon_html .= '</form>';
+                                                        } else {
+                                                            if ($pin_product->isAvailable()) {
+                                                                $pin_icon_html .= '<div class="stock available"><span>'.__('In stock').'</span></div>';
+                                                            } else {
+                                                                $pin_icon_html .= '<div class="stock unavailable"><span>'.__('Out of stock').'</span></div>';
+                                                            }
+                                                        }
+                                                        $pin_icon_html .= '</div>';
+                                                        $pin_icon_html .= '</div>';
+                                                    }
+
+                                                    $pin_icon_html .= '</div>';
+                                                    $pin_icon_html .= '</div>';
+                                                    $pin_icon_html .= '</div>';
+                                                    $pin_icon_html .= '</div>';
+                                                    $pin_icon_html .= '</div>';
+
+                                                    if (!$block->isRedirectToCartEnabled()) {
+                                                        $pin_icon_html .= '<script type="text/x-magento-init">';
+                                                        $pin_icon_html .= '{';
+                                                        $pin_icon_html .= '"[data-role=tocart-form], .form.map.checkout": {';
+                                                        $pin_icon_html .= '"catalogAddToCart": {';
+                                                        $pin_icon_html .= '"product_sku": "'.$pin_product->getSku().'"';
+                                                        $pin_icon_html .= '}';
+                                                        $pin_icon_html .= '}';
+                                                        $pin_icon_html .= '}';
+                                                        $pin_icon_html .= '</script>';
+                                                    }
+                                                }
+                                            }
+                                        break;
+                                }
+                            $pin_icon_html .= '</div>';
+                        $pin_icon_html .= '</div>';
+                        break;
+                }
+                if ( $setting->{'pin-type'} == 'pin-icon' ) {
+                    $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' {';
+
+                        if ( $pin->{'top'} ) {
+                            $css[] = 'top: ' . ( $pin->{'top'} ) . ';';
+                        }
+
+                        if ( $pin->{'left'} ) {
+                            $css[] = 'left: ' . ( $pin->{'left'} ) . ';';
+                        }
+
+                    $css[] = '}';
+
+                    $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__icon--add {';
+
+                        if ( $setting->{'icon-border-width'} ) {
+                            $css[] = 'border: ' . ( $setting->{'icon-border-width'} ) . 'px solid ' . ( $setting->{'icon-border-color'} ) . ';';
+                        }
+
+                        if ( $setting->{'icon-border-radius'} ) {
+                            $css[] = 'border-radius: ' . ( $setting->{'icon-border-radius'} ) . 'px;';
+                        }
+
+                        if ( $setting->{'icon-color'} ) {
+                            $css[] = 'color: ' . ( $setting->{'icon-color'} ) . ';';
+                        }
+
+                        if ( $setting->{'icon-bg-color'} ) {
+                            $css[] = 'background: ' . ( $setting->{'icon-bg-color'} ) . ';';
+                        }
+
+                    $css[] = '}';
+
+                    $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__icon--add:hover {';
+
+                        if ( $setting->{'icon-border-width'} && $setting->{'icon-border-hover-color'} ) {
+                            $css[] = 'border-color: ' . ( $setting->{'icon-border-hover-color'} ) . ';';
+                        }
+
+                        if ( $setting->{'icon-hover-color'} ) {
+                            $css[] = 'color: ' . ( $setting->{'icon-hover-color'} ) . ';';
+                        }
+
+                        if ( $setting->{'icon-bg-hover-color'} ) {
+                            $css[] = 'background: ' . ( $setting->{'icon-bg-hover-color'} ) . ';';
+                        }
+
+                    $css[] = '}';
+
+                    if ( $popup_type == 'video' ) {
+
+                        $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup iframe {';
+
+                            if ( $setting->{'popup-width'} ) {
+                                $css[] = 'width: ' . ( $setting->{'popup-width'} ) . 'px;';
+                                $css[] = 'height: ' . ( $setting->{'popup-width'} / 1.7777777778 ) . 'px;';
+                            }
+
+                        $css[] = '}';
+
+                        $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup {';
+
+                            if ( $setting->{'popup-border-radius'} ) {
+                                $css[] = 'border-radius: ' . ( $setting->{'popup-border-radius'} ) . 'px;';
+                            }
+
+                            if ( $setting->{'popup-bg-color'} ) {
+                                $css[] = 'background: ' . ( $setting->{'popup-bg-color'} ) . ';';
+                            }
+
+                        $css[] = '}';
+
+                        $css[] = '
+                            .pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup--top,
+                            .pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup--bottom {';
+                            if ( $setting->{'popup-width'} ) {
+                                $css[] = 'left: calc(50% - ' . ( $setting->{'popup-width'} / 2 + 15 ) . 'px);';
+                            }
+                        $css[] = '}';
+
+                    } else {
+                        $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup {';
+
+                            if ( $setting->{'popup-width'} ) {
+                                $css[] = 'width: ' . ( $setting->{'popup-width'} ) . 'px;';
+                            }
+
+                            if ( $setting->{'popup-border-radius'} ) {
+                                $css[] = 'border-radius: ' . ( $setting->{'popup-border-radius'} ) . 'px;';
+                            }
+
+                            if ( $setting->{'popup-bg-color'} ) {
+                                $css[] = 'background: ' . ( $setting->{'popup-bg-color'} ) . ';';
+                            }
+
+                        $css[] = '}';
+
+                        $css[] = '
+                            .pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup--top,
+                            .pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup--bottom {';
+                            if ( $setting->{'popup-width'} ) {
+                                $css[] = 'left: calc(50% - ' . ( $setting->{'popup-width'} / 2 ) . 'px);';
+                            }
+                        $css[] = '}';
+                    }
+
+                    $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .popup__title {';
+                        if ( $setting->{'popup-title-color'} ) {
+                            $css[] = 'color: ' . ( $setting->{'popup-title-color'} ) . ';';
+                        }
+                    $css[] = '}';
+
+                    $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .popup__content {';
+                        if ( $setting->{'popup-content-color'} ) {
+                            $css[] = 'color: ' . ( $setting->{'popup-content-color'} ) . ';';
+                        }
+                    $css[] = '}';
+                }
+
+                // Type area
+                if ( $setting->{'pin-type'} == 'pin-area' ) {
+                    $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' {';
+
+                        if ( $pin->{'top'} ) {
+                            $css[] = 'top: ' . ( $pin->{'top'} ) . ';';
+                        }
+
+                        if ( $pin->{'left'} ) {
+                            $css[] = 'left: ' . ( $pin->{'left'} ) . ';';
+                        }
+
+                        if ( $setting->{'area-text'} ) {
+                            if ( $setting->{'area-text-size'} ) {
+                                $css[] = 'font-size: ' . ( $setting->{'area-text-size'} ) . 'px;';
+                            }
+
+                            if ( $setting->{'area-text-color'} ) {
+                                $css[] = 'color: ' . ( $setting->{'area-text-color'} ) . ';';
+                            }
+                        }
+
+                        if ( $setting->{'area-width'} ) {
+                            $css[] = 'width: ' . ( $setting->{'area-width'} ) . 'px;';
+                        }
+
+                        if ( $setting->{'area-height'} ) {
+                            $css[] = 'height: ' . ( $setting->{'area-height'} ) . 'px;';
+                        }
+
+                        if ( $setting->{'area-border-width'} ) {
+                            $css[] = 'border: ' . ( $setting->{'area-border-width'} ) . 'px solid ' . ( $setting->{'area-border-color'} ) . ';';
+                        }
+
+                        if ( $setting->{'area-border-radius'} ) {
+                            $css[] = 'border-radius: ' . ( $setting->{'area-border-radius'} ) . 'px;';
+                        }
+
+                        if ( $setting->{'area-bg-color'} ) {
+                            $css[] = 'background: ' . ( $setting->{'area-bg-color'} ) . ';';
+                        }
+
+                    $css[] = '}';
+
+                    $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ':hover {';
+
+                        if ( $setting->{'area-text'} && $setting->{'area-text-hover-color'} ) {
+                            $css[] = 'color: ' . ( $setting->{'area-text-hover-color'} ) . ';';
+                        }
+
+                        if ( $setting->{'area-border-width'} && $setting->{'area-border-hover-color'} ) {
+                            $css[] = 'border-color: ' . ( $setting->{'area-border-hover-color'} ) . ';';
+                        }
+
+                        if ( $setting->{'area-bg-hover-color'} ) {
+                            $css[] = 'background: ' . ( $setting->{'area-bg-hover-color'} ) . ';';
+                        }
+                    $css[] = '}';
+
+                    if ( $popup_type == 'video' ) {
+
+                        $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup iframe {';
+
+                            if ( $setting->{'popup-width'} ) {
+                                $css[] = 'width: ' . ( $setting->{'popup-width'} ) . 'px;';
+                                $css[] = 'height: ' . ( $setting->{'popup-width'} / 1.7777777778 ) . 'px;';
+                            }
+
+                        $css[] = '}';
+
+                        $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup {';
+
+                            if ( $setting->{'popup-border-radius'} ) {
+                                $css[] = 'border-radius: ' . ( $setting->{'popup-border-radius'} ) . 'px;';
+                            }
+
+                            if ( $setting->{'popup-bg-color'} ) {
+                                $css[] = 'background: ' . ( $setting->{'popup-bg-color'} ) . ';';
+                            }
+
+                        $css[] = '}';
+
+                        $css[] = '
+                            .pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup--top,
+                            .pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup--bottom {';
+                            if ( $setting->{'popup-width'} ) {
+                                $css[] = 'left: calc(50% - ' . ( $setting->{'popup-width'} / 2 + 15 ) . 'px);';
+                            }
+                        $css[] = '}';
+
+                    } else {
+                        $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup {';
+
+                            if ( $setting->{'popup-width'} ) {
+                                $css[] = 'width: ' . ( $setting->{'popup-width'} ) . 'px;';
+                            }
+
+                            if ( $setting->{'popup-border-radius'} ) {
+                                $css[] = 'border-radius: ' . ( $setting->{'popup-border-radius'} ) . 'px;';
+                            }
+
+                            if ( $setting->{'popup-bg-color'} ) {
+                                $css[] = 'background: ' . ( $setting->{'popup-bg-color'} ) . ';';
+                            }
+
+                        $css[] = '}';
+
+                        $css[] = '
+                            .pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup--top,
+                            .pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup--bottom {';
+                            if ( $setting->{'popup-width'} ) {
+                                $css[] = 'left: calc(50% - ' . ( $setting->{'popup-width'} / 2 ) . 'px);';
+                            }
+                        $css[] = '}';
+                    }
+
+                    $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .popup__title {';
+                        if ( $setting->{'popup-title-color'} ) {
+                            $css[] = 'color: ' . ( $setting->{'popup-title-color'} ) . ';';
+                        }
+                    $css[] = '}';
+
+                    $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .popup__content {';
+                        if ( $setting->{'popup-content-color'} ) {
+                            $css[] = 'color: ' . ( $setting->{'popup-content-color'} ) . ';';
+                        }
+                    $css[] = '}';
+                }
+
+                // Type image
+                if ( $setting->{'pin-type'} == 'pin-image' ) {
+                    $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' {';
+
+                        if ( $pin->{'top'} ) {
+                            $css[] = 'top: ' . ( $pin->{'top'} ) . ';';
+                        }
+
+                        if ( $pin->{'left'} ) {
+                            $css[] = 'left: ' . ( $pin->{'left'} ) . ';';
+                        }
+
+                    $css[] = '}';
+
+                    $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' > img, .pin__item--' . $pin->{'settings'}->{'id'} . ' > a > img {';
+
+                        if ( $setting->{'image-width'} ) {
+                            $css[] = 'width: ' . ( $setting->{'image-width'} ) . 'px;';
+                        }
+
+                        if ( $setting->{'image-height'} ) {
+                            $css[] = 'height: ' . ( $setting->{'image-height'} ) . 'px;';
+                        }
+
+                        if ( $setting->{'image-border-radius'} ) {
+                            $css[] = 'border-radius: ' . ( $setting->{'image-border-radius'} ) . 'px;';
+                        }
+
+                    $css[] = '}';
+
+                    if ( $popup_type == 'video' ) {
+
+                        $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup iframe {';
+
+                            if ( $setting->{'popup-width'} ) {
+                                $css[] = 'width: ' . ( $setting->{'popup-width'} ) . 'px;';
+                                $css[] = 'height: ' . ( $setting->{'popup-width'} / 1.7777777778 ) . 'px;';
+                            }
+
+                        $css[] = '}';
+
+                        $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup {';
+
+                            if ( $setting->{'popup-border-radius'} ) {
+                                $css[] = 'border-radius: ' . ( $setting->{'popup-border-radius'} ) . 'px;';
+                            }
+
+                            if ( $setting->{'popup-bg-color'} ) {
+                                $css[] = 'background: ' . ( $setting->{'popup-bg-color'} ) . ';';
+                            }
+
+                        $css[] = '}';
+
+                        $css[] = '
+                            .pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup--top,
+                            .pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup--bottom {';
+                            if ( $setting->{'popup-width'} ) {
+                                $css[] = 'left: calc(50% - ' . ( $setting->{'popup-width'} / 2 + 15 ) . 'px);';
+                            }
+                        $css[] = '}';
+
+                    } else {
+                        $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup {';
+
+                            if ( $setting->{'popup-width'} ) {
+                                $css[] = 'width: ' . ( $setting->{'popup-width'} ) . 'px;';
+                            }
+
+                            if ( $setting->{'popup-border-radius'} ) {
+                                $css[] = 'border-radius: ' . ( $setting->{'popup-border-radius'} ) . 'px;';
+                            }
+
+                            if ( $setting->{'popup-bg-color'} ) {
+                                $css[] = 'background: ' . ( $setting->{'popup-bg-color'} ) . ';';
+                            }
+
+                        $css[] = '}';
+
+                        $css[] = '
+                            .pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup--top,
+                            .pin__item--' . $pin->{'settings'}->{'id'} . ' .pin__popup--bottom {';
+                            if ( $setting->{'popup-width'} ) {
+                                $css[] = 'left: calc(50% - ' . ( $setting->{'popup-width'} / 2 ) . 'px);';
+                            }
+                        $css[] = '}';
+                    }
+
+                    $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .popup__title {';
+                        if ( $setting->{'popup-title-color'} ) {
+                            $css[] = 'color: ' . ( $setting->{'popup-title-color'} ) . ';';
+                        }
+                    $css[] = '}';
+
+                    $css[] = '.pin__item--' . $pin->{'settings'}->{'id'} . ' .popup__content {';
+                        if ( $setting->{'popup-content-color'} ) {
+                            $css[] = 'color: ' . ( $setting->{'popup-content-color'} ) . ';';
+                        }
+                    $css[] = '}';
+                }
+            }
+            $css[] = '</style>';
+            $pin_icon_html .= preg_replace( '/\n|\t/i', '', implode( '', $css ) );
+            $pin_icon_html .= '</div>';
+            echo $pin_icon_html;
+        }
+
+    }
+    echo '</div>';
+}
+
+
+?>
+
+<script>
+require(['jquery', 'pmScript', 'jQueryLibMin'], function($) {
+    $(document).ready( function () {
+        $('.pin__type--icon').click(function( e ){
+            var $source = '';
+            var $iframe  = $(this).find('iframe');
+            if($iframe.length) {
+                $source  = $iframe.attr('source');
+            }
+            if($source.length) {
+                if($(this).hasClass('pin__opened')) {
+                    $(this).find('iframe').attr('src',$source);
+                } else {
+                    $(this).find('iframe').attr('src','');
+                }
+            }
+        });
+        <?php if($this->getCollectionData('display_type') == 'slider'):?>
+            $('.pin__wrapper_slider').owlCarousel({
+                loop:true,
+                margin:10,
+                items: <?=$this->getCollectionData('column')?>,
+                autoplay: <?= $this->getCollectionData('autoplay') ? "true" : "false"?>,
+                nav: <?= $this->getCollectionData('arrow') ? 'true' : 'false'?>,
+                dots: <?= $this->getCollectionData('dot') ? 'true' : 'false'?>
+            });
+        <?php endif;?>
+       
+    });
+});
+<?php if($this->getCollectionData('display_type') == 'masonry'):?>
+    requirejs( [ 'require', 'jquery', 'masonryLib' ],
+    function( require, $, Masonry ) {
+        require( [ 'jquery-bridget/jquery-bridget' ],
+        function( jQueryBridget ) {
+            jQueryBridget( 'masonry', Masonry, $ );
+            $('.pin__wrapper_masonry').masonry({
+                itemSelector: '.grid-item'
+            })
+        });
+    });
+<?php endif;?>
+</script>
+<style>
+    .pin-maker .grid-item {
+        padding: <?= $this->getCollectionData('gutter_width')?>px;
+    }
+    .pin__wrapper_masonry .grid-item {
+        margin-bottom: <?= $this->getCollectionData('gutter_width')?>px;
+        padding-right: <?= $this->getCollectionData('gutter_width')?>px;
+    }
+</style>

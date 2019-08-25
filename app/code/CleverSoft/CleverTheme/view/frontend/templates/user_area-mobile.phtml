@@ -1,0 +1,16 @@
+<?php
+$headerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\HeaderData');
+$settingData = $headerBuilderHelper->getSettingData();
+
+?>
+<?php if(isset($settingData->{'_customize_header_user_area_mobile_style'}) && $settingData->{'_customize_header_user_area_mobile_style'} == 'link'): ?>
+<?php else:?>
+	<div class="user_area_content"><span class="area-arrow"></span>
+	    <h4>Welcome</h4>
+	    <ul class="header links user_area">
+	        <li class="pslogin-welcome-msg"></li>
+	        <li class="authorization-link"><a href="javascript:void(0)" class="loginpopup">Sign In</a></li>
+	        <li><a href="javascript:void(0)" class="registerpopup">Create An Account</a></li>
+	    </ul>
+	</div>
+<?php endif;?>

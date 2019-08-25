@@ -1,0 +1,585 @@
+{
+  "name": "Image Box",
+  "title": "Image Box",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "widget",
+  "icon" : "",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\ImageBox",
+  "code": "clever-imagebox",
+  "layouts":[
+  ],
+  "content_fields": [
+    {
+      "type": "media",
+      "attribute_type":"attribute",
+      "code":"src",
+      "element_class": "image-box__img",
+      "name": "image",
+      "required": false,
+      "visible": true,
+      "label": "Choose Image"
+    },
+    {
+      "type": "text",
+      "name": "title",
+      "default": "This is the heading",
+      "attribute_type":"html",
+      "element_class": "image-box__content-title",
+      "required": false,
+      "visible": true,
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "name": "description",
+      "element_class": "image-box__content-description",
+      "default": "Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+      "required": false,
+      "visible": true,
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "name": "link",
+      "required": false,
+      "visible": true,
+      "label": "Link to"
+    },
+    {
+      "type": "toggle",
+      "name": "link_option",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Open in new window"
+    },
+    {
+      "type": "toggle",
+      "name": "link_option_rel",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Add nofollow"
+    },
+    {
+      "type": "select",
+      "name": "alignment",
+      "attribute_type": "class",
+      "prefix": "element-position-",
+      "values": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "default": "top",
+      "label": "Image Position"
+    },
+    {
+      "type": "select",
+      "name": "tag",
+      "attribute_type": "class",
+      "element_class": "image-box__content-title",
+      "values": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H7"
+        },
+        {
+          "value": "div",
+          "label": "div"
+        },
+        {
+          "value": "span",
+          "label": "span"
+        },
+        {
+          "value": "p",
+          "label": "p"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "default": "h3",
+      "label": "Title HTML Tag"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "label",
+      "name": "image",
+      "required": false,
+      "visible": true,
+      "label": "Image"
+    },
+    {
+      "type": "slider",
+      "name": "spacing",
+      "required": false,
+      "min":0,
+      "max":100,
+      "default":15,
+      "visible": true,
+      "label": "Spacing (px)"
+    },
+    {
+      "type": "slider",
+      "name": "width",
+      "attribute_type": "style",
+      "element_class":"image-box__wrapper-img",
+      "code": "width",
+      "unit": "%",
+      "required": false,
+      "min":0,
+      "max":100,
+      "default":30,
+      "visible": true,
+      "label": "Width (%)"
+    },
+    {
+      "type": "select",
+      "name": "hover_animation",
+      "attribute_type": "class",
+      "element_class": "image-box__img",
+      "prefix": "element-animation-",
+      "values": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "grow",
+          "label": "Grow"
+        },
+        {
+          "value": "shrink",
+          "label": "Shrink"
+        },
+        {
+          "value": "pulse",
+          "label": "Pulse"
+        },
+        {
+          "value": "pulse-grow",
+          "label": "Pulse Grow"
+        },
+        {
+          "value": "pulse-shrink",
+          "label": "Pulse Shrink"
+        },
+        {
+          "value": "push",
+          "label": "Push"
+        },
+        {
+          "value": "pop",
+          "label": "Pop"
+        },
+        {
+          "value": "bounce-in",
+          "label": "Bounce In"
+        },
+        {
+          "value": "bounce-out",
+          "label": "Bounce Out"
+        },
+        {
+          "value": "rotate",
+          "label": "Rotate"
+        },
+        {
+          "value": "grow-rotate",
+          "label": "Grow Rotate"
+        },
+        {
+          "value": "float",
+          "label": "Float"
+        },
+        {
+          "value": "sink",
+          "label": "Sink"
+        },
+        {
+          "value": "bob",
+          "label": "Bob"
+        },
+        {
+          "value": "hang",
+          "label": "Hang"
+        },
+        {
+          "value": "skew",
+          "label": "Skew"
+        },
+        {
+          "value": "skew-forward",
+          "label": "Skew Forward"
+        },
+        {
+          "value": "skew-backward",
+          "label": "Skew Backward"
+        },
+        {
+          "value": "wobble-vertical",
+          "label": "Wobble Vertical"
+        },
+        {
+          "value": "wobble-horizontal",
+          "label": "Wobble Horizontal"
+        },
+        {
+          "value": "wobble-to-bottom-right",
+          "label": "Wobble To Bottom Right"
+        },
+        {
+          "value": "wobble-to-top-right",
+          "label": "Wobble To Top Right"
+        },
+        {
+          "value": "wobble-top",
+          "label": "Wobble Top"
+        },
+        {
+          "value": "wobble-bottom",
+          "label": "Wobble Bottom"
+        },
+        {
+          "value": "wobble-skew",
+          "label": "Wobble Skew"
+        },
+        {
+          "value": "buzz",
+          "label": "Buzz"
+        },
+        {
+          "value": "buzz-out",
+          "label": "Buzz Out"
+        }        
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Hover Animation"
+    },
+    {
+      "type": "select",
+      "name": "css_filter",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ],
+      "label": "Css Filters"
+    },
+    {
+      "type": "slider",
+      "name": "blur",
+      "required": false,
+      "min":0,
+      "max":10,
+      "visible": true,
+      "label": "Blur (px)",
+      "depends" : {"css_filter" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "brightness",
+      "required": false,
+      "min":0,
+      "max":200,
+      "visible": true,
+      "label": "Brightness (%)",
+      "depends" : {"css_filter" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "contrast",
+      "required": false,
+      "min":0,
+      "max":200,
+      "visible": true,
+      "label": "Contrast (%)",
+      "depends" : {"css_filter" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "saturation",
+      "required": false,
+      "min":0,
+      "max":200,
+      "visible": true,
+      "label": "Saturation (%)",
+      "depends" : {"css_filter" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "hue",
+      "required": false,
+      "min":0,
+      "max":360,
+      "visible": true,
+      "label": "Hue (deg)",
+      "depends" : {"css_filter" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "opacity",
+      "attribute_type": "style",
+      "code": "opacity",
+      "element_class": "image-box__img",
+      "required": false,
+      "min":1,
+      "max":10,
+      "default": 10,
+      "visible": true,
+      "label": "Opacity"
+    },
+    {
+      "type": "slider",
+      "name": "transition",
+      "attribute_type": "style",
+      "code": "transition-duration",
+      "element_class": "image-box__img",
+      "prefix":"0.",
+      "unit": "s",
+      "required": false,
+      "min":0,
+      "max":30,
+      "default": 3,
+      "visible": true,
+      "label": "Transition Duration"
+    },
+    {
+      "type": "select",
+      "name": "active_hover",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ],
+      "label": "Active Hover"
+    },
+    {
+      "type": "slider",
+      "name": "blur_hover",
+      "required": false,
+      "min":0,
+      "max":10,
+      "visible": true,
+      "label": "Blur (px)",
+      "depends" : {"active_hover" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "brightness_hover",
+      "required": false,
+      "min":0,
+      "max":200,
+      "visible": true,
+      "label": "Brightness (%)",
+      "depends" : {"active_hover" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "contrast_hover",
+      "required": false,
+      "min":0,
+      "max":200,
+      "visible": true,
+      "label": "Contrast (%)",
+      "depends" : {"active_hover" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "saturation_hover",
+      "required": false,
+      "min":0,
+      "max":200,
+      "visible": true,
+      "label": "Saturation (%)",
+      "depends" : {"active_hover" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "hue_hover",
+      "required": false,
+      "min":0,
+      "max":360,
+      "visible": true,
+      "label": "Hue (deg)",
+      "depends" : {"active_hover" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "opacity_hover",
+      "required": false,
+      "min":1,
+      "max":10,
+      "default": 10,
+      "visible": true,
+      "label": "Opacity",
+      "depends" : {"active_hover" : "yes"}
+    },
+    {
+      "type": "label",
+      "name": "content",
+      "required": false,
+      "visible": true,
+      "label": "Content"
+    },
+    {
+      "type": "select",
+      "name": "alignment_content_text",
+      "attribute_type": "class",
+      "prefix": "text-",
+      "values": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "justify",
+          "label": "Justify"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "default": "center",
+      "label": "Alignment"
+    },
+    {
+      "type": "select",
+      "name": "alignment_content",
+      "attribute_type": "class",
+      "prefix":"element-vertical-align-",
+      "values": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "default": "top",
+      "label": "Vertical Alignment"
+    },
+    {
+      "type": "label",
+      "name": "title",
+      "required": false,
+      "visible": true,
+      "label": "Title"
+    },
+    {
+      "type": "slider",
+      "name": "spacing_title",
+      "attribute_type": "style",
+      "element_class": "image-box__content-title",
+      "code": "margin-bottom",
+      "unit": "px",
+      "required": false,
+      "min":0,
+      "max":100,
+      "visible": true,
+      "label": "Spacing (px)"
+    },
+    {
+      "type": "color",
+      "name": "color_title",
+      "attribute_type": "style",
+      "element_class": "image-box__content-title",
+      "code": "color",
+      "required": false,
+      "visible": true,
+      "label": "Color Title"
+    },
+    {
+      "type": "label",
+      "name": "label_desc",
+      "required": false,
+      "visible": true,
+      "label": "Description"
+    },
+    {
+      "type": "color",
+      "name": "color_desc",
+      "attribute_type": "style",
+      "element_class": "image-box__content-description",
+      "code": "color",
+      "required": false,
+      "visible": true,
+      "label": "Color Description"
+    }
+  ]
+}

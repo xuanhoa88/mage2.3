@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <cleversoft_shopbybrand>
+            <all_brand_page>
+                <general>1</general>
+                <attribute_code>manufacturer</attribute_code>
+                <title>Brands</title>
+                <meta_title>Brands</meta_title>
+                <meta_keywords>brands,all brands</meta_keywords>
+                <display_featured_brands>1</display_featured_brands>
+                <display_brand_search>1</display_brand_search>
+            </all_brand_page>
+			<product_view_page>
+				<display_brand_logo>1</display_brand_logo>
+			</product_view_page>
+		</cleversoft_shopbybrand>
+	</default>
+</config>

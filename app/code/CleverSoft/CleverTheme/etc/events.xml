@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_predispatch">
+        <observer name="pre_next_product" instance="CleverSoft\CleverTheme\Observer\PreNextObserver" />
+    </event>
+</config>

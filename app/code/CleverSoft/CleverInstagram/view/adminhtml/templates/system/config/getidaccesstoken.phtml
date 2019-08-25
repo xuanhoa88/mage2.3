@@ -1,0 +1,46 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverInstagram
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<div class="pp-buttons-container">
+    <button id="<?php echo $block->getId() ?>" type="button" value="getid" class="getTokenandId">
+        <span><span><span><?php echo $block->escapeHtml($block->getButtonLabel()); ?></span></span></span>
+    </button>
+</div>
+
+<script>
+    require(['jquery'], function(jQuery){
+        jQuery('.getTokenandId').click(function() {
+            //Check if url have hash (#) then remove hash
+            var url_return = "";
+            var url_redirect = window.location.href,
+                index = url_redirect.indexOf('#');
+
+            if (index > 0) {
+                url_return = url_redirect.substring(0, index);
+            }else{
+                url_return = window.location.href;
+            }
+            //End remove hash
+
+            window.location = "https://instagram.com/oauth/authorize/?client_id=3a81a9fa2a064751b8c31385b91cc25c&scope=basic+public_content&redirect_uri=https://smashballoon.com/instagram-feed/instagram-token-plugin/?return_uri=" + url_return + "&response_type=token";
+        });
+
+        jQuery(document).ready(function($) {
+            //Autofill the token and id
+            var hash = window.location.hash,
+                token = hash.substring(14),
+                id = token.split('.')[0];
+            //If there's a hash then autofill the token and id
+            if(hash){
+                $('#instagram_general_accessToken').val(token);
+                $('#instagram_general_userid').val(id);
+            }
+        })
+    });
+</script>

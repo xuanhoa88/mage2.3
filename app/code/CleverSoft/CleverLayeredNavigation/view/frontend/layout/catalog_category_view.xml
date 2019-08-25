@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="CleverSoft\CleverLayeredNavigation\Block\Product\ProductList\Ajax" name="category.clevershopby.ajax" template="product/productlist/ajax.phtml" after="-"/>
+        </referenceContainer>
+        <referenceBlock name="product_list_toolbar_pager">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">CleverSoft_CleverLayeredNavigation::html/pager.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="main.content">
+            <container name="wrap-breadcrumbs" htmlTag="div" htmlClass="wrap-breadcrumbs zoo-breadcrumbs" before="-">
+                <container name="wrap-breadcrumbs-content" htmlTag="div" htmlClass="container">
+                </container>
+            </container>
+        </referenceContainer>
+        <move element="breadcrumbs" destination="wrap-breadcrumbs-content" before="-" />
+        <!-- <referenceContainer name="category.product.list.additional">
+             <block class="CleverSoft\CleverLayeredNavigation\Block\Navigation\Category" template="CleverSoft_CleverLayeredNavigation::layer/view.phtml">
+                 <block class="CleverSoft\CleverLayeredNavigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderernew" as="renderernew" template="CleverSoft_CleverLayeredNavigation::layer/filter.phtml"/>
+             </block>
+         </referenceContainer>-->
+    </body>
+</page>

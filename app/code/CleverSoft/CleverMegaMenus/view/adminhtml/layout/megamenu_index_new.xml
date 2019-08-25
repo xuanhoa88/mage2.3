@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverMegaMenus
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <head>
+        <css src="jquery/fileUploader/css/jquery.fileupload-ui.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="CleverSoft\CleverMegaMenus\Block\Adminhtml\Formfields\NewAction\Fields\MenuItems\Layouts" template="newaction/fields/item/container.phtml" name="clever_menu_items_container">
+                <block class="CleverSoft\CleverMegaMenus\Block\Adminhtml\Formfields\NewAction" name="megamenu_newaction"/>
+                <block class="CleverSoft\CleverMegaMenus\Block\Adminhtml\Formfields\NewAction\Fields\MenuItems\Layouts" name="clever_menu_fields_items_layout" template="newaction/fields/item/layout.phtml" />
+                <block class="CleverSoft\CleverMegaMenus\Block\Adminhtml\Formfields\NewAction\Fields\MenuItems\Layouts" name="clever_menu_fields_col_sample" template="newaction/fields/item/colsample.phtml" />
+            </block>
+        </referenceContainer>
+    </body>
+</page>

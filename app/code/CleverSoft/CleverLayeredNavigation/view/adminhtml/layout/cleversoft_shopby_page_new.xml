@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="CleverSoft\CleverLayeredNavigation\Block\Adminhtml\Page\Edit" name="cleversoft_shopby_page_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="CleverSoft\CleverLayeredNavigation\Block\Adminhtml\Page\Edit\Tabs" name="cleversoft_shopby_page_edit_tabs">
+
+                <block class="CleverSoft\CleverLayeredNavigation\Block\Adminhtml\Page\Edit\Tab\Setup" name="cleversoft_shopby_page_edit_tab_setup"/>
+
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">cleversoft_shopby_page_edit_tab_setup</argument>
+                    <argument name="block" xsi:type="string">cleversoft_shopby_page_edit_tab_setup</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

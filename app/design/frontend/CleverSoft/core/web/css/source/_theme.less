@@ -1,0 +1,116 @@
+// /**
+//  * Copyright © 2015 Magento. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Novetty theme overrides
+//  _____________________________________________
+
+//  Theme file should contain declarations (overrides) ONLY OF EXISTING variables
+//  Otherwise this theme won't be available for parent nesting
+//  All new variables should be placed in local theme lib or local theme files
+
+
+
+
+//  Display settings
+
+@button__border-radius: 0;
+
+//  Border
+@border-width__base: 1px;
+@border-color__base: @main-border__color;
+
+//Border radius
+@border-radius:@border_radius;
+
+//box shadow
+
+//  Layout grid
+//  ---------------------------------------------
+@layout__max-width-1200: 1200px;
+@layout__max-width-1440: 1440px;
+@layout__max-width-1680: 1680px;
+@layout__max-width-1920: 1920px;
+
+//
+//  Links
+//  ---------------------------------------------
+
+@link__text-decoration: none;
+
+@link__visited__text-decoration: none;
+
+@link__hover__text-decoration: none;
+
+@link__active__text-decoration: none;
+
+//
+//  Buttons
+//  ---------------------------------------------
+
+@button__font-weight: @font-weight__semibold;
+
+//  Default = secondary button
+@button__background: @color-gray-darken0;
+@button__border: 1px solid @border-color__base;
+@button__hover__color: @button__color;
+@button__hover__background: darken(@button__background, 5%);
+@button__active__background: @color-gray-darken1;
+
+//  Primary button
+@button-primary__hover__color: @color-white;
+@button-primary__active__background: @link__hover__color;
+@button-primary__active__border: 1px solid @link__hover__color;
+@button-primary__active__color: @color-white;
+
+//  Button with icon
+@button-icon__line-height: @icon-font__line-height;
+
+//
+//  Rating
+//  ---------------------------------------------
+
+@rating-icon__font-size: 28px;
+@rating-icon__letter-spacing: -10px;
+@rating-icon__active__color: #f9bf3b;
+@rating-icon__color: #c7c7c7;
+
+//
+//  Dropdowns
+//  ---------------------------------------------
+
+@dropdown-toggle-icon__content: @icon-down;
+@dropdown-toggle-icon__active__content: @icon-up;
+@dropdown-toggle-icon__font-size: 12px;
+
+//  Split dropdown
+@dropdown-split-actions__padding: 0 @indent__xs;
+@dropdown-split-toggle__actions__padding: false;
+
+//  Actions-toolbar
+@actions-toolbar-actions__position: left;
+@actions-toolbar-actions-primary__margin: 0 15px 0 0;
+
+//
+//  Breadcrumbs
+//  ---------------------------------------------
+
+@breadcrumbs__container-margin: 0 0 15px;
+@breadcrumbs-icon__font-size: 10px;
+@breadcrumbs-icon__font-margin: 0 @indent__s;
+
+//
+//  Popups
+//  ---------------------------------------------
+
+@popup__border: 1px solid @color-gray68;
+@popup-title-headings__level: h2;
+
+//  Popup icons
+@popup-icon-font__size: 16px;
+@popup-icon-font__line-height: 16px;
+@popup-icon-font__color: @color-gray55;
+@popup-icon-font__color-hover: darken(@popup-icon-font__color, 10%);
+@popup-icon-font__color-active: @popup-icon-font__color-hover;

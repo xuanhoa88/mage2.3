@@ -1,0 +1,58 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$theme = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$threshold = $theme->getCfg('responsive/threshold');
+$config = $theme->getCfg('responsive/iconlazyload');
+if (isset($config) and $config !='') {
+    $image = $config;
+    $om = \Magento\Framework\App\ObjectManager::getInstance();
+    $storeManager = $om->create('Magento\Store\Model\StoreManagerInterface');
+    $image_url = $storeManager->getStore()
+            ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'lazyload/' . $image;
+} else {
+    $image_url = $block->getViewFileUrl('CleverSoft_CleverTheme::images/transparent.gif');
+}
+?>
+<script>
+    requirejs(['jquery', 'jQueryLibMin'],function ($) {
+        //container is a selector
+        window.lazyloadfunction = function() {
+            if ($(".clazyload").length > 0) {
+                $(".clazyload").lazyload({
+                    data_attribute: "src",
+                    placeholder: '<?php echo $image_url;?>',
+                    threshold: '<?php echo $threshold;?>',
+                    failure_limit : 10,
+                    load:
+                        function(){
+                            $(this).waitForImages({
+                                finished: function() {
+                                },
+                                each: function() {
+                                    $(this).addClass('clazyloading');
+                                },
+                                waitForAll: true
+                            }).done(function() {
+                                $(this).removeClass('clazyloading');
+                                $(this).addClass('clazyloaded');
+                            })
+                        }
+                });
+            }
+        };
+        $(function () {
+            lazyloadfunction();
+            $(document).bind('ajaxComplete', function(){
+                lazyloadfunction();
+            });
+        });
+    });
+</script>

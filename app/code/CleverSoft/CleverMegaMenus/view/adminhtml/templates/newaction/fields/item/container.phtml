@@ -1,0 +1,62 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverMegaMenus
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+
+$menus = $this->getAllMenu();
+?>
+<div id="clever-spinner" style="display: none">
+    <div class="admin__data-grid-loading-mask"
+         data-role="spinner">
+        <div class="spinner">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+</div>
+<div class="menu-container" id="editting-tabs">
+    <ul >
+        <li>
+            <a href="#clever-menu-form-general-setting"><?php echo __('General Settings') ?></a>
+        </li>
+        <li>
+            <a href="#tabs-main-editing"><?php echo __('Edit Menu') ?></a>
+        </li>
+    </ul>
+    <div id="clever-menu-form-general-setting">
+        <div class="clever-form-inner">
+            <?php echo $block->getChildHtml('megamenu_newaction') ?>
+        </div>
+    </div>
+    <div class="bottom-container" id="tabs-main-editing">
+        <?php if($menus): ?>
+            <div class="selections-container">
+                <div class="manage-menus">
+                    <label for="menu-selection-submit"><?php echo __('Select a menu to edit:') ?></label>
+                    <select id="menu-selection-submit" onchange="window.location = this.value">
+                        <?php $id = $block->getRequest()->getParam('id'); ?>
+                        <?php if(is_null($id)) {
+                            echo '<option selected>'.__('Select Menu').'</option>';
+                        } ?>
+                        <?php foreach ($menus as $menu) : ?>
+                            <option <?php echo $id == $menu->getId() ? 'selected' : ''; ?> value="<?php echo $block->getUrl('megamenu/index/new',['id' => $menu->getId()]) ?>"><?php echo $menu->getName(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <span>Or <a class="blue" href="<?php echo $block->getUrl('megamenu/index/new'); ?>"><?php echo __('create a new menu'); ?></a></span>
+                </div>
+            </div>
+        <?php else : ?>
+            <div class="selections-container">
+                <div class="manage-menus">
+                    <span class="add-edit-menu-action"><?php echo __('Edit your menu below, or'); ?> <a class="blue" href="<?php echo $block->getUrl('megamenu/index/new'); ?>"><?php echo __('create a new menu'); ?></a>.		</span>
+                </div>
+            </div>
+        <?php endif ?>
+        <?php echo $block->getChildHtml('clever_menu_fields_items_layout') ?>
+        <?php echo $block->getChildHtml('clever_menu_fields_col_sample') ?>
+    </div>
+</div>

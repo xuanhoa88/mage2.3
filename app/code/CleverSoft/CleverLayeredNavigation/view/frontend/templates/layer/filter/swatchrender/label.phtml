@@ -1,0 +1,133 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+
+$swatchData = $block->getSwatchData();
+$filterSetting = $swatchData['filterSetting'];
+$tooltipUrl = $swatchData['tooltipUrl'];
+$filterItem = $swatchData['filterItem'];
+?>
+
+<?php if($filterSetting->isShowSearchBox()): ?>
+    <div class="clevershopby-search-box">
+        <input type="text" class="cleversoft_shopby_filter_search_box_<?php echo $filterSetting->getFilterCode();?>" placeholder="<?php echo __("Search")?>">
+    </div>
+<?php endif; ?>
+
+<div class="swatch-attribute swatch-layered <?php /* @escapeNotVerified */ echo $swatchData['attribute_code'] ?>"
+     attribute-code="<?php /* @escapeNotVerified */ echo $swatchData['attribute_code'] ?>" attribute-id="<?php /* @escapeNotVerified */ echo $swatchData['attribute_id'] ?>">
+    <div class="swatch-attribute-options clearfix">
+            <?php
+            $numberoffilrerItem = 0;
+            foreach ($swatchData['options'] as $option => $label):
+            ?>
+                <?php $sledClass  = $block->getRequest()->getParam($swatchData['attribute_code']) == $option ? 'selected' : ''; ?>
+                    <?php $checked =  $this->checkedFilter($filterItem[$numberoffilrerItem]) ? ' checked' : ''; ?>
+                    <a href="<?php /* @escapeNotVerified */ echo $label['link'] ?>" class="cleversoft_shopby_filter_item_<?php echo $block->escapeId($label['value'])?> swatch-option-link-layered">
+                        <?php if ($filterSetting->isMultiselect()): ?>
+                            <input type="checkbox" <?php echo $checked ?> />
+                        <?php endif; ?>
+                        <?php if (isset($swatchData['swatches'][$option]['type'])) { ?>
+                            <?php switch ($swatchData['swatches'][$option]['type']) {
+                                case '3':
+                                    ?>
+                                    <div class="swatch-option <?php /* @escapeNotVerified */ echo $label['custom_style'] ?> <?php echo $sledClass ?>">
+                                        <div><span class="label"><?php /* @escapeNotVerified */ echo $label['label'] ?></span><?php echo '(' . $label['count']. ') ';?></div>
+                                    </div>
+                                    <?php    break;
+                                case '2':
+                                    ?>
+                                    <div class="swatch-option image <?php /* @escapeNotVerified */ echo $label['custom_style'] ?> <?php echo $sledClass ?>">
+                                        <div><span class="label"><?php /* @escapeNotVerified */ echo $label['label'] ?></span><?php echo '(' . $label['count']. ') ';?></div>
+
+                                    </div>
+                                    <?php    break;
+                                case '1':
+                                    ?>
+                                    <div class="swatch-option color <?php /* @escapeNotVerified */ echo $label['custom_style'] ?> <?php echo $sledClass ?>">
+                                        <div><span class="label"><?php /* @escapeNotVerified */ echo $label['label'] ?></span><?php echo '(' . $label['count']. ') ';?></div>
+                                    </div>
+                                    <?php    break;
+                                case '0':
+                                default:
+                                    ?>
+                                    <div class="swatch-option text <?php /* @escapeNotVerified */ echo $label['custom_style'] ?> <?php echo $sledClass ?>">
+                                        <?php /* @escapeNotVerified */ echo $label['label'] ?>
+                                    </div>
+                                    <?php    break;
+                            } ?>
+                        <?php } ?>
+                    </a>
+                    <script type="text/x-magento-init">
+                    {
+                        ".cleversoft_shopby_filter_item_<?php echo $block->escapeId($label['value'])?>": {
+                            "cleverLayeredNavigationFilterItemDefault": {}
+                        }
+                    }
+                    </script>
+                <?php $numberoffilrerItem += 1; ?>
+            <?php endforeach; ?>
+    </div>
+</div>
+
+<script>
+    require(["jquery", "jquery/ui", "Magento_Swatches/js/swatch-renderer"], function ($) {
+        $('.swatch-layered.<?php /* @escapeNotVerified */ echo $swatchData['attribute_code'] ?>')
+            .find('[option-type="1"], [option-type="2"], [option-type="0"], [option-type="3"]')
+            .SwatchRendererTooltip();
+    });
+</script>
+
+
+<?php if($filterSetting->isShowSearchBox()): ?>
+    <script type="text/x-magento-init">
+            {
+                ".cleversoft_shopby_filter_search_box_<?php echo $filterSetting->getFilterCode()?>": {
+                    "cleverLayeredNavigationFilterSearch": {
+                        "highlightTemplate": "<span class='clevershopby-hightlighted'>$&</span>",
+                        "itemsSelector": ".cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode();?>"
+                    }
+                }
+            }
+    </script>
+<?php endif; ?>
+
+<?php if($filterSetting->getNumberUnfoldedOptions()): ?>
+    <button class="clevershopby-more-button">
+        <a class="cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode()?>_show_more" data-text-more="<?php echo __("More")?>" data-text-less="<?php echo __("Less")?>" href="javascript:void(0)" data-is-hide="false">
+            <?php echo __("Less")?>
+        </a>
+    </button>
+    <script type="text/x-magento-init">
+            {
+                ".cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode()?>": {
+                    "cleverLayeredNavigationFilterHideMoreOptions": {
+                        "numberUnfoldedOptions": <?php echo $filterSetting->getNumberUnfoldedOptions()?>,
+                        "buttonSelector": ".cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode()?>_show_more"
+                    }
+                }
+            }
+    </script>
+<?php endif; ?>
+
+<?php if($filterSetting->isShowTooltip()): ?>
+    <?php
+    $tooltipTemplate = '<span class="tooltip clevershopby-filter-tooltip" style="float:right" title="{content}"><img src="'.$tooltipUrl.'"/></span>';
+    ?>
+    <script type="text/x-magento-init">
+            {
+                ".cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode()?>": {
+                    "cleverLayeredNavigationFilterAddTooltip": {
+                        "content": <?php echo json_encode($filterSetting->getTooltip())?>,
+                        "tooltipTemplate": <?php echo json_encode($tooltipTemplate)?>
+                    }
+                }
+            }
+    </script>
+<?php endif; ?>
+

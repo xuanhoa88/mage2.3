@@ -1,0 +1,171 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverNewsletter
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Newsletter\Data');
+$_helperCookie = $this->helper('CleverSoft\CleverCookieLaw\Helper\Data');
+$width = $helper->getCfgWidth();
+$height = $helper->getCfgHeight();
+$backgroundColor = $helper->getCfgBackgroundColor();
+$backgroundImage = $helper->getCfgBackgroundImage();
+$desc = $helper->getCfgIntro();
+$enable = $helper->getCfgEnable();
+$delay = $this->getConfig('clevernewsletter/advanced_options/load_after');
+if(!$delay || empty($delay) || !isset($delay)) $delay = 10000;
+else $delay = intval($delay) * 1000;
+$routeName = $block->getRequest()->getRouteName();
+$curentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+$includeRouters = json_decode($helper->getCfgOtherpages(),true);
+?>
+<?php if ($routeName != 'ajaxcart' && $routeName != 'quickview' && $enable && (!$helper->getCfgHideOnMobile() || ($helper->getCfgHideOnMobile() && !$helper->isMobile()))) { ?>
+    <div style="display: none">
+        <div id="zoo_newsletter" class="row block block-subscribe clearfix" style="height: <?php echo $height; ?>px; background: <?php echo $backgroundColor; ?>; margin: 0">
+            <?php if($backgroundImage){?>
+                <div class="d-none d-md-block col-md-6 zoo-logo-newsletter" style="background-image: url(<?php echo $helper->getMediaUrl('wysiwyg/cleversoft/newsletter/').$backgroundImage; ?>); background-repeat: no-repeat; height: 100%; background-size: cover;"></div>
+            <?php }?>
+            <div class="zoo-popup-newsletter-inner col-md-6 <?php if(!$backgroundImage) echo 'col-md-12'; ?>">
+                <h2>
+                    <span><?php echo __('Newsletter') ?></span>
+                </h2>
+                <div class="row-none">
+                    <div class="popup_message">
+                        <p class="intro">
+                            <?php echo $desc; ?>
+                        </p>
+                        <form action="<?php echo $this->getFormActionUrl() ?>" method="post"
+                              id="zoo-newsletter-validate-detail" novalidate
+                              data-mage-init='{"validation": {"errorClass": "mage-error"}}'>
+                            <div class="block-content form-groups">
+                                <input name="email" type="text" id="zoo-newsletter"
+                                       class="input-text required-entry validate-email"
+                                       value="<?php echo __('Your email address') ?>"
+                                       onclick="this.value=='<?php echo __('Your email address') ?>'?this.value='':''"
+                                       onblur="this.value==''?this.value='<?php echo __('Your email address') ?>':''"
+                                       data-validate="{required:true, 'validate-email':true}"/>
+                                <button type="submit"  class="btn-novetty"><?php echo __('Subscribe') ?></button>
+                                <?php if($_helperCookie->getSystemConfig('integration', 'newsletter')):?>
+                                    <div class="checkbox-filter">
+                                        <label>
+                                            <input data-validate="{required:true}" type="checkbox" name="integration[newsletter]">
+                                            <span class="checkbox-material"><span class="check "></span></span>
+                                            <?php echo $_helperCookie->getSystemConfig('integration', 'newsletter_text')?>
+                                        </label>
+                                    </div>
+                                    <div id="newsletter_popup_integration_error" class="message info empty" style="display:none">
+                                         <div><?php echo $_helperCookie->getSystemConfig('integration', 'newsletter_error')?></div>
+                                    </div>
+                                <?php endif;?>     
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="block-content">
+                    <label class="subcriper_label checkbox-filter">
+                        <input type="checkbox">
+                        <span class="checkbox-material"><span class="check"></span></span>
+                        <?php echo __('Don\'t show this popup again'); ?>
+                    </label>
+                </div>
+                <script>
+                    require([
+                        "jquery",
+                        'Magento_Ui/js/modal/modal',
+                        "jquery/jquery.cookie"
+                    ], function(  $, modal  ) {
+                        //<![CDATA[
+                        $(function () {
+                            function setCookie(cname, cvalue, exdays) {
+                                var d = new Date();
+                                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                                var expires = "expires="+d.toUTCString();
+                                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+                            }
+                            function getCookie(cname) {
+                                var name = cname + "=";
+                                var ca = document.cookie.split(';');
+                                for(var i = 0; i < ca.length; i++) {
+                                    var c = ca[i];
+                                    while (c.charAt(0) == ' ') {
+                                        c = c.substring(1);
+                                    }
+                                    if (c.indexOf(name) == 0) {
+                                        return c.substring(name.length, c.length);
+                                    }
+                                }
+                                return null;
+                            }
+
+                            $('#zoo_newsletter .subcriper_label input').on('click', function () {
+                                if ($(this).parent().find('input:checked').length > 0) {
+                                    setCookie('cleverNewsletterSubscribe','true',2147483647);
+                                } else {
+                                    setCookie('cleverNewsletterSubscribe',null,1);
+                                }
+                            });
+
+                            var subscribeFlag = getCookie('cleverNewsletterSubscribeFlag');
+
+
+                            $('#zoo_newsletter button.btn-novetty').on('click', function () {
+                                var button = $(this);
+                                setTimeout(function () {
+                                    if (!button.parent().find('input#zoo-newsletter').hasClass('validation-failed')) {
+                                        setCookie('cleverNewsletterSubscribeFlag','true',2147483647);
+                                    }
+                                }, 500);
+                            });
+
+                            if (!(subscribeFlag) && !getCookie('cleverNewsletterSubscribe')) {
+                                var options = {
+                                    type: 'popup',
+                                    modalClass: 'zoo-newsletter-popup',
+                                    responsive: true
+                                };
+                                var popup = modal(options, $('#zoo_newsletter'));
+                                $(".zoo-newsletter-popup .modal-inner-wrap").css("width","<?php echo $width; ?>px");
+                                <?php if($helper->getCfgShowPopupType() == '2'):?>
+                                   $(window).scroll(function() {
+                                        if (!(subscribeFlag) && !getCookie('cleverNewsletterSubscribe')) {
+                                            if ($(window).scrollTop() >= <?php echo $helper->getCfgScrollPixel();?>) {
+                                                $('#zoo_newsletter').modal('openModal');
+                                                $(window).off('scroll');
+                                            }
+                                        }
+                                    });
+                                <?php elseif($helper->getCfgShowPopupType() == '3'):?>
+                                    $(window).click(function() {
+                                        $('#zoo_newsletter').modal('openModal');
+                                        $(window).off('click');
+                                    })
+                                <?php else:?>
+                                    setTimeout(function(){
+                                        $('#zoo_newsletter').modal('openModal');
+                                    },<?php echo $delay; ?>);
+                                <?php endif;?>
+                            }
+                        });
+                        //]]>
+                    })
+                </script>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+ <?php if($_helperCookie->getSystemConfig('integration', 'newsletter')):?>
+    <script>
+        require(['jquery'], function($){ 
+            $(document).ready(function() {
+                $("#zoo-newsletter-validate-detail").submit(function() {
+                    $('#newsletter_popup_integration_error').show();
+                });
+            });
+        });
+    </script>
+<?php endif;?>

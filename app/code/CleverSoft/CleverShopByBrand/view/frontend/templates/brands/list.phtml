@@ -1,0 +1,59 @@
+<?php
+$brands = $this->getBrands();
+$alphabetTable = $this->getAlphabetTable();
+$width = 200;
+$height = 200;
+$brandInit = [
+    'cleverBrands' => [
+        'brand.alphabetList' => []
+    ]
+];
+?>
+
+<div class="brand-alphabet-list lazy-loading" data-mage-init='<?= json_encode($brandInit) ?>'>
+    <div class="brand-loader double-bounce-spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+    <div class="brand-inner hidden">
+        <div class="char-list" data-role="char-list">
+            <a class="char-item all active" data-char="all" class="active" href="javascirpt:;"><?php echo __('All') ?></a>
+            <a class="char-item number" data-char="num" class="active" href="javascirpt:;"><?php echo __('0 - 9') ?></a>
+            <?php foreach ($alphabetTable as $char) : ?>
+                <a class="char-item alphabet" data-char="<?= strtoupper($char) ?>" href="javascirpt:;"><?= strtoupper($char) ?></a>
+            <?php endforeach ?>
+        </div>
+        <?php if(count($brands)):?>
+        <div class="brand-list" data-role="brand-list">
+            <?php foreach ($brands as $brand) : ?>
+                <?php
+                $label = strip_tags($brand->getBrandLabel());
+                $url = $this->getBrandPageUrl($brand);
+                $productCount = $this->getProductCount($brand);
+                ?>
+                <div class="brand-item col-lg-2 col-md-3 col-sm-6 col-xs-8" data-label='<?= $label ?>'>
+                    <div class="brand-item-inner">
+                        <div class="item-top">
+                            <a class="brand-link abs-img" href="<?= $url ?>" title="<?= $label; ?>">
+                                <img class="brand-img zoom-eff" alt="<?= $label ?>" data-src="<?= $this->getLogo($brand, ['width' => $width, 'height' => $height]) ?>" />
+                            </a>
+                        </div>
+                        <div class="item-bottom">
+                            <a class="brand-name" href="<?= $url ?>" title="<?= $label; ?>">
+                                <?= $label; ?>
+                            </a>
+                            <?php if ($productCount > 1) : ?>
+                                <div class="count"><?= __('%1 products', $productCount) ?></div>
+                            <?php else : ?>
+                                <div class="count"><?= __('%1 product', $productCount) ?></div>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach ?>
+        </div>
+        <?php else:?>
+        <div class="no-item hidden"><?= __('There is no brand macthing your select') ?></div>
+        <?php endif;?>
+    </div>
+</div>

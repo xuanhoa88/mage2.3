@@ -1,0 +1,190 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author        ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+
+$theme = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$cssGen = $this->helper('CleverSoft\CleverTheme\Helper\Cssgen');
+$cfgstore = $theme->getCfgSectionDesign($block->getData('cssgen_store'));
+//Include Google Fonts
+$amp = '&amp;';
+?>
+
+<?php //body font ?>
+<?php if (isset($cfgstore['font']) and count($cfgstore['font']) > 0) : ?>
+
+    <?php if ($cfgstore['font']['body_font'] == 1): ?>
+        <?php if ($cfgstore['font']['primary_font_family_group'] == 'google'): ?>
+
+            <?php
+            $charSubset = '';
+            if ($subsets = $cfgstore['font']['primary_char_subset']) {
+                $charSubset = "{$amp}subset={$subsets}";
+            }
+            $fontWeight = '';
+            $weight = $cfgstore['font']['primary_font_weight'];
+            $weight = trim($weight);
+            if ($weight) {
+                $fontWeight = ':400,500,600,700,800,900';
+            }
+            ?>
+
+            <link
+                href='//fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $cfgstore['font']['primary_font_family']);
+                echo $fontWeight;
+                echo $charSubset; ?>' rel='stylesheet'/>
+        <?php endif; ?>
+    <?php endif; ?>
+
+
+    <?php //h1 font ?>
+    <?php if ($cfgstore['font']['h1_font'] == 1): ?>
+        <?php if ($cfgstore['font']['h1_primary_font_family_group'] == 'google'): ?>
+
+            <?php
+            $h1_charSubset = '';
+            if ($h1_subsets = $cfgstore['font']['h1_primary_char_subset']) {
+                $h1_charSubset = "{$amp}subset={$h1_subsets}";
+            }
+            $h1_fontWeight = '';
+            $h1_weight = $cfgstore['font']['h1_primary_font_weight'];
+            $h1_weight = trim($h1_weight);
+            if ($h1_weight) {
+                $h1_fontWeight = ':' . $h1_weight;
+            }
+            ?>
+
+            <link
+                href='//fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $cfgstore['font']['h1_primary_font_family']);
+                echo $h1_fontWeight;
+                echo $h1_charSubset; ?>' rel='stylesheet'/>
+        <?php endif; ?>
+    <?php endif; ?>
+
+
+    <?php //h2 font ?>
+    <?php if ($cfgstore['font']['h2_font'] == 1): ?>
+        <?php if ($cfgstore['font']['h2_primary_font_family_group'] == 'google'): ?>
+
+            <?php
+            $h2_charSubset = '';
+            if ($h2_subsets = $cfgstore['font']['h2_primary_char_subset']) {
+                $h2_charSubset = "{$amp}subset={$h2_subsets}";
+            }
+            $h2_fontWeight = '';
+            $h2_weight = $cfgstore['font']['h2_primary_font_weight'];
+            $h2_weight = trim($h2_weight);
+            if ($h2_weight) {
+                $h2_fontWeight = ':' . $h2_weight;
+            }
+            ?>
+
+            <link
+                href='//fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $cfgstore['font']['h2_primary_font_family']);
+                echo $h2_fontWeight;
+                echo $h2_charSubset; ?>' rel='stylesheet'/>
+        <?php endif; ?>
+    <?php endif; ?>
+
+
+    <?php //h3 font ?>
+    <?php if ($cfgstore['font']['h3_font'] == 1): ?>
+        <?php if ($cfgstore['font']['h3_primary_font_family_group'] == 'google'): ?>
+
+
+            <?php
+            $h3_charSubset = '';
+            if ($h3_subsets = $cfgstore['font']['h3_primary_char_subset']) {
+                $h3_charSubset = "{$amp}subset={$h3_subsets}";
+            }
+            $h3_fontWeight = '';
+            $h3_weight = $cfgstore['font']['h3_primary_font_weight'];
+            $h3_weight = trim($h3_weight);
+            if ($h3_weight) {
+                $h3_fontWeight = ':' . $h3_weight;
+            }
+            ?>
+            <link
+                href='//fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $cfgstore['font']['h3_primary_font_family']);
+                echo $h3_fontWeight;
+                echo $h3_charSubset; ?>' rel='stylesheet'/>
+        <?php endif; ?>
+    <?php endif; ?>
+
+
+    <?php //h4 font ?>
+    <?php if ($cfgstore['font']['h4_font'] == 1): ?>
+        <?php if ($cfgstore['font']['h4_primary_font_family_group'] == 'google'): ?>
+
+            <?php
+            $h4_charSubset = '';
+            if ($h4_subsets = $cfgstore['font']['h4_primary_char_subset']) {
+                $h4_charSubset = "{$amp}subset={$h4_subsets}";
+            }
+            $h4_fontWeight = '';
+            $h4_weight = $cfgstore['font']['h4_primary_font_weight'];
+            $h4_weight = trim($h4_weight);
+            if ($h4_weight) {
+                $h4_fontWeight = ':' . $h4_weight;
+            }
+            ?>
+            <link
+                href='//fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $cfgstore['font']['h4_primary_font_family']);
+                echo $h4_fontWeight;
+                echo $h4_charSubset; ?>' rel='stylesheet'/>
+        <?php endif; ?>
+    <?php endif; ?>
+
+
+    <?php //h5 font ?>
+    <?php if ($cfgstore['font']['h5_font'] == 1): ?>
+        <?php if ($cfgstore['font']['h5_primary_font_family_group'] == 'google'): ?>
+
+            <?php
+            $h5_charSubset = '';
+            if ($h5_subsets = $cfgstore['font']['h5_primary_char_subset']) {
+                $h5_charSubset = "{$amp}subset={$h5_subsets}";
+            }
+            $h5_fontWeight = '';
+            $h5_weight = $cfgstore['font']['h5_primary_font_weight'];
+            $h5_weight = trim($h5_weight);
+            if ($h5_weight) {
+                $h5_fontWeight = ':' . $h5_weight;
+            }
+            ?>
+
+            <link
+                href='//fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $cfgstore['font']['h5_primary_font_family']);
+                echo $h5_fontWeight;
+                echo $h5_charSubset; ?>' rel='stylesheet'/>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php //h6 font ?>
+    <?php if ($cfgstore['font']['h6_font'] == 1): ?>
+        <?php if ($cfgstore['font']['h6_primary_font_family_group'] == 'google'): ?>
+
+            <?php
+            $h6_charSubset = '';
+            if ($h6_subsets = $cfgstore['font']['h6_primary_char_subset']) {
+                $h6_charSubset = "{$amp}subset={$h6_subsets}";
+            }
+            $h6_fontWeight = '';
+            $h6_weight = $cfgstore['font']['h6_primary_font_weight'];
+            $h6_weight = trim($h6_weight);
+            if ($h6_weight) {
+                $h6_fontWeight = ':' . $h6_weight;
+            }
+            ?>
+            <link
+                href='//fonts.googleapis.com/css?family=<?php echo str_replace(' ', '+', $cfgstore['font']['h6_primary_font_family']);
+                echo $h6_fontWeight;
+                echo $h6_charSubset; ?>' rel='stylesheet'/>
+        <?php endif; ?>
+    <?php endif; ?>
+
+<?php endif; ?>

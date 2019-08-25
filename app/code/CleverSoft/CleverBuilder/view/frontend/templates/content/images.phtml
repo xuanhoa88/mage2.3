@@ -1,0 +1,87 @@
+<?php 
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+$img_placeholder = $this->getViewFileUrl("CleverSoft_CleverBuilder::images/placeholder.png");
+$image_url = $this->getViewFileUrl('CleverSoft_CleverBuilder::images/transparent.gif');
+?>
+<?php 
+    $image = $this->getData('image');
+    $size = $this->getData('size') ? $this->getData('size') : 'normal';
+    switch ($size) {
+        case 'normal':
+            $imageWidth = null;
+            $imageHeight = null;
+            break;
+        case 'large':
+            $imageWidth = 1024;
+            $imageHeight = 1024;
+            break;
+        case 'medium':
+            $imageWidth = 300;
+            $imageHeight = 300;
+            break;
+        case 'thumbnail':
+            $imageWidth = 150;
+            $imageHeight = 150;
+            break;
+        
+        default:
+            $imageWidth = null;
+            $imageHeight = null;
+            break;
+    }
+?>
+<div class="img has-hover uxb-selected global-element image-<?php echo $this->getData('widget_id')?> <?php if($isPreview) echo "cs-live-preview"?>" style="width: <?= $this->getData('width') ? $this->getData('width') : '100'?>%" <?php echo $this->getData('animate') ? 'data-animate="'.$this->getData('animate').'"': ''?>>
+    <div class="img__wrap">
+        <?php if($this->getData('link')):?>
+        <a href="<?= $this->getData('link')?>" target="<?= $this->getData('target')?>" class="">
+        <?php endif;?>
+            <div class="<?php echo $this->getData('image_hover') ? 'image_hover' : ''?>">
+                <div class="img__inner image-<?= $this->getData('image_hover')?> image-<?= $this->getData('image_hover_alt')?> box-shadow-<?php echo $this->getData('depth')?> box-shadow-<?php echo $this->getData('depth_hover')?>-hover" style="padding-top: 0;margin: <?= $this->getData('margin') ? $this->getData('margin') : '0'?>">
+                    <?php if($this->getData('parallax')):?>
+                        <div data-jarallax data-speed="0.2" class="jarallax" style="min-height:<?= $this->getData('height') && $this->getData('height') !='px' && $this->getData('height') !='%' ? $this->getData('height') : '600px'?>">
+                            <?php if($this->getData('image')):?>
+                                <img style="height: <?= $this->getData('height')?>" width="<?= $this->getData('width')?>%" height="<?= $this->getData('height')?>"
+                                 data-src="<?= $size == 'normal' ? $image : $helper->resizeImage($image, $imageWidth, $imageHeight) ?>" src="<?php echo $image_url; ?>" class="jarallax-img clazyload image <?= $this->getData('size')?>" alt=""/>
+                            <?php else:?>
+                                <img style="height: <?= $this->getData('height')?>" width="<?= $this->getData('width')?>%" height="<?= $this->getData('height')?>"
+                                 data-src="<?= $size == 'normal' ? $img_placeholder : $helper->resizeImage($img_placeholder, $imageWidth, $imageHeight) ?>" src="<?php echo $image_url; ?>" class="jarallax-img clazyload image <?= $this->getData('size')?>"/>
+                            <?php endif;?>
+                            <img style="height: <?= $this->getData('height')?>" width="<?= $this->getData('width')?>%" height="<?= $this->getData('height')?>"
+                                 data-src="<?= $size == 'normal' ? $this->getData('image') : $helper->resizeImage($image, $imageWidth, $imageHeight) ?>" src="<?php echo $image_url; ?>"class="jarallax-img clazyload image <?= $this->getData('size')?>" alt=""/>
+                        </div>
+                    <?php else:?>
+                        <?php if($this->getData('image')):?>
+                            <img style="height: <?= $this->getData('height') ? $this->getData('height') :'auto'?>" width="<?= $this->getData('width')?>%"
+                             data-src="<?= $size == 'normal' ? $image : $helper->resizeImage($image, $imageWidth, $imageHeight) ?>" src="<?php echo $image_url; ?>" class="<?= $this->getData('size')?> clazyload image" alt=""/>
+                        <?php else:?>
+                            <img style="height: <?= $this->getData('height') ? $this->getData('height') :'auto'?>" width="<?= $this->getData('width')?>%"
+                             data-src="<?= $size == 'normal' ? $img_placeholder : $helper->resizeImage($img_placeholder, $imageWidth, $imageHeight) ?>" src="<?php echo $image_url; ?>" class="<?= $this->getData('size')?> clazyload image" alt=""/>
+                        <?php endif;?>
+                        
+                    <?php endif;?>
+                    <div class="overlay" <?php if($this->getData('image_overlay')):?>style="background-color: <?= $this->getData('image_overlay')?>" <?php endif;?>></div>
+                </div>
+            </div>
+        <?php if($this->getData('link')):?>
+        </a>
+        <?php endif;?>
+        <?php if($isPreview) { ?>
+            <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+        <?php } ?>
+    </div>
+</div>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "jarallax" : {}
+    }
+}
+</script>
+<script type="text/x-magento-init">
+{
+    ".image-<?php echo $this->getData('widget_id')?>":{
+        "cleverElementAnimate":{}
+    }
+}
+</script>

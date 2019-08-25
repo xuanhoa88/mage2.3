@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="cleversoft_pinmarker" class="CleverSoft\CleverPinMarker\Block\Widget\PinMarker" placeholder_image="CleverSoft_CleverPinMarker::images/clever-pinmarker.png">
+        <label translate="true">Clever PinMarker</label>
+        <description>CleverSoft - PinMarker Widget</description>
+        <parameters>
+            <parameter name="collection_pin" xsi:type="select" visible="true" source_model="CleverSoft\CleverPinMarker\Model\Config\Source\CollectionPin">
+                <label translate="true">Collection Name</label>
+                <description translate="true">Select Collection Pin</description>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

@@ -1,0 +1,635 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+if ($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getId()) {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getHeaderStyle());
+} else {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',0)->getFirstItem()->getHeaderStyle());
+}
+if($settings){
+    $data = isset($settings->header) ? $settings->header : '{}';
+}
+?>
+<!-- Modal content -->
+<div class="headerbuilder-modal-content">
+    <div class="headerbuilder-modal-header">
+        <span class="headerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="headerbuilder-modal-body">
+        <strong>Top Search</strong>
+        <div class="modal-inner" id="header_desktop_top.search" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open"
+                id="sub-accordion-section-header_search">
+                <li id="customize-control-search_icon_size" class="customize-control customize-control-search-icon_size"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Icon Size (px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-search_icon_size]" value="<?= isset($data->{'_customize-input-search_icon_size'}) && $data->{'_customize-input-search_icon_size'} ? $data->{'_customize-input-search_icon_size'} : '' ?>">
+                </li>
+                <li id="customize-control-header_top.search_merge_item" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[header][_customize_header_top.search_merge_item]">
+                        <option value="0" <?= isset($data->{'_customize_header_top.search_merge_item'}) && $data->{'_customize_header_top.search_merge_item'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_header_top.search_merge_item'}) && $data->{'_customize_header_top.search_merge_item'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_header_top.search_merge_item'}) && $data->{'_customize_header_top.search_merge_item'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-search_icon_style" class="customize-control customize-control-builder-radio-image"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Search Icon Style</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_search_icon_style" class="image">
+                        <input class="image-select" type="radio" value=""
+                               name="settings[header][_customize-radio-search_icon_style]" <?= isset($data->{'_customize-radio-search_icon_style'}) && $data->{'_customize-radio-search_icon_style'} ? '' : 'checked' ?>
+                               id="search_icon_style" data-alt="">
+                        <label for="search_icon_style" class="search_icon_style">
+                            <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/search-preset-1.png' ?>">
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button circle outline is-small"
+                               name="settings[header][_customize-radio-search_icon_style]" <?= isset($data->{'_customize-radio-search_icon_style'}) && $data->{'_customize-radio-search_icon_style'} == 'button circle outline is-small' ? 'checked' : '' ?>
+                               id="search_icon_styleoutline" data-alt="">
+                        <label for="search_icon_styleoutline" class="search_icon_styleoutline">
+                            <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/search-preset-2.png' ?>">
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button primary circle is-small"
+                               name="settings[header][_customize-radio-search_icon_style]" <?= isset($data->{'_customize-radio-search_icon_style'}) && $data->{'_customize-radio-search_icon_style'} == 'button primary circle is-small' ? 'checked' : '' ?>
+                               id="search_icon_stylefill" data-alt="">
+                        <label for="search_icon_stylefill" class="search_icon_stylefill">
+                            <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/search-preset-3.png' ?>">
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button primary round is-small"
+                               name="settings[header][_customize-radio-search_icon_style]" <?= isset($data->{'_customize-radio-search_icon_style'}) && $data->{'_customize-radio-search_icon_style'} == 'button primary round is-small' ? 'checked' : '' ?>
+                               id="search_icon_stylefill-round" data-alt="">
+                        <label for="search_icon_stylefill-round" class="search_icon_stylefill-round">
+                            <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/search-preset-4.png' ?>">
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button round outline is-small"
+                               name="settings[header][_customize-radio-search_icon_style]" <?= isset($data->{'_customize-radio-search_icon_style'}) && $data->{'_customize-radio-search_icon_style'} == 'button round outline is-small' ? 'checked' : '' ?>
+                               id="search_icon_styleoutline-round" data-alt="">
+                        <label for="search_icon_styleoutline-round" class="search_icon_styleoutline-round">
+                            <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/search-preset-5.png' ?>">
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-search_icon" class="customize-control customize-control-builder-radio-image"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Search Icon</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_search_icon" class="image">
+                        <input class="image-select" type="radio" value="c017"
+                               name="settings[header][_customize-radio-search_icon]" <?= isset($data->{'_customize-radio-search_icon'}) && $data->{'_customize-radio-search_icon'} == 'c017' ? 'checked' : '' ?>
+                               id="search_icon" data-alt="">
+                        <label for="search_icon" class="search_icon">
+                            <i class="cs-font clever-icon-search-1"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="c016"
+                               name="settings[header][_customize-radio-search_icon]" <?= isset($data->{'_customize-radio-search_icon'}) && $data->{'_customize-radio-search_icon'} == 'c016' ? 'checked' : '' ?>
+                               id="search_icon2" data-alt="">
+                        <label for="search_icon2" class="search_icon2">
+                            <i class="cs-font clever-icon-search-2"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="c015"
+                               name="settings[header][_customize-radio-search_icon]" <?= isset($data->{'_customize-radio-search_icon'}) && $data->{'_customize-radio-search_icon'} == 'c015' ? 'checked' : '' ?>
+                               id="search_icon3" data-alt="">
+                        <label for="search_icon3" class="search_icon3">
+                            <i class="cs-font clever-icon-search-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="c014"
+                               name="settings[header][_customize-radio-search_icon]" <?= isset($data->{'_customize-radio-search_icon'}) && $data->{'_customize-radio-search_icon'} == 'c014' ? 'checked' : '' ?>
+                               id="search_icon4" data-alt="">
+                        <label for="search_icon4" class="search_icon4">
+                            <i class="cs-font clever-icon-search-4"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value=""
+                               name="settings[header][_customize-radio-search_icon]" <?= isset($data->{'_customize-radio-search_icon'}) && $data->{'_customize-radio-search_icon'} ? '' : 'checked' ?>
+                               id="search_icon5" data-alt="">
+                        <label for="search_icon5" class="search_icon5">
+                            <i class="cs-font clever-icon-search-5"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-header_search_form_type"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Search Form Type</span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <div id="input_header_search_form_type" class="buttonset">
+                        <input class="switch-input screen-reader-text" type="radio" value=""
+                               name="settings[header][_customize-radio-header_search_form_type]"
+                               id="header_search_form_type" <?= isset($data->{'_customize-radio-header_search_form_type'}) && $data->{'_customize-radio-header_search_form_type'} ? '' : 'checked' ?>>
+                        <label class="switch-label switch-label-off" for="header_search_form_type">Normal</label>
+                        <input class="switch-input screen-reader-text" type="radio" value="lightbox"
+                               name="settings[header][_customize-radio-header_search_form_type]"
+                               id="header_search_form_typelightbox" <?= isset($data->{'_customize-radio-header_search_form_type'}) && $data->{'_customize-radio-header_search_form_type'} == 'lightbox' ? 'checked' : '' ?> >
+                        <label class="switch-label switch-label-on " for="header_search_form_typelightbox">Lightbox</label>
+                    </div>
+                </li>
+                <li id="customize-control-search_placeholder" class="customize-control customize-control-kirki-generic"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Placeholder text</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                        <div class="customize-control-content">
+                            <input value="<?= isset($data->{'search_placeholder'}) ? $data->{'search_placeholder'} : '' ?>"
+                                   name="settings[header][search_placeholder]" type="text">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_search_categories" class="customize-control customize-control-checkbox"
+                    style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+                        <input id="_customize-input-header_search_categories" type="checkbox" value="1"
+                               name="settings[header][header_search_categories]" <?= isset($data->{'header_search_categories'}) && $data->{'header_search_categories'} ? 'checked' : '' ?>>
+                        <label for="_customize-input-header_search_categories">Search Categories</label>
+                    </span>
+                </li>
+                <li id="customize-control-header_search_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Color</span>
+                    <input id="input_header_search_color" name="settings[header][_customize-radio-search_icon_color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-search_icon_color'}) ? $data->{'_customize-radio-search_icon_color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_header_search_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_search_hover_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Hover Color</span>
+                    <input id="input_header_search_hover_color"
+                           name="settings[header][_customize-radio-search_icon_hover_color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-search_icon_hover_color'}) ? $data->{'_customize-radio-search_icon_hover_color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_header_search_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-search_border" class="customize-control customize-control-search_border"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Width</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top" type="text" name="settings[header][_customize-input-search_border-top]" value="<?= isset($data->{'_customize-input-search_border-top'}) && $data->{'_customize-input-search_border-top'} ? $data->{'_customize-input-search_border-top'} : '' ?>">
+                            <input placeholder="right" type="text" name="settings[header][_customize-input-search_border-right]" value="<?= isset($data->{'_customize-input-search_border-right'}) && $data->{'_customize-input-search_border-right'} ? $data->{'_customize-input-search_border-right'} : '' ?>">
+                            <input placeholder="bottom" type="text" name="settings[header][_customize-input-search_border-bottom]" value="<?= isset($data->{'_customize-input-search_border-bottom'}) && $data->{'_customize-input-search_border-bottom'} ? $data->{'_customize-input-search_border-bottom'} : '' ?>">
+                            <input placeholder="left" type="text" name="settings[header][_customize-input-search_border-left]" value="<?= isset($data->{'_customize-input-search_border-left'}) && $data->{'_customize-input-search_border-left'} ? $data->{'_customize-input-search_border-left'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-header_search_style" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Border Style</span>
+                    </label>
+                    <select name="settings[header][_customize_header_search_style]">
+                        <option value="" <?= isset($data->{'_customize_header_search_style'}) && $data->{'_customize_header_search_style'} == '' ? 'selected' : '' ?>>
+                            Default
+                        </option>
+                        <option value="none" <?= isset($data->{'_customize_header_search_style'}) && $data->{'_customize_header_search_style'} == 'none' ? 'selected' : '' ?>>
+                            None
+                        </option>
+                        <option value="solid" <?= isset($data->{'_customize_header_search_style'}) && $data->{'_customize_header_search_style'} == 'solid' ? 'selected' : '' ?>>
+                            Solid
+                        </option>
+                        <option value="dotted" <?= isset($data->{'_customize_header_search_style'}) && $data->{'_customize_header_search_style'} == 'dotted' ? 'selected' : '' ?>>
+                            Dotted
+                        </option>
+                        <option value="dashed" <?= isset($data->{'_customize_header_search_style'}) && $data->{'_customize_header_search_style'} == 'dashed' ? 'selected' : '' ?>>
+                            Dashed
+                        </option>
+                        <option value="double" <?= isset($data->{'_customize_header_search_style'}) && $data->{'_customize_header_search_style'} == 'double' ? 'selected' : '' ?>>
+                            Double
+                        </option>
+                        <option value="ridge" <?= isset($data->{'_customize_header_search_style'}) && $data->{'_customize_header_search_style'} == 'ridge' ? 'selected' : '' ?>>
+                            Ridge
+                        </option>
+                        <option value="inset" <?= isset($data->{'_customize_header_search_style'}) && $data->{'_customize_header_search_style'} == 'inset' ? 'selected' : '' ?>>
+                            Inset
+                        </option>
+                        <option value="outset" <?= isset($data->{'_customize_header_search_style'}) && $data->{'_customize_header_search_style'} == 'outset' ? 'selected' : '' ?>>
+                            Outset
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_search_border_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Border Color</span>
+                    <input id="input_header_search_border_color" name="settings[header][_customize-radio-search_border_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-radio-search_border_color'}) ? $data->{'_customize-radio-search_border_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_search_border_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-search_border-radius" class="customize-control customize-control-search_border-radius"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Radius</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top-left" type="text" name="settings[header][_customize-input-search_border-top-left-radius]" value="<?= isset($data->{'_customize-input-search_border-top-left-radius'}) && $data->{'_customize-input-search_border-top-left-radius'} ? $data->{'_customize-input-search_border-top-left-radius'} : '' ?>">
+                            <input placeholder="top-right" type="text" name="settings[header][_customize-input-search_border-top-right-radius]" value="<?= isset($data->{'_customize-input-search_border-top-right-radius'}) && $data->{'_customize-input-search_border-top-right-radius'} ? $data->{'_customize-input-search_border-top-right-radius'} : '' ?>">
+                            <input placeholder="bottom-right" type="text" name="settings[header][_customize-input-search_border-bottom-right-radius]" value="<?= isset($data->{'_customize-input-search_border-bottom-right-radius'}) && $data->{'_customize-input-search_border-bottom-right-radius'} ? $data->{'_customize-input-search_border-bottom-right-radius'} : '' ?>">
+                            <input placeholder="bottom-left" type="text" name="settings[header][_customize-input-search_border-bottom-left-radius]" value="<?= isset($data->{'_customize-input-search_border-bottom-left-radius'}) && $data->{'_customize-input-search_border-bottom-left-radius'} ? $data->{'_customize-input-search_border-bottom-left-radius'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-search_padding" class="customize-control customize-control-search-padding"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Padding (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-search_padding]" value="<?= isset($data->{'_customize-input-search_padding'}) && $data->{'_customize-input-search_padding'} ? $data->{'_customize-input-search_padding'} : '' ?>">
+                </li>
+                <li id="customize-control-search_margin" class="customize-control customize-control-search-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-search_margin]" value="<?= isset($data->{'_customize-input-search_margin'}) && $data->{'_customize-input-search_margin'} ? $data->{'_customize-input-search_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-top.search_align" class="customize-control customize-control-top.search_align"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Align items</span>
+                    </label>
+                    <select name="settings[header][_customize-input-top.search_align]">
+                        <option value="0" <?= isset($data->{'_customize-input-top.search_align'}) && $data->{'_customize-input-top.search_align'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="left" <?= isset($data->{'_customize-input-top.search_align'}) && $data->{'_customize-input-top.search_align'} == 'left' ? 'selected' : '' ?>>
+                            Left
+                        </option>
+                        </option>
+                        <option value="right" <?= isset($data->{'_customize-input-top.search_align'}) && $data->{'_customize-input-top.search_align'} == 'right' ? 'selected' : '' ?>>
+                            Right
+                        </option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-inner" id="header_mobile_top.search" style="display:none;">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open" id="sub-accordion-section-header_search_mobile">
+                <li id="customize-control-search_icon_size-mobile" class="customize-control customize-control-search-icon_size-mobile"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Icon Size (px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-search_icon_size-mobile]" value="<?= isset($data->{'_customize-input-search_icon_size-mobile'}) && $data->{'_customize-input-search_icon_size-mobile'} ? $data->{'_customize-input-search_icon_size-mobile'} : '' ?>">
+                </li>
+                <li id="customize-control-mobile_search_margin" class="customize-control customize-control-search-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-mobile_search_margin]" value="<?= isset($data->{'_customize-input-mobile_search_margin'}) && $data->{'_customize-input-mobile_search_margin'} ? $data->{'_customize-input-mobile_search_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-top.search_align" class="customize-control customize-control-top.search_align"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Align items</span>
+                    </label>
+                    <select name="settings[header][_customize-input-top.search_align]">
+                        <option value="0" <?= isset($data->{'_customize-input-top.search_align'}) && $data->{'_customize-input-top.search_align'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="left" <?= isset($data->{'_customize-input-top.search_align'}) && $data->{'_customize-input-top.search_align'} == 'left' ? 'selected' : '' ?>>
+                            Left
+                        </option>
+                        </option>
+                        <option value="right" <?= isset($data->{'_customize-input-top.search_align'}) && $data->{'_customize-input-top.search_align'} == 'right' ? 'selected' : '' ?>>
+                            Right
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_top.search_merge_item_mobile" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[header][_customize_header_top.search_merge_item_mobile]">
+                        <option value="0" <?= isset($data->{'_customize_header_top.search_merge_item_mobile'}) && $data->{'_customize_header_top.search_merge_item_mobile'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_header_top.search_merge_item_mobile'}) && $data->{'_customize_header_top.search_merge_item_mobile'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_header_top.search_merge_item_mobile'}) && $data->{'_customize_header_top.search_merge_item_mobile'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-search_mobile_icon_style" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Search Icon Style</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_search_mobile_icon_style" class="image">
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-search_mobile_icon_style]" <?= isset($data->{'_customize-radio-search_mobile_icon_style'}) && $data->{'_customize-radio-search_mobile_icon_style'} ? '' : 'checked'?> id="search_mobile_icon_style" data-alt="">
+                        <label for="search_mobile_icon_style" class="search_icon_style">
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/search-preset-1.png'?>">
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button circle outline is-small" name="settings[header][_customize-radio-search_mobile_icon_style]" <?= isset($data->{'_customize-radio-search_mobile_icon_style'}) && $data->{'_customize-radio-search_mobile_icon_style'} == 'button circle outline is-small' ? 'checked' : ''?> id="search_mobile_icon_styleoutline" data-alt="">
+                        <label for="search_mobile_icon_styleoutline" class="search_icon_styleoutline">
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/search-preset-2.png'?>">
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button primary circle is-small" name="settings[header][_customize-radio-search_mobile_icon_style]" <?= isset($data->{'_customize-radio-search_mobile_icon_style'}) && $data->{'_customize-radio-search_mobile_icon_style'} == 'button primary circle is-small' ? 'checked' : ''?> id="search_mobile_icon_stylefill" data-alt="">
+                        <label for="search_mobile_icon_stylefill" class="search_icon_stylefill">
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/search-preset-3.png'?>">
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button primary round is-small" name="settings[header][_customize-radio-search_mobile_icon_style]" <?= isset($data->{'_customize-radio-search_mobile_icon_style'}) && $data->{'_customize-radio-search_mobile_icon_style'} == 'button primary round is-small' ? 'checked' : ''?> id="search_mobile_icon_stylefill-round" data-alt="">
+                        <label for="search_mobile_icon_stylefill-round" class="search_icon_stylefill-round">
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/search-preset-4.png'?>">
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button round outline is-small" name="settings[header][_customize-radio-search_mobile_icon_style]" <?= isset($data->{'_customize-radio-search_mobile_icon_style'}) && $data->{'_customize-radio-search_mobile_icon_style'} == 'button round outline is-small' ? 'checked' : ''?> id="search_mobile_icon_styleoutline-round" data-alt="">
+                        <label for="search_mobile_icon_styleoutline-round" class="search_icon_styleoutline-round">
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/search-preset-5.png'?>">
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-search_mobile_icon" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Search Icon</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_search_mobile_icon" class="image">
+                        <input class="image-select" type="radio" value="c017" name="settings[header][_customize-radio-search_mobile_icon]" <?= isset($data->{'_customize-radio-search_mobile_icon'}) && $data->{'_customize-radio-search_mobile_icon'} == 'c017' ? 'checked' : ''?> id="search_mobile_icon1" data-alt="">
+                        <label for="search_mobile_icon1" class="search_mobile_icon1">
+                            <i class="cs-font clever-icon-search-1"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="c016" name="settings[header][_customize-radio-search_mobile_icon]" <?= isset($data->{'_customize-radio-search_mobile_icon'}) && $data->{'_customize-radio-search_mobile_icon'} == 'c016' ? 'checked' : ''?> id="search_mobile_icon2" data-alt="">
+                        <label for="search_mobile_icon2" class="search_mobile_icon2">
+                            <i class="cs-font clever-icon-search-2"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="c015" name="settings[header][_customize-radio-search_mobile_icon]" <?= isset($data->{'_customize-radio-search_mobile_icon'}) && $data->{'_customize-radio-search_mobile_icon'} == 'c015' ? 'checked' : ''?> id="search_mobile_icon3" data-alt="">
+                        <label for="search_mobile_icon3" class="search_mobile_icon3">
+                            <i class="cs-font clever-icon-search-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="c014" name="settings[header][_customize-radio-search_mobile_icon]" <?= isset($data->{'_customize-radio-search_mobile_icon'}) && $data->{'_customize-radio-search_mobile_icon'} == 'c014' ? 'checked' : ''?> id="search_mobile_icon4" data-alt="">
+                        <label for="search_mobile_icon4" class="search_mobile_icon4">
+                            <i class="cs-font clever-icon-search-4"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-search_mobile_icon]" <?= isset($data->{'_customize-radio-search_mobile_icon'}) && $data->{'_customize-radio-search_mobile_icon'} ? '' : 'checked'?> id="search_mobile_icon5" data-alt="">
+                        <label for="search_mobile_icon5" class="search_mobile_icon5">
+                            <i class="cs-font clever-icon-search-5"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-header_search_mobile_form_type" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Search Form Type</span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <div id="input_header_search_mobile_form_type" class="buttonset">
+                        <input class="switch-input screen-reader-text" type="radio" value="" name="settings[header][_customize-radio-header_search_mobile_form_type]" id="header_search_mobile_form_type" <?= isset($data->{'_customize-radio-header_search_mobile_form_type'}) && $data->{'_customize-radio-header_search_mobile_form_type'} ? '' : 'checked'?>>
+                        <label class="switch-label switch-label-off" for="header_search_mobile_form_type">Normal</label>
+                        <input class="switch-input screen-reader-text" type="radio" value="lightbox" name="settings[header][_customize-radio-header_search_mobile_form_type]" id="header_search_mobile_form_typelightbox" <?= isset($data->{'_customize-radio-header_search_mobile_form_type'}) && $data->{'_customize-radio-header_search_mobile_form_type'} == 'lightbox' ? 'checked' : ''?> >
+                        <label class="switch-label switch-label-on " for="header_search_mobile_form_typelightbox">Lightbox</label>
+                    </div>
+                </li>
+                <li id="customize-control-search_mobile_placeholder" class="customize-control customize-control-kirki-generic" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Placeholder text</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                        <div class="customize-control-content">
+                            <input value="<?=isset($data->{'search_mobile_placeholder'}) ? $data->{'search_mobile_placeholder'} : '' ?>" name="settings[header][search_mobile_placeholder]" type="text">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_search_mobile_categories" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+                        <input id="_customize-input-header_search_mobile_categories" type="checkbox" value="1" name="settings[header][header_search_mobile_categories]" <?= isset($data->{'header_search_mobile_categories'}) && $data->{'header_search_mobile_categories'} ? 'checked' : ''?>>
+                        <label for="_customize-input-header_search_mobile_categories">Search Categories</label>
+                    </span>
+                </li>
+                <li id="customize-control-header_search_mobile_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Color</span>
+                    <input id="input_header_search_mobile_color" name="settings[header][_customize-radio-search_mobile_icon_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-radio-search_mobile_icon_color'}) ? $data->{'_customize-radio-search_mobile_icon_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_search_mobile_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_search_mobile_hover_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Hover Color</span>
+                    <input id="input_header_search_mobile_hover_color" name="settings[header][_customize-radio-search_mobile_icon_hover_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-radio-search_mobile_icon_hover_color'}) ? $data->{'_customize-radio-search_mobile_icon_hover_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_search_mobile_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-search-mobile_border" class="customize-control customize-control-search-mobile_border"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Width</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top" type="text" name="settings[header][_customize-input-search-mobile_border-top]" value="<?= isset($data->{'_customize-input-search-mobile_border-top'}) && $data->{'_customize-input-search-mobile_border-top'} ? $data->{'_customize-input-search-mobile_border-top'} : '' ?>">
+                            <input placeholder="right" type="text" name="settings[header][_customize-input-search-mobile_border-right]" value="<?= isset($data->{'_customize-input-search-mobile_border-right'}) && $data->{'_customize-input-search-mobile_border-right'} ? $data->{'_customize-input-search-mobile_border-right'} : '' ?>">
+                            <input placeholder="bottom" type="text" name="settings[header][_customize-input-search-mobile_border-bottom]" value="<?= isset($data->{'_customize-input-search-mobile_border-bottom'}) && $data->{'_customize-input-search-mobile_border-bottom'} ? $data->{'_customize-input-search-mobile_border-bottom'} : '' ?>">
+                            <input placeholder="left" type="text" name="settings[header][_customize-input-search-mobile_border-left]" value="<?= isset($data->{'_customize-input-search-mobile_border-left'}) && $data->{'_customize-input-search-mobile_border-left'} ? $data->{'_customize-input-search-mobile_border-left'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-header_search-mobile_style" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Border Style</span>
+                    </label>
+                    <select name="settings[header][_customize_header_search-mobile_style]">
+                        <option value="" <?= isset($data->{'_customize_header_search-mobile_style'}) && $data->{'_customize_header_search-mobile_style'} == '' ? 'selected' : '' ?>>
+                            Default
+                        </option>
+                        <option value="none" <?= isset($data->{'_customize_header_search-mobile_style'}) && $data->{'_customize_header_search-mobile_style'} == 'none' ? 'selected' : '' ?>>
+                            None
+                        </option>
+                        <option value="solid" <?= isset($data->{'_customize_header_search-mobile_style'}) && $data->{'_customize_header_search-mobile_style'} == 'solid' ? 'selected' : '' ?>>
+                            Solid
+                        </option>
+                        <option value="dotted" <?= isset($data->{'_customize_header_search-mobile_style'}) && $data->{'_customize_header_search-mobile_style'} == 'dotted' ? 'selected' : '' ?>>
+                            Dotted
+                        </option>
+                        <option value="dashed" <?= isset($data->{'_customize_header_search-mobile_style'}) && $data->{'_customize_header_search-mobile_style'} == 'dashed' ? 'selected' : '' ?>>
+                            Dashed
+                        </option>
+                        <option value="double" <?= isset($data->{'_customize_header_search-mobile_style'}) && $data->{'_customize_header_search-mobile_style'} == 'double' ? 'selected' : '' ?>>
+                            Double
+                        </option>
+                        <option value="ridge" <?= isset($data->{'_customize_header_search-mobile_style'}) && $data->{'_customize_header_search-mobile_style'} == 'ridge' ? 'selected' : '' ?>>
+                            Ridge
+                        </option>
+                        <option value="inset" <?= isset($data->{'_customize_header_search-mobile_style'}) && $data->{'_customize_header_search-mobile_style'} == 'inset' ? 'selected' : '' ?>>
+                            Inset
+                        </option>
+                        <option value="outset" <?= isset($data->{'_customize_header_search-mobile_style'}) && $data->{'_customize_header_search-mobile_style'} == 'outset' ? 'selected' : '' ?>>
+                            Outset
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_search-mobile_border_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Border Color</span>
+                    <input id="input_header_search-mobile_border_color" name="settings[header][_customize-radio-search-mobile_border_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-radio-search-mobile_border_color'}) ? $data->{'_customize-radio-search-mobile_border_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_search-mobile_border_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-search-mobile_border-radius" class="customize-control customize-control-search-mobile_border-radius"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Radius</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top-left" type="text" name="settings[header][_customize-input-search-mobile_border-top-left-radius]" value="<?= isset($data->{'_customize-input-search-mobile_border-top-left-radius'}) && $data->{'_customize-input-search-mobile_border-top-left-radius'} ? $data->{'_customize-input-search-mobile_border-top-left-radius'} : '' ?>">
+                            <input placeholder="top-right" type="text" name="settings[header][_customize-input-search-mobile_border-top-right-radius]" value="<?= isset($data->{'_customize-input-search-mobile_border-top-right-radius'}) && $data->{'_customize-input-search-mobile_border-top-right-radius'} ? $data->{'_customize-input-search-mobile_border-top-right-radius'} : '' ?>">
+                            <input placeholder="bottom-right" type="text" name="settings[header][_customize-input-search-mobile_border-bottom-right-radius]" value="<?= isset($data->{'_customize-input-search-mobile_border-bottom-right-radius'}) && $data->{'_customize-input-search-mobile_border-bottom-right-radius'} ? $data->{'_customize-input-search-mobile_border-bottom-right-radius'} : '' ?>">
+                            <input placeholder="bottom-left" type="text" name="settings[header][_customize-input-search-mobile_border-bottom-left-radius]" value="<?= isset($data->{'_customize-input-search-mobile_border-bottom-left-radius'}) && $data->{'_customize-input-search-mobile_border-bottom-left-radius'} ? $data->{'_customize-input-search-mobile_border-bottom-left-radius'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-search-mobile_padding" class="customize-control customize-control-search-mobile-padding"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Padding (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-search-mobile_padding]" value="<?= isset($data->{'_customize-input-search-mobile_padding'}) && $data->{'_customize-input-search-mobile_padding'} ? $data->{'_customize-input-search-mobile_padding'} : '' ?>">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

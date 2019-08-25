@@ -1,0 +1,23 @@
+<?php
+$pageInfo = $block->getPageInfo();
+?>
+
+<div class="clever_brands">
+    <?php if($pageInfo->getData('description')):?>
+        <div class="page-desc"><?= $pageInfo->getData('description') ?></div>
+    <?php endif;?>
+    <?php if($pageInfo->getData('display_brand_search')):?>
+        <?php echo $block->getChildHtml('brand_search');?>
+    <?php endif;?>
+</div>
+<?php if($pageInfo->getData('display_brand_search')):?>
+    <div class="display_featured_brands">
+        <h3>Featured Brands</h3>
+        <?php echo $block->getChildHtml('featured_brands');?>
+    </div>
+<?php endif;?>
+<br />
+<div class="list_brands">
+    <h3>ALL Brands</h3>
+    <?php echo $block->getChildHtml('brand_list');?>
+</div>

@@ -1,0 +1,416 @@
+{
+  "name": "Row",
+  "title": "Row",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "layout",
+  "icon" : "",
+  "default_items": [
+    {
+      "x": 0,
+      "y": 0,
+      "width": 12,
+      "height": 2,
+      "col_depth": 0,
+      "col_hover_depth": 0
+    }
+  ],
+  "has_child": "row",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Row",
+  "code": "clever-row",
+  "layouts":[
+    [
+      {
+        "x" : 0,
+        "y" : 0,
+        "width": 12,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      }
+    ],
+    [
+      {
+        "x" : 0,
+        "y" : 0,
+        "width": 6,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      },
+      {
+        "x": 6,
+        "y": 0,
+        "width": 6,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      }
+    ],
+    [
+      {
+        "x" : 0,
+        "y" : 0,
+        "width": 4,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      },
+      {
+        "x": 4,
+        "y": 0,
+        "width": 4,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      },
+      {
+        "x": 8,
+        "y": 0,
+        "width": 4,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      }
+    ],
+    [
+      {
+        "x" : 0,
+        "y" : 0,
+        "width": 3,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      },
+      {
+        "x": 3,
+        "y": 0,
+        "width": 3,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      },
+      {
+        "x": 6,
+        "y": 0,
+        "width": 3,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      },
+      {
+        "x": 9,
+        "y": 0,
+        "width": 3,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      }
+    ],
+    [
+      {
+        "x" : 0,
+        "y" : 0,
+        "width": 4,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      },
+      {
+        "x": 4,
+        "y": 0,
+        "width": 8,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      }
+    ],
+    [
+      {
+        "x" : 0,
+        "y" : 0,
+        "width": 8,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      },
+      {
+        "x": 8,
+        "y": 0,
+        "width": 4,
+        "height": 2,
+        "col_depth": 0,
+        "col_hover_depth": 0
+      }
+    ]
+  ],
+  "content_fields": [
+    {
+      "type": "toggle",
+      "name": "stretch",
+      "attribute_type":"class",
+      "element_class": "element-row",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "full-width",
+          "label": "On"
+        }
+      ],
+      "label": "Stretch Row"
+    },
+    {
+      "type": "select",
+      "name": "content_width",
+      "attribute_type":"class",
+      "element_class": "element-row",
+      "prefix": "element-row-style-",
+      "values": [
+        {
+          "value": "boxed",
+          "label": "Boxed"
+        },
+        {
+          "value": "full-width",
+          "label": "Full Width"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Content Width"
+    },
+    {
+      "type": "select",
+      "name": "set_width",
+      "values": [
+        {
+          "value": "no",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Set Width for Content",
+      "depends" : {"content_width" : "boxed"}
+    },
+    {
+      "type": "slider",
+      "name": "width",
+      "required": false,
+      "min":500,
+      "max":1600,
+      "default": 500,
+      "visible": true,
+      "depends" : {"set_width" : "yes"},
+      "indepence" : {"content_width" : "full-width"}
+    },
+    {
+      "type": "select",
+      "name": "column_gap",
+      "required": false,
+      "values": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "no",
+          "label": "No Gap"
+        },
+        {
+          "value": "narrow",
+          "label": "Narrow"
+        },
+        {
+          "value": "extended",
+          "label": "Extended"
+        },
+        {
+          "value": "wide",
+          "label": "wide"
+        },
+        {
+          "value": "wider",
+          "label": "Wider"
+        }
+      ],
+      "visible": true,
+      "attribute_type": "class",
+      "element_class": "element-row__content",
+      "prefix": "column-gap-",
+      "label": "Columns Gap"
+    },
+    {
+      "type": "select",
+      "name": "height",
+      "attribute_type":"class",
+      "element_class": "element-row",
+      "prefix": "element-row-height-",
+      "values": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "full",
+          "label": "Fit To Screen"
+        },
+        {
+          "value": "min-height",
+          "label": "Min Height"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Height"
+    },
+    {
+      "type": "slider",
+      "name": "minimum_height",
+      "required": false,
+      "min":0,
+      "max":1440,
+      "default": 400,
+      "visible": true,
+      "label": "Minimum Height (px)",
+      "depends" : {"height" : "min-height"}
+    },
+    {
+      "type": "select",
+      "name": "column_position",
+      "values": [
+        {
+          "value": "stretch",
+          "label": "Stretch"
+        },
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "middle",
+          "label": "Midlle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "default": "middle",
+      "attribute_type":"class",
+      "element_class": "row-wrap",
+      "prefix": "column-position-",
+      "label": "Column Position"
+    },
+    {
+      "type": "select",
+      "name": "html_tag",
+      "values": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "div",
+          "label": "div"
+        },
+        {
+          "value": "header",
+          "label": "header"
+        },
+        {
+          "value": "footer",
+          "label": "footer"
+        },
+        {
+          "value": "main",
+          "label": "main"
+        },
+        {
+          "value": "article",
+          "label": "article"
+        },
+        {
+          "value": "section",
+          "label": "section"
+        },
+        {
+          "value": "aside",
+          "label": "aside"
+        },
+        {
+          "value": "nav",
+          "label": "nav"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Html Tag"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "buttonGroup",
+      "name": "text_align",
+      "required": false,
+      "values": [
+        {
+          "value": "left",
+          "label": "Left",
+          "icon": "dashicons dashicons-editor-alignleft"
+        },
+        {
+          "value": "center",
+          "label": "Center",
+          "icon": "dashicons dashicons-editor-aligncenter"
+        },
+        {
+          "value": "right",
+          "label": "Right",
+          "icon": "dashicons dashicons-editor-alignright"
+        }
+      ],
+      "visible": true,
+      "attribute_type":"class",
+      "element_class": "element-row__content",
+      "prefix": "text-",
+      "label": "Text Align"
+    },
+    {
+      "type": "color",
+      "name": "heading_color",
+      "required": false,
+      "visible": true,
+      "label": "Heading Color"
+    },
+    {
+      "type": "color",
+      "name": "text_color",
+      "required": false,
+      "visible": true,
+      "label": "Text Color"
+    },
+    {
+      "type": "color",
+      "name": "link_color",
+      "required": false,
+      "visible": true,
+      "label": "Link Color"
+    },
+    {
+      "type": "color",
+      "name": "link_hover_color",
+      "required": false,
+      "visible": true,
+      "label": "Link Hover Color"
+    }
+  ]
+}

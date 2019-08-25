@@ -1,0 +1,348 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+if ($objectManager->create('CleverSoft\CleverTheme\Model\FooterBlock')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getId()) {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\FooterBlock')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getFooterStyle());
+} else {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\FooterBlock')->getCollection()->addFieldToFilter('store_id',0)->getFirstItem()->getFooterStyle());
+}
+if($settings){
+    $data = isset($settings->footer) ? $settings->footer : '{}';
+}
+?>
+<!-- Modal content -->
+<div class="footerbuilder-modal-content">
+    <div class="footerbuilder-modal-footer">
+        <span class="footerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="footerbuilder-modal-body">
+        <strong>Footer Top Bar</strong>
+        <div class="modal-inner" id="footer_desktop_top_bar" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open" id="sub-accordion-section-top_bar">
+                <li id="customize-control-footer_top_width" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Footer Top Width</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                    </label>
+                    <div id="input_footer_top_width" class="image">
+
+                        <input class="image-select" type="radio" value="" name="settings[footer][_customize-radio-footer_top_width]" id="footer_top_widthcontainer" data-customize-setting-link="footer_top_width" <?= isset($data->{'_customize-radio-footer_top_width'}) && $data->{'_customize-radio-footer_top_width'} ? '' : 'checked'?> data-alt="">
+                        <label for="footer_top_widthcontainer" class="footer_top_widthcontainer">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/container.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="full-width" name="settings[footer][_customize-radio-footer_top_width]" id="footer_top_widthfull-width" data-customize-setting-link="footer_top_width" <?= isset($data->{'_customize-radio-footer_top_width'}) && $data->{'_customize-radio-footer_top_width'} == 'full-width' ? 'checked' : ''?> data-alt="">
+                        <label for="footer_top_widthfull-width" class="footer_top_widthfull-width">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/full-width.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                    </div>
+                </li>
+                <li id="customize-control-footer-top_align-item" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Footer Top Align Items</span>
+                    </label>
+                    <select name="settings[footer][_customize_footer-top_align-item]">
+                        <option value="align-items-stretch" <?= isset($data->{'_customize_footer-top_align-item'}) && $data->{'_customize_footer-top_align-item'} == 'align-items-stretch' ? 'selected' : '' ?>>
+                            stretch
+                        </option>
+                        <option value="align-items-start" <?= isset($data->{'_customize_footer-top_align-item'}) && $data->{'_customize_footer-top_align-item'} == 'align-items-start' ? 'selected' : '' ?>>
+                            start
+                        </option>
+                        <option value="align-items-end" <?= isset($data->{'_customize_footer-top_align-item'}) && $data->{'_customize_footer-top_align-item'} == 'align-items-end' ? 'selected' : '' ?>>
+                            end
+                        </option>
+                        <option value="align-items-center" <?= isset($data->{'_customize_footer-top_align-item'}) && $data->{'_customize_footer-top_align-item'} == 'align-items-center' ? 'selected' : '' ?>>
+                            center
+                        </option>
+                        <option value="align-items-baseline" <?= isset($data->{'_customize_footer-top_align-item'}) && $data->{'_customize_footer-top_align-item'} == 'align-items-baseline' ? 'selected' : '' ?>>
+                            baseline
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control_footer-top_justify-content" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Footer Middle Justify content</span>
+                    </label>
+                    <select name="settings[footer][_customize_footer-top_justify-content]">
+                        <option value="justify-content-start" <?= isset($data->{'_customize_footer-top_justify-content'}) && $data->{'_customize_footer-top_justify-content'} == 'justify-content-start' ? 'selected' : '' ?>>
+                            start
+                        </option>
+                        <option value="justify-content-end" <?= isset($data->{'_customize_footer-top_justify-content'}) && $data->{'_customize_footer-top_justify-content'} == 'justify-content-end' ? 'selected' : '' ?>>
+                            end
+                        </option>
+                        <option value="justify-content-center" <?= isset($data->{'_customize_footer-top_justify-content'}) && $data->{'_customize_footer-top_justify-content'} == 'justify-content-center' ? 'selected' : '' ?>>
+                            center
+                        </option>
+                        <option value="justify-content-between" <?= isset($data->{'_customize_footer-top_justify-content'}) && $data->{'_customize_footer-top_justify-content'} == 'justify-content-between' ? 'selected' : '' ?>>
+                            between
+                        </option>
+                        <option value="justify-content-around" <?= isset($data->{'_customize_footer-top_justify-content'}) && $data->{'_customize_footer-top_justify-content'} == 'justify-content-around' ? 'selected' : '' ?>>
+                            around
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-footer_top_padding_top" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Padding Top</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                        <input id="_customize-input-footer_top_padding_top" type="text" name="settings[footer][_customize-input-footer_top_padding_top]" value="<?= isset($data->{'_customize-input-footer_top_padding_top'}) ? $data->{'_customize-input-footer_top_padding_top'} :''?>" data-customize-setting-link="footer_top_padding_top">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-footer_top_padding_bottom" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Padding Bottom</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                        <input id="_customize-input-footer_top_padding_bottom" type="text" name="settings[footer][_customize-input-footer_top_padding_bottom]" value="<?= isset($data->{'_customize-input-footer_top_padding_bottom'}) ? $data->{'_customize-input-footer_top_padding_bottom'} :''?>" data-customize-setting-link="footer_top_padding_bottom">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-topbar_bg" class="customize-control customize-control-kirki-color" style="display: list-item;">
+                    <label>
+                    <span class="customize-control-title">
+                        Background Color
+                    </span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                    </label>
+                    <div class="wp-picker-container">
+                        <input id="input_footer_topbar_bg" name="settings[footer][_customize-footer_top_bg_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value" value="<?= isset($data->{'_customize-footer_top_bg_color'}) ?  $data->{'_customize-footer_top_bg_color'} : ''?>" class="mColorPicker" type="text">
+                        <script>
+                            require([
+                                "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                            ],function(){
+                                jQuery(document).ready(function(){
+                                    jQuery("#input_footer_topbar_bg").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                                });
+
+                            });
+                        </script>
+                    </div>
+                </li>
+                <li id="customize-control-footer_top_link_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Link Color</span>
+                    <input id="input_footer_top_link_color" name="settings[footer][_customize-footer_top_link_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value" value="<?= isset($data->{'_customize-footer_top_link_color'}) ? $data->{'_customize-footer_top_link_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                                "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                            ],function(){
+                                jQuery(document).ready(function(){
+                                    jQuery("#input_footer_top_link_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                                });
+
+                            });
+                    </script>
+                </li>
+                <li id="customize-control-footer_top_link_hover_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Link Hover Color</span>
+                    <input id="input_footer_top_link_hover_color" name="settings[footer][_customize-footer_top_link_hover_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value" value="<?= isset($data->{'_customize-footer_top_link_hover_color'}) ? $data->{'_customize-footer_top_link_hover_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                                "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                            ],function(){
+                                jQuery(document).ready(function(){
+                                    jQuery("#input_footer_top_link_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                                });
+
+                            });
+                    </script>
+                </li>
+                <li id="customize-control-footer_top_text_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Text Color</span>
+                    <input id="input_footer_top_text_color" name="settings[footer][_customize-footer_top_text_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value" value="<?= isset($data->{'_customize-footer_top_text_color'}) ? $data->{'_customize-footer_top_text_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                                "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                            ],function(){
+                                jQuery(document).ready(function(){
+                                    jQuery("#input_footer_top_text_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                                });
+
+                            });
+                    </script>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-inner" id="footer_mobile_top_bar" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open" id="sub-accordion-section-top_bar">
+                <li id="customize-control-footer_top_width" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Footer Top Width</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                    </label>
+                    <div id="input_footer_top_width" class="image">
+
+                        <input class="image-select" type="radio" value="" name="settings[footer][_customize-radio-footer_top_mobile_width]" id="footer_top_widthcontainer" data-customize-setting-link="footer_top_width" <?= isset($data->{'_customize-radio-footer_top_mobile_width'}) && $data->{'_customize-radio-footer_top_mobile_width'} ? '' : 'checked'?> data-alt="">
+                        <label for="footer_top_widthcontainer" class="footer_top_widthcontainer">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/container.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="full-width" name="settings[footer][_customize-radio-footer_top_mobile_width]" id="footer_top_widthfull-width" data-customize-setting-link="footer_top_width" <?= isset($data->{'_customize-radio-footer_top_mobile_width'}) && $data->{'_customize-radio-footer_top_mobile_width'} == 'full-width' ? 'checked' : ''?> data-alt="">
+                        <label for="footer_top_widthfull-width" class="footer_top_widthfull-width">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/full-width.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                    </div>
+                </li>
+                <li id="customize-control-footer-top_mobile_align-item" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Footer Top Align Items</span>
+                    </label>
+                    <select name="settings[footer][_customize_footer-top_mobile_align-item]">
+                        <option value="align-items-stretch" <?= isset($data->{'_customize_footer-top_mobile_align-item'}) && $data->{'_customize_footer-top_mobile_align-item'} == 'align-items-stretch' ? 'selected' : '' ?>>
+                            stretch
+                        </option>
+                        <option value="align-items-start" <?= isset($data->{'_customize_footer-top_mobile_align-item'}) && $data->{'_customize_footer-top_mobile_align-item'} == 'align-items-start' ? 'selected' : '' ?>>
+                            start
+                        </option>
+                        <option value="align-items-end" <?= isset($data->{'_customize_footer-top_mobile_align-item'}) && $data->{'_customize_footer-top_mobile_align-item'} == 'align-items-end' ? 'selected' : '' ?>>
+                            end
+                        </option>
+                        <option value="align-items-center" <?= isset($data->{'_customize_footer-top_mobile_align-item'}) && $data->{'_customize_footer-top_mobile_align-item'} == 'align-items-center' ? 'selected' : '' ?>>
+                            center
+                        </option>
+                        <option value="align-items-baseline" <?= isset($data->{'_customize_footer-top_mobile_align-item'}) && $data->{'_customize_footer-top_mobile_align-item'} == 'align-items-baseline' ? 'selected' : '' ?>>
+                            baseline
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control_footer-top_mobile_justify-content" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Footer Middle Justify content</span>
+                    </label>
+                    <select name="settings[footer][_customize_footer-top_mobile_justify-content]">
+                        <option value="justify-content-start" <?= isset($data->{'_customize_footer-top_mobile_justify-content'}) && $data->{'_customize_footer-top_mobile_justify-content'} == 'justify-content-start' ? 'selected' : '' ?>>
+                            start
+                        </option>
+                        <option value="justify-content-end" <?= isset($data->{'_customize_footer-top_mobile_justify-content'}) && $data->{'_customize_footer-top_mobile_justify-content'} == 'justify-content-end' ? 'selected' : '' ?>>
+                            end
+                        </option>
+                        <option value="justify-content-center" <?= isset($data->{'_customize_footer-top_mobile_justify-content'}) && $data->{'_customize_footer-top_mobile_justify-content'} == 'justify-content-center' ? 'selected' : '' ?>>
+                            center
+                        </option>
+                        <option value="justify-content-between" <?= isset($data->{'_customize_footer-top_mobile_justify-content'}) && $data->{'_customize_footer-top_mobile_justify-content'} == 'justify-content-between' ? 'selected' : '' ?>>
+                            between
+                        </option>
+                        <option value="justify-content-around" <?= isset($data->{'_customize_footer-top_mobile_justify-content'}) && $data->{'_customize_footer-top_mobile_justify-content'} == 'justify-content-around' ? 'selected' : '' ?>>
+                            around
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-footer_top_mobile_bg_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Background Color</span>
+                    <input id="input_footer_top_mobile_bg_color" name="settings[footer][_customize-footer_top_mobile_bg_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value" value="<?= isset($data->{'_customize-footer_top_mobile_bg_color'}) ? $data->{'_customize-footer_top_mobile_bg_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_footer_top_mobile_bg_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-footer_mobile_top_padding_top" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Padding Top</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                            <input id="_customize-input-footer_mobile_top_padding_top" type="text" name="settings[footer][_customize-input-footer_mobile_top_padding_top]" value="<?= isset($data->{'_customize-input-footer_mobile_top_padding_top'}) ? $data->{'_customize-input-footer_mobile_top_padding_top'} :''?>" data-customize-setting-link="footer_mobile_top_padding_top">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-footer_mobile_top_padding_bottom" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Padding Bottom</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                            <input id="_customize-input-footer_mobile_top_padding_bottom" type="text" name="settings[footer][_customize-input-footer_mobile_top_padding_bottom]" value="<?= isset($data->{'_customize-input-footer_mobile_top_padding_bottom'}) ? $data->{'_customize-input-footer_mobile_top_padding_bottom'} :''?>" data-customize-setting-link="footer_mobile_top_padding_bottom">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-footer_mobile_top_link_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Link Color</span>
+                    <input id="input_footer_mobile_top_link_color" name="settings[footer][_customize-footer_mobile_top_link_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value" value="<?= isset($data->{'_customize-footer_mobile_top_link_color'}) ? $data->{'_customize-footer_mobile_top_link_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_footer_mobile_top_link_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-footer_mobile_top_link_hover_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Link Hover Color</span>
+                    <input id="input_footer_mobile_top_link_hover_color" name="settings[footer][_customize-footer_mobile_top_link_hover_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value" value="<?= isset($data->{'_customize-footer_mobile_top_link_hover_color'}) ? $data->{'_customize-footer_mobile_top_link_hover_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_footer_mobile_top_link_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-footer_mobile_top_text_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Text Color</span>
+                    <input id="input_footer_mobile_top_text_color" name="settings[footer][_customize-footer_mobile_top_text_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value" value="<?= isset($data->{'_customize-footer_mobile_top_text_color'}) ? $data->{'_customize-footer_mobile_top_text_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_footer_mobile_top_text_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

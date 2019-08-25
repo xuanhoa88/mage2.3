@@ -1,0 +1,8 @@
+.page-header .user_area i { font-size:24px; }
+.header-minimal-search a.icon i:before {
+  content:"\c013";
+  font-family:"cleversoft";
+}
+.page-header .header-compare i { font-size:24px; }
+.page-header .header-wishlist i { font-size:24px; }
+.minicart-wrapper i, .minicart-wrapper_dropdown i { font-size:24px; }

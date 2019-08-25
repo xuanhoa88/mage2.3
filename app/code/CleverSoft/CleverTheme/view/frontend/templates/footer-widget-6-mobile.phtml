@@ -1,0 +1,21 @@
+<?php
+$footerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\FooterData');
+$settingData = $footerBuilderHelper->getSettingData();
+
+
+$staticBlock = isset($settingData->{'_customize-select-footer-widget-6-mobile'}) && $settingData->{'_customize-select-footer-widget-6-mobile'} ? $settingData->{'_customize-select-footer-widget-6-mobile'} : '';
+
+?>
+
+<?php if ($staticBlock): ?>
+    <?php if (isset($settingData->{'_customize-input-footer-widget-6-mobile_margin'}) && $settingData->{'_customize-input-footer-widget-6-mobile_margin'}): ?>
+        <div style="margin: <?php echo $settingData->{'_customize-input-footer-widget-6-mobile_margin'} ?>">
+    <?php endif; ?>
+    <?php echo $this->getLayout()
+        ->createBlock('Magento\Cms\Block\Block')
+        ->setBlockId($staticBlock)
+        ->toHtml(); ?>
+    <?php if (isset($settingData->{'_customize-input-footer-widget-6-mobile_margin'}) && $settingData->{'_customize-input-footer-widget-6-mobile_margin'}): ?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

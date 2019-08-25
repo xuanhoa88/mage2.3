@@ -1,0 +1,80 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+$overlay_color = $this->getData('overlay_color');
+$video_you = $this->getData('youtube_id');
+$video_mp4 = $this->getData('video_mp4');
+$video_webm = $this->getData('video_webm');
+$video_ogg = $this->getData('video_ogg');
+$image = $this->getData('image');
+$image_url = $this->getViewFileUrl('CleverSoft_CleverBuilder::images/transparent.gif');
+$height_image = $this->getData('height_image');
+$effect = $this->getData('effect');
+$height = $this->getData('height');
+$items = $this->getData('items');
+?>
+<div class="global-element banner <?php if($isPreview) echo "cs-live-preview"?> banner-<?php echo $this->getData('widget_id')?> layout-<?php echo $this->getData('layout_name') ? $this->getData('layout_name') : 'blank' ?> has-hover <?php echo $this->getData('sticky')?> <?php echo $this->getData('banner_width')?>" <?php echo $this->getData('animate') ? 'data-animate="'.$this->getData('animate').'"': ''?> <?php if((!isset($image)|| !$image) && $video_you == ""): ?>style="height:<?php echo $this->getData('height') ? $this->getData('height') : 500?>px"<?php endif?>>
+    <div class="banner-inner">
+        <?php if(isset($image) && $image): ?>
+            <div class="banner-image" <?php if($height_image):?>style="min-height: <?=$height_image?>px"<?php endif?>>
+            <?php if(isset($overlay_color) && $overlay_color): ?>
+            <div class="overlay" style="background-color:<?=$overlay_color?>"></div>
+            <?php endif?>
+            <img class="img clazyload" data-src="<?=$image?>" src="<?=$image_url;?>" alt=""/>
+            </div>
+        <?php endif?>
+        <?php if ($video_mp4 || $video_webm || $video_ogg) { ?>
+            <div class="video-overlay no-click fill hide-for-small"></div>
+            <video class="video-bg fill hide-for-small" style="object-fit:cover;width:100%" preload playsinline
+                <?php echo $this->getData('auto_play') ? 'autoplay' : ''; ?>
+                <?php echo $this->getData('volume') ? '' : 'muted'; ?>
+                <?php echo $this->getData('auto_loop') ? 'loop' : ''; ?>>
+                <?php
+                echo $video_mp4 ? '<source src="' . $video_mp4 . '" type="video/mp4">' : '';
+                echo $video_ogg ? '<source src="' . $video_ogg . '" type="video/ogg">' : '';
+                echo $video_webm ? '<source src="' . $video_webm . '" type="video/webm">' : '';
+                ?>
+            </video>
+        <?php } ?>
+        <?php if($video_you):?>
+            <div class="jarallax background-video global-element" data-jarallax-video="https://www.youtube.com/watch?v=<?=$video_you?>" data-auto-play="<?= $this->getData('auto_play')?>" data-video-loop="<?= $this->getData('auto_loop')?>" data-video-volume="<?= $this->getData('volume')?>">
+            </div>
+            <script type="text/x-magento-init">
+                {
+                    "*": {
+                        "jarallax" : {},
+                        "jarallaxVideo" : {}
+                    }
+                }
+            </script>
+        <?php endif;?>
+        <?php if(isset($effect) && $effect): ?>
+        <div class="<?php echo $effect ? $effect : ''?> bg-effect fill no-click"></div>
+        <?php endif;?>
+        <?php if (isset($items) && $items): ?>
+        <div class="banner-layers">
+            <div class="banner-child-element">
+                <?php 
+                    foreach ($items as $item) {
+                        if (isset($item[0]))
+                            echo $item[0]['html'];
+                        else
+                            echo $item['html'];
+                    }
+                ?>
+            </div>
+        </div>
+        <?php endif;?>
+    </div>
+    <?php if($isPreview) { ?>
+        <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+    <?php } ?>
+</div>
+
+<script type="text/x-magento-init">
+{
+    ".banner-<?php echo $this->getData('widget_id')?>":{
+        "cleverElementAnimate":{}
+    }
+}
+</script>

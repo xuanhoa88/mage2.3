@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <css src="jquery/fileUploader/css/jquery.fileupload-ui.css"/>
+		<css src="CleverSoft_CleverPinMarker::css/pm-admin.css"/>
+    </head>
+    <body>
+		<referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="store_switcher">
+                <action method="setUseConfirm">
+                    <argument name="params" xsi:type="string">1</argument>
+                </action>
+            </block>
+        </referenceContainer>
+		<referenceContainer name="left">
+			<block class="CleverSoft\CleverPinMarker\Block\Adminhtml\Index\Edit\Tabs" name="pinmarker_edit_tabs">
+				<block class="CleverSoft\CleverPinMarker\Block\Adminhtml\Index\Edit\Tab\Main" name="pinmarker_edit_tab_main" />
+				<action method="addTab">
+					<argument name="name" xsi:type="string">main_section</argument>
+					<argument name="block" xsi:type="string">pinmarker_edit_tab_main</argument>
+				</action>
+                <action method="addTab">
+					<argument name="name" xsi:type="string">collection_section</argument>
+					<argument name="block" xsi:type="string">pinmarker_edit_tab_collection</argument>
+				</action>
+			</block>
+		</referenceContainer>
+		
+		<referenceContainer name="content">
+			<block class="CleverSoft\CleverPinMarker\Block\Adminhtml\Index\Edit" name="pinmarker_edit" />
+			<block class="Magento\Backend\Block\Template" name="pm_js" template="CleverSoft_CleverPinMarker::pinmarker/js_config.phtml"/>
+        </referenceContainer>
+		
+    </body>
+	<update handle="editor"/>
+</page>

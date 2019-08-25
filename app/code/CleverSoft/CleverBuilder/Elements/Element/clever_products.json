@@ -1,0 +1,512 @@
+{
+  "name": "Products",
+  "title": "Products",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Element\\Form\\Products",
+  "installed": true,
+  "groups": [],
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Element\\Render\\Products\\CarouselProducts",
+  "icon" : "",
+  "area" : "element",
+  "code": "clever-products",
+  "content_fields": [
+    {
+      "type": "select",
+      "name": "layout_product",
+      "required": true,
+      "values": [
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "carousel",
+          "label": "Carousel"
+        },
+        {
+          "value": "carousel-vertical",
+          "label": "Carousel Vertical"
+        }
+      ],
+      "visible": true,
+      "label": "Layout"
+    },
+    {
+      "type": "toggle",
+      "name": "alt_image",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "default": "1",
+      "label": "Alteration Image"
+    },
+    {
+      "type": "select",
+      "name": "one_image_height",
+      "required": false,
+      "values": [
+        {
+          "value": "",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ],
+      "visible": true,
+      "label": "Use One Image Height"
+    },
+    {
+      "type": "slider",
+      "name": "scale_product",
+      "required": false,
+      "min":1,
+      "default": 250,
+      "max":500,
+      "visible": true,
+      "label": "Image height. Value in pixel.",
+      "depends" : {"one_image_height" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "scale_product_container",
+      "required": false,
+      "min":1,
+      "default": 250,
+      "max":500,
+      "visible": true,
+      "label": "Product container image height. Value in pixel.",
+      "depends" : {"one_image_height" : "yes"}
+    },
+    {
+      "type": "toggle",
+      "name": "enable_fullwidth",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Full Width"
+    },
+    {
+      "type": "select",
+      "name": "ajaxload",
+      "required": false,
+      "visible": true,
+      "default": 0,
+      "source_model": "Magento\\Config\\Model\\Config\\Source\\Yesno",
+      "label": "Enable Ajax Load"
+    },
+    {
+      "type": "select",
+      "name": "lazyload",
+      "required": false,
+      "visible": true,
+      "default": 1,
+      "source_model": "Magento\\Config\\Model\\Config\\Source\\Yesno",
+      "label": "Lazy load Image"
+    },
+    {
+      "type": "text",
+      "name": "height_image",
+      "required": false,
+      "visible": true,
+      "label": "Image lazy load height(px)",
+      "depends" : {"lazyload" : 1}
+    },
+    {
+      "type": "toggle",
+      "name": "enable_border_boxshadow",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "default": "0",
+      "label": "Border Boxshadow"
+    },
+    {
+      "type": "select",
+      "name": "mode",
+      "required": true,
+      "values": [
+        {
+          "value": "latest",
+          "label": "Latest Products"
+        },
+        {
+          "value": "new",
+          "label": "New Products"
+        },
+        {
+          "value": "bestsell",
+          "label": "Best Sell Products"
+        },
+        {
+          "value": "mostviewed",
+          "label": "Most Viewed Products"
+        },
+        {
+          "value": "random",
+          "label": "Random Products"
+        },
+        {
+          "value": "related",
+          "label": "Related Products"
+        },{
+          "value": "upsell",
+          "label": "Up-sell Products"
+        },{
+          "value": "crosssell",
+          "label": "Cross-sell Products"
+        },
+        {
+          "value": "discount",
+          "label": "Discount Products"
+        },
+        {
+          "value": "rating",
+          "label": "Top Rated Products"
+        },
+        {
+          "value": "recentviewed",
+          "label": "Recent Viewed Products"
+        }
+      ],
+      "visible": true,
+      "label": "Collection"
+    },
+    {
+      "type": "conditions",
+      "name": "category_ids",
+      "required": false,
+      "visible": true,
+      "label": "Categories",
+      "description": "If category is selected, the product collection will be filtered by this categories"
+    },
+    {
+      "type": "slider",
+      "name": "limit",
+      "required": false,
+      "min":1,
+      "default": 6,
+      "max":99,
+      "visible": true,
+      "label": "Max Products Count"
+    },
+    {
+      "type": "slider",
+      "name": "column_grid",
+      "attribute_type": "class",
+      "element_class": "product-items",
+      "prefix": "zoo-grid-",
+      "unit": "col",
+      "required": false,
+      "visible": true,
+      "min":1,
+      "default": 4,
+      "max":16,
+      "label": "Items per row",
+      "depends" : {"layout_product" :  "grid"}
+    },
+    {
+      "type": "slider",
+      "name": "col_480",
+      "required": false,
+      "min":1,
+      "max":12,
+      "default": 2,
+      "visible": true,
+      "label": "Number Items (480px up)",
+      "indepence" : {"layout_product" :  "grid"}
+    },
+    {
+      "type": "slider",
+      "name": "col_768",
+      "required": false,
+      "min":1,
+      "max":12,
+      "default": 3,
+      "visible": true,
+      "label": "Number Items (768px wide)",
+      "indepence" : {"layout_product" :  "grid"}
+    },
+    {
+      "type": "slider",
+      "name": "col_992",
+      "required": false,
+      "min":1,
+      "max":12,
+      "default": 4,
+      "visible": true,
+      "label": "Number Items (992px up)",
+      "indepence" : {"layout_product" :  "grid"}
+    },
+    {
+      "type": "slider",
+      "name": "column",
+      "required": false,
+      "min":1,
+      "max":12,
+      "default": 6,
+      "visible": true,
+      "label": "Number Items (1200px up)",
+      "indepence" : {"layout_product" :  "grid"}
+    },
+    {
+      "type": "text",
+      "name": "margin",
+      "required": false,
+      "visible": true,
+      "label": "Gap (Default: 0 (px))",
+      "indepence" : {"layout_product" :  "grid"}
+    },
+    {
+      "type": "toggle",
+      "name": "autoplay",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Auto Play",
+      "indepence" : {"layout_product" :  "grid"}
+    },
+    {
+      "type": "toggle",
+      "name": "autoplayhoverpause",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Pause on Hover",
+      "indepence" : {"layout_product" :  "grid"}
+    },
+    {
+      "type": "text",
+      "name": "autoplaytimeout",
+      "required": false,
+      "visible": true,
+      "label": "Auto Play Timeout",
+      "indepence" : {"layout_product" :  "grid"}
+    },
+    {
+      "type": "toggle",
+      "name": "enable_bullet",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Enable Bullet",
+      "indepence" : {"layout_product" :  "grid"}
+    },
+    {
+      "type": "toggle",
+      "name": "enable_loop",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Enable Loop",
+      "indepence" : {"layout_product" :  "grid"}
+    },
+    {
+      "type": "toggle",
+      "name": "navigation",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Show Navigation",
+      "indepence" : {"layout_product" :  "grid"}
+    },
+    {
+      "type": "toggle",
+      "name": "display_rating",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Ratings"
+    },
+    {
+      "type": "toggle",
+      "name": "display_addtocart",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": 1,
+          "label": "On"
+        }
+      ],
+      "label": "Add To Cart"
+    },
+    {
+      "type": "toggle",
+      "name": "display_quickview",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Quickview"
+    },
+    {
+      "type": "toggle",
+      "name": "display_addtowishlist",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Add To Wishlist"
+    },
+    {
+      "type": "toggle",
+      "name": "display_addtocompare",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Add To Compare"
+    },
+    {
+      "type": "toggle",
+      "name": "display_swatch_attributes",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Swatch Attributes <br>(Colors,Sizes,Style....)"
+    },
+    {
+      "type": "toggle",
+      "name": "display_productname",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Product name"
+    },
+    {
+      "type": "toggle",
+      "name": "display_price",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Price"
+    },
+    {
+      "type": "select",
+      "name": "aspect_ratio",
+      "required": false,
+      "visible": true,
+      "default": 0,
+      "source_model": "Magento\\Config\\Model\\Config\\Source\\Yesno",
+      "label": "Keep Image Aspect Ratio"
+    },
+    {
+      "type": "text",
+      "name": "image_width",
+      "required": false,
+      "visible": true,
+      "label": "Image Width"
+    },
+    {
+      "type": "text",
+      "name": "image_height",
+      "required": false,
+      "visible": true,
+      "label": "Image Height",
+      "depends" : {"aspect_ratio" : 0}
+    },
+    {
+      "type": "text",
+      "name": "cache",
+      "required": false,
+      "visible": true,
+      "label": "Cache Lifetime"
+    },
+    {
+      "type": "text",
+      "name": "classes",
+      "required": false,
+      "visible": true,
+      "label": "Widget Classes"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "select",
+      "name": "product_grid_style",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "product_grid_style_1",
+          "label": "Style 1"
+        }
+      ],
+      "default": "product_grid_style_1",
+      "label": "Hover on Product"
+    }
+  ]
+}

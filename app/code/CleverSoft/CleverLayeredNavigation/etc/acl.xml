@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::content">
+                    <resource id="CleverSoft_CleverLayeredNavigation::layered_navigation" title="CleverSoft: Layered Navigation" sortOrder="30" >
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="CleverSoft_CleverLayeredNavigation::config" title="Improved Layered Navigation" sortOrder="11318" />
+                        </resource>
+                    </resource>
+                    <resource id="Magento_Backend::stores_attributes">
+                        <resource id="CleverSoft_CleverLayeredNavigation::option" title="CleverSoft Attribute Options Settings" sortOrder="30"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

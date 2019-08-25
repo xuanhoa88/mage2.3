@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="CleverSoft_CleverShopByBrand::shopbybrand" title="CleverShopByBrand" module="CleverSoft_CleverShopByBrand" sortOrder="11" parent="CleverSoft_Base::cl_all" resource="CleverSoft_CleverShopByBrand::shopbybrand" />
+        <add id="CleverSoft_CleverShopByBrand::manage_brands" title="Brands Manager" module="CleverSoft_CleverShopByBrand" sortOrder="0" parent="CleverSoft_CleverShopByBrand::shopbybrand" action="shopbybrand/index" resource="CleverSoft_CleverShopByBrand::index" />
+        <add id="CleverSoft_CleverShopByBrand::settings" title="Configuration" module="CleverSoft_CleverShopByBrand" sortOrder="20" parent="CleverSoft_CleverShopByBrand::shopbybrand" action="adminhtml/system_config/edit/section/cleversoft_shopbybrand" resource="CleverSoft_CleverShopByBrand::settings" />
+    </menu>
+</config>

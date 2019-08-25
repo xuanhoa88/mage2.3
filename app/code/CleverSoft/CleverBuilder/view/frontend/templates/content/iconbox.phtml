@@ -1,0 +1,64 @@
+<?php
+$icon = $this->getData('icon');
+$primary_color = $this->getData('primary_color');
+$secondary_color = $this->getData('secondary_color');
+$hover_primary_color = $this->getData('hover_primary_color');
+$hover_secondary_color = $this->getData('hover_secondary_color');
+$spacing = $this->getData('spacing');
+$font_size = $this->getData('size');
+$padding = $this->getData('padding');
+$rotate = $this->getData('rotate');
+$alignment = $this->getData('alignment');
+$link = $this->getData('link');
+$tag = $this->getData('tag');
+$view = $this->getData('view');
+$shape_stacked = $this->getData('shape_stacked');
+$shape_framed = $this->getData('shape_framed');
+$animation = $this->getData('hover_animation');
+$alignment_content_text = $this->getData('alignment_content_text');
+$alignment_content = $this->getData('alignment_content');
+$link_option = $this->getData('link_option');
+$link_option_rel = $this->getData('link_option_rel');
+$title = $this->getData('title');
+$description = $this->getData('description');
+$spacing_title = $this->getData('spacing_title');
+$color_title = $this->getData('color_title');
+$color_desc = $this->getData('color_desc');
+$text_transform = $this->getData('text_transform');
+$text_transform_desc = $this->getData('text_transform_desc');
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$dataStyle = $helper->widget_style($block->getData('widget_id'));
+$isPreview = $helper->getCustomerEnablePanel();
+?>
+<div class="global-element iconbox-<?= $block->getData('widget_id')?> icon-box__element element-position-<?=$alignment ? $alignment : "top"?> element-vertical-align-<?=$alignment_content ? $alignment_content : "top"?> <?php if(isset($view)) { echo "element-view-".$view; }?> <?php if(isset($shape_stacked)) { echo "element-shape_stacked-".$shape_stacked; }?> <?php if(isset($shape_framed)) { echo "element-shape_framed-".$shape_framed; }?> <?php if($isPreview) echo "cs-live-preview"?>">
+    <div class="element-iconbox icon-box__wrapper <?=$alignment_content_text ? "text-$alignment_content_text" : "text-center"?>">
+        <div class="element-iconbox__icon">
+            <?php if(isset($link) && $link != ""): ?>
+            <a href="<?= $link ?>" <?php if(isset($link_option) && $link_option != "") { echo 'target="_blank"'; }?> <?php if(isset($link_option_rel) && $link_option_rel != "") { echo 'rel="nofollow"'; }?> class="element-icon <?php if(isset($animation)) { echo "element-animation-".$animation; }?>" style="<?= $font_size ? "font-size: $font_size"."px" : "font-size: 50px" ?>;<?= $padding ? "padding: $padding"."px" : "" ?>">
+            <?php else: ?>
+            <span class="element-icon <?php if(isset($animation)) { echo "element-animation-".$animation; }?>" style="<?= $font_size ? "font-size: $font_size"."px" : "font-size: 50px" ?>;<?= $padding ? "padding: $padding"."px" : "" ?>">
+            <?php endif?>
+                <i class="<?= $icon ? "fa $icon" : "fa fa-star"?>" style="<?= $rotate ? "transform: rotate(".$rotate."deg)" : "" ?>"></i>
+            <?php if(isset($link) && $link != ""): ?>
+            </a>
+            <?php else: ?>
+            </span>
+            <?php endif?>
+        </div>
+        <div class="element-iconbox__content">
+            <<?=$tag ? $tag : "h1"?> class="element-iconbox__content-title <?php if(isset($text_transform)) { echo "text-".$text_transform; }?>" style="<?= $color_title ? "color: $color_title" : "" ?>;<?= $spacing_title ? "margin-bottom: $spacing_title"."px" : "margin-bottom: 0" ?>">
+            <?php if(isset($link) && $link != ""): ?>
+            <a href="<?=$link ?>" <?php if(isset($link_option) && $link_option != "") { echo 'target="_blank"'; }?> <?php if(isset($link_option_rel) && $link_option_rel != "") { echo 'rel="nofollow"'; }?>>
+            <?php endif;?>
+                <?=$title ? $title : "This is the heading"?>
+            <?php if(isset($link) && $link != ""): ?>
+            </a>
+            <?php endif;?>
+            </<?=$tag ? $tag : "h1"?>>
+            <div class="element-iconbox__content-description <?php if(isset($text_transform_desc)) { echo "text-".$text_transform_desc; }?>" style="<?php echo $color_desc ? "color: $color_desc" : "" ?>"> <?=$description ? $description : "Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."?> </div>
+        </div>
+    </div>
+    <?php if($isPreview) { ?>
+        <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+    <?php } ?>
+</div>

@@ -1,0 +1,6 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="CleverSoft_CleverBuilder::builder" title="CleverBuilder" module="CleverSoft_CleverBuilder" sortOrder="10" parent="CleverSoft_Base::cl_all" resource="CleverSoft_Base::all" />
+        <add id="CleverSoft_CleverBuilder::buildersettings" title="Configuration" module="CleverSoft_CleverBuilder" sortOrder="0" parent="CleverSoft_CleverBuilder::builder" action="adminhtml/system_config/edit/section/clevervisualpagebuilder" resource="CleverSoft_CleverBuilder::config_setting" />
+    </menu>
+</config>

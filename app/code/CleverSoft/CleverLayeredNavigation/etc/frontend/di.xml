@@ -1,0 +1,259 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\LayeredNavigation\Block\Navigation\FilterRenderer"     type="CleverSoft\CleverLayeredNavigation\Block\Navigation\FilterRenderer"/>
+    <preference for="Magento\Swatches\Block\LayeredNavigation\RenderLayered"     type="CleverSoft\CleverLayeredNavigation\Block\Navigation\SwatchRenderer"/>
+    <preference for="Magento\LayeredNavigation\Block\Navigation\Category"     type="CleverSoft\CleverLayeredNavigation\Block\Navigation\Category"/>
+    <preference for="Magento\CatalogSearch\Model\Adapter\Mysql\Filter\Preprocessor"     type="CleverSoft\CleverLayeredNavigation\Model\Adapter\Mysql\Filter\Preprocessor"/>
+    <preference for="Magento\CatalogSearch\Model\Adapter\Aggregation\AggregationResolver"  type="CleverSoft\CleverLayeredNavigation\Model\Adapter\Aggregation\AggregationResolver"/>
+    <preference for="Magento\CatalogSearch\Controller\Result\Index"  type="CleverSoft\CleverLayeredNavigation\Controller\CatalogSearch\Index"/>
+    <preference for="Magento\Catalog\Controller\Category\View"  type="CleverSoft\CleverLayeredNavigation\Controller\Category\View"/>
+
+    <virtualType name="CleverSoft\CleverLayeredNavigation\Block\Navigation\Category" type="CleverSoft\CleverLayeredNavigation\Block\Navigation">
+        <arguments>
+            <argument name="filterList" xsi:type="object">categoryFilterList</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\ItemFactory" type="Magento\Catalog\Model\Layer\Filter\ItemFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Item</argument>
+        </arguments>
+    </virtualType>
+    <type name="CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Attribute">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+    <type name="CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Price">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+    <type name="Magento\CatalogSearch\Model\Layer\Filter\Category">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+    <type name="CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Stock">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+    <type name="CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Rating">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+
+    <type name="CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\NewProduct">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+
+    <type name="CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\OnSale">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+
+    <type name="CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Category">
+        <arguments>
+            <argument name="filterItemFactory" xsi:type="object">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\ItemFactory</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\CollectionFactory" type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\ResourceModel\Fulltext\Collection</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory" type="Magento\Catalog\Model\ResourceModel\Product\CollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\ResourceModel\Fulltext\Collection</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="categoryFilterList" type="Magento\Catalog\Model\Layer\FilterList">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="attribute" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Attribute</item>
+                <item name="price" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Price</item>
+                <item name="decimal" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Decimal</item>
+                <item name="category" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Category</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="searchFilterList" type="Magento\Catalog\Model\Layer\FilterList">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="attribute" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Attribute</item>
+                <item name="price" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Price</item>
+                <item name="decimal" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Decimal</item>
+                <item name="category" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Category</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+
+    <type name="CleverSoft\CleverLayeredNavigation\Controller\Category\View">
+        <plugin name="CleverSoft_CleverLayeredNavigation::ajaxInject" type="CleverSoft\CleverLayeredNavigation\Plugin\Ajax\CategoryViewAjax" />
+    </type>
+
+    <type name="CleverSoft\CleverLayeredNavigation\Controller\Index\Index">
+        <plugin name="CleverSoft_CleverLayeredNavigation::ajaxLayeredNavigationInject" type="CleverSoft\CleverLayeredNavigation\Plugin\Ajax\LayeredNavigationViewAjax" />
+    </type>
+
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="CleverSoft_CleverLayeredNavigation::wrapProductList" type="CleverSoft\CleverLayeredNavigation\Plugin\ProductListWrapper" />
+    </type>
+
+    <type name="Magento\CatalogSearch\Block\Result">
+        <plugin name="CleverSoft_CleverLayeredNavigation::wrapSearchProductList" type="CleverSoft\CleverLayeredNavigation\Plugin\SearchProductListWrapper" />
+    </type>
+
+    <type name="Magento\Catalog\Block\Product\ProductList\Toolbar">
+        <plugin name="CleverSoft_CleverLayeredNavigation::removeAjaxParamFromToolbar" type="CleverSoft\CleverLayeredNavigation\Plugin\CatalogToolbarPlugin" />
+    </type>
+
+    <type name="Magento\Theme\Block\Html\Pager">
+        <plugin name="CleverSoft_CleverLayeredNavigation::removeAjaxParamFromPager" type="CleverSoft\CleverLayeredNavigation\Plugin\PagerPlugin" />
+    </type>
+
+    <type name="Magento\LayeredNavigation\Block\Navigation\State">
+        <plugin name="CleverSoft_CleverLayeredNavigation::removeAjaxParamFromState" type="CleverSoft\CleverLayeredNavigation\Plugin\StatePlugin" />
+    </type>
+
+    <type name="Magento\Catalog\Model\Layer\FilterList">
+        <plugin name="CleverSoft_CleverLayeredNavigation::addCustomFilters" type="CleverSoft\CleverLayeredNavigation\Plugin\FilterList" />
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Search\IndexBuilder">
+        <plugin name="CleverSoft_CleverLayeredNavigation::addStockTableToSelect" type="CleverSoft\CleverLayeredNavigation\Plugin\SearchIndexBuilder" />
+    </type>
+
+    <type name="Magento\CatalogSearch\Model\Adapter\Mysql\Aggregation\DataProvider">
+        <plugin name="CleverSoft_CleverLayeredNavigation::stockAndRatingAggregation" type="CleverSoft\CleverLayeredNavigation\Plugin\AggregationDataProvider" />
+    </type>
+
+    <type name="\Magento\Catalog\Block\Category\View">
+        <plugin name="cleversoft_shopby_catalog_category_view" type="\CleverSoft\CleverLayeredNavigation\Plugin\CategoryViewPlugin" sortOrder="100"/>
+    </type>
+
+    <virtualType name="CleverSoft\CleverLayeredNavigation\Block\Navigation\FilterCollapsing\Category" type="CleverSoft\CleverLayeredNavigation\Block\Navigation\FilterCollapsing">
+        <arguments>
+            <argument name="filterList" xsi:type="object">categoryFilterList</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="CleverSoft\CleverLayeredNavigation\Block\Navigation\FilterCollapsing\Search" type="CleverSoft\CleverLayeredNavigation\Block\Navigation\FilterCollapsing">
+        <arguments>
+            <argument name="filterList" xsi:type="object">searchFilterList</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\Search\Adapter\Mysql\Aggregation\Builder\Dynamic">
+        <plugin name="CleverSoft_CleverLayeredNavigation::changeAggregationForSliders" type="CleverSoft\CleverLayeredNavigation\Plugin\DynamicAggregation" />
+    </type>
+
+    <type name="Magento\Framework\Search\Request\Config\FilesystemReader">
+        <plugin name="CleverSoft_CleverLayeredNavigation::UseAndLogicFields"  type="CleverSoft\CleverLayeredNavigation\Plugin\ReaderPlugin" />
+    </type>
+
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Attribute\Collection">
+        <plugin name="CleverSoft_CleverLayeredNavigation::getAttributeByCode"  type="CleverSoft\CleverLayeredNavigation\Plugin\AttributeCollectionPlugin" />
+    </type>
+
+    <type name="Magento\Eav\Model\Config">
+        <plugin name="CleverSoft_CleverLayeredNavigation::getAttributeByCodeFromConfig"  type="CleverSoft\CleverLayeredNavigation\Plugin\AttributeConfigPlugin" />
+    </type>
+
+    <type name="\CleverSoft\CleverLayeredNavigation\Controller\Category\View">
+        <plugin name="cleversoft_shopby_page_view" type="\CleverSoft\CleverLayeredNavigation\Plugin\CategoryViewPlugin" sortOrder="1"/>
+    </type>
+    <type name="\CleverSoft\CleverLayeredNavigation\Controller\Index\Index">
+        <plugin name="cleversoft_shopby_page_view" type="\CleverSoft\CleverLayeredNavigation\Plugin\CategoryViewPlugin" sortOrder="1"/>
+    </type>
+    <type name="\Magento\Framework\Url">
+        <plugin name="clevershopby_url" type="\CleverSoft\CleverLayeredNavigation\Plugin\UrlPlugin" sortOrder="10"/>
+    </type>
+    <type name="\Magento\Catalog\Block\Product\ProductList\Toolbar">
+        <plugin name="clevershopby_toolbar" type="\CleverSoft\CleverLayeredNavigation\Plugin\ToolbarPlugin" sortOrder="1"/>
+    </type>
+    <type name="\Magento\Theme\Block\Html\Pager">
+        <plugin name="clevershopbyr" type="\CleverSoft\CleverLayeredNavigation\Plugin\ToolbarPlugin" sortOrder="1"/>
+    </type>
+
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="cleversoft_seo_router" xsi:type="array">
+                    <item name="class" xsi:type="string">CleverSoft\CleverLayeredNavigation\Controller\RouterSeo</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">22</item>
+                </item>
+                <item name="cleversoft_shopby" xsi:type="array">
+                    <item name="class" xsi:type="string">CleverSoft\CleverLayeredNavigation\Controller\RouterRoot</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">60</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="cleversoft_shopby_page_listing_data_source" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\ResourceModel\Page\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="CleverSoft\CleverLayeredNavigation\Model\ResourceModel\Page\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">cleversoft_clevershopby</argument>
+            <argument name="eventPrefix" xsi:type="string">cleversoft_clevershopby_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">cleversoft_clevershopby_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\ResourceModel\Page</argument>
+        </arguments>
+    </type>
+
+    <type name="CleverSoft\CleverLayeredNavigation\Model\Customizer\Category">
+        <arguments>
+            <argument name="customizers" xsi:type="array">
+                <item name="page" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\Customizer\Category\Page</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="\Magento\Catalog\Block\Category\View">
+        <plugin name="cleversoft_shopby_page_catalog_category_view" type="CleverSoft\CleverLayeredNavigation\Plugin\CategoryViewPlugin" sortOrder="100"/>
+    </type>
+    <type name="Magento\Catalog\Helper\Category">
+        <plugin name="cleversoft_shopby_page_template_context" type="CleverSoft\CleverLayeredNavigation\Plugin\HelperCategoryPlugin" sortOrder="100"/>
+    </type>
+
+    <type name="\Magento\Catalog\Block\Category\View">
+        <plugin name="cleversoft_shopby_brand_catalog_category_view" type="\CleverSoft\CleverLayeredNavigation\Plugin\CategoryViewPlugin" sortOrder="100"/>
+    </type>
+    <type name="\Magento\Catalog\Model\Category">
+        <plugin name="cleversoft_shopby_brand_catalog_category" type="\CleverSoft\CleverLayeredNavigation\Plugin\CategoryPlugin" sortOrder="100"/>
+    </type>
+    <type name="\CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Attribute">
+        <plugin name="cleversoft_shopby_brand_filter_attribute" type="\CleverSoft\CleverLayeredNavigation\Plugin\AttributeFilterPlugin" sortOrder="100"/>
+    </type>
+    <type name="CleverSoft\CleverLayeredNavigation\Model\Customizer\Category">
+        <arguments>
+            <argument name="customizers" xsi:type="array">
+                <item name="brand" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\Customizer\Category\Brand</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

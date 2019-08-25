@@ -1,0 +1,20 @@
+<?php
+$headerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\HeaderData');
+$settingData = $headerBuilderHelper->getSettingData();
+
+
+$staticBlock = isset($settingData->{'_customize-select-html-4-mobile'}) && $settingData->{'_customize-select-html-4-mobile'} ? $settingData->{'_customize-select-html-4-mobile'} : '';
+?>
+
+<?php if ($staticBlock): ?>
+    <?php if (isset($settingData->{'_customize-input-html-4-mobile_margin'}) && $settingData->{'_customize-input-html-4-mobile_margin'}): ?>
+        <div style="margin: <?php echo $settingData->{'_customize-input-html-4-mobile_margin'} ?>">
+    <?php endif; ?>
+    <?php echo $this->getLayout()
+        ->createBlock('Magento\Cms\Block\Block')
+        ->setBlockId($staticBlock)
+        ->toHtml(); ?>
+    <?php if (isset($settingData->{'_customize-input-html-4-mobile_margin'}) && $settingData->{'_customize-input-html-4-mobile_margin'}): ?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

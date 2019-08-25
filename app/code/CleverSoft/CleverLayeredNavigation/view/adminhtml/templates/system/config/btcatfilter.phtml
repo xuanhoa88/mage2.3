@@ -1,0 +1,20 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?> 
+<?php
+$_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+$attribute = $_objectManager->get('Magento\Eav\Model\ResourceModel\Entity\Attribute');
+$attributeId = $attribute->getIdByCode('catalog_product', 'category_ids');
+$urlCatAttribute = $block->getUrl('catalog/product_attribute/edit/', ['attribute_id' => $attributeId, '_secure' => true]);
+
+?>
+<button id="categoryFilterSettingsBtn" class="action-add" title="Category Filter Settings" type="button"
+        onclick="document.location.href='<?php echo $urlCatAttribute; ?>'">
+    <span>Category Filter Settings</span>
+</button>

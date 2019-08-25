@@ -1,0 +1,221 @@
+<?php
+$headerDesktop = json_decode($this->getHeaderDesktop());
+$headerMobile = json_decode($this->getHeaderMobile());
+?>
+<?php
+$headerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\HeaderData');
+$settingData = $headerBuilderHelper->getSettingData();
+?>
+<link rel="stylesheet" media="all" href="<?php echo $this->helper('CleverSoft\CleverTheme\Helper\HeaderCssgen')->getStyleFile();?>" />
+
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$custom_css = $this->getConfig('cleversofttheme_custom_css/css_swing_editor/custom_css');
+$custom_css_enable = $this->getConfig('cleversofttheme_custom_css/css_swing_editor/custom_css_enable');
+echo $this->cssTemplate($custom_css,$custom_css_enable);
+?>
+<script>
+    window.enable_sticky_menu = '<?=isset($settingData->{'_customize-radio-header_sticky'}) && $settingData->{'_customize-radio-header_sticky'} == "" ?>';
+    window.enable_sticky_addtocart = '<?php echo $this->getConfig('cleversofttheme/product_page/enable_sticky_addtocart'); ?>';
+    window.stickyThumbGallery = '<?php echo $this->getConfig('cleversofttheme/product_page/page_layout'); ?>';
+</script>
+<header class="page-header <?=isset($settingData->{'_customize-input-custom-class_header'}) && $settingData->{'_customize-input-custom-class_header'} ? $settingData->{'_customize-input-custom-class_header'} : ''?> <?=isset($settingData->{'_customize-radio-header_search_form_type'}) && $settingData->{'_customize-radio-header_search_form_type'} ? $settingData->{'_customize-radio-header_search_form_type'} : ''?> <?=isset($settingData->{'_customize-input-box_shadow_header'}) && $settingData->{'_customize-input-box_shadow_header'} ? $settingData->{'_customize-input-box_shadow_header'} : ''?> <?=isset($settingData->{'_customize-radio-header_search_mobile_form_type'}) && $settingData->{'_customize-radio-header_search_mobile_form_type'} ? $settingData->{'_customize-radio-header_search_mobile_form_type'} : ''?> <?=isset($settingData->{'_customize-input-box_shadow_header'}) && $settingData->{'_customize-input-box_shadow_header'} ? $settingData->{'_customize-input-box_shadow_header'} : ''?>" id="page-header">
+    <?php
+    $compareHeader = $block->getData('compare');
+    $wishlistHeader = $block->getData('wishlist');
+    $sticky_logo = $block->getConfig('cleversofttheme/header/sticky_logo');
+    $logoSrc = $block->getMediaUrl() . 'wysiwyg/cleversoft/logo/' . $sticky_logo;
+
+    ?>
+    <?php if($headerMobile): ?>
+        <div class="show-on-mobile page-header-mobile d-lg-none">
+            <?php
+            $tops = isset($headerMobile->top) ? $headerMobile->top : '';
+            $mains = isset($headerMobile->main) ? $headerMobile->main : '';
+            $bottoms = isset($headerMobile->bottom) ? $headerMobile->bottom : '';
+            ?>
+            <!-- Mobile -->
+            <?php if($tops):?>
+                <!-- topbar -->
+                <div class="panel wrapper header_top-mobile <?=isset($settingData->{'_customize-radio-topbar_color'}) && $settingData->{'_customize-radio-topbar_color'} ? $settingData->{'_customize-radio-topbar_color'} : '';?> nav top-bar-nav nav-<?=isset($settingData->{'_customize-radio-nav_style_top'}) && $settingData->{'_customize-radio-nav_style_top'} ? $settingData->{'_customize-radio-nav_style_top'} : '';?>">
+                    <div class="header-panel">
+                         <div class="topbar-container topbar-container-mobile <?=isset($settingData->{'_customize-radio-header_mobile_width'}) && $settingData->{'_customize-radio-header_mobile_width'} ? $settingData->{'_customize-radio-header_mobile_width'} : 'container';?> nav-<?=isset($settingData->{'_customize-radio-nav_style_top'}) && $settingData->{'_customize-radio-nav_style_top'} ? $settingData->{'_customize-radio-nav_style_top'} : '';?>">
+                            <div class="row main-menu_relative">
+                                <?php echo $this->renderRow($tops, '', 'mobile');?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endif;?>
+
+            <?php if($mains):?>
+                <!-- header main -->
+                <div id="sticky-headers__mobile" class="header_main-mobile">
+                    <div class="header_main-mobile-top <?=isset($settingData->{'_customize-input-header_main_mobile_nav_uppercase'}) && $settingData->{'_customize-input-header_main_mobile_nav_uppercase'} ? $settingData->{'_customize-input-header_main_mobile_nav_uppercase'} : '';?>" id="header-sticky-mobile">
+                        <div class="<?=isset($settingData->{'_customize-radio-header_mobile_width'}) && $settingData->{'_customize-radio-header_mobile_width'} ? $settingData->{'_customize-radio-header_mobile_width'} : 'container';?>">
+                            <div class="row main-menu_relative">
+                                <?php echo $this->renderRow($mains, '', 'mobile');?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php if(isset($settingData->{'_customize-input-header_mobile_divider'}) && !($settingData->{'_customize-input-header_mobile_divider'} == "")): ?>
+                    <div class="<?=isset($settingData->{'_customize-radio-header_mobile_width'}) && $settingData->{'_customize-radio-header_mobile_width'} ? $settingData->{'_customize-radio-header_mobile_width'} : 'container';?>">
+                        <div class="top-divider"></div>
+                    </div>
+                <?php endif;?>
+            <?php endif;?>
+
+            <?php if($bottoms):?>
+                <!-- header bottom -->
+                <div class="header_main-mobile-bottom nav bottom_mobile-bar-nav <?=isset($settingData->{'_customize-radio-header_mobile_nav_base_color'}) && $settingData->{'_customize-radio-header_mobile_nav_base_color'} ? $settingData->{'_customize-radio-header_mobile_nav_base_color'} : '';?> nav-size-<?=isset($settingData->{'_customize-radio-header_bottom_mobile_nav_size'}) && $settingData->{'_customize-radio-header_bottom_mobile_nav_size'} ? $settingData->{'_customize-radio-header_bottom_mobile_nav_size'} : '';?> nav-spacing-<?=isset($settingData->{'_customize-radio-header_bottom_mobile_nav_spacing'}) && $settingData->{'_customize-radio-header_bottom_mobile_nav_spacing'} ? $settingData->{'_customize-radio-header_bottom_mobile_nav_spacing'} : '';?> nav-<?=isset($settingData->{'_customize-radio-nav_style_header_bottom'}) && $settingData->{'_customize-radio-nav_style_header_bottom'} ? $settingData->{'_customize-radio-nav_style_header_bottom'} : '';?> <?=isset($settingData->{'_customize-input-header_bottom_mobile_nav_uppercase'}) && $settingData->{'_customize-input-header_bottom_mobile_nav_uppercase'} ? $settingData->{'_customize-input-header_bottom_mobile_nav_uppercase'} : '';?>" id="zoo-sticky-header">
+                    <div class="<?=isset($settingData->{'_customize-radio-header_mobile_width'}) && $settingData->{'_customize-radio-header_mobile_width'} ? $settingData->{'_customize-radio-header_mobile_width'} : 'container';?>">
+                        <div class="row main-menu_relative">
+                            <?php echo $this->renderRow($bottoms, '', 'mobile');?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif;?>
+
+            <?php if(isset($settingData->{'_customize-html_after_header_mobile'}) && !($settingData->{'_customize-html_after_header_mobile'} == "")): ?>
+                <div class="header-block block-html-after-header z-1">
+                    <div class="<?=isset($settingData->{'_customize-radio-header_mobile_width'}) && $settingData->{'_customize-radio-header_mobile_width'} ? $settingData->{'_customize-radio-header_mobile_width'} : 'container';?>">
+                        <?=$settingData->{'_customize-html_after_header_mobile'};?>
+                    </div>
+                </div>
+            <?php endif;?>
+        </div>
+    <?php endif;?>
+    <?php if($headerDesktop):?>
+        <div class="show-on-desktop page-wrapper__header d-none d-lg-block">
+            <!-- Desktop -->
+            <?php
+            $tops = isset($headerDesktop->top) ? $headerDesktop->top :'';
+            $mains = isset($headerDesktop->main) ? $headerDesktop->main : '';
+            $bottoms = isset($headerDesktop->bottom) ? $headerDesktop->bottom : '';
+            ?>
+            <!-- topbar -->
+            <?php if(isset($settingData->{'_customize-input-topbar_sticky'}) && ($settingData->{'_customize-input-topbar_sticky'} == "sticker")):?>
+            <div id="sticky-headers" class="header_top <?=isset($settingData->{'_customize-input-topbar_sticky'}) && $settingData->{'_customize-input-topbar_sticky'} ? $settingData->{'_customize-input-topbar_sticky'} : '';?>" data-sticky-height="<?=isset($settingData->{'_customize_header_top_sticky_height'}) && $settingData->{'_customize_header_top_sticky_height'} ? $settingData->{'_customize_header_top_sticky_height'} : '';?>">
+            <?php endif;?>
+                <?php if($tops):?>
+                    <div class="panel wrapper header-top <?=isset($settingData->{'_customize-radio-topbar_color'}) && $settingData->{'_customize-radio-topbar_color'} ? $settingData->{'_customize-radio-topbar_color'} : '';?>">
+                        <div class="header-panel">
+                            <div class="topbar-container <?=isset($settingData->{'_customize-radio-header_width'}) && $settingData->{'_customize-radio-header_width'} ? $settingData->{'_customize-radio-header_width'} : 'container';?> nav-<?=isset($settingData->{'_customize-radio-nav_style_top'}) && $settingData->{'_customize-radio-nav_style_top'} ? $settingData->{'_customize-radio-nav_style_top'} : '';?>">
+                                <div class="row main-menu_relative">
+                                    <?php echo $this->renderRow($tops, '', 'desktop');?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif;?>
+            <?php if(isset($settingData->{'_customize-input-topbar_sticky'}) && ($settingData->{'_customize-input-topbar_sticky'} == "sticker")):?>
+            </div>
+            <?php endif;?>
+
+            <!-- header main -->
+            <?php if(isset($settingData->{'_customize-input-header-main_sticky'}) && ($settingData->{'_customize-input-header-main_sticky'} == "sticker")):?>
+            <div id="sticky-headers__main" class="header_main <?=isset($settingData->{'_customize-input-header-main_sticky'}) && $settingData->{'_customize-input-header-main_sticky'} ? $settingData->{'_customize-input-header-main_sticky'} : '';?>" data-sticky-height="<?=isset($settingData->{'_customize_header_main_sticky_height'}) && $settingData->{'_customize_header_main_sticky_height'} ? $settingData->{'_customize_header_main_sticky_height'} : '';?>">
+            <?php endif;?>
+                <?php if($mains):?>
+                    <div class="header_main-top <?=isset($settingData->{'_customize-radio-header_main_color'}) && $settingData->{'_customize-radio-header_main_color'} ? $settingData->{'_customize-radio-header_main_color'} : '';?> nav-size-<?=isset($settingData->{'_customize-radio-header_main_nav_size'}) && $settingData->{'_customize-radio-header_main_nav_size'} ? $settingData->{'_customize-radio-header_main_nav_size'} : '';?> nav-spacing-<?=isset($settingData->{'_customize-radio-header_main_nav_spacing'}) && $settingData->{'_customize-radio-header_main_nav_spacing'} ? $settingData->{'_customize-radio-header_main_nav_spacing'} : '';?> nav-<?=isset($settingData->{'_customize-radio-nav_style_header_main'}) && $settingData->{'_customize-radio-nav_style_header_main'} ? $settingData->{'_customize-radio-nav_style_header_main'} : '';?> <?=isset($settingData->{'_customize-input-header_main_nav_uppercase'}) && $settingData->{'_customize-input-header_main_nav_uppercase'} ? $settingData->{'_customize-input-header_main_nav_uppercase'} : '';?>">
+                        <div class="<?=isset($settingData->{'_customize-radio-header_width'}) && $settingData->{'_customize-radio-header_width'} ? $settingData->{'_customize-radio-header_width'} : 'container';?>">
+                            <div class="row main-menu_relative">
+                                <?php echo $this->renderRow($mains, '', 'desktop');?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php if(isset($settingData->{'_customize-input-header_divider'}) && !($settingData->{'_customize-input-header_divider'} == "")): ?>
+                        <div class="<?=isset($settingData->{'_customize-radio-header_width'}) && $settingData->{'_customize-radio-header_width'} ? $settingData->{'_customize-radio-header_width'} : 'container';?>">
+                            <div class="top-divider"></div>
+                        </div>
+                    <?php endif;?>
+                <?php endif;?>
+            <?php if(isset($settingData->{'_customize-input-header-main_sticky'}) && ($settingData->{'_customize-input-header-main_sticky'} == "sticker")):?>
+            </div>
+            <?php endif;?>
+            
+            <!-- header bottom -->
+            <?php if(isset($settingData->{'_customize-input-header-bottom_sticky'}) && ($settingData->{'_customize-input-header-bottom_sticky'} == "sticker")):?>
+            <div id="sticky-headers__bottom" class="header_main-bottoms <?=isset($settingData->{'_customize-input-header-bottom_sticky'}) && $settingData->{'_customize-input-header-bottom_sticky'} ? $settingData->{'_customize-input-header-bottom_sticky'} : '';?>" data-sticky-height="<?=isset($settingData->{'_customize-input-header_bottom_sticky_height'}) && $settingData->{'_customize-input-header_bottom_sticky_height'} ? $settingData->{'_customize-input-header_bottom_sticky_height'} : '';?>">
+            <?php endif;?>
+                <?php if($bottoms):?>
+                    <div class="top-menu header_main-bottom nav-small <?=isset($settingData->{'_customize-radio-header_nav_base_color'}) && $settingData->{'_customize-radio-header_nav_base_color'} ? $settingData->{'_customize-radio-header_nav_base_color'} : '';?> nav-size-<?=isset($settingData->{'_customize-radio-header_bottom_nav_size'}) && $settingData->{'_customize-radio-header_bottom_nav_size'} ? $settingData->{'_customize-radio-header_bottom_nav_size'} : '';?> nav-spacing-<?=isset($settingData->{'_customize-radio-header_bottom_nav_spacing'}) && $settingData->{'_customize-radio-header_bottom_nav_spacing'} ? $settingData->{'_customize-radio-header_bottom_nav_spacing'} : '';?> nav-<?=isset($settingData->{'_customize-radio-nav_style_header_bottom'}) && $settingData->{'_customize-radio-nav_style_header_bottom'} ? $settingData->{'_customize-radio-nav_style_header_bottom'} : '';?> <?=isset($settingData->{'_customize-input-header_bottom_nav_uppercase'}) && $settingData->{'_customize-input-header_bottom_nav_uppercase'} ? $settingData->{'_customize-input-header_bottom_nav_uppercase'} : '';?>" id="zoo-sticky-header">
+                        <div class="<?=isset($settingData->{'_customize-radio-header_width'}) && $settingData->{'_customize-radio-header_width'} ? $settingData->{'_customize-radio-header_width'} : 'container';?>">
+                            <div class="row main-menu_relative">
+                                <?php echo $this->renderRow($bottoms, '', 'desktop');?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif;?>
+
+                <?php if(isset($settingData->{'_customize-html_after_header'}) && !($settingData->{'_customize-html_after_header'} == "")): ?>
+                    <div class="header-block block-html-after-header z-1">
+                        <div class="<?=isset($settingData->{'_customize-radio-header_width'}) && $settingData->{'_customize-radio-header_width'} ? $settingData->{'_customize-radio-header_width'} : 'container';?>">
+                            <?=$settingData->{'_customize-html_after_header'};?>
+                        </div>
+                    </div>
+                <?php endif;?>
+            <?php if(isset($settingData->{'_customize-input-header-bottom_sticky'}) && ($settingData->{'_customize-input-header-bottom_sticky'} == "sticker")):?>
+            </div>
+            <?php endif;?>
+        </div>
+    <?php endif;?>
+</header>
+<?php $canvas = isset($headerDesktop->sidebar) ? $headerDesktop->sidebar : '';?>
+<?php if($canvas):?>
+    <?php if(isset($settingData->{'_customize_header_sidebar_icon_content_position'}) && $settingData->{'_customize_header_sidebar_icon_content_position'} == "desktop-canvas__left"): ?>
+        <div class="sections desktop-canvas__left sections__canvas nav-sections">
+            <div class="desktop-canvas">
+                <div class="desktop-canvas__content">
+                    <?php echo $this->renderRow($canvas, 'sidebar', 'desktop');?>
+                </div>
+                <a href="javascript:void(0);" class="off-canvas-close"><i class="cs-font clever-icon-close"></i></a>
+            </div>
+        </div>
+    <?php elseif (isset($settingData->{'_customize_header_sidebar_icon_content_position'}) && $settingData->{'_customize_header_sidebar_icon_content_position'} == "desktop-canvas__right"): ?>
+        <div class="sections desktop-canvas__right sections__canvas nav-sections">
+            <div class="desktop-canvas">
+                <div class="desktop-canvas__content">
+                    <?php echo $this->renderRow($canvas, 'sidebar', 'desktop');?>
+                </div>
+                <a href="javascript:void(0);" class="off-canvas-close"><i class="cs-font clever-icon-close"></i></a>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="sections desktop-canvas__full-width sections__canvas nav-sections">
+            <div class="desktop-canvas">
+                <div class="desktop-canvas__content">
+                    <?php echo $this->renderRow($canvas, 'sidebar', 'desktop');?>
+                </div>
+                <a href="javascript:void(0);" class="off-canvas-close"><i class="cs-font clever-icon-close"></i></a>
+            </div>
+        </div>
+    <?php endif;?>
+<?php endif;?>
+<?php $sidebars = isset($headerMobile->sidebar) ? $headerMobile->sidebar : '';?>
+<?php if($sidebars):?>
+    <div class="sections mobile-sidebar sections__canvas nav-sections">
+        <a href="javascript:void(0);" class="sections__canvas--close"><span class="cs-font clever-icon-close"></span></a>
+        <div class="sections__canvas--content">
+            <?php echo $this->renderRow($sidebars, 'sidebar', 'mobile');?>
+        </div>
+    </div>
+<?php endif;?>
+<script>
+    require(['jquery', 'jquery/ui'], function($){
+        $(".nav ul li").each(function(){
+            $(this).click(function(){
+                $(this).toggleClass('active');
+            });
+        });
+    });
+</script>

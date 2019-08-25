@@ -1,0 +1,383 @@
+{
+  "name": "Images",
+  "title": "Images",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "widget",
+  "icon" : "",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Images",
+  "code": "clever-images",
+  "content_fields": [
+    {
+      "type": "media",
+      "name": "image",
+      "attribute_type":"attribute",
+      "code":"src",
+      "element_class": "image",
+      "required": false,
+      "visible": true,
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "name": "link",
+      "required": false,
+      "visible": true,
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "name": "target",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "",
+          "label": "Same window"
+        },
+        {
+          "value": "_blank",
+          "label": "New window"
+        }
+      ],
+      "label": "Target"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "select",
+      "name": "size",
+      "attribute_type":"class",
+      "element_class": "image",
+      "values": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "thumbnail",
+          "label": "Thumbnail"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Image size"
+    },
+    {
+      "type": "slider",
+      "name": "width",
+      "attribute_type":"style",
+      "code":"width",
+      "element_class": "image",
+      "unit":"%",
+      "required": false,
+      "min":0,
+      "max":100,
+      "default": 100,
+      "visible": true,
+      "label": "Width(%)"
+    },
+    {
+      "type": "unit",
+      "name": "height",
+      "attribute_type":"style",
+      "code":"height",
+      "element_class": "image",
+      "required": false,
+      "visible": true,
+      "label": "Height"
+    },
+    {
+      "type": "position",
+      "name": "margin",
+      "attribute_type": "style",
+      "code": "margin",
+      "element_class": "img__inner",
+      "required": false,
+      "visible": true,
+      "label": "Margin"
+    },
+    {
+      "type": "toggle",
+      "name": "lightbox",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Lightbox"
+    },
+    {
+      "type": "toggle",
+      "name": "caption",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Caption"
+    },
+    {
+      "type": "color",
+      "name": "image_overlay",
+      "attribute_type": "style",
+      "code": "background-color",
+      "element_class": "overlay",
+      "required": false,
+      "visible": true,
+      "label": "Image Overlay"
+    },
+    {
+      "type": "select",
+      "name": "image_hover",
+      "attribute_type": "class",
+      "element_class": "img__inner",
+      "prefix": "image-",
+      "values": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "zoom",
+          "label": "Zoom"
+        },
+        {
+          "value": "zoom-long",
+          "label": "Zoom Long"
+        },
+        {
+          "value": "zoom-fade",
+          "label": "Zoom Fade"
+        },
+        {
+          "value": "blur",
+          "label": "Blur"
+        },
+        {
+          "value": "fade-in",
+          "label": "Fade In"
+        },
+        {
+          "value": "fade-out",
+          "label": "Fade Out"
+        },
+        {
+          "value": "glow",
+          "label": "Glow"
+        },
+        {
+          "value": "color",
+          "label": "Add Color"
+        },
+        {
+          "value": "grayscale",
+          "label": "Grayscale"
+        },
+        {
+          "value": "overlay-add",
+          "label": "Add Overlay"
+        },
+        {
+          "value": "overlay-remove",
+          "label": "Remove Overlay"
+        },
+        {
+          "value": "overlay-add-50",
+          "label": "Add Overlay (50%)"
+        },
+        {
+          "value": "overlay-remove-50",
+          "label": "Remove Overlay (50%)"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Image Hover"
+    },
+    {
+      "type": "select",
+      "name": "image_hover_alt",
+      "attribute_type": "class",
+      "element_class": "img__inner",
+      "prefix": "image-",
+      "values": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "zoom",
+          "label": "Zoom"
+        },
+        {
+          "value": "zoom-long",
+          "label": "Zoom Long"
+        },
+        {
+          "value": "zoom-fade",
+          "label": "Zoom Fade"
+        },
+        {
+          "value": "blur",
+          "label": "Blur"
+        },
+        {
+          "value": "fade-in",
+          "label": "Fade In"
+        },
+        {
+          "value": "fade-out",
+          "label": "Fade Out"
+        },
+        {
+          "value": "glow",
+          "label": "Glow"
+        },
+        {
+          "value": "color",
+          "label": "Add Color"
+        },
+        {
+          "value": "grayscale",
+          "label": "Grayscale"
+        },
+        {
+          "value": "overlay-add",
+          "label": "Add Overlay"
+        },
+        {
+          "value": "overlay-remove",
+          "label": "Remove Overlay"
+        },
+        {
+          "value": "overlay-add-50",
+          "label": "Add Overlay (50%)"
+        },
+        {
+          "value": "overlay-remove-50",
+          "label": "Remove Overlay (50%)"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Image Hover Alt"
+    },
+    {
+      "type": "slider",
+      "name": "depth",
+      "attribute_type": "class",
+      "element_class": "img__inner",
+      "prefix": "box-shadow-",
+      "required": false,
+      "min":0,
+      "max":5,
+      "visible": true,
+      "label": "Depth"
+    },
+    {
+      "type": "slider",
+      "name": "depth_hover",
+      "attribute_type": "class",
+      "element_class": "img__inner",
+      "prefix": "box-shadow-",
+      "unit": "-hover",
+      "required": false,
+      "min":0,
+      "max":5,
+      "visible": true,
+      "label": "Depth Hover"
+    },
+    {
+      "type": "toggle",
+      "name": "parallax",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Parallax"
+    },
+    {
+      "type": "select",
+      "name": "animate",
+      "attribute_type": "attribute",
+      "code": "data-animate",
+      "values": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "fadeInLeft",
+          "label": "Fade In Left"
+        },
+        {
+          "value": "fadeInRight",
+          "label": "Fade In Right"
+        },
+        {
+          "value": "fadeInUp",
+          "label": "Fade In Up"
+        },
+        {
+          "value": "fadeInDown",
+          "label": "Fade In Down"
+        },
+        {
+          "value": "bounceIn",
+          "label": "Bounce In"
+        },
+        {
+          "value": "bounceInUp",
+          "label": "Bounce In Up"
+        },
+        {
+          "value": "bounceInDown",
+          "label": "Bounce In Down"
+        },
+        {
+          "value": "bounceInLeft",
+          "label": "Bounce In Left"
+        },
+        {
+          "value": "bounceInRight",
+          "label": "Bounce In Right"
+        },
+        {
+          "value": "blurIn",
+          "label": "Blur In"
+        },
+        {
+          "value": "flipInX",
+          "label": "Flip In X"
+        },
+        {
+          "value": "flipInY",
+          "label": "Flip In Y"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Animate"
+    }
+  ]
+}

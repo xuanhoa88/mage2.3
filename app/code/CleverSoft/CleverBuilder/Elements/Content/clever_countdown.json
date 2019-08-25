@@ -1,0 +1,114 @@
+{
+  "name": "Countdown",
+  "title": "Countdown",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "widget",
+  "icon" : "",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\CountDown",
+  "code": "clever-countdown",
+  "layouts":[
+  ],
+  "content_fields": [
+    {
+      "type": "select",
+      "name": "style",
+      "required": false,
+      "values": [
+        {
+          "value": "inline",
+          "label": "Inline"
+        },
+        {
+          "value": "block",
+          "label": "Block"
+        }
+      ],
+      "visible": true,
+      "label": "Style"
+    },
+    {
+      "type": "select",
+      "name": "time_by_day",
+      "required": true,
+      "visible": true,
+      "default": 1,
+      "source_model": "Magento\\Config\\Model\\Config\\Source\\Yesno",
+      "label": "Time By Day"
+    },
+    {
+      "type": "calendar",
+      "name": "due_date",
+      "required": false,
+      "visible": true,
+      "label": "Due Date",
+      "depends" : {"time_by_day" : 0}
+    },
+    {
+      "type": "multiselect",
+      "values": [
+        {
+          "value": "years",
+          "label": "Years"
+        },
+        {
+          "value": "month",
+          "label": "Month"
+        },
+        {
+          "value": "day",
+          "label": "Day"
+        },
+        {
+          "value": "hours",
+          "label": "Hours"
+        },
+        {
+          "value": "minutes",
+          "label": "Minutes"
+        },
+        {
+          "value": "second",
+          "label": "Second"
+        }
+      ],
+      "name": "time_units",
+      "required": false,
+      "visible": true,
+      "label": "Time Units"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "color",
+      "name": "bg_color",
+      "attribute_type": "style",
+      "element_class": "countdown-deal__times",
+      "code": "background-color",
+      "required": false,
+      "visible": true,
+      "label": "Background Color"
+    },
+    {
+      "type": "color",
+      "name": "icon_color",
+      "attribute_type": "style",
+      "element_class": "cs-font",
+      "code": "color",
+      "required": false,
+      "visible": true,
+      "label": "Icon Color"
+    },
+    {
+      "type": "color",
+      "name": "color",
+      "attribute_type": "style",
+      "element_class": "countdown-deal--time",
+      "code": "color",
+      "required": false,
+      "visible": true,
+      "label": "Time Color"
+    }
+  ]
+}

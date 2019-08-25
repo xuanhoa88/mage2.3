@@ -1,0 +1,664 @@
+& when (@media-common = true) {
+	.image-box__element, .icon-box__element {
+		&.element {
+			&-position {
+				&-left, &-right {
+					.image-box__wrapper, .icon-box__wrapper {
+					    display: -webkit-box;
+					    display: -webkit-flex;
+					    display: -ms-flexbox;
+					    display: flex;
+					}
+					.image-box__wrapper {
+						.image-box__wrapper-img {
+							-webkit-box-flex: 0;
+						    -webkit-flex: 0 0 auto;
+						    -ms-flex: 0 0 auto;
+						    flex: 0 0 auto;
+						}
+					}
+					.icon-box__wrapper {
+						.element-iconbox__icon {
+						    -webkit-box-flex: 0;
+						    -webkit-flex: 0 0 auto;
+						    -ms-flex: 0 0 auto;
+						    flex: 0 0 auto;
+						}
+					}
+				}
+				&-left {
+					.image-box__wrapper, .icon-box__wrapper {
+					    -webkit-box-orient: horizontal;
+					    -webkit-box-direction: normal;
+					    -webkit-flex-direction: row;
+					    -ms-flex-direction: row;
+					    flex-direction: row;
+					}
+					.icon-box__wrapper {
+						.element-iconbox__icon {
+							margin-right: 20px;
+						}
+					}
+					.image-box__wrapper {
+						.element-iconbox__icon {
+							margin-left: 20px;
+						}
+					}
+				}
+				&-top {
+					.image-box__wrapper, .icon-box__wrapper {
+					    -webkit-box-align: start;
+					    -webkit-align-items: flex-start;
+					    -ms-flex-align: start;
+					    align-items: flex-start;
+					}
+					.icon-box__wrapper {
+						.element-iconbox__icon {
+							margin-bottom: 20px;
+						}
+					}
+					.image-box__wrapper {
+						.element-iconbox__icon {
+							margin-bottom: 20px;
+						}
+					}
+				}
+				&-right {
+					.image-box__wrapper, .icon-box__wrapper {
+					    -webkit-box-orient: horizontal;
+					    -webkit-box-direction: reverse;
+					    -webkit-flex-direction: row-reverse;
+					    -ms-flex-direction: row-reverse;
+					    flex-direction: row-reverse;
+					}
+					.icon-box__wrapper {
+						.element-iconbox__icon {
+							margin-left: 20px;
+						}
+					}
+					.image-box__wrapper {
+						.element-iconbox__icon {
+							margin-left: 20px;
+						}
+					}
+				}
+			}
+			&-vertical-align {
+				&-top {
+					.image-box__wrapper, .icon-box__wrapper {
+					    -webkit-box-align: start;
+					    -webkit-align-items: flex-start;
+					    -ms-flex-align: start;
+					    align-items: flex-start;
+					}
+				}
+				&-middle {
+					.image-box__wrapper, .icon-box__wrapper {
+					    -webkit-box-align: center;
+					    -webkit-align-items: center;
+					    -ms-flex-align: center;
+					    align-items: center;
+					}
+				}
+				&-bottom {
+					.image-box__wrapper, .icon-box__wrapper {
+				        -webkit-box-align: end;
+					    -webkit-align-items: flex-end;
+					    -ms-flex-align: end;
+					    align-items: flex-end;
+					}
+				}
+			}
+		}
+	}
+	.image-box {
+		&__wrapper {
+			&-img {
+			    height: auto;
+			    max-width: 100%;
+			    border: none;
+			    -webkit-border-radius: 0;
+			    border-radius: 0;
+			    -webkit-box-shadow: none;
+			    box-shadow: none;
+			    display: inline-block;
+			}
+		}
+		&__content {
+			width: 100%;
+			&-title {
+				a {
+				    color: inherit;
+				}
+			}
+		}
+	}
+	// Icon box
+	.clever-row {
+		&-xs, &-no-space {
+			.icon-box__element {
+				padding-left: 10px;
+			}
+		}
+	}
+	.icon-box__wrapper {
+		.element-icon {
+		    display: inline-block;
+		    line-height: 1;
+		    -webkit-transition: all .5s;
+		    -o-transition: all .5s;
+		    transition: all .5s;
+		    color: #0172ff;
+		    font-size: 50px;
+		    text-align: center;
+			i {
+			    width: 1em;
+			    height: 1em;
+			    position: relative;
+			    display: block;
+			    &:before {
+		    	    position: absolute;
+				    left: 50%;
+				    -webkit-transform: translateX(-50%);
+				    -ms-transform: translateX(-50%);
+				    transform: translateX(-50%);
+			    }
+			}
+		}
+	}
+	.element-view {
+		&-stacked {
+			&.element-shape_stacked-circle {
+				.element-icon {
+				    -webkit-border-radius: 50%;
+	    			border-radius: 50%;
+				}
+			}
+			.element-icon {
+			    padding: .5em;
+			    color: #fff;
+			    background: #0172ff;
+			}
+		}
+		&-framed {
+			.element-icon {
+			    padding: .5em;
+			    color: #0172ff;
+			    border: 3px solid #0172ff;
+			    background-color: transparent;
+			}
+			&.element-shape_framed-circle {
+				.element-icon {
+				    -webkit-border-radius: 50%;
+	    			border-radius: 50%;
+				}
+			}
+		}
+	}
+	.element-animation {
+		&-grow {
+			transition-duration:.3s;
+    		transition-property:transform;
+			&:active, &:focus, &:hover {
+		    	transform:scale(1.1);
+			}
+		}
+		&-shrink {
+			transition-duration:.3s;
+    		transition-property:transform;
+			&:active, &:focus, &:hover {
+		    	transform: scale(0.9);
+			}
+		}
+		&-pulse {
+			transition-duration:.3s;
+    		transition-property:transform;
+			&:active, &:focus, &:hover {
+		    	animation-name: element-animation-pulse;
+			    animation-duration:1s;
+			    animation-timing-function:linear;
+			    animation-iteration-count:infinite;
+			}
+			&-grow {
+				&:active, &:focus, &:hover {
+					animation-name:element-animation-pulse-grow;
+				    animation-duration:.3s;
+				    animation-timing-function:linear;
+				    animation-iteration-count:infinite;
+				    animation-direction:alternate;
+				}
+			}
+			&-shrink {
+				&:active, &:focus, &:hover {
+					animation-name:element-animation-pulse-shrink;
+				    animation-duration:.3s;
+				    animation-timing-function:linear;
+				    animation-iteration-count:infinite;
+				    animation-direction:alternate;
+				}
+			}
+		}
+		&-push {
+			&:active, &:focus, &:hover {
+				animation-name:element-animation-push;
+			    animation-duration:.3s;
+			    animation-timing-function:linear;
+			    animation-iteration-count:1;
+			}
+		}
+		&-pop {
+			&:active, &:focus, &:hover {
+				animation-name:element-animation-pop;
+			    animation-duration:.3s;
+			    animation-timing-function:linear;
+			    animation-iteration-count:1
+			}
+		}
+		&-bounce-in {
+			transition-duration:.5s;
+			&:active, &:focus, &:hover {
+				transform:scale(1.2);
+    			transition-timing-function:cubic-bezier(0.47,2.02,.31,-.36)
+			}
+		}
+		&-bounce-out {
+			transition-duration:.5s;
+			&:active, &:focus, &:hover {
+				transform:scale(0.8);
+    			transition-timing-function:cubic-bezier(0.47,2.02,.31,-.36)
+			}
+		}
+		&-rotate {
+			transition-duration:.3s;
+    		transition-property:transform;
+			&:active, &:focus, &:hover {
+				transform:rotate(4deg);
+			}
+		}
+		&-grow-rotate {
+			transition-duration:.3s;
+    		transition-property:transform;
+			&:active, &:focus, &:hover {
+				transform:scale(1.1) rotate(4deg);
+			}
+		}
+		&-float {
+			transition-duration:.3s;
+		    transition-property:transform;
+		    transition-timing-function:ease-out;
+			&:active, &:focus, &:hover {
+				transform:translateY(-8px);
+			}
+		}
+		&-sink {
+			transition-duration:.3s;
+		    transition-property:transform;
+		    transition-timing-function:ease-out;
+			&:active, &:focus, &:hover {
+				transform:translateY(8px);
+			}
+		}
+		&-bob {
+			&:active, &:focus, &:hover {
+				animation-name:element-animation-bob-float,element-animation-bob;
+			    animation-duration:.3s,1.5s;
+			    animation-delay:0s,.3s;
+			    animation-timing-function:ease-out,ease-in-out;
+			    animation-iteration-count:1,infinite;
+			    animation-fill-mode:forwards;
+			    animation-direction:normal,alternate;
+			}
+		}
+		&-hang {
+			&:active, &:focus, &:hover {
+				animation-name:element-animation-hang-sink,element-animation-hang;
+			    animation-duration:.3s,1.5s;
+			    animation-delay:0s,.3s;
+			    animation-timing-function:ease-out,ease-in-out;
+			    animation-iteration-count:1,infinite;
+			    animation-fill-mode:forwards;
+			    animation-direction:normal,alternate;
+			}
+		}
+		&-skew {
+			transition-duration:.3s;
+    		transition-property:transform;
+			&:active, &:focus, &:hover {
+				transform:skew(-10deg);
+			}
+		}
+		&-skew-forward {
+			transition-duration:.3s;
+    		transition-property:transform;
+    		transform-origin:0 100%;
+			&:active, &:focus, &:hover {
+				transform:skew(-10deg);
+			}
+		}
+		&-skew-backward {
+			transition-duration:.3s;
+    		transition-property:transform;
+    		transform-origin:0 100%;
+			&:active, &:focus, &:hover {
+				transform:skew(10deg);
+			}
+		}
+		&-wobble-vertical {
+			&:active, &:focus, &:hover {
+				animation-name:element-animation-wobble-vertical;
+			    animation-duration:1s;
+			    animation-timing-function:ease-in-out;
+			    animation-iteration-count:1
+			}
+		}
+		&-wobble-horizontal {
+			&:active, &:focus, &:hover {
+				animation-name:element-animation-wobble-horizontal;
+			    animation-duration:1s;
+			    animation-timing-function:ease-in-out;
+			    animation-iteration-count:1;
+			}
+		}
+		&-wobble-to-bottom-right {
+			&:active, &:focus, &:hover {
+				animation-name:element-animation-wobble-to-bottom-right;
+			    animation-duration:1s;
+			    animation-timing-function:ease-in-out;
+			    animation-iteration-count:1;
+			}
+		}
+		&-wobble-to-top-right {
+			&:active, &:focus, &:hover {
+				animation-name:element-animation-wobble-to-top-right;;
+			    animation-duration:1s;
+			    animation-timing-function:ease-in-out;
+			    animation-iteration-count:1;
+			}
+		}
+		&-wobble-top {
+			transform-origin:0 100%;
+			&:active, &:focus, &:hover {
+				animation-name:element-animation-wobble-top;
+			    animation-duration:1s;
+			    animation-timing-function:ease-in-out;
+			    animation-iteration-count:1
+			}
+		}
+		&-wobble-bottom {
+			transform-origin:100% 0;
+			&:active, &:focus, &:hover {
+				animation-name:element-animation-wobble-bottom;
+			    animation-duration:1s;
+			    animation-timing-function:ease-in-out;
+			    animation-iteration-count:1;
+			}
+		}
+		&-wobble-skew {
+			&:active, &:focus, &:hover {
+				animation-name:element-animation-wobble-skew;
+			    animation-duration:1s;
+			    animation-timing-function:ease-in-out;
+			    animation-iteration-count:1;
+			}
+		}
+		&-buzz {
+			&:active, &:focus, &:hover {
+				animation-name:element-animation-buzz;
+			    animation-duration:1s;
+			    animation-timing-function:ease-in-out;
+			    animation-iteration-count:1;
+			}
+		}
+		&-buzz-out {
+			&:active, &:focus, &:hover {
+				animation-name:element-animation-buzz-out;
+			    animation-duration:1s;
+			    animation-timing-function:ease-in-out;
+			    animation-iteration-count:1;
+			}
+		}
+	}
+	@keyframes element-animation-pulse{
+	    25% {
+	        transform:scale(1.1);
+	    }
+	    75% {
+	        transform:scale(0.9);
+	    }
+	}
+	@keyframes element-animation-pulse-grow{
+	    to {
+	        transform:scale(1.1);
+	    }
+	}
+	@keyframes element-animation-pulse-shrink{
+	    to {
+	        transform:scale(0.9);
+	    }
+	}
+	@keyframes element-animation-push{
+	    50%{
+	        transform:scale(0.8);
+	    }
+	    100%{
+	        transform:scale(1);
+	    }
+	}
+	@keyframes element-animation-pop{
+	    50%{
+	        transform:scale(1.2);
+	    }
+	}
+	@keyframes element-animation-bob{
+	    0%{
+	        transform:translateY(-8px);
+	    }
+	    50%{
+	        transform:translateY(-4px);
+	    }
+	    100%{
+	        transform:translateY(-8px);
+	    }
+	}
+	@keyframes element-animation-bob-float{
+	    100%{
+	        transform:translateY(-8px);
+	    }
+	}
+	@keyframes element-animation-hang{
+	    0%{
+	        transform:translateY(8px);
+	    }
+	    50%{
+	        transform:translateY(4px);
+	    }
+	    100%{
+	        transform:translateY(8px);
+	    }
+	}
+	@keyframes element-animation-hang-sink{
+	    100%{
+	        transform:translateY(8px);
+	    }
+	}
+	@keyframes element-animation-wobble-vertical{
+	    16.65%{
+	        transform:translateY(8px);
+	    }
+	    33.3%{
+	        transform:translateY(-6px);
+	    }
+	    49.95%{
+	        transform:translateY(4px);
+	    }
+	    66.6%{
+	        transform:translateY(-2px);
+	    }
+	    83.25%{
+	        transform:translateY(1px);
+	    }
+	    100%{
+	        transform:translateY(0);
+	    }
+	}
+	@keyframes element-animation-wobble-horizontal{
+	    16.65%{
+	        transform:translateX(8px);
+	    }
+	    33.3%{
+	        transform:translateX(-6px);
+	    }
+	    49.95%{
+	        transform:translateX(4px);
+	    }
+	    66.6%{
+	        transform:translateX(-2px);
+	    }
+	    83.25%{
+	        transform:translateX(1px);
+	    }
+	    100%{
+	        transform:translateX(0);
+	    }
+	}
+	@keyframes element-animation-wobble-to-bottom-right{
+	    16.65%{
+	        transform:translate(8px,8px);
+	    }
+	    33.3%{
+	        transform:translate(-6px,-6px);
+	    }
+	    49.95%{
+	        transform:translate(4px,4px);
+	    }
+	    66.6%{
+	        transform:translate(-2px,-2px);
+	    }
+	    83.25%{
+	        transform:translate(1px,1px);
+	    }
+	    100%{
+	        transform:translate(0,0);
+	    }
+	}
+	@keyframes element-animation-wobble-to-top-right{
+	    16.65%{
+	        transform:translate(8px,-8px);
+	    }
+	    33.3%{
+	        transform:translate(-6px,6px);
+	    }
+	    49.95%{
+	        transform:translate(4px,-4px);
+	    }
+	    66.6%{
+	        transform:translate(-2px,2px);
+	    }
+	    83.25%{
+	        transform:translate(1px,-1px);
+	    }
+	    100%{
+	        transform:translate(0,0);
+	    }
+	}
+	@keyframes element-animation-wobble-top{
+	    16.65%{
+	        transform:skew(-12deg);
+	    }
+	    33.3%{
+	        transform:skew(10deg);
+	    }
+	    49.95%{
+	        transform:skew(-6deg);
+	    }
+	    66.6%{
+	        transform:skew(4deg);
+	    }
+	    83.25%{
+	        transform:skew(-2deg);
+	    }
+	    100%{
+	        transform:skew(0);
+	    }
+	}
+	@keyframes element-animation-wobble-bottom{
+	    16.65%{
+	        transform:skew(-12deg);
+	    }
+	    33.3%{
+	        transform:skew(10deg);
+	    }
+	    49.95%{
+	        transform:skew(-6deg);
+	    }
+	    66.6%{
+	        transform:skew(4deg);
+	    }
+	    83.25%{
+	        transform:skew(-2deg);
+	    }
+	    100%{
+	        transform:skew(0)
+	    }
+	}
+	@keyframes element-animation-wobble-skew{
+	    16.65%{
+	        transform:skew(-12deg);
+	    }
+	    33.3%{
+	        transform:skew(10deg);
+	    }
+	    49.95%{
+	        transform:skew(-6deg);
+	    }
+	    66.6%{
+	        transform:skew(4deg);
+	    }
+	    83.25%{
+	        transform:skew(-2deg);
+	    }
+	    100%{
+	        transform:skew(0);
+	    }
+	}
+	@keyframes element-animation-buzz{
+	    50%{
+	        transform:translateX(3px) rotate(2deg);
+	    }
+	    100%{
+	        transform:translateX(-3px) rotate(-2deg);
+	    }
+	}
+	@keyframes element-animation-buzz-out{
+	    10%{
+	        transform:translateX(3px) rotate(2deg);
+	    }
+	    20%{
+	        transform:translateX(-3px) rotate(-2deg);
+	    }
+	    30%{
+	        transform:translateX(3px) rotate(2deg);
+	    }
+	    40%{
+	        transform:translateX(-3px) rotate(-2deg);
+	    }
+	    50%{
+	        transform:translateX(2px) rotate(1deg);
+	    }
+	    60%{
+	        transform:translateX(-2px) rotate(-1deg);
+	    }
+	    70%{
+	        transform:translateX(2px) rotate(1deg);
+	    }
+	    80%{
+	        transform:translateX(-2px) rotate(-1deg);
+	    }
+	    90%{
+	        transform:translateX(1px) rotate(0);
+	    }
+	    100%{
+	        transform:translateX(-1px) rotate(0);
+	    }
+	}
+}

@@ -1,0 +1,48 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverSocialLogin
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php if ($this->getHelper()->hasButtons()) : ?>
+    <div class="pslogin-block pslogin-register pslogin-register-popup" data-mage-init='{"pslogin":{}}'>
+
+        <div
+            class="pslogin-buttons <?php echo $this->showRegisterFullButtons() ? 'pslogin-buttons-showfull' : ''; ?>">
+            <fieldset>
+            <legend><?php echo __('Register with your social account'); ?></legend>
+
+            <ul>
+                <?php foreach ($this->getPreparedButtons() as $button) : ?>
+                    <li class="pslogin-button <?php echo $button['type']; ?>"
+                        title="<?php echo $this->escapeHtml($button['register_text']); ?>">
+                        <a class="pslogin-button-link pslogin-button-click" rel="nofollow"
+                           href="javascript:void(0);" data-href="<?php echo $button['href']; ?>"
+                           data-width="<?php echo $button['popup_width']; ?>"
+                           data-height="<?php echo $button['popup_height']; ?>">
+
+                            <?php if ($this->showRegisterFullButtons()) : ?>
+                                <span class="pslogin-button-auto">
+                                <span class="pslogin-button-icon"></span>
+                                <span
+                                    class="pslogin-button-text"><?php echo $this->escapeHtml($button['register_text']); ?></span>
+                            </span>
+                            <?php else : ?>
+                                <span class="pslogin-button-auto">
+                                <span class="pslogin-button-icon"></span>
+                            </span>
+                            <?php endif; ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            </fieldset>
+        </div>
+
+    </div>
+    <div style="clear: both;"></div>
+<?php endif; ?>
+

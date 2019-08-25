@@ -1,0 +1,113 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+/**
+ * Product media data template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ */
+
+$_settingHelper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$_product = $block->getProduct();
+if($_product->getIsSalable()) $product_stock = 'product-instock'; else $product_stock = 'product-oustock';
+
+?>
+
+
+<?php if ($_product->getIsSalable()): echo '<div class="label-product-view">'.$_settingHelper->getLabel($block->getProduct()).'</div>'; ?>
+<?php else : ?>
+    <div class="stock unavailable"><span><?php /* @escapeNotVerified */  echo __('Out of stock') ?></span></div>
+<?php endif; ?>
+
+<div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
+    <div data-role="loader" class="loading-mask">
+        <div class="loader">
+            <span class="zoo-loading" style="opacity: 1; visibility: visible"></span>
+        </div>
+    </div>
+
+</div>
+
+<?php
+$theme = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$product_layout  = $theme->getCfg('product_page/page_layout');
+/* Image size */
+if(!($main_width = $_settingHelper->getCfg('product_page/main_image_width')))
+    $main_width = $block->getImageAttribute('product_page_image_medium', 'width');
+if(!($main_height = $_settingHelper->getCfg('product_page/main_image_height')))
+    $main_height = $block->getImageAttribute('product_page_image_medium', 'height');
+if(!($thumb_width = $_settingHelper->getCfg('product_page/thumb_image_width')))
+    $thumb_width = $block->getImageAttribute('product_page_image_small', 'width');
+if(!($thumb_height = $_settingHelper->getCfg('product_page/thumb_image_height')))
+    $thumb_height = $block->getImageAttribute('product_page_image_small', 'height') ? $block->getImageAttribute('product_page_image_small', 'height') : $thumb_width;
+
+$gallerylayout = 'horizontal';
+?>
+
+<script type="text/x-magento-init">
+    {
+        "[data-gallery-role=gallery-placeholder]": {
+            "mage/gallery/gallery": {
+                "mixins":["magnifier/magnify"],
+                "magnifierOpts": <?= /* @escapeNotVerified */ $block->getMagnifier() ?>,
+                "data": <?= /* @escapeNotVerified */ $block->getGalleryImagesJson() ?>,
+                "options": {
+                    "nav": "<?= /* @escapeNotVerified */ $block->getVar("gallery/nav") ?>",
+                    <?php if (($block->getVar("gallery/loop"))): ?>
+                        "loop": <?= /* @escapeNotVerified */ $block->getVar("gallery/loop") ?>,
+                    <?php endif; ?>
+                    <?php if (($block->getVar("gallery/keyboard"))): ?>
+                        "keyboard": <?= /* @escapeNotVerified */ $block->getVar("gallery/keyboard") ?>,
+                    <?php endif; ?>
+                    <?php if (($block->getVar("gallery/arrows"))): ?>
+                        "arrows": <?= /* @escapeNotVerified */ $block->getVar("gallery/arrows") ?>,
+                    <?php endif; ?>
+                    <?php if (($block->getVar("gallery/allowfullscreen"))): ?>
+                        "allowfullscreen": <?= /* @escapeNotVerified */ $block->getVar("gallery/allowfullscreen") ?>,
+                    <?php endif; ?>
+                    <?php if (($block->getVar("gallery/caption"))): ?>
+                        "showCaption": <?= /* @escapeNotVerified */ $block->getVar("gallery/caption") ?>,
+                    <?php endif; ?>
+                    "width": <?php /* @escapeNotVerified */ echo $main_width; ?>,
+                    "thumbwidth": <?php /* @escapeNotVerified */ echo $thumb_width; ?>,
+                    "thumbheight": <?php /* @escapeNotVerified */ echo $thumb_height ?: $thumb_width; ?>,
+                    "height": <?php /* @escapeNotVerified */ echo $main_height ?: $main_width; ?>,
+                    <?php if ($block->getVar("gallery/transition/duration")): ?>
+                        "transitionduration": <?= /* @escapeNotVerified */ $block->getVar("gallery/transition/duration") ?>,
+                    <?php endif; ?>
+                    "transition": "<?= /* @escapeNotVerified */ $block->getVar("gallery/transition/effect") ?>",
+                    <?php if (($block->getVar("gallery/navarrows"))): ?>
+                        "navarrows": <?= /* @escapeNotVerified */ $block->getVar("gallery/navarrows") ?>,
+                    <?php endif; ?>
+                    "navtype": "<?= /* @escapeNotVerified */ $block->getVar("gallery/navtype") ?>",
+                    "navdir": "<?php /* @escapeNotVerified */  echo $gallerylayout; ?>"
+                },
+                "fullscreen": {
+                    "nav": "<?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/nav") ?>",
+                    <?php if ($block->getVar("gallery/fullscreen/loop")): ?>
+                        "loop": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/loop") ?>,
+                    <?php endif; ?>
+                    "navdir": "<?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/navdir") ?>",
+                    <?php if ($block->getVar("gallery/transition/navarrows")): ?>
+                        "navarrows": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/navarrows") ?>,
+                    <?php endif; ?>
+                    "navtype": "<?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/navtype") ?>",
+                    <?php if ($block->getVar("gallery/fullscreen/arrows")): ?>
+                        "arrows": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/arrows") ?>,
+                    <?php endif; ?>
+                    <?php if ($block->getVar("gallery/fullscreen/caption")): ?>
+                        "showCaption": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/caption") ?>,
+                    <?php endif; ?>
+                    <?php if ($block->getVar("gallery/fullscreen/transition/duration")): ?>
+                        "transitionduration": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/transition/duration") ?>,
+                    <?php endif; ?>
+                    "transition": "<?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/transition/effect") ?>"
+                },
+                "breakpoints": <?= /* @escapeNotVerified */ $block->getBreakpoints() ?>
+            }
+        }
+    }
+</script>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverMegaMenus
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="cleversoft_megamenu" class="CleverSoft\CleverMegaMenus\Block\Widget\Megamenu" is_email_compatible="true" placeholder_image="CleverSoft_CleverMegaMenus::images/megamenu.png" ttl="86400">
+        <label translate="true">Clever MegaMenu</label>
+        <description translate="true">Show selected megamenu in frontend</description>
+        <parameters>
+            <parameter name="menu" source_model="CleverSoft\CleverMegaMenus\Model\Menuoptions" xsi:type="select" required="true" visible="true">
+                <label translate="true">Menu</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

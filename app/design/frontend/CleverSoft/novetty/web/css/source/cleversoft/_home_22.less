@@ -1,0 +1,107 @@
+@color-gray_light: #cccccc;
+.page-header {
+  &__home22 {
+    .main-menu {
+      margin: 0 -100px 0 0;
+    }
+  }
+}
+ .home22-menu-section{
+   &.clever-horizontal-menu .clever-mega-menu li.level0 > a.menu-link{
+     padding: 0 15px;
+     margin: 0;
+   }
+ }
+.cms-cleversoft-homepage-22{
+  .color-section:before{
+    display: none;
+  }
+  .tab-style2 .tabs-collection .widget-tabs.nav.nav-tabs > li:before {
+    display: none;
+  }
+}
+@media (max-width: 991px){
+  .zoo-title-style6 {
+    .zoo-main-heading{
+      display: block;
+      &:before, &:after{
+        display: none;
+      }
+    }
+  }
+  .home22-menu-section{
+    text-align: center!important;
+    &.clever-horizontal-menu .clever-mega-menu li.level0 > a.menu-link{
+      padding: 10px 0;
+    }
+  }
+  .page-wrapper .page-header.zoo-header-10 #zoo-sticky-header {
+    display: none;
+    height: auto !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px){
+  .zoo-customer-service, #zoo-sticky-header .zoo-header-user {
+    display: none;
+  }
+}
+@media (min-width: 768px){
+  .home22-market .clever-menu ul.clever-mega-menu > li.level-top > a, .clever-horizontal-menu .clever-mega-menu li.level0 > a.menu-link {
+    color: @color-gray15;
+  }
+}
+.block-megamenu {
+  position: relative;
+  .block-title {
+    height: 57px;
+    line-height: 57px;
+    cursor: pointer;
+    &.active{
+      .clever-icon-down{
+        .abs-transition(all 0.4s);
+        .abs-transform(~'rotate(180deg)');
+      }
+    }
+  }
+  .clever-menu.clever-vertical-menu {
+    z-index: 9;
+    background: @color-white;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    display: none;
+  }
+}
+.slide-home22 {
+  .zoo-slideshow-text-content {
+    .btn-novetty {
+      padding: 10px 40px;
+    }
+    .zoo-button-slide a{
+      font-weight: 500;
+      padding: 5px 40px;
+      text-transform: none;
+      border-radius: 4px;
+    }
+    h2{
+      font-size: 40px;
+      text-transform: none;
+      font-weight: 500;
+    }
+  }
+}
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (min-width: @screen__l) {
+      .media-width('min', @screen__l);
+      .page-header {
+        &__home22 {
+          .zoo-customer-service {
+            margin-left: 50px;
+          }
+        }
+      }
+    }
+}

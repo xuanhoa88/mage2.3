@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="CleverSoft_CleverLayeredNavigation::css/edit.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="CleverSoft\CleverLayeredNavigation\Block\Adminhtml\Page\Edit" name="cleversoft_shopby_page_edit"/>
+            <block class="CleverSoft\CleverLayeredNavigation\Block\Adminhtml\Page\Selection" name="cleversoft_shopby_page_selection"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="CleverSoft\CleverLayeredNavigation\Block\Adminhtml\Page\Edit\Tabs" name="cleversoft_shopby_page_edit_tabs">
+
+                <block class="CleverSoft\CleverLayeredNavigation\Block\Adminhtml\Page\Edit\Tab\Meta" name="cleversoft_shopby_page_edit_tab_meta"/>
+                <block class="CleverSoft\CleverLayeredNavigation\Block\Adminhtml\Page\Edit\Tab\Text" name="cleversoft_shopby_page_edit_tab_text"/>
+                <block class="CleverSoft\CleverLayeredNavigation\Block\Adminhtml\Page\Edit\Tab\Category" name="cleversoft_shopby_page_edit_tab_category"/>
+                <block class="CleverSoft\CleverLayeredNavigation\Block\Adminhtml\Page\Edit\Tab\Selection" name="cleversoft_shopby_page_edit_tab_selection"/>
+
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">cleversoft_shopby_page_edit_tab_meta</argument>
+                    <argument name="block" xsi:type="string">cleversoft_shopby_page_edit_tab_meta</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">cleversoft_shopby_page_edit_tab_text</argument>
+                    <argument name="block" xsi:type="string">cleversoft_shopby_page_edit_tab_text</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">cleversoft_shopby_page_edit_tab_category</argument>
+                    <argument name="block" xsi:type="string">cleversoft_shopby_page_edit_tab_category</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">cleversoft_shopby_page_edit_tab_selection</argument>
+                    <argument name="block" xsi:type="string">cleversoft_shopby_page_edit_tab_selection</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

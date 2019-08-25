@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="wrap-breadcrumbs-content">
+            <block class="Magento\Framework\View\Element\Template" name="product.prev.next" template="CleverSoft_CleverTheme::product/nextandpre.phtml" after="breadcrumbs"/>
+        </referenceContainer>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Newsletter\Block\Subscribe" name="clever.newsletter.product" template="CleverSoft_CleverTheme::newsletter/subscribe.phtml" ifconfig="clevernewsletter/selected_pages/showon_productpage" after="-"/>
+        </referenceContainer>
+        <move element="product.info.simple" destination="product.info.labels" as="simple.info.stock"/>
+        <move element="product.info.configurable" destination="product.info.labels" as="configurable.info.stock"/>
+        <move element="product.info.virtual" destination="product.info.labels" as="virtual.info.stock"/>
+        <move element="product.info.grouped.stock" destination="product.info.labels" as="grouped.stock.info.stock"/>
+        <referenceContainer name="product.info.main">
+            <block class="CleverSoft\CleverTheme\Block\Wysiwyg\Content" name="product.extra.information" template="CleverSoft_CleverTheme::product/view/extra_information.phtml" before="product.info"/>
+            <block class="CleverSoft\CleverTheme\Block\Wysiwyg\Content" name="product.upsell.featured" template="CleverSoft_CleverTheme::product/view/upsell.phtml" after="product.info"/>
+        </referenceContainer>
+    </body>
+</page>

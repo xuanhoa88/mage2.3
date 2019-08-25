@@ -1,0 +1,6 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="CleverSoft_CleverInstagram::instagram" title="CleverInstagram" module="CleverSoft_CleverInstagram" sortOrder="556" parent="CleverSoft_Base::cl_all" resource="CleverSoft_CleverTheme::all" />
+        <add id="CleverSoft_CleverInstagram::instagramsettings" title="Configuration" module="CleverSoft_CleverInstagram" sortOrder="0" parent="CleverSoft_CleverInstagram::instagram" action="adminhtml/system_config/edit/section/instagram" resource="CleverSoft_CleverTheme::config_cleversinstagram" />
+    </menu>
+</config>

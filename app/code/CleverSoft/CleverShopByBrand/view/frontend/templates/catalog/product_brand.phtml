@@ -1,0 +1,18 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverShopByBrand\Helper\Data');
+$brand = $this->getBrandByProduct();
+if($brand) {
+	$label = strip_tags($brand->getBrandLabel());
+	$width = 75;
+	$height = 75;
+	$img = $brand->getLogo();
+}
+
+?>
+<?php if($brand && $img && $helper->getConfig('cleversoft_shopbybrand/product_view_page/display_brand_logo')):?>
+    <div class="brand-logo">
+        <a class="brand-link abs-img" href="<?= $this->getBrandPageUrl($brand) ?>" title="<?= $label ?>">
+            <img class="brand-img" alt="<?= $label ?>" src="<?= $this->getLogo($brand, ['width' => $width, 'height' => $height]) ?>" />
+        </a>
+    </div>
+<?php endif;?>

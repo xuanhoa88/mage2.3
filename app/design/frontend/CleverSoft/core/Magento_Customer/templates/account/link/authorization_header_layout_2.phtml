@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Customer\Block\Account\AuthorizationLink */
+$dataPostParam = '';
+if ($block->isLoggedIn()) {
+    $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams());
+}
+$logged = $block->isLoggedIn() ? $block->escapeHtml($block->getLabel(),array('br')) : __('Sign In');
+?>
+
+<div class="authorization-link authorization-link-layout-2" data-label="<?php echo $block->escapeHtml(__('or')); ?>">
+    <?php echo $this->getLayout()->createBlock('Magento\Customer\Block\Account\Customer')->setTemplate('Magento_Customer::account/customer.phtml')->toHtml(); ?>
+    <a <?php /* @escapeNotVerified */ echo $block->getLinkAttributes(); ?><?php /* @escapeNotVerified */ echo $dataPostParam; ?>>
+        <i class="clever-icon-user-6" aria-hidden="true"></i><span><?php echo $logged; ?></span>
+    </a>
+</div>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="main.breadcrumbs" remove="true"/>
+        <referenceContainer name="content">
+            <container name="category.view.container" htmlTag="div" htmlClass="category-view" before="-">
+                <block class="Magento\Catalog\Block\Category\View" name="category.image" template="Magento_Catalog::category/image.phtml"/>
+                <block class="Magento\Catalog\Block\Category\View" name="category.description" template="Magento_Catalog::category/description.phtml"/>
+                <block class="Magento\Catalog\Block\Category\View" name="category.cms" template="Magento_Catalog::category/cms.phtml"/>
+            </container>
+        </referenceContainer>
+        <referenceContainer name="catalog.rightnav">
+        	<container name="category.view.container.child" htmlTag="div" htmlClass="category-view__right" before="-">
+                <block class="Magento\Catalog\Block\Category\View" name="category.image.child" template="Magento_Catalog::category/image.phtml"/>
+                <block class="Magento\Catalog\Block\Category\View" name="category.description.child" template="Magento_Catalog::category/description.phtml"/>
+                <block class="Magento\Catalog\Block\Category\View" name="category.cms.child" template="Magento_Catalog::category/cms.phtml"/>
+            </container>
+    	</referenceContainer>
+        <referenceBlock name="page.main.title" remove="true" />
+    </body>
+</page>

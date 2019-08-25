@@ -1,0 +1,3945 @@
+@import '../vendor/bootstrap/_bootstrap-grid.less';
+@import '../vendor/owlcarousel/_owl.carousel.less';
+@import '../vendor/flexslider/_flexslider.less';
+@import '../vendor/fontawesome/_font-awesome.less';
+@import '../vendor/jquery-ui/_jquery-ui.less';
+@import '../cleverfont/_cleverfont.less';
+@import '_live-editor__front.less';
+@import '_dashicons.less';
+@import '_effect.less';
+@import '_select2.less';
+@import '../element/_banner.less';
+@import '../element/_image.less';
+@import '../element/_products.less';
+@import '../element/_categories.less';
+@import '../element/_row.less';
+@import '../element/_tabs.less';
+@import '../element/_title.less';
+@import '../element/_iconbox.less';
+@import '_variables.less';
+@import '_style_element.less';
+@font-icon-name__panels-icons: 'cleversoft-panels-icons';
+.lib-font-face(
+    @family-name: @font-icon-name__panels-icons,
+    @font-path: '@{baseDir}CleverSoft_CleverBuilder/fonts/panels-icons/panels-icons',
+    @font-weight: normal,
+    @font-style: normal
+);
+@font-size__base: 16px;
+& when (@media-common = true) {
+	.page-wrapper {
+		.sections.nav-sections {
+			.ui-widget.ui-widget-content, .ui-state-focus, .ui-widget-content .ui-state-focus {
+			    border: none;
+			    background: none;
+			}
+			.ui-widget.ui-widget-content {
+				&.level0 {
+					background: @color-white;
+				}
+			}
+		}
+	}
+    .clever-builder-buttons-actions a,
+    .btn.turn-on-builder {
+        -webkit-appearance: inherit;
+        background: #0172ff;
+        color: @color-white;
+        font-size: 16px;
+        z-index: 999;
+        border-radius: 0;
+        position: absolute;
+    }
+    .live-editor {
+    	&-logout, &-close , &-save-options {
+		    &.button-primary {
+			    background: #0085ba;
+			    border-color: #0085ba;
+			    box-shadow: 0 1px 0 #006799;
+			    color: @color-white;
+			    text-decoration: none;
+			    text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+			    display: inline-block;
+			    font-size: 13px;
+			    line-height: 26px;
+			    height: 28px;
+			    margin: 0;
+			    padding: 0 10px 1px;
+			    cursor: pointer;
+			    border-width: 1px;
+			    border-style: solid;
+			    -webkit-appearance: none;
+			    border-radius: 3px;
+			    white-space: nowrap;
+			    box-sizing: border-box;
+			    &.cs-close {
+			    	color: @color-white;
+			    }
+			    &:hover {
+			    	background: @color-white;
+				    border-color: @color-white;
+				    color: #0085ba;
+			        text-shadow: none;
+    				box-shadow: none;
+			    }
+			}
+    	}
+    }
+    .col_grid {
+    	display: inline;
+    }
+	a, .alink {
+		&:hover {
+		    text-decoration: none;
+		}
+	}
+	.fa {
+		&.margin-0 {
+			margin: 0;
+		}
+	}
+	button {
+		&:not(.primary) {
+			box-shadow: none;
+		}
+	}
+	body {
+		font-size: 16px;
+	}
+	#pl-2 {
+		.cs-panel {
+		    margin: 0 !important;
+		}
+	}
+	.panels-scrollto-editor {
+	    padding: 15px;
+		.form-group {
+			&.scroll-style {
+				.control-label {
+					display: block;
+				}
+				.form-control {
+				    width: 30%;
+				    float: left;
+				    position: relative;
+				    margin-bottom: 15px;
+				    &:before {
+			    	    position: absolute;
+					    left: calc(~"50% - 40px");
+					    transform: translate(-50%);
+				    }
+				}
+			}
+		}
+	}
+	.scroll-to-bullets {
+	    top: 50%;
+	    -ms-transform: translateY(-50%);
+	    transform: translateY(-50%);
+	    z-index: 999;
+	    max-height: 100vh;
+	    position: fixed;
+	    a {
+    	    display: block;
+		    border: 3px solid transparent;
+		    background: @color-black;
+		    width: 15px;
+		    height: 15px;
+		    border-radius: 30px;
+		    transition: all .3s;
+		    box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+	    	&.active {
+			    opacity: 1;
+			    border-color: @color-black;
+			    background: @color-white;
+			}
+			&:hover {
+			    opacity: 1;
+			    color: @color-black;
+    			background: @color-white;
+			}
+	    }
+	    &.left {
+		    left: 15px;
+		    .vertical-menu-one-page__item {
+		    	.effect-tooltip {
+					.tooltip {
+					    left: 25px;
+					    transform: translate(0, -50%);
+					    &:before {
+					    	left: -6px;
+					    	border-right: 7px solid #252525;
+					    }
+					}
+				}
+			}
+		}
+	    &.right {
+		    right: 15px;
+		    .vertical-menu-one-page__item {
+		    	.effect-tooltip {
+					.tooltip {
+					    right: 25px;
+					    transform: translate(0, -50%);
+					    &:before {
+					    	right: -6px;
+					    	border-left: 7px solid #252525;
+					    }
+					}
+				}
+			}
+		}
+		.vertical-menu-one-page__item {
+			&.active {
+		    	.tooltip-section {
+			    	background: @color-white;
+		    	}
+	    	}
+	    	.effect-tooltip {
+	    		position: relative;
+				.tooltip {
+		            opacity: 0;
+				    top: 50%;
+				    position: absolute;
+				    visibility: hidden;
+				    font-size: 12px;
+				    min-width: 105px;
+				    padding: 5px 7px;
+				    text-align: center;
+				    z-index: 99;
+				    border-radius: 10px;
+				    -webkit-transform: translate(-50%, -50%);
+				    transform: translate(-50%, -50%);
+				    -moz-transition: all .3s;
+				    -webkit-transition: all .3s;
+				    -o-transition: all .3s;
+				    transition: all .3s;
+				    -moz-backface-visibility: hidden;
+				    -webkit-backface-visibility: hidden;
+				    backface-visibility: hidden;
+				    background: #252525;
+				    color: @color-white;
+				    line-height: initial;
+				    &:before {
+						content: '';
+					    width: 0;
+					    height: 0;
+					    position: absolute;
+					    top: 50%;
+					    transform: translateY(-50%);
+					    border-top: 7px solid transparent;
+					    border-bottom: 7px solid transparent;
+				    }
+				}
+			}
+	    	&:hover {
+				.effect-tooltip {
+					.tooltip {
+			            opacity: 1;
+					    visibility: visible;
+					}
+				}
+	    	}
+		}
+	}
+	.vertical-menu-one-page {
+		&__list {
+			margin: 0;
+			&.scroll-to-icon {
+				background: @color-white;
+			}
+		}
+		&__item {
+	        width: unset;
+		    height: unset;
+		    line-height: 1;
+		    margin: 0;
+		    list-style: none;
+		    .menu-link {
+		    	text-align: center;
+		    	display: block;
+		    	i {
+	    		    position: relative;
+				    height: 50px;
+				    padding-top: 0;
+				    line-height: 50px;
+				    width: 100%;
+				    font-size: 18px;
+		    	}
+		    	&:hover {
+	    		    background: #da3e6a;
+					color: @color-white;
+		    	}
+		    }
+		    &.active {
+		    	.menu-link {
+    		    	background: #da3e6a;
+					color: @color-white;
+		    	}
+	    	}
+		}
+	    &.right {
+		    right: 15px !important;
+		}
+		.scroll-to-bullets {
+			li {
+				margin: 10px 0;
+			}
+		}
+	}
+	.element-testimonial {
+		position: relative;
+		&__wrapper {
+		    position: relative;
+		    z-index: 2;
+		    width: 100%;
+		    padding: 20px 0;
+		}
+		&.text {
+			&-left, &-right, &-center {
+				.element-testimonial {
+					&__meta {
+						&.img-position {
+							&__aside {
+								.element-testimonial__inner {
+									&-image {
+										padding-right: 15px;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			&-left {
+				.element-testimonial__inner {
+					&-details {
+						text-align: left;
+					}
+				}
+			}
+			&-right {
+				.element-testimonial__inner {
+					&-details {
+						text-align: right;
+					}
+				}
+			}
+			&-center {
+				.element-testimonial__inner {
+					&-details {
+						text-align: center;
+					}
+				}
+			}
+		}
+		&__content {
+		    margin-bottom: 20px;
+		}
+		&__meta {
+			&.img-position {
+				&__aside {
+					.element-testimonial__inner {
+						&-image, &-details {
+							display: inline-block;
+						}
+					}
+				}
+				&__top {
+					.element-testimonial__inner {
+						&-image, &-details {
+							display: block;
+						}
+						&-image {
+							margin-bottom: 20px;
+						}
+					}
+				}
+			}
+		}
+		&__inner {
+			&-image {
+			    img {
+				    width: 60px;
+				    height: 60px;
+				    -webkit-border-radius: 50%;
+				    border-radius: 50%;
+				    -o-object-fit: cover;
+				    object-fit: cover;
+				    max-width: none;
+			    }
+			}
+			&-details {
+			    display: table-cell;
+    			vertical-align: middle;
+    			.element-testimonial-name {
+    				font-weight: 600;
+    			}
+			}
+		}
+	}
+	.element-row {
+		&__content {
+			display: -webkit-box;
+		    display: -webkit-flex;
+		    display: -ms-flexbox;
+		    display: flex;
+		    margin-right: auto;
+		    margin-left: auto;
+		    position: relative;
+		    background: inherit;
+		}
+		&.full-width {
+			padding: 0 30px;
+		}
+		&-height-full {
+			height: 100vh;
+			.element-row__content {
+				height: 100%;
+			}
+		}
+		.row.row-grid {
+			width: 100%;
+			position: relative;
+		}
+	}
+	.element-innerrow {
+		&__content {
+			display: -webkit-box;
+		    display: -webkit-flex;
+		    display: -ms-flexbox;
+		    display: flex;
+		    margin-right: auto;
+		    margin-left: auto;
+		    position: relative;
+		}
+		&.full-width {
+			padding: 0 30px;
+		}
+		&-height-full {
+			height: 100vh;
+			.element-innerrow__content {
+				height: 100%;
+			}
+		}
+		.innerrow.row-grid {
+			width: 100%;
+			position: relative;
+		}
+	}
+	.column {
+		&-position {
+			&-top {
+				-webkit-box-align: start;
+			    -webkit-align-items: flex-start;
+			    -ms-flex-align: start;
+			    align-items: flex-start;
+			}
+			&-middle {
+			    -webkit-box-align: center;
+			    -webkit-align-items: center;
+			    -ms-flex-align: center;
+			    align-items: center;
+			}
+			&-bottom {
+			    -webkit-box-align: end;
+			    -webkit-align-items: flex-end;
+			    -ms-flex-align: end;
+			    align-items: flex-end;
+			}
+		}
+	}
+	.cell-wrapper {
+		min-height: 63px !important;
+		padding-bottom: 20px;
+	}
+	.cs-cells {
+		.cs-widget-wrapper {
+			.ui-accordion-header-icon {
+			    position: absolute;
+			    left: 5px;
+			    top: 50%;
+			    transform: translateY(-50%);
+			    margin: 0;
+			}
+		}
+		.cs-widget {
+			&:not(.show-icon) {
+				.ui-accordion-header-icon {
+					display: none;
+				}
+			}
+		}
+		.ui-accordion .ui-accordion-content {
+		    padding: 0;
+		    overflow: hidden;
+		    height: auto !important;
+	        border: none;
+            background: none;
+		}
+	}
+	#cs-panels-panels.attached-to-editor {
+	    margin-top: 20px
+	}
+	#cs-panels-panels.attached-to-editor .handlediv, #cs-panels-panels.attached-to-editor .hndle {
+	    display: none !important
+	}
+	#cs-panels-panels.attached-to-editor .inside {
+	    margin: 0 !important;
+	    padding: 0 !important
+	}
+	.cs-textbox-item-child-wrapper {
+	    margin-bottom: 10px;
+	}
+	#cs-panels-panels.attached-to-editor .cs-toolbar .cs-switch-to-standard {
+	    display: block
+	}
+	.cleversoft-panels {
+		&- {
+			.socialproof-modal {
+				display: none !important
+			}
+		}
+		&-builder {
+		    position: relative
+		}
+	}
+	.cs-content.panel-dialog > h4 {
+	    margin-left: 5px;
+	}
+	.cleversoft-widget-field {
+		padding: 0 15px;
+		margin: 0;
+		background: @color-white;
+		&.cleversoft-widget-field {
+			&-type-slider {
+				.form-group {
+					.ui-slider {
+				    	width: calc(~"100% - 65px");
+				    	margin-left: auto;
+					}
+				}
+			}
+			&-type-textarea {
+				.form-group {
+					.control-label {
+						width: auto;
+					}
+					> button {
+					    padding: 3px 15px;
+					    margin-bottom: 10px;
+					    margin-left: auto;
+					    background: #0172ff;
+					}
+					.mce-btn {
+						button {
+							border: none;
+							&:hover {
+								background: none;
+							}
+						}
+					}
+				}
+			}
+			&-type-toggle {
+				.form-group {
+					.control-label {
+					    width: auto;
+					}
+				}
+			}
+		}
+		.label-heading {
+		    color: @color-black;
+		}
+	}
+	.cleversoft-panels-builder .cs-tool-button {
+	    padding: 6px 7px;
+	    text-decoration: none;
+	    line-height: 1em;
+	    margin-right: 2px;
+	    display: block;
+	    visibility: visible;
+	    position: relative;
+	    cursor: pointer;
+	    background: -o-linear-gradient(#f9f9f9, @color-gray-darken0);
+	    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f9f9f9", endColorstr="@color-gray-darken0eee", GradientType=0);
+	    outline: none;
+	    border-radius: 2px;
+	    &.cs-prebuilt-add {
+    	    float: right;
+	    }
+	}
+	.cleversoft-panels-builder .cs-tool-button .cs-panels-icon {
+	    font-size: 12px
+	}
+	.cleversoft-panels-builder .cs-tool-button span {
+	    display: inline-block;
+	    color: @color-gray40;
+	    text-shadow: 0 1px 0 @color-white;
+	    min-width: 10px;
+	    text-align: center
+	}
+	.cleversoft-panels-builder .cs-tool-button:hover span {
+	    color: #444
+	}
+	.cleversoft-panels-builder .cs-builder-toolbar {
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box;
+	    border-bottom: 1px solid #d0d0d0;
+	    background: #0172ff;
+	    line-height: 1em;
+	    z-index: 101;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    position: relative;
+	    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    padding: 6px 9px;
+	    margin-top: 0 !important;
+	    zoom: 1;
+	    .logo {
+    	    position: absolute;
+		    left: 50%;
+		    top: 50%;
+		    transform: translate(-50%,-50%);
+	        margin: 0;
+		    img {
+	    	    max-width: 35px;
+		    }
+	    }
+	}
+	.cleversoft-panels-builder .cs-builder-toolbar:before {
+	    content: "";
+	    display: block
+	}
+	.cleversoft-panels-builder .cs-builder-toolbar:after {
+	    content: "";
+	    display: table;
+	    clear: both
+	}
+	.cleversoft-panels-builder .cs-builder-toolbar .cs-tool-button {
+	    display: inline-block;
+	    color: @color-gray40;
+	    padding: 2px 10px 2px 8px;
+	    background: @color-white;
+	}
+	.cleversoft-panels-builder .cs-builder-toolbar .cs-tool-button .cs-button-text {
+	    margin: 3px 0 2px;
+	    font-size: 11px
+	}
+	.cleversoft-panels-builder .cs-builder-toolbar .cs-tool-button .cs-panels-icon {
+	    float: left;
+	    margin: 3px 7px 2px 0;
+	    font-size: 14px;
+	    color: #747474
+	}
+	.cleversoft-panels-builder .cs-builder-toolbar .cs-tool-button:hover, .cleversoft-panels-builder .cs-builder-toolbar .cs-tool-button:hover .cs-panels-icon {
+	    color: #444
+	}
+	.cleversoft-panels-builder .cs-builder-toolbar .cs-tool-button.cs-learn {
+	    background: #e5e5e5;
+	    background: -o-linear-gradient(#f6f6f6, #e5e5e5);
+	    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f6f6f6", endColorstr="#e5e5e5", GradientType=0)
+	}
+	.cleversoft-panels-builder .cs-builder-toolbar .cs-tool-button.cs-learn:hover {
+	    background: @color-white
+	}
+	.cleversoft-panels-builder .cs-builder-toolbar .cs-switch-to-standard {
+	    cursor: pointer;
+	    float: right;
+	    display: none;
+	    text-decoration: none;
+	    color: @color-gray40;
+	    padding: 5px 6px;
+	    border-radius: 2px;
+	    border: 1px solid transparent;
+	    font-size: 11px
+	}
+	.cleversoft-panels-builder .cs-builder-toolbar .cs-switch-to-standard:hover {
+	    background: #fafafa;
+	    border: 1px solid @color-gray60;
+	    color: #444
+	}
+	.cleversoft-panels-builder .cs-rows-container {
+	    padding: 20px 15px 0
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-color-1.cs-row-color {
+	    background: #cde2ec;
+	    border: 1px solid #a4cadd
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-color-1.cs-row-color.cs-row-color-selected:before {
+	    background: #a8cdde
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-1 .cs-cells .cell .cell-wrapper {
+	    background: none;
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-1 .cs-cells .cell.cell-selected .cell-wrapper {
+	    background: #f1f1f1;
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-1 .cs-cells .cell .resize-handle {
+		background: #ccc;
+		width: 5px;
+		left: 0;
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-1 .cs-cells .cell .resize-handle:hover {
+	    background: #666
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-color-2.cs-row-color {
+	    background: #f2c2be;
+	    border: 1px solid #e9968f
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-color-2.cs-row-color.cs-row-color-selected:before {
+	    background: #ea9a93
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-2 .cs-cells .cell .cell-wrapper {
+	    background: #f2c2be
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-2 .cs-cells .cell.cell-selected .cell-wrapper {
+	    background: #e68a83
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-2 .cs-cells .cell .resize-handle {
+	    background: #f8dedc
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-2 .cs-cells .cell .resize-handle:hover {
+	    background: #f5d2cf
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-color-3.cs-row-color {
+	    background: #d5ccdf;
+	    border: 1px solid #b9aac9
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-color-3.cs-row-color.cs-row-color-selected:before {
+	    background: #bbadcb
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-3 .cs-cells .cell .cell-wrapper {
+	    background: #d5ccdf
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-3 .cs-cells .cell.cell-selected .cell-wrapper {
+	    background: #b1a0c3
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-3 .cs-cells .cell .resize-handle {
+	    background: #e7e2ed
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-3 .cs-cells .cell .resize-handle:hover {
+	    background: #dfd9e7
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-color-4.cs-row-color {
+	    background: #cae7cd;
+	    border: 1px solid #a3d6a9
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-color-4.cs-row-color.cs-row-color-selected:before {
+	    background: #a7d7ac
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-4 .cs-cells .cell .cell-wrapper {
+	    background: #cae7cd
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-4 .cs-cells .cell.cell-selected .cell-wrapper {
+	    background: #99d19f
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-4 .cs-cells .cell .resize-handle {
+	    background: #e3f2e4
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-4 .cs-cells .cell .resize-handle:hover {
+	    background: #d8edda
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-color-5.cs-row-color {
+	    background: #e2dcb1;
+	    border: 1px solid #d3ca88
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-color-5.cs-row-color.cs-row-color-selected:before {
+	    background: #d4cb8c
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-5 .cs-cells .cell .cell-wrapper {
+	    background: #e2dcb1
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-5 .cs-cells .cell.cell-selected .cell-wrapper {
+	    background: #cfc57d
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-5 .cs-cells .cell .resize-handle {
+	    background: #ece8cb
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.cs-row-color-5 .cs-cells .cell .resize-handle:hover {
+	    background: #e8e3c0
+	}
+	.cleversoft-panels-builder .cs-rows-container h3.cs-row-label {
+	    display: inline-block;
+	    font-size: 1em;
+	    font-weight: 500;
+	    color: #474747;
+	    margin: 0 0 0 4px;
+	    line-height: 22px;
+	    float: left
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar {
+	    zoom: 1;
+	    margin-bottom: 4px
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar:before {
+	    content: "";
+	    display: block
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar:after {
+	    content: "";
+	    display: table;
+	    clear: both
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar .cs-tool-button {
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box;
+	    padding: 4px;
+        text-align: center;
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar .cs-tool-button .cs-panels-icon {
+	    color: #777;
+	    font-size: 11px;
+	    width: 11px;
+	    height: 11px;
+	    display: block;
+	    &.cs-panels-icon-settings {
+    	    &:before {
+        	    content: "\e901";
+    	    }
+	    }
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar .cs-tool-button:hover .cs-panels-icon {
+	    color: @color-gray-darken3
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar .cs-tool-button.cs-row-move {
+	    cursor: move
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar .cs-dropdown-wrapper .cs-dropdown-links-wrapper {
+	    visibility: hidden;
+	    opacity: 0;
+	    transition: visibility 0s linear 75ms, opacity 75ms linear;
+	    z-index: 101;
+	    right: -10px;
+	    top: 100%;
+	    width: 125px
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar .cs-dropdown-wrapper .cs-dropdown-links-wrapper ul li a.cs-row-delete {
+	    color: #a00
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar .cs-dropdown-wrapper .cs-dropdown-links-wrapper ul li a.cs-row-delete:hover {
+	    color: @color-white;
+	    background: #a00
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar .cs-dropdown-wrapper .cs-dropdown-links-wrapper ul li.cs-row-colors-container {
+	    display: flex;
+	    justify-content: space-around;
+	    padding: 5px
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar .cs-dropdown-wrapper .cs-dropdown-links-wrapper ul li.cs-row-colors-container .cs-row-color {
+	    display: inline-block;
+	    cursor: pointer;
+	    position: relative;
+	    text-align: center;
+	    width: 14px;
+	    height: 14px;
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar .cs-dropdown-wrapper .cs-dropdown-links-wrapper ul li.cs-row-colors-container .cs-row-color.cs-row-color-selected:before {
+	    content: "";
+	    display: block;
+	    position: absolute;
+	    top: 2px;
+	    bottom: 2px;
+	    left: 2px;
+	    right: 2px
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-toolbar .cs-dropdown-wrapper:hover .cs-dropdown-links-wrapper {
+	    visibility: visible;
+	    opacity: 1;
+	    transition-delay: 0s
+	}
+	.cleversoft-panels-builder .cs-rows-container .ui-sortable-placeholder {
+	    visibility: visible !important;
+	    background: #f7f7f7;
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box;
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container {
+	    margin-bottom: 15px;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+        border: 1px dashed #ccc;
+        padding: 10px 0 0;
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container.ui-sortable-helper {
+	    opacity: .9
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells {
+	    zoom: 1;
+	    margin: 0;
+	    position: relative;
+        padding: 10px 0 0;
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells:before {
+	    content: "";
+	    display: block
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells:after {
+	    content: "";
+	    display: table;
+	    clear: both
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .ui-resizable-handle.ui-resizable-w {
+	    width: 10px;
+	    left: -11px;
+	    cursor: col-resize;
+	    background: rgba(0, 150, 211, .25);
+	    transition: background .25s ease-in-out
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .ui-resizable-handle.ui-resizable-w:hover {
+	    background: rgba(0, 150, 211, .1)
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell {
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box;
+	    float: left;
+	    position: relative;
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell.cs-first {
+	    margin-left: 0
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell.cs-last {
+	    margin-right: 0
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .cell-wrapper {
+	    padding: 10px;
+	    height: 100%;
+	    min-height: 63px;
+	    transition: background .25s ease-in-out 0s
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell, .cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .cell-wrapper {
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box
+	}
+	.tab-items-wrapper, .scrollto-items-wrapper, .grid-items-wrapper {
+	    padding-left: 10px;
+	    border-left: 1px solid transparent;
+	    overflow: hidden;
+	    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1),max-height 300ms cubic-bezier(0.19, 1, 0.22, 1);
+	}
+	.element-item-elements {
+	    margin-left: 15px;
+	}
+	.widget-type-wrapper {
+		.dashicons {
+			&.dashicons-admin-generic {
+				font-family: "cleversoft";
+			    font-size: 20px;
+			    width: 20px;
+			    height: 20px;
+			    color: @color-gray40;
+			}
+		}
+	}
+	.clever {
+		&-row {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c321";
+				}			
+			}
+		}
+		&-innerrow {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c321";
+				}			
+			}
+		}
+		&-grid {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c320";
+				}			
+			}
+		}
+		&-slider {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c310";
+				}			
+			}
+		}
+		&-tabs {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c311";
+				}			
+			}
+		}
+		&-banner {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c315";
+				}			
+			}
+		}
+		&-button {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c319";
+				}			
+			}
+		}
+		&-divider {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c035";
+				}			
+			}
+		}
+		&-images {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c111";
+				}			
+			}
+		}
+		&-video {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c106";
+				}			
+			}
+		}
+		&-products {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c321";
+				}			
+			}
+			&-list {
+				.dashicons-admin-generic {
+					&:before {
+					    content: "\c052";
+					}			
+				}
+			}
+		}
+		&-testimonial {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c318";
+				}			
+			}
+		}
+		&-category {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c041";
+				}			
+			}
+		}
+		&-scrollto {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c209";
+				}			
+			}
+		}
+		&-gap {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c094";
+				}			
+			}
+		}
+		&-title {
+			.dashicons-admin-generic {
+				&:before {
+					content: "\c097";
+				}
+			}
+		}
+		&-iconbox {
+			.dashicons-admin-generic {
+				&:before {
+					content: "\c323";
+				}
+			}
+		}
+		&-imagebox {
+			.dashicons-admin-generic {
+				&:before {
+					content: "\c323";
+				}
+			}
+		}
+		&-textbox {
+			.dashicons-admin-generic {
+				&:before {
+					content: "\c322";
+				}
+			}
+		}
+		&-countdown {
+			.dashicons-admin-generic {
+				&:before {
+					content: "\c105";
+				}
+			}
+		}
+	}
+	.editor-text {
+		.dashicons-admin-generic {
+			&:before {
+			    content: "\c322";
+			}			
+		}
+	}
+	.cleversoft {
+		&_shopbybrand {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c177";
+				}			
+			}
+		}
+		&_pinmarker {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c043";
+				}			
+			}
+		}
+		&_megamenu {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c087";
+				}			
+			}
+		}
+	}
+	.magefan_blog {
+		&_featured {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c299";
+				}			
+			}
+		}
+		&_recent {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c300";
+				}			
+			}
+		}
+	}
+	.widget {
+		&_instagram {
+			.dashicons-admin-generic {
+				&:before {
+				    content: "\c232";
+				}			
+			}
+		}
+	}
+	.mt_cookielaw {
+		.dashicons-admin-generic {
+			&:before {
+			    content: "\c312";
+			}			
+		}
+	}
+	.cs-tab-item-button , .cs-grid-item-button {
+	    margin: 5px 0;
+	}
+	.cs-tab-item-child-wrapper, .cs-grid-item-child-wrapper{margin-bottom: 5px;}
+	.cs-tab-item-button span.cs-tab-insert, .cs-grid-item-button span.cs-grid-insert  {
+	    text-align: center;
+	    padding: 4px 10px;
+	    background: #2f4f4f;
+	    color: @color-white;
+	    border: 1px solid #6e716e;
+	    border-radius: 5px;
+	    margin-top: 5px;
+	    cursor: pointer;
+	}
+	.element-items-wrapper .element-item {
+	    padding-top: 5px;
+	    display: block;
+	    position: relative;
+	    padding-bottom: 5px;
+	}
+	.element-items-wrapper .panel-info {
+	    border: 1px solid #6e716e !important;
+	    background: #6e716e !important;
+	    color: @color-white !important;
+	    display: flex;
+	    -ms-flex-pack: justify;
+	    font-size: 14px;
+	    line-height: 22px;
+	    cursor: pointer;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    -webkit-backface-visibility: hidden;
+	    backface-visibility: hidden;
+	    padding: 3px 10px;
+        border-radius: 99px;
+	}
+	.element-items-wrapper .element-item-elements .panel-info {
+	    padding: 0px 10px;
+	}
+	.element-items-wrapper .element-item-elements .panel-info {
+	    padding: 0px 10px;
+	}
+	.element-items-wrapper .element-item .panel-info .widget-info {
+	    color: @color-white;
+	    font-weight: bold;
+	    font-size: 85%;
+	    font-style: italic;
+	    padding-left: 5px;
+	}
+	.clever-trigger-content-update {
+		ul li {
+		    margin-bottom: 0;
+		    ul {
+			    margin-left: 8px;
+			}
+		}
+	}
+	.element-items-wrapper {
+	    padding: 0 0 10px 10px;
+	    border-left: 1px solid transparent;
+	    overflow: hidden;
+	    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1),max-height 300ms cubic-bezier(0.19, 1, 0.22, 1);
+	    &:first-child {
+    	    margin-top: 12px;
+	    }
+	    .cs-element-insert {
+	    	.icon-container {
+    		    padding: 5px;
+			    background: #444;
+			    color: @color-white;
+			    border: 1px solid #6e716e;
+		        border-radius: 99px;
+			    cursor: pointer;
+			    min-height: unset;
+			    &.row {
+			    	margin-right: unset;
+			    	margin-left: unset;
+			    }
+	    	}
+	    }
+	}
+	.cs-element-item-button {
+	    margin: 5px 0;
+	}
+	.banner-item-elements .cs-element-item-button {
+	    margin-left: 10px;
+	}
+	.cs-banner-item-inner-child-wrapper {
+	    padding: 5px 0 0 10px;
+	}
+	.slider-item-elements .cs-element-item-button {
+		margin-left: 10px;
+	}
+	.cs-slider-item-inner-child-wrapper {
+		padding: 5px 0 0 10px;
+	}
+	.element-item-wrapper {
+	    padding-bottom: 5px;
+	}
+	.icon-container.banner {
+	    margin-top: 0;
+	}
+	.icon-container.row {
+		margin-right: unset;
+		margin-left: unset;
+	}
+	.cs-element-item-button span.cs-element-insert {
+	    text-align: center;
+	    padding: 4px 10px;
+	    background: #2f4f4f;
+	    color: @color-white;
+	    border: 1px solid #6e716e;
+	    border-radius: 5px;
+	    margin-top: 5px;
+	    cursor: pointer;
+	}
+	.element-items-wrapper .element-item {
+	    padding-top: 5px;
+	    display: block;
+	    position: relative;
+	    padding-bottom: 5px;
+	}
+	.element-items-wrapper .element-item-elements .panel-info {
+	    padding: 0px 10px;
+	}
+	.element-items-wrapper .element-item .panel-info .widget-info {
+	    color: @color-white;
+	    font-weight: bold;
+	    font-size: 85%;
+	    font-style: italic;
+	    padding-left: 5px;
+	}
+	.icon-container {
+	    padding: 5px;
+	    background: #444;
+	    color: @color-white;
+	    border: 1px solid #6e716e;
+	    border-radius: 5px;
+	    cursor: pointer;
+        border-radius: 99px;
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container {
+		.cs-widget {
+		    cursor: move;
+		    margin-bottom: 7px;
+		    -ms-box-sizing: border-box;
+		    box-sizing: border-box;
+		    &.cs-textbox-item-child-wrapper {
+		    	.cs-widget-wrapper {
+		    		.title {
+		    			display: flex;
+	    			    align-items: center;
+	    			    .widget-info {
+				    	    padding-left: 10px;
+					        font-size: 15px;
+	    					font-weight: 400;
+	    			    }
+		    		}
+		    	}
+		    }
+		}
+	    .clever-wrap-element {
+    		.cs-innerrow-item-button, .cs-row-item-button {
+    			cursor: pointer;
+    		}
+    	}
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.cs-widget-no-move {
+	    cursor: auto
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget:hover {
+	    background: none;
+        box-shadow: none;
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget .cs-widget-wrapper {
+        padding: 3px 8px;
+	    margin: 0;
+	    overflow: hidden;
+	    position: relative;
+        border: 1px solid @color-gray80;
+        border-radius: 99px;
+        &:not(.ui-state-active) {
+        	background: @color-white;
+        }
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget {
+		h4 {
+	        font-size: 16px;
+		    display: block;
+		    cursor: pointer;
+		    margin: 0 0 0 15px;
+		    font-weight: 600;
+		    line-height: 1.25em;
+		    color: #474747;
+		    white-space: nowrap;
+		    &:after {
+	    	    content: "\e901";
+			    font-family: @font-icon-name__panels-icons;
+			    position: absolute;
+			    right: 15px;
+			    font-size: 11px;
+			    font-weight: normal;
+		    }
+		}
+		.ui-state-active {
+			.title {
+				h4 {
+					color: @color-white;
+				}
+			}
+		}
+	}
+	.cs-element-item-child-wrapper.cs-row-item-child-wrapper {
+		position: relative;
+		&:after {
+    	    content: "\e901";
+		    font-family: @font-icon-name__panels-icons;
+		    position: absolute;
+		    right: 15px;
+		    font-size: 11px;
+		    font-weight: normal;
+	        color: @color-white;
+		    top: 50%;
+		    transform: translateY(-50%);
+		    cursor: pointer;
+	    }
+	}
+	.cs-element-item-child-wrapper.cs-innerrow-item-child-wrapper {
+		position: relative;
+		&:after {
+    	    content: "\e901";
+		    font-family: @font-icon-name__panels-icons;
+		    position: absolute;
+		    right: 15px;
+		    font-size: 11px;
+		    font-weight: normal;
+	        color: @color-white;
+		    top: 50%;
+		    transform: translateY(-50%);
+		    cursor: pointer;
+	    }
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget h4 span {
+	    font-weight: 400;
+	    display: inline-block;
+	    color: @color-gray60;
+	    text-shadow: 0 1px 0 @color-white;
+	    margin-left: 12px;
+	    margin-right: 5px;
+	    font-style: italic
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.cs-widget-no-edit h4 {
+	    cursor: auto
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget .title .actions {
+	    font-size: 12px;
+	    position: absolute;
+	    top: 5px;
+	    right: 7px;
+	    cursor: pointer;
+	    padding: 2px 2px 2px 15px;
+	    z-index: 10
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget .title .actions:hover {
+	    background: #feffff
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget .title .actions:hover a {
+	    opacity: 1
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget .title .actions a {
+	    display: none;
+	    margin-right: 3px;
+	    text-decoration: none
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget .title .actions a.widget-delete {
+	    color: red
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget .title .actions a.widget-delete:hover {
+	    color: @color-white;
+	    background: red
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget:hover .title a {
+	    display: inline-block;
+	    opacity: .5
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.panel-being-dragged .title .actions {
+	    display: none
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget small {
+	    display: block;
+	    height: 16px;
+	    overflow: hidden;
+	    color: #777
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget .form {
+	    display: none
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.cs-widget-read-only, .cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.cs-widget-read-only:hover {
+	    background: #f5f5f5;
+	    border: 1px solid #a6bac1;
+	    box-shadow: none
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.cs-widget-read-only:hover h4, .cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.cs-widget-read-only:hover small, .cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.cs-widget-read-only h4, .cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.cs-widget-read-only small {
+	    opacity: .5
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.cs-hovered {
+	    background: none;
+	    border: 1px solid none;
+	    box-shadow: 0 2px 2px rgba(0, 0, 0, .0);
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.cs-hovered h4, .cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.cs-hovered small, .cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.cs-hovered span {
+	    text-shadow: none;
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget.cs-hovered small {
+	    color: @color-gray-darken0;
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .widgets-container .cs-widget-sortable-highlight {
+	    border: 1px solid rgba(0, 0, 0, .075);
+	    background: rgba(0, 0, 0, .025);
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box;
+	    height: 49px;
+	    margin-bottom: 7px;
+	    position: relative;
+	    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, .01)
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell .resize-handle {
+	    z-index: 100;
+	    position: absolute;
+	    top: 0;
+	    width: 10px;
+	    left: -5px;
+	    cursor: col-resize;
+	    background: #f6fafb;
+	    height: 100%;
+	    transition: background .25s ease-in-out 0s
+	}
+	.cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell:first-child .resize-handle {
+	    display: none
+	}
+	.cleversoft-panels-builder .cs-panels-welcome-message {
+	    text-align: center;
+	    padding: 0 15px 20px;
+	    color: @color-gray-darken3;
+	    line-height: 1.8em
+	}
+	.cleversoft-panels-builder .cs-panels-welcome-message .cs-message-wrapper {
+	    padding: 15px 10px;
+	    background: #f8f8f8;
+	    border: 1px solid #e0e0e0
+	}
+	.cleversoft-panels-builder .cs-panels-welcome-message .cs-tool-button {
+	    font-size: inherit;
+	    display: inline-block;
+	    float: none;
+	    color: @color-gray40;
+	    padding: 5px 10px;
+	    margin: 0 3px;
+		background: #e4e3e3;
+	}
+	.cleversoft-panels-builder .cs-panels-welcome-message .cs-tool-button .cs-panels-icon {
+	    color: #777;
+	    font-size: .8em
+	}
+	.cleversoft-panels-builder .cs-panels-welcome-message .cs-tip-wrapper {
+	    margin-top: 15px;
+	    font-size: .95em
+	}
+	.cleversoft-panels-builder.cs-display-narrow .cs-builder-toolbar {
+	    padding: 10px
+	}
+	.cleversoft-panels-builder.cs-display-narrow .cs-builder-toolbar > .cs-tool-button {
+	    padding-right: 2px
+	}
+	.cleversoft-panels-builder.cs-display-narrow .cs-builder-toolbar > .cs-tool-button .cs-panels-icon {
+	    font-size: 14px
+	}
+	.cleversoft-panels-builder.cs-display-narrow .cs-builder-toolbar > .cs-tool-button.cs-learn, .cleversoft-panels-builder.cs-display-narrow .cs-builder-toolbar > .cs-tool-button span.cs-button-text {
+	    display: none
+	}
+	.cleversoft-panels-builder.cs-display-narrow .cs-builder-toolbar .cs-switch-to-standard, .cleversoft-panels-builder.cs-display-narrow .widgets-container .cs-widget .actions {
+	    display: none !important
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged {
+	    z-index: 500002 !important;
+	    opacity: .9;
+	    pointer-events: none;
+	    border: 1px solid rgba(0, 0, 0, .35) !important;
+	    cursor: move;
+	    margin-bottom: 7px;
+	    background: #f9f9fb;
+	    border: 1px solid hsla(0, 0%, 100%, .75);
+	    max-height: 49px;
+	    box-shadow: 0 1px 1px rgba(0, 0, 0, .075);
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged.cs-widget-no-move {
+	    cursor: auto
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged:hover {
+	    border: 1px solid hsla(0, 0%, 100%, .55);
+	    background: @color-white;
+	    box-shadow: 0 0 2px rgba(0, 0, 0, .1)
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged .cs-widget-wrapper {
+	    padding: 7px 8px;
+	    overflow: hidden;
+	    position: relative
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged h4 {
+	    display: block;
+	    cursor: pointer;
+	    margin: 0 15px 3px 0;
+	    font-weight: 600;
+	    line-height: 1.25em;
+	    color: #474747;
+	    text-shadow: 0 1px 0 @color-white;
+	    white-space: nowrap
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged h4 span {
+	    font-weight: 400;
+	    display: inline-block;
+	    color: @color-gray60;
+	    text-shadow: 0 1px 0 @color-white;
+	    margin-left: 12px;
+	    margin-right: 5px;
+	    font-style: italic
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged.cs-widget-no-edit h4 {
+	    cursor: auto
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged .title .actions {
+	    font-size: 12px;
+	    position: absolute;
+	    top: 5px;
+	    right: 7px;
+	    cursor: pointer;
+	    padding: 2px 2px 2px 15px;
+	    z-index: 10
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged .title .actions:hover {
+	    background: #feffff
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged .title .actions:hover a {
+	    opacity: 1
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged .title .actions a {
+	    display: none;
+	    margin-right: 3px;
+	    text-decoration: none
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged .title .actions a.widget-delete {
+	    color: red
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged .title .actions a.widget-delete:hover {
+	    color: @color-white;
+	    background: red
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged:hover .title a {
+	    display: inline-block;
+	    opacity: .5
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged.panel-being-dragged .title .actions {
+	    display: none
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged small {
+	    display: block;
+	    height: 16px;
+	    overflow: hidden;
+	    color: #777
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged .form {
+	    display: none
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged.cs-widget-read-only, .cs-widget.ui-sortable-helper.widget-being-dragged.cs-widget-read-only:hover {
+	    background: #f5f5f5;
+	    border: 1px solid #a6bac1;
+	    box-shadow: none
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged.cs-widget-read-only:hover h4, .cs-widget.ui-sortable-helper.widget-being-dragged.cs-widget-read-only:hover small, .cs-widget.ui-sortable-helper.widget-being-dragged.cs-widget-read-only h4, .cs-widget.ui-sortable-helper.widget-being-dragged.cs-widget-read-only small {
+	    opacity: .5
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged.cs-hovered {
+	    background: #3a7096;
+	    border: 1px solid #39618c;
+	    box-shadow: 0 2px 2px rgba(0, 0, 0, .1)
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged.cs-hovered h4, .cs-widget.ui-sortable-helper.widget-being-dragged.cs-hovered small, .cs-widget.ui-sortable-helper.widget-being-dragged.cs-hovered span {
+	    color: @color-white;
+	    text-shadow: 0 1px 2px rgba(0, 0, 0, .85)
+	}
+	.cs-widget.ui-sortable-helper.widget-being-dragged.cs-hovered small {
+	    color: @color-gray-darken0
+	}
+	.widgets-holder-wrap .widget-inside .cleversoft-panels-builder .cs-builder-container {
+	    padding-top: 0
+	}
+	.widgets-holder-wrap .widget-inside .cleversoft-panels-builder .cs-rows-container {
+	    padding: 10px 0 0
+	}
+	.widgets-holder-wrap .widget-inside .cleversoft-panels-builder .cs-builder-toolbar {
+	    padding-left: 15px;
+	    padding-right: 15px;
+	    margin: 0 -15px
+	}
+	.cs-panels-dialog .cs-content, .cs-panels-dialog .cs-left-sidebar, .cs-panels-dialog .cs-overlay, .cs-panels-dialog .cs-right-sidebar, .cs-panels-dialog .cs-title-bar, .cs-panels-dialog .cs-toolbar {
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box;
+	}
+	.cs-panels-dialog .cs-content, .cs-panels-dialog .cs-left-sidebar, .cs-panels-dialog .cs-right-sidebar {
+	    /*overflow-y: auto*/
+	}
+	.cs-panels-dialog .cs-overlay {
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    background: rgba(0, 0, 0, .5)
+	}
+	.cs-panels-dialog .cs-content {
+	    top: 50px;
+	    left: 0px;
+	    bottom: 50px;
+	    background: #e6e9ec;
+	    overflow-y: auto;
+	    overflow-x: hidden ;
+	    -webkit-box-shadow: 1px 0px 8px 0 rgba(99,88,99,0.5);
+	    -moz-box-shadow: 1px 0px 8px 0 rgba(99,88,99,0.5);
+	    box-shadow: 1px 0px 8px 0 rgba(99,88,99,0.5);
+	    .ui-widget.ui-widget-content.ui-slider-horizontal {
+    	    height: 4px;
+		    -webkit-border-radius: 99px;
+		    -moz-border-radius: 99px;
+		    border-radius: 99px;
+		    background: #a4afb7;
+		    margin-top: 0;
+		    .ui-slider-range-min {
+		    	background: transparent;
+		    }
+		    .ui-slider-handle {
+		        height: 16px;
+			    width: 16px;
+			    background-color: @color-white;
+			    display: inline-block;
+			    top: 50%;
+			    -webkit-transform: translateY(-50%) translateX(4px);
+			    -ms-transform: translateY(-50%) translateX(4px);
+			    transform: translateY(-50%) translateX(4px);
+			    position: absolute;
+			    -webkit-box-shadow: 1px 1px 6px rgba(0,0,0,.3);
+			    box-shadow: 1px 1px 6px rgba(0,0,0,.3);
+			    -webkit-border-radius: 50%;
+			    border-radius: 50%;
+			    cursor: pointer;
+			    border: none;
+			}
+	    }
+		button {
+			&.btn {
+				background: #0172ff;
+			    margin-right: 5px;
+	            box-shadow: none;
+			    padding: 5px 12px;
+			    color: @color-white;
+			    font-size: 14px;
+				&.selected {
+				    -webkit-box-shadow: 0 0 0 3px rgba(231,166,26,0.73);
+				    -moz-box-shadow: 0 0 0 3px rgba(231,166,26,0.73);
+				    box-shadow: 0 0 0 3px rgba(231,166,26,0.73);
+				}
+			}
+			&:not(.primary) {
+				box-shadow: none;
+			}
+		}
+		.form-group {
+			.form-control {
+			    height: 32px;
+			    line-height: 32px;
+			    padding: 0 9px;
+			    border: 1px solid #ccc;
+			    border-radius: 1px;
+			    &select {
+			    	cursor: pointer;
+			    }
+			}
+		}
+	}
+	.cs-panels-dialog.cs-panels-dialog-edit-widget > div {
+	    position: fixed;
+	    z-index: 1001;
+	    width: 360px;
+	    max-width: 360px;
+	}
+	.cs-panels-dialog .cs-content > :first-child {
+	    margin-top: 0
+	}
+	.cs-panels-dialog .cs-content > :last-child {
+	    margin-bottom: 0
+	}
+	.cs-panels-dialog .cs-content .cs-content-tabs > * {
+	    display: none
+	}
+	.cs-panels-dialog .cs-title-bar {
+	    height: 50px;
+	    background: #0172ff;
+	    top:0;
+	    border-bottom: 1px solid #d8d8d8;
+        padding: 0 10px;
+	}
+	.cs-panels-dialog .cs-title-bar h3.cs-title {
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box;
+	    margin: -3px 1px 0 -3px;
+	    padding: 5px 6px;
+	    display: block;
+	    line-height: 44px
+	}
+	.widget-type-list {
+		padding-right: 0;
+	}
+	.cs-panels-dialog .cs-title-bar h3.cs-title.cs-title-editable:focus, .cs-panels-dialog .cs-title-bar h3.cs-title.cs-title-editable:hover {
+	    outline: none;
+	    background: #f0f0f0
+	}
+	.cs-panels-dialog .cs-title-bar h3.cs-title.cs-title-editable:focus {
+	    margin-top: -4px;
+	    margin-left: -4px;
+	    border: 1px solid #e4e4e4
+	}
+	.cs-panels-dialog .cs-title-bar input[type=text].cs-edit-title {
+	    margin-top: -3px;
+	    margin-left: -3px;
+	    display: none;
+	    color: #23282d;
+	    font-size: 1.3em;
+	    font-weight: 600;
+	    border: none;
+	    box-shadow: none;
+	    background: #f0f0f0;
+	    padding: 4px 5px
+	}
+	.cs-panels-dialog .cs-title-bar h3.cs-parent-link {
+	    cursor: pointer;
+	    position: relative;
+	    float: left;
+	    margin: 0 15px 0 0 !important;
+	    padding: 0 27px 0 0 !important
+	}
+	.cs-panels-dialog .cs-title-bar h3.cs-parent-link .cs-separator {
+	    position: absolute;
+	    top: -15px;
+	    right: 0;
+	    width: 12px;
+	    height: 50px;
+	    display: block;
+	    background: url('@{baseDir}CleverSoft_CleverBuilder/images/dialog-separator.png') no-repeat;
+	}
+	.cs-panels-dialog {
+		.cs-title-bar a {
+		    cursor: pointer;
+		    position: absolute;
+		    box-sizing: border-box;
+		    width: 50px;
+		    height: 50px;
+		    display: block;
+		    top: 0;
+		    right: 0;
+		    transition: all .2s ease 0s;
+		    border-bottom: 1px solid #d8d8d8;
+		    &:hover {
+			    background: #e9e9e9;
+			    .cs-dialog-icon {
+				    color: #333
+				}
+			}
+		}
+	}
+	.cs-panels-dialog .cs-title-bar a .cs-dialog-icon {
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    text-decoration: none;
+	    width: 22px;
+	    height: 22px;
+	    margin-left: -10px;
+	    margin-top: -10px;
+	    color: @color-white;
+	    text-align: center
+	}
+	.cs-panels-dialog .cs-title-bar a .cs-dialog-icon:before {
+	    font: 400 20px/1em dashicons;
+	    top: 7px;
+	    left: 13px
+	}
+	.cs-panels-dialog .cs-title-bar a.cs-close {
+	    right: 0
+	}
+	.cs-panels-dialog .cs-title-bar a.cs-close .cs-dialog-icon:before {
+	    content: "\f335"
+	}
+	.cs-panels-dialog .cs-title-bar a.cs-next {
+	    right: 50px
+	}
+	.cs-panels-dialog .cs-title-bar a.cs-next .cs-dialog-icon:before {
+	    content: "\f345"
+	}
+	.cs-panels-dialog .cs-title-bar a.cs-previous {
+	    right: 100px
+	}
+	.cs-panels-dialog .cs-title-bar a.cs-previous .cs-dialog-icon:before {
+	    content: "\f341"
+	}
+	.cs-panels-dialog .cs-title-bar a.cs-nav.cs-disabled {
+	    cursor: default;
+	    pointer-events: none
+	}
+	.cs-panels-dialog .cs-title-bar a.cs-nav.cs-disabled .cs-dialog-icon {
+	    color: #ddd
+	}
+	.cs-panels-dialog .cs-title-bar {
+		&.cs-has-icon {
+		    padding-left: 45px;
+		    .cs-panels-icon.cs-panels-icon-add-widget:before {
+			    content: "\e901";
+			    font-family: @font-icon-name__panels-icons;
+			}
+		}
+		.cs-title {
+			color: @color-white;
+		}
+	}
+	.cs-panels-dialog .cs-title-bar.cs-has-icon .cs-panels-icon {
+	    position: absolute;
+	    top: 12px;
+	    left: 14px;
+	    font-size: 20px;
+	    line-height: 22px;
+	    display: block;
+	    width: 22px;
+	    height: 22px;
+	    text-align: center;
+	    color: @color-white;
+	}
+	.cs-panels-dialog .cs-toolbar {
+	    height: 50px;
+	    background: #fafafa;
+	    border-top: 1px solid #d8d8d8;
+	    bottom: 0;
+	    padding: 5px;
+	    -webkit-box-shadow: 1px 0px 8px 0 rgba(99,88,99,0.5);
+	    -moz-box-shadow: 1px 0px 8px 0 rgba(99,88,99,0.5);
+	    box-shadow: 1px 0px 8px 0 rgba(99,88,99,0.5);
+        display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.cs-panels-dialog .cs-toolbar .cs-status {
+	    float: left;
+	    padding-top: 6px;
+	    padding-bottom: 6px;
+	    font-style: italic;
+	    color: @color-gray60;
+	    line-height: 1em
+	}
+	.cs-panels-dialog .cs-toolbar .cs-status.cs-panels-loading {
+	    padding-left: 26px;
+	    background-position: 0
+	}
+	.cs-panels-loading {
+	    background-image: url('@{baseDir}CleverSoft_CleverBuilder/images/wpspin_light.gif');
+	    background-position: 50%;
+	    background-repeat: no-repeat
+	}
+	.cs-panels-dialog .cs-toolbar .cs-status .dashicons-warning {
+	    color: #a00;
+	    vertical-align: middle;
+	    margin-right: 7px;
+	    margin-top: -1px
+	}
+	.cs-panels-dialog .cs-toolbar .cs-buttons {
+	    float: right;
+	    .button-primary.cs-close {
+    	    box-shadow: none;
+		    line-height: normal;
+		    text-transform: none;
+		    font-size: 13px;
+		    color: @color-white;
+		    font-weight: 600;
+		    padding-left: 10px;
+		    padding-right: 10px;
+	    }
+	}
+	.cs-panels-dialog .cs-toolbar .cs-buttons {
+		.action-buttons {
+		    position: absolute;
+		    left: 15px;
+		    top: 50%;
+		    margin-top: -.65em;
+		}
+	    .cs-update {
+		    color: @color-white;
+		    text-transform: none;
+		    line-height: 28px;
+	        box-shadow: none;
+	    }
+	}
+	.cs-panels-dialog .cs-toolbar .cs-buttons .action-buttons a {
+	    cursor: pointer;
+	    display: inline;
+	    padding: .2em .5em;
+	    line-height: 1em;
+	    margin-right: .5em;
+	    text-decoration: none
+	}
+	.cs-panels-dialog .cs-toolbar .cs-buttons .action-buttons .cs-delete {
+	    color: #a00
+	}
+	.cs-panels-dialog .cs-toolbar .cs-buttons .action-buttons .cs-delete:hover {
+	    background: #a00;
+	    color: @color-white
+	}
+	.cs-panels-dialog .cs-toolbar .cs-buttons .action-buttons .cs-duplicate:hover {
+	    text-decoration: underline
+	}
+	.cs-panels-dialog .cs-left-sidebar {
+	    display: none;
+	    top: 30px;
+	    left: 30px;
+	    bottom: 30px;
+	    width: 290px;
+	    border-right: 1px solid #d8d8d8
+	}
+	.cs-panels-dialog .cs-left-sidebar h4 {
+	    margin: 0 0 20px;
+	    font-size: 18px
+	}
+	.cs-panels-dialog .cs-left-sidebar .cs-sidebar-search {
+	    width: 100%;
+	    padding: 6px;
+	    margin-bottom: 20px
+	}
+	.cs-panels-dialog .cs-left-sidebar .cs-sidebar-tabs {
+	    list-style: none;
+	    margin: 0 -15px
+	}
+	.cs-panels-dialog .cs-left-sidebar .cs-sidebar-tabs li {
+	    margin-bottom: 0
+	}
+	.cs-panels-dialog .cs-left-sidebar .cs-sidebar-tabs li a {
+	    padding: 7px 16px;
+	    display: block;
+	    font-size: 14px;
+	    text-decoration: none;
+	    box-shadow: none !important
+	}
+	.cs-panels-dialog .cs-left-sidebar .cs-sidebar-tabs li a:hover {
+	    background: @color-white
+	}
+	.cs-panels-dialog .cs-left-sidebar .cs-sidebar-tabs li.tab-active a {
+	    color: @color-gray-darken3;
+	    font-weight: 700;
+	    background: @color-white
+	}
+	.cs-panels-dialog .cs-left-sidebar .cs-sidebar-tabs li.tab-active a:hover {
+	    background: @color-white
+	}
+	.cs-sidebar.cs-right-sidebar > div {
+	    max-width: 360px;
+	}
+	.cs-panels-dialog .cs-right-sidebar {
+	    display: none;
+	    right: 30px;
+	    bottom: 88px;
+	    width: 290px;
+	    border-left: 1px solid #d8d8d8
+	}
+	.cs-panels-dialog.cs-panels-dialog-has-right-sidebar .cs-right-sidebar {
+	    width: 360px;
+	    left: 0;
+	    bottom: 50px;
+	    border-left: none;
+	    height: auto;
+	    overflow-y: auto;
+	}
+	.cs-panels-dialog .cs-right-sidebar h3 {
+	    color: #333
+	}
+	.cs-panels-dialog .cs-right-sidebar h3:first-child {
+	    margin-top: 0
+	}
+	.cs-panels-dialog .cs-sidebar .form-field {
+	    margin-bottom: 20px
+	}
+	.cs-panels-dialog .cs-sidebar .form-field label {
+	    font-weight: 500;
+	    font-size: 15px;
+	    display: block;
+	    margin-bottom: 10px
+	}
+	.cs-panels-dialog.cs-panels-dialog-has-left-sidebar .cs-content, .cs-panels-dialog.cs-panels-dialog-has-left-sidebar .cs-title-bar, .cs-panels-dialog.cs-panels-dialog-has-left-sidebar .cs-toolbar {
+	    left: 0px
+	}
+	.cs-panels-dialog.cs-panels-dialog-has-left-sidebar .cs-content {
+	    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, .03)
+	}
+	.cs-panels-dialog.cs-panels-dialog-has-left-sidebar .cs-left-sidebar {
+	    display: block
+	}
+	.cs-panels-dialog.cs-panels-dialog-has-right-sidebar .cs-content {
+	    right: 320px;
+	}
+	.cs-panels-dialog.cs-panels-dialog-has-right-sidebar .cs-right-sidebar {
+	    display: block;
+	}
+	.cs-panels-dialog.cs-panels-dialog-edit-widget .cs-left-sidebar .cs-widgets .cs-widget {
+	    border-radius: 2px;
+	    border: 1px solid @color-gray80;
+	    cursor: pointer;
+	    padding: 10px;
+	    background: #f9f9f9;
+	    box-shadow: 0 1px 2px rgba(0, 0, 0, .075), inset 0 1px 0 @color-white;
+	    margin-bottom: 15px
+	}
+	.cs-panels-dialog.cs-panels-dialog-edit-widget .cs-left-sidebar .cs-widgets .cs-widget:hover {
+	    border: 1px solid @color-gray-light2;
+	    background: @color-white
+	}
+	.cs-panels-dialog.cs-panels-dialog-edit-widget .cs-left-sidebar .cs-widgets .cs-widget.cs-current {
+	    border-color: #0074a2;
+	    background: #2ea2cc;
+	    cursor: auto;
+	    box-shadow: 0 1px 2px rgba(0, 0, 0, .15), inset 0 1px 0 hsla(0, 0%, 100%, .2)
+	}
+	.cs-panels-dialog.cs-panels-dialog-edit-widget .cs-left-sidebar .cs-widgets .cs-widget.cs-current h3 {
+	    color: @color-white
+	}
+	.cs-panels-dialog.cs-panels-dialog-edit-widget .cs-left-sidebar .cs-widgets .cs-widget.cs-current small {
+	    color: @color-gray-darken0
+	}
+	.cs-panels-dialog.cs-panels-dialog-edit-widget .cs-left-sidebar .cs-widgets .cs-widget.cs-current:hover {
+	    border-color: #0074a2;
+	    background: #2ea2cc
+	}
+	.cs-panels-dialog.cs-panels-dialog-edit-widget .cs-left-sidebar .cs-widgets .cs-widget:last-child {
+	    margin-bottom: 0
+	}
+	.cs-panels-dialog.cs-panels-dialog-edit-widget .cs-left-sidebar .cs-widgets .cs-widget h3 {
+	    margin: 0 0 7px;
+	    padding: 0;
+	    height: 1.2em;
+	    color: #222;
+	    font-size: 14px
+	}
+	.cs-panels-dialog.cs-panels-dialog-edit-widget .cs-left-sidebar .cs-widgets .cs-widget small {
+	    font-size: 11px;
+	    line-height: 1.25em;
+	    display: block;
+	    overflow: hidden;
+	    color: #888
+	}
+	.cs-panels-dialog.cs-panels-dialog-add-widget .widget-type-list , .cs-panels-dialog.cs-panels-dialog-add-widget .element-type-list, .cs-panels-dialog.cs-panels-dialog-add-widget .layout-type-list {
+	    zoom: 1;
+	    margin: 0;
+	    padding: 0;
+	    min-height: 10px;
+	    list-style: none;
+	}
+	.cs-panels-dialog.cs-panels-dialog-add-widget .widget-type-list:before, .cs-panels-dialog.cs-panels-dialog-add-widget .element-type-list:before, .cs-panels-dialog.cs-panels-dialog-add-widget .layout-type-list:before {
+	    content: "";
+	    display: block
+	}
+	.cs-panels-dialog.cs-panels-dialog-add-widget .widget-type-list:after, .cs-panels-dialog.cs-panels-dialog-add-widget .element-type-list:after, .cs-panels-dialog.cs-panels-dialog-add-widget .layout-type-list:after {
+	    content: "";
+	    display: table;
+	    clear: both
+	}
+	.cs-panels-dialog.cs-panels-dialog-add-widget .widget-type-list .widget-type , .cs-panels-dialog.cs-panels-dialog-add-widget .element-type-list .widget-type, .cs-panels-dialog.cs-panels-dialog-add-widget .layout-type-list .widget-type {
+	    -ms-user-select: none;
+	    -moz-user-select: -moz-none;
+	    -webkit-user-select: none;
+	    user-select: none;
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box;
+	    width: 50%;
+	    padding: 0 5px;
+	    margin-bottom: 10px;
+	    float: left
+	}
+	.cs-panels-dialog.cs-panels-dialog-add-widget {
+	    max-width: 360px;
+	    width: 360px;
+	    bottom: 0;
+	    left: 0;
+	    top: 0;
+	    position: relative;
+	    z-index: 1000;
+	    .cs-searchbar {
+	    	top: 50px;
+	    }
+	    .cs-content {
+	    	top: 82px;
+	    }
+	}
+	.cleversoft-widget-field-type-slider .form-group > div {
+	    width: 100%;
+	    margin-top: 4px;
+	    margin-left: 10px;
+	    margin-right: 10px;
+	}
+	.cleversoft-widget-field-type-slider .form-group input {
+	    width: 50px;
+	    height: 25px;
+	    padding: 0;
+	    text-align: center;
+	    background: @color-white;;
+	    color: #333;
+	}
+	.cs-panels-dialog > div { 
+		position: fixed;
+		max-width: 360px;
+	    width: 360px;
+	    z-index: 1001;
+	}
+	.cs-panels-dialog.cs-panels-dialog-add-widget .widget-type-list .widget-type h3, .cs-panels-dialog.cs-panels-dialog-add-widget .element-type-list .widget-type h3, .cs-panels-dialog.cs-panels-dialog-add-widget .layout-type-list .widget-type h3 {
+        font-size: 11px;
+    	color: @color-gray40;
+	    margin: 12px 0 0;
+	    padding: 0;
+	}
+	.cs-panels-dialog.cs-panels-dialog-add-widget .widget-type-list .widget-type small, .cs-panels-dialog.cs-panels-dialog-add-widget .element-type-list .widget-type small,
+	.cs-panels-dialog.cs-panels-dialog-add-widget .layout-type-list .widget-type small {
+	    font-size: 11px;
+	    min-height: 2.5em;
+	    line-height: 1.25em;
+	    display: block;
+	    overflow: hidden;
+	    color: #888
+	}
+	.cs-panels-dialog.cs-panels-dialog-add-widget .widget-type-list .widget-type .widget-icon , .cs-panels-dialog.cs-panels-dialog-add-widget .element-type-list .widget-type .element-icon,
+	.cs-panels-dialog.cs-panels-dialog-add-widget .layout-type-list .widget-type .element-icon {
+	    font-size: 20px;
+	}
+	.cs-panels-dialog.cs-panels-dialog-add-widget .widget-type-list .widget-type-wrapper, .cs-panels-dialog.cs-panels-dialog-add-widget .element-type-list .widget-type-wrapper,
+	.cs-panels-dialog.cs-panels-dialog-add-widget .layout-type-list .widget-type-wrapper {
+	    border: 1px solid @color-gray80;
+	    cursor: pointer;
+	    padding: 15px 0;
+	    background: @color-white;
+        text-align: center;
+	}
+	.cs-panels-dialog.cs-panels-dialog-add-widget .widget-type-list .widget-type-wrapper:hover, .cs-panels-dialog.cs-panels-dialog-add-widget .element-type-list .widget-type-wrapper:hover,
+	.cs-panels-dialog.cs-panels-dialog-add-widget .layout-type-list .widget-type-wrapper:hover {
+	    border: 1px solid @color-gray-light2;
+	    background: @color-white;
+        -webkit-box-shadow: 0 2px 6px rgba(0,0,0,.2);
+	    box-shadow: 0 2px 6px rgba(0,0,0,.2);
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-set-form {
+	    zoom: 1;
+	    padding: 8px;
+	    border: 1px solid @color-gray80;
+	    margin-bottom: 20px;
+	    background: #f3f3f3;
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-set-form:before {
+	    content: "";
+	    display: block
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-set-form:after {
+	    content: "";
+	    display: table;
+	    clear: both
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-set-form button, .cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-set-form input, .cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-set-form select, .cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-set-form span, .cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-set-form strong {
+	    display: inline;
+	    margin: 1px 5px;
+	    outline: none;
+	    box-shadow: none
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-set-form button {
+	    margin-top: 2px
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-set-form label {
+	    display: inline
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview {
+	    margin: 0 -6px;
+	    height: 360px;
+	    position: relative;
+	    white-space: nowrap
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell, .cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell-in, .cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell-weight {
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell {
+	    display: inline-block;
+	    position: relative;
+	    padding: 0 6px;
+	    cursor: pointer
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell .preview-cell-in {
+	    border: 1px solid #bcccd2;
+	    min-height: 360px;
+	    background: #e4eff4;
+	    position: relative
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell .preview-cell-in.cell-selected {
+	    background: #cae7f4 url('@{baseDir}CleverSoft_CleverBuilder/images/cell-selected.png') repeat;
+	    border-color: #9abcc7;
+	    box-shadow: 0 0 5px rgba(0, 0, 0, .2)
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell .preview-cell-in .preview-cell-weight, .cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell .preview-cell-in .preview-cell-weight-input {
+	    position: absolute;
+	    font-size: 17px;
+	    font-weight: 700;
+	    top: 50%;
+	    left: 50%;
+	    width: 80px;
+	    text-align: center;
+	    color: #5e6d72;
+	    margin: -.95em 0 0 -40px;
+	    padding: 10px 0;
+	    border: 1px solid transparent;
+	    line-height: 1.4em !important;
+	    overflow: hidden;
+	    cursor: pointer
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell .preview-cell-in .preview-cell-weight-input:after, .cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell .preview-cell-in .preview-cell-weight:after {
+	    content: "%"
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell .preview-cell-in .preview-cell-weight-input:hover, .cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell .preview-cell-in .preview-cell-weight:hover {
+	    background: #f6f6f6;
+	    border: 1px solid #d0d0d0
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell .preview-cell-in .preview-cell-weight-input {
+	    background: #f6f6f6;
+	    border: 1px solid #d0d0d0;
+	    box-shadow: none
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell .resize-handle {
+	    z-index: 100;
+	    position: absolute;
+	    top: 0;
+	    width: 12px;
+	    left: -6px;
+	    cursor: col-resize;
+	    background: #e5f4fb;
+	    height: 360px;
+	    transition: background .15s ease-in-out 0s
+	}
+	.cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell .resize-handle.ui-draggable-dragging, .cs-panels-dialog.cs-panels-dialog-row-edit .cs-content .row-preview .preview-cell .resize-handle:hover {
+	    background: #b7e0f1
+	}
+	.cs-panels-dialog.cs-panels-dialog-history .cs-left-sidebar {
+	    padding: 0
+	}
+	.cs-panels-dialog.cs-panels-dialog-history .history-entries .history-entry {
+	    padding: 10px;
+	    background: #f8f8f8;
+	    cursor: pointer;
+	    border-bottom: 1px solid @color-gray80
+	}
+	.cs-panels-dialog.cs-panels-dialog-history .history-entries .history-entry h3 {
+	    margin: 0 0 .6em;
+	    font-size: 12px;
+	    font-weight: 700;
+	    color: #444;
+	    line-height: 1em
+	}
+	.cs-panels-dialog.cs-panels-dialog-history .history-entries .history-entry .timesince {
+	    color: @color-gray60;
+	    font-size: 11px;
+	    line-height: 1em
+	}
+	.cs-panels-dialog.cs-panels-dialog-history .history-entries .history-entry:hover {
+	    background: #f0f0f0
+	}
+	.cs-panels-dialog.cs-panels-dialog-history .history-entries .history-entry.cs-selected {
+	    background: @color-gray-darken0
+	}
+	.cs-panels-dialog.cs-panels-dialog-history .history-entries .history-entry .count {
+	    color: @color-gray60
+	}
+	.cs-panels-dialog.cs-panels-dialog-history .cs-content {
+	    padding: 0;
+	    overflow-y: hidden
+	}
+	.cs-panels-dialog.cs-panels-dialog-history .cs-content form.history-form {
+	    display: none
+	}
+	.cs-panels-dialog.cs-panels-dialog-history .cs-content iframe.cleversoft-panels-history-iframe {
+	    width: 100%;
+	    height: 100%
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content {
+	    padding: 0 10px;
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-error-message {
+	    font-size: 14px;
+	    border: 1px solid @color-gray80;
+	    background: #f8f8f8;
+	    padding: 15px 20px
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .export-file-ui {
+	    padding: 5px 15px;
+	    text-align: right
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .import-upload-ui {
+	    padding: 15px
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .import-upload-ui .drag-drop-message {
+	    display: none
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .import-upload-ui.has-drag-drop .drag-drop-message {
+	    display: block
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .import-upload-ui p.drag-drop-message {
+	    font-size: 1em;
+	    margin-bottom: 0
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .import-upload-ui .drag-upload-area {
+	    display: block;
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box;
+	    padding: 50px 30px;
+	    border: 4px dashed #e0e0e0;
+	    text-align: center;
+	    transition: all .25s ease 0s
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .import-upload-ui .drag-upload-area.file-dragover {
+	    background: #f2f9fc;
+	    border-color: #0074a2
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .import-upload-ui .progress-bar {
+	    display: none;
+	    padding: 2px;
+	    border: 2px solid #2181b1;
+	    border-radius: 2px;
+	    margin-top: 20px
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .import-upload-ui .progress-bar .progress-percent {
+	    height: 14px;
+	    background: #358ebe;
+	    border-radius: 1px
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .import-upload-ui .file-browse-button {
+	    padding: 12px 30px;
+	    height: auto
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-browse {
+	    background: #f3f3f3;
+	    border-bottom: 1px solid #d0d0d0;
+	    margin: -15px -10px 15px;
+	    padding: 15px;
+	    font-weight: 700
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items-wrapper {
+	    display: flex;
+	    flex-flow: row wrap
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-no-results {
+	    margin: 20px 0;
+	    padding: 0 5px
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item {
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box;
+	    padding: 6px
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item .cs-directory-item-wrapper {
+	    display: flex;
+	    flex-flow: column nowrap;
+	    height: 100%;
+	    box-sizing: border-box;
+	    padding: 15px 10px;
+	    background: #f7f7f7;
+	    border: 1px solid #d0d0d0;
+	    box-shadow: 0 1px 1px rgba(0, 0, 0, .1)
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item .cs-title {
+	    font-size: 15px;
+	    margin: 0 0 13px
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item .cs-screenshot {
+	    flex: 3 auto;
+	    margin-bottom: 10px;
+	    cursor: pointer
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item .cs-screenshot.cs-loading {
+	    background-image: url('@{baseDir}CleverSoft_CleverBuilder/images/wpspin_light.gif');
+	    background-position: 50%;
+	    background-repeat: no-repeat
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item .cs-screenshot img {
+	    display: block;
+	    width: 100%;
+	    height: auto
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item .cs-screenshot .cs-screenshot-wrapper {
+	    display: block;
+	    min-height: 40px;
+	    background: gray;
+	    border: 1px solid #d0d0d0
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item .cs-description {
+	    flex: 1 auto;
+	    font-size: .9em;
+	    color: @color-gray40;
+	    margin-bottom: 10px;
+	    max-height: 60px;
+	    overflow: hidden
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item .cs-bottom {
+	    flex: 1 auto;
+	    position: relative;
+	    max-height: 50px;
+	    margin: 10px -10px -15px;
+	    background: #fcfcfc;
+	    border-top: 1px solid #d0d0d0
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item .cs-bottom .cs-title {
+	    margin: 0;
+	    padding: 16px 10px;
+	    cursor: pointer;
+	    overflow: hidden;
+	    white-space: nowrap
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item .cs-bottom .cs-buttons {
+	    position: absolute;
+	    z-index: 2;
+	    top: 0;
+	    bottom: 0;
+	    right: 0;
+	    height: 100%;
+	    visibility: hidden;
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box;
+	    padding: 11px 10px 10px 15px;
+	    border-left: 1px solid #d0d0d0;
+	    background: #f6f6f6;
+	    box-shadow: -1px 0 1px rgba(0, 0, 0, .05)
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item:hover .cs-buttons {
+	    visibility: visible
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item.selected {
+	    background: #e5f4fa
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item.selected .cs-directory-item-wrapper {
+	    background: #deeef4;
+	    border-color: #9abcc7
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item.selected .cs-bottom {
+	    background: #f8fdff;
+	    border-color: #bcccd2
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item.selected .cs-bottom .cs-title {
+	    color: #3e484c
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item.selected .cs-bottom .cs-buttons {
+	    background: #eaf2f6;
+	    border-color: #bcccd2
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-pages {
+	    margin-top: 15px;
+	    padding: 0 5px
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-pages .button-disabled {
+	    pointer-events: none
+	}
+	.cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-toolbar .cs-buttons select.cs-layout-position {
+	    vertical-align: baseline
+	}
+	.cs-panels-dialog .cs-visual-styles {
+	    /*margin: -15px*/
+	}
+	.cs-panels-dialog .cs-visual-styles h3 {
+	    line-height: 1em;
+	    margin: 0;
+	    padding: 20px 15px;
+	    border-bottom: 1px solid #ddd;
+	    background: #0085ba;
+	    color: @color-white;
+	    font-size: 20px;
+	}
+	.cs-panels-dialog .cs-visual-styles .style-section-head {
+	    background: @color-white;
+	    padding: 15px 10px;
+	    border-bottom: 1px solid #ddd;
+	    cursor: pointer;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+		margin-bottom: 10px;
+	}
+	.cs-panels-dialog .cs-visual-styles .style-section-head h4 {
+	    margin: 0
+	}
+	.cs-panels-dialog .cs-visual-styles .style-section-fields {
+	    padding: 15px;
+	    border-bottom: 1px solid #ddd;
+	    background: #f7f7f7
+	}
+	.cs-panels-dialog .cs-visual-styles .style-section-fields .style-field-wrapper {
+	    margin-bottom: 20px
+	}
+	.cs-panels-dialog .cs-visual-styles .style-section-fields .style-field-wrapper:last-child {
+	    margin-bottom: 0
+	}
+	.cs-panels-dialog .cs-visual-styles .style-section-fields .style-field-wrapper > label {
+	    font-weight: 700;
+	    display: block;
+	    margin-bottom: 3px
+	}
+	.cs-panels-dialog .cs-visual-styles .style-section-fields .style-field-wrapper .style-field {
+	    zoom: 1
+	}
+	.cs-panels-dialog .cs-visual-styles .style-section-fields .style-field-wrapper .style-field:before {
+	    content: "";
+	    display: block
+	}
+	.cs-panels-dialog .cs-visual-styles .style-section-fields .style-field-wrapper .style-field:after {
+	    content: "";
+	    display: table;
+	    clear: both
+	}
+	.cs-panels-dialog .cs-visual-styles .style-section-fields .style-field-wrapper .style-field input {
+	    font-size: 12px
+	}
+	.cs-panels-dialog .cs-visual-styles .style-input-wrapper {
+	    zoom: 1
+	}
+	.cs-panels-dialog .cs-visual-styles .style-input-wrapper:before {
+	    content: "";
+	    display: block
+	}
+	.cs-panels-dialog .cs-visual-styles .style-input-wrapper:after {
+	    content: "";
+	    display: table;
+	    clear: both
+	}
+	.cs-panels-dialog .cs-visual-styles .style-input-wrapper input {
+	    max-width: 100%
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-measurement .measurement-inputs {
+	    overflow: auto;
+	    margin: 0 -3px 4px
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-measurement .measurement-wrapper {
+	    box-sizing: border-box;
+	    float: left;
+	    width: 25%;
+	    padding: 0 3px
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-measurement .measurement-wrapper .measurement-value {
+	    border-width: 1px;
+	    display: block;
+	    max-width: 100%
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-measurement .measurement-wrapper .measurement-value.measurement-top {
+	    box-shadow: inset 0 3px 1px rgba(10, 10, 10, 0.8);
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-measurement .measurement-wrapper .measurement-value.measurement-right {
+	    box-shadow: inset -3px 0 2px rgba(10, 10, 10, 0.8);
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-measurement .measurement-wrapper .measurement-value.measurement-bottom {
+	    box-shadow: inset 0 -3px 1px rgba(10, 10, 10, 0.8);
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-measurement .measurement-wrapper .measurement-value.measurement-left {
+	    box-shadow: inset 3px 0 2px rgba(10, 10, 10, 0.8);
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-measurement .measurement-unit-multiple {
+	    width: 100%;
+	    display: block
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-measurement .measurement-unit-single {
+	    float: right;
+	    width: 25%
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-measurement .measurement-value-single {
+	    float: left;
+	    width: 72%
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-image .cs-image-selector {
+	    display: inline-block;
+	    background: #f7f7f7;
+	    border: 1px solid @color-gray80;
+	    height: 28px;
+	    float: left;
+	    border-radius: 3px;
+	    cursor: pointer;
+	    box-shadow: inset 0 1px @color-white
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-image .cs-image-selector .current-image {
+	    height: 28px;
+	    width: 28px;
+	    float: left;
+	    background: @color-white;
+	    border-right: 1px solid @color-gray80;
+	    background-size: cover;
+	    -webkit-border-top-right-radius: 0;
+	    -webkit-border-bottom-right-radius: 0;
+	    -webkit-border-bottom-left-radius: 3px;
+	    -webkit-border-top-left-radius: 3px;
+	    -moz-border-radius-topright: 0;
+	    -moz-border-radius-bottomright: 0;
+	    -moz-border-radius-bottomleft: 3px;
+	    -moz-border-radius-topleft: 3px;
+	    border-top-right-radius: 0;
+	    border-bottom-right-radius: 0;
+	    border-bottom-left-radius: 3px;
+	    border-top-left-radius: 3px;
+	    background-clip: padding-box
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-image .cs-image-selector .select-image {
+	    font-size: 12px;
+	    line-height: 28px;
+	    float: left;
+	    padding: 0 8px;
+	    color: @color-gray-darken3
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-image .remove-image {
+	    font-size: 12px;
+	    margin-top: 4px;
+	    margin-left: 15px;
+	    display: inline-block;
+	    float: left;
+	    color: @color-gray40;
+	    text-decoration: none
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-image .remove-image .remove-image {
+	    color: #333
+	}
+	.cs-panels-dialog .cs-visual-styles .style-field-checkbox label {
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none
+	}
+	.cs-panels-dialog .cs-visual-styles .cs-field-code {
+	    font-size: 12px;
+	}
+	.cs-panels-dialog .cs-visual-styles .cs-description {
+	    color: @color-gray60;
+	    font-size: 12px;
+	    margin-top: 5px;
+	    margin-bottom: 0;
+	    font-style: italic;
+	    clear: both
+	}
+	.cs-panels-dialog .cs-visual-styles.cs-cell-styles {
+	    margin-top: 15px
+	}
+	.cs-panels-dialog .cs-content .cleversoft-panels-builder .cs-builder-toolbar {
+	    border: 1px solid #dedede
+	}
+	.cs-panels-dialog .cs-content .cleversoft-panels-builder .cs-rows-container {
+	    padding: 20px 0 0
+	}
+	.cs-panels-dialog .cs-content .cleversoft-panels-builder .cs-panels-welcome-message {
+	    padding-left: 0;
+	    padding-right: 0
+	}
+	.cs-panels-dialog .cs-dropdown-wrapper input[type=button].button-primary {
+	    width: 125px;
+	    height: 28px
+	}
+	.cs-panels-dialog .cs-dropdown-wrapper .cs-dropdown-links-wrapper {
+	    display: block;
+	    z-index: 11;
+	    bottom: 28px;
+	    width: 125px
+	}
+	.cs-panels-dialog .cs-dropdown-wrapper .cs-dropdown-links-wrapper.hidden {
+	    display: none
+	}
+	.wp-customizer .cs-panels-dialog .cs-content, .wp-customizer .cs-panels-dialog .cs-left-sidebar, .wp-customizer .cs-panels-dialog .cs-overlay, .wp-customizer .cs-panels-dialog .cs-right-sidebar, .wp-customizer .cs-panels-dialog .cs-title-bar, .wp-customizer .cs-panels-dialog .cs-toolbar {
+	    z-index: 500001
+	}
+	.wp-customizer .cs-panels-dialog .cs-toolbar {
+	    z-index: 500002
+	}
+	.cs-panels-live-editor > div {
+	    position: fixed;
+	    z-index: 999;
+	    -ms-box-sizing: border-box;
+	    box-sizing: border-box
+	}
+	.cs-panels-live-editor .live-editor-form {
+	    display: none
+	}
+	.cs-panels-live-editor .live-editor-collapse {
+		left: 360px;
+		height: 80px;
+		line-height: 100px;
+		background: rgb(230, 233, 236);
+		bottom: 90px;
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+		z-index: 1000;
+		width: 20px;
+		text-align: center;
+		top: 50%;
+		bottom: 50%;
+		transform: translate(0%,-50%);
+		-moz-transition: all 400ms;
+		-webkit-transition: all 400ms;
+		-o-transition: all 400ms;
+		transition: all 400ms;
+		cursor: pointer;
+		&:hover{
+			background: #0172ff;
+			color: @color-white;
+		}
+	}
+	.cs-panels-live-editor .live-editor-collapse .collapse-icon {
+		transform: translate(-50%,-50%);
+		top: 50%;
+		left: 50%;
+		position: relative;
+		font-family: 'cleversoft' ;
+		speak: none;
+		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		line-height: 1;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		&:before{
+			content: "\c155";
+		}
+	}
+	.cs-panels-live-editor {
+		.cs-sidebar-tools {
+	        background: #76818e; 
+		    bottom: 0;
+		    left: 0;
+		    height: 46px;
+		    width: 360px;
+		}
+	}
+	.cs-panels-live-editor .cs-sidebar-tools .live-editor-mode .dashicons {
+	    font-size: 30px;
+	    width: 30px;
+	    height: 30px;
+	    cursor: pointer;
+	    color: #dedddd;
+	}
+	.cs-panels-live-editor .cs-sidebar-tools .live-editor-mode .dashicons:hover {
+	    color: #0073aa
+	}
+	.cs-panels-live-editor .cs-sidebar-tools .live-editor-mode.cs-active .dashicons, .cs-panels-live-editor .cs-sidebar-tools .live-editor-mode.cs-active .dashicons:hover {
+	    color: #0073aa
+	}
+	.cs-live-preview {
+		&.global-element {
+	    	border: 1px dashed transparent !important;
+	    	&:hover {
+	    		border-color: #0172ff !important;
+	    	}
+		    .cs-edit-element-section {
+		        position: absolute;
+			    top: 0;
+			    right: 0;
+			    font-size: 16px;
+			    background: #0172ff;
+		        width: 35px;
+			    height: 35px;
+			    line-height: 35px;
+			    text-align: center;
+			    z-index: 99999;
+			    cursor: pointer;
+			    i {
+			    	color: @color-white;
+				    opacity: 1;
+				    margin: 0;
+				    padding-left: 2px;
+			    }
+		    }
+		    &.button {
+		    	&-element {
+		    		pointer-events: auto !important;
+		    	}
+		    }
+		    .img__wrap {
+		    	position: relative;
+		    }
+	    }
+	}
+	.cs-panels-live-editor {
+		.cs-sidebar {
+	        top: 0;
+		    left: 0;
+		    bottom: 46px;
+		    width: 360px;
+		    overflow-y: auto;
+		    background: #e6e9ec;
+		    .cs-row-delete {
+		    	span {
+    				font-size: 22px;
+	    		    color: #ff0000;
+		    	}
+		    }
+			.ui-icon,
+			.ui-widget-content .ui-icon {
+				background-image: url('@{baseDir}CleverSoft_CleverBuilder/images/ui-icons_444444_256x240.png');
+			}
+			.ui-widget-header .ui-icon {
+				background-image: url('@{baseDir}CleverSoft_CleverBuilder/images/ui-icons_444444_256x240.png');
+			}
+			.ui-button .ui-icon {
+				background-image: url('@{baseDir}CleverSoft_CleverBuilder/images/ui-icons_777777_256x240.png');
+			}
+			.ui-state-hover .ui-icon,
+			.ui-state-focus .ui-icon,
+			.ui-button:hover .ui-icon,
+			.ui-button:focus .ui-icon,
+			.ui-state-default .ui-icon {
+				background-image: url('@{baseDir}CleverSoft_CleverBuilder/images/ui-icons_555555_256x240.png');
+			}
+			.ui-state-active .ui-icon,
+			.ui-button:active .ui-icon {
+				background-image: url('@{baseDir}CleverSoft_CleverBuilder/images/ui-icons_ffffff_256x240.png');
+			}
+			.ui-state-highlight .ui-icon,
+			.ui-button .ui-state-highlight.ui-icon {
+				background-image: url('@{baseDir}CleverSoft_CleverBuilder/images/ui-icons_777620_256x240.png');
+			}
+			.ui-state-error .ui-icon,
+			.ui-state-error-text .ui-icon {
+				background-image: url('@{baseDir}CleverSoft_CleverBuilder/images/ui-icons_cc0000_256x240.png');
+			}
+		}
+		&.cs-toolbar-loading {
+			.cs-sidebar {
+				pointer-events: none
+			}
+		}
+		.cs-preview {
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    left: 360px;
+		    background: #191e23;
+		    form {
+			    display: none
+			}
+			iframe {
+			    float: left;
+			    width: 100%;
+			    height: 100%;
+			    margin: 0 auto;
+			    border-style: inset;
+			    border-image: initial;
+			}
+		}
+	}
+	.cs-panels-live-editor .cs-sidebar .cleversoft-panels-builder .cs-rows-container {
+	    padding: 10px 10px 0 !important
+	}
+	.cs-title {line-height: 30px}
+	.panels-tab-editor {padding: 10px;}
+	.panels-tab-editor .cs-tab-item-title { padding-bottom: 10px; }
+	.cs-panels-live-editor .cs-preview-overlay {
+	    display: none;
+	    opacity: .975;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    left: 360px;
+	    background: #f4f4f4;
+	    cursor: wait
+	}
+	.cs-panels-live-editor .cs-preview-overlay .cs-loading-container {
+	    opacity: .6;
+	    position: absolute;
+	    top: 50%;
+	    width: 200px;
+	    padding: 2px;
+	    border-radius: 5px;
+	    left: 50%;
+	    margin-left: -104px;
+	    margin-top: -9px;
+	    border: 2px solid #aaa
+	}
+	.cs-panels-live-editor .cs-preview-overlay .cs-loading-container .cs-loading-bar {
+	    width: 50%;
+	    border-radius: 3px;
+	    height: 10px;
+	    background: #aaa
+	}
+	.cs-panels-live-editor.cs-collapsed .live-editor-collapse{
+		left: 0;
+	}
+	.cs-panels-live-editor.cs-collapsed .live-editor-collapse .collapse-icon {
+	    transform: rotate(180deg);
+	    left: 0;
+        top: 35px;
+	}
+	.cs-panels-live-editor.cs-collapsed .cs-sidebar, .cs-panels-live-editor.cs-collapsed .cs-sidebar-tools {
+	    display: none
+	}
+	.cs-panels-live-editor.cs-collapsed .cs-preview, .cs-panels-live-editor.cs-collapsed .cs-preview-overlay {
+	    left: 0
+	}
+	.cs-panels-live-editor.live-editor-mobile-mode .cs-preview iframe {
+	    max-width: 480px;
+	    max-height: 640px;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    margin-left: -240px;
+	    margin-top: -320px
+	}
+	.cs-panels-live-editor.live-editor-tablet-mode .cs-preview iframe {
+	    position: absolute;
+	    max-width: 768px;
+	    top: 0;
+	    left: 50%;
+	    margin-left: -384px
+	}
+	#panels-home_page .switch {
+	    margin: 0 10px 0 0;
+	    float: left;
+	    position: relative;
+	    display: inline-block;
+	    vertical-align: top;
+	    width: 68px;
+	    height: 24px;
+	    padding: 3px;
+	    background: @color-white;
+	    border-radius: 24px;
+	    box-shadow: inset 0 -1px @color-white, inset 0 1px 1px rgba(0, 0, 0, .05);
+	    cursor: pointer;
+	    background-image: linear-gradient(180deg, @color-gray-darken0, @color-white 25px)
+	}
+	#panels-home_page .switch .switch-input {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    opacity: 0
+	}
+	#panels-home_page .switch .switch-label {
+	    position: relative;
+	    display: block;
+	    height: inherit;
+	    font-size: 12px;
+	    text-transform: uppercase;
+	    background: #eceeef;
+	    border-radius: inherit;
+	    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .12), inset 0 0 2px rgba(0, 0, 0, .15);
+	    transition: .15s ease-out;
+	    transition-property: opacity background
+	}
+	#panels-home_page .switch .switch-label:after, #panels-home_page .switch .switch-label:before {
+	    position: absolute;
+	    top: 50%;
+	    margin-top: -.5em;
+	    line-height: 1;
+	    transition: inherit
+	}
+	#panels-home_page .switch .switch-label:before {
+	    content: attr(data-off);
+	    right: 11px;
+	    color: #aaa;
+	    text-shadow: 0 1px hsla(0, 0%, 100%, .5)
+	}
+	#panels-home_page .switch .switch-label:after {
+	    content: attr(data-on);
+	    left: 13px;
+	    color: @color-white;
+	    text-shadow: 0 1px rgba(0, 0, 0, .2);
+	    opacity: 0
+	}
+	#panels-home_page .switch .switch-input:checked ~ .switch-label {
+	    background: #47a8d8;
+	    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .15), inset 0 0 3px rgba(0, 0, 0, .2)
+	}
+	#panels-home_page .switch .switch-input:checked ~ .switch-label:before {
+	    opacity: 0
+	}
+	#panels-home_page .switch .switch-input:checked ~ .switch-label:after {
+	    opacity: 1
+	}
+	#panels-home_page .switch .switch-handle {
+	    position: absolute;
+	    top: 4px;
+	    left: 4px;
+	    width: 22px;
+	    height: 22px;
+	    background: @color-white;
+	    border-radius: 12px;
+	    box-shadow: 1px 1px 5px rgba(0, 0, 0, .2);
+	    background-image: linear-gradient(180deg, @color-white 40%, #f0f0f0);
+	    transition: left .15s ease-out
+	}
+	#panels-home_page .switch .switch-handle:before {
+	    content: "";
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    margin: -7px 0 0 -7px;
+	    width: 14px;
+	    height: 14px;
+	    background: #f9f9f9;
+	    border-radius: 7px;
+	    box-shadow: inset 0 1px rgba(0, 0, 0, .02);
+	    background-image: linear-gradient(180deg, @color-gray-darken0, @color-white)
+	}
+	#panels-home_page .switch .switch-input:checked ~ .switch-handle {
+	    left: 48px;
+	    box-shadow: -1px 1px 5px rgba(0, 0, 0, .2)
+	}
+	#panels-home_page .switch .switch-green > .switch-input:checked ~ .switch-label {
+	    background: #4fb845
+	}
+	#panels-home_page #panels-view-as-page {
+	    display: inline-block;
+	    margin-left: 50px
+	}
+	.cleversoft-panels-builder-form .cleversoft-panels-builder {
+	    border: 1px solid #d0d0d0;
+	    background: @color-white;
+	    margin: 10px 0
+	}
+	.cleversoft-panels-builder-form .cleversoft-panels-builder.cs-panels-loading {
+	    min-height: 150px
+	}
+	.cleversoft-page-builder-widget .cleversoft-panels-display-builder {
+	    display: inline-block !important
+	}
+	.cleversoft-page-builder-widget .cleversoft-panels-no-builder {
+	    display: none !important
+	}
+	.cs-panels-contextual-menu {
+	    border: 1px solid silver;
+	    background: #f9f9f9;
+	    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+	    outline: none;
+	    border-radius: 2px;
+	    position: absolute;
+	    width: 180px;
+	    top: 20px;
+	    left: 20px;
+	    z-index: 999999;
+	    display: none;
+	    overflow-y: auto
+	}
+	.cs-panels-contextual-menu, .cs-panels-contextual-menu * {
+	    font-size: 12px
+	}
+	.cs-panels-contextual-menu .cs-section {
+	    border-bottom: 1px solid silver
+	}
+	.cs-panels-contextual-menu .cs-section:last-child {
+	    border-bottom: none
+	}
+	.cs-panels-contextual-menu .cs-section h5 {
+	    margin: 0 0 5px;
+	    padding: 8px 10px 5px;
+	    border-bottom: 1px solid #d0d0d0;
+	    background: #f6f6f6
+	}
+	.cs-panels-contextual-menu .cs-section .cs-search-wrapper {
+	    margin: -5px 0 5px;
+	    border-bottom: 1px solid #d0d0d0;
+	    background: #f4f4f4
+	}
+	.cs-panels-contextual-menu .cs-section .cs-search-wrapper input[type=text] {
+	    box-sizing: border-box;
+	    display: block;
+	    width: 100%;
+	    margin: 0;
+	    border: none;
+	    padding: 5px 10px;
+	    background: #fbfbfb
+	}
+	.cs-panels-contextual-menu .cs-section .cs-search-wrapper input[type=text]:active, .cs-panels-contextual-menu .cs-section .cs-search-wrapper input[type=text]:focus {
+	    border: none;
+	    box-shadow: none;
+	    background: @color-white
+	}
+	.cs-panels-contextual-menu .cs-section ul {
+	    margin: 5px 0 0;
+	    padding: 0 0 5px
+	}
+	.cs-panels-contextual-menu .cs-section ul li {
+	    cursor: pointer;
+	    margin: 0;
+	    padding: 4px 10px;
+	    line-height: 1em
+	}
+	.cs-panels-contextual-menu .cs-section ul li.cs-active, .cs-panels-contextual-menu .cs-section ul li:hover {
+	    background: #f0f0f0;
+	    color: #444
+	}
+	.cs-panels-contextual-menu .cs-section ul li.cs-confirm {
+	    color: #a00
+	}
+	.cs-panels-contextual-menu .cs-section ul li.cs-confirm.cs-active, .cs-panels-contextual-menu .cs-section ul li.cs-confirm:hover {
+	    background: #a00;
+	    color: @color-white
+	}
+	.cs-panels-contextual-menu .cs-section ul li .dashicons {
+	    width: 12px;
+	    height: 12px;
+	    font-size: 12px;
+	    margin: 0;
+	    float: right;
+	    line-height: 12px
+	}
+	.cs-panels-contextual-menu .cs-section .cs-no-results {
+	    padding: 0 10px 5px;
+	    display: none;
+	    font-style: italic
+	}
+	.button-clear {
+        display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    .cs-row-delete {
+		    font-size: 14px;
+		    height: 30px;
+    	    line-height: 30px;
+		    border-radius: 3px;
+		    padding: 0 15px;
+		    box-shadow: none;
+		    border: none;
+	    }
+	}
+	.cs-dropdown-wrapper .cs-dropdown-links-wrapper {
+	    position: absolute;
+	    padding: 6px 0 0;
+	    ul {
+    	    list-style: none;
+	    }
+	}
+	.cs-dropdown-wrapper .cs-dropdown-links-wrapper ul {
+	    margin: 0;
+	    border: 1px solid silver;
+	    background: #f9f9f9;
+	    border-radius: 2px;
+	    padding: 4px 0;
+	    box-shadow: 0 2px 2px rgba(0, 0, 0, .1)
+	}
+	.cs-dropdown-wrapper .cs-dropdown-links-wrapper ul li {
+	    margin: 0
+	}
+	.cs-dropdown-wrapper .cs-dropdown-links-wrapper ul li:first-child {
+	    border-top-width: 1px
+	}
+	.cs-dropdown-wrapper .cs-dropdown-links-wrapper ul li a {
+	    display: block;
+	    padding: 2px 8px;
+	    text-decoration: none;
+	    color: @color-gray40;
+	    font-size: 11px;
+	    cursor: pointer;
+	    outline: 0 !important;
+	    box-shadow: none
+	}
+	.cs-dropdown-wrapper .cs-dropdown-links-wrapper ul li a:hover {
+	    background: #f0f0f0;
+	    color: #444
+	}
+	.cs-dropdown-wrapper .cs-dropdown-links-wrapper ul li a .dashicons {
+	    font-size: 16px;
+	    margin: 0;
+	    float: right;
+	    line-height: 16px
+	}
+	.cs-dropdown-wrapper .cs-dropdown-links-wrapper .cs-pointer {
+	    width: 12px;
+	    height: 6px;
+	    position: absolute;
+	    z-index: 12;
+	    background: url('@{baseDir}CleverSoft_CleverBuilder/images/dropdown-pointer.png');
+	    background-size: 12px 6px;
+	    top: 1px;
+	    right: 18px
+	}
+	.cs-panels-icon {
+	    font-family: @font-icon-name__panels-icons;
+	    speak: none;
+	    font-style: normal;
+	    font-weight: 400;
+	    font-variant: normal;
+	    text-transform: none;
+	    line-height: 1;
+	    -webkit-font-smoothing: antialiased;
+	    -moz-osx-font-smoothing: grayscale
+	}
+	.cs-panels-icon.cs-panels-icon-add-row:before {
+	    content: "\e900"
+	}
+	.cs-panels-icon.cs-panels-icon-add-widget:before {
+        content: "\c025";
+    	font-family: "cleversoft";
+	}
+	.cs-panels-icon.cs-panels-icon-addons:before {
+	    content: "\e902"
+	}
+	.cs-panels-icon.cs-panels-icon-history:before {
+	    content: "\e903"
+	}
+	.cs-panels-icon.cs-panels-icon-layouts:before {
+	    content: "\e904"
+	}
+	.cs-panels-icon.cs-panels-icon-learn:before {
+	    content: "\e905"
+	}
+	.cs-panels-icon.cs-panels-icon-live-editor:before {
+	    content: "\e906"
+	}
+	.cs-panels-icon.cs-panels-icon-move:before {
+	    content: "\e907"
+	}
+	.cs-panels-icon.cs-panels-icon-settings:before {
+	    content: "\e908"
+	}
+	#post-status-info.for-cleversoft-panels {
+	    margin-top: -21px !important
+	}
+	.row-set-form .cs-row-field {width: 150px}
+	.add-shortcode-presets ul, .add-shortcode-items ul {
+	    display: -ms-flexbox;
+	    display: flex;
+	    -ms-flex-flow: row wrap;
+	    flex-flow: row wrap;
+	    margin-right: -10px;
+	    padding-left: 0;
+	}
+	.add-shortcode-presets ul li {
+	    margin-right: 10px;
+	    margin-left: 5px;
+	    margin-bottom: 15px;
+	    list-style: none;
+	}
+	.add-shortcode-presets ul li.active button {
+	    outline-color: #00a0d2;
+	}
+	.add-shortcode-presets ul li button{
+	    background: @color-white;
+	    padding: 0;
+	    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.2);
+	    border: 0;
+	    width: 100px;
+	    font-size: 13px;
+	    vertical-align: top;
+	    text-overflow: ellipsis;
+	    line-height: 15px;
+	    color: @color-gray-darken3;
+	    overflow: hidden;
+	    outline: 2px solid transparent;
+	    min-height: 90px;
+	    position: relative;
+	    transition: background 300ms cubic-bezier(0.23, 1, 0.32, 1),box-shadow 300ms cubic-bezier(0.23, 1, 0.32, 1);
+	}
+	.add-shortcode-presets ul li button img{
+	    display: block;
+	    max-height: 100%;
+	    max-width: 100%;
+	    margin: 0 auto;
+	}
+	.add-shortcode-presets ul li button .title {
+	    text-align: center;
+	    display: block;
+	    padding: 0px 5px 3px;
+	    transition: transform .3s, opacity .3s;
+	    color: @color-gray40;
+	}
+	/*need to change prefix
+	*/
+	.row.row-grid {
+	    display: block;
+        margin: 0;
+	}
+	.row.row-grid>.col {
+	    float: left;
+	}
+	.innerrow.row-grid {
+	    display: block;
+        margin: 0;
+	}
+	.innerrow.row-grid>.col {
+	    float: left;
+	}
+	.row-small>.col {
+	    padding: 0 9.8px 19.6px;
+	    margin-bottom: 0;
+	}
+	.grid-col>.col-inner {
+	    height: 100%;
+	}
+	.col-inner {
+	    position: relative;
+	    margin-left: auto;
+	    margin-right: auto;
+	    width: 100%;
+	    background-position: 50% 50%;
+	    background-size: cover;
+	    background-repeat: no-repeat;
+	    -ms-flex: 1 0 auto;
+	    flex: 1 0 auto;
+	}
+	.tab-widget-items {
+	    position: relative;
+	    /* display: block; */
+	    min-height: 50px;
+	}
+	.uxb-empty-message {
+	    position: absolute;
+	    top: 50%;
+	    width: 100%;
+	    -ms-transform: translateY(-50%);
+	    transform: translateY(-50%);
+	    text-align: center;
+	    font-size: 1.0em;
+	    color: #00a0d2;
+	}
+	.full-width {
+	    width: 100vw;
+	    position: relative;
+	    left: 50%;
+	    right: 50%;
+	    margin-left: -50vw !important;
+	    margin-right: -50vw !important;
+		max-width: 100vw;
+	}
+	.clever-row-wrap-identify {
+		.element-items-wrapper {
+			.panel-info {
+				cursor: default;
+			}
+			.element-item {
+				&.row-item {
+					&:after {
+				        content: "\e901";
+					    font-family: @font-icon-name__panels-icons;
+					    position: absolute;
+					    top: 50%;
+					    right: 15px;
+					    font-size: 11px;
+					    font-weight: normal;
+					    cursor: pointer;
+					    transform: translateY(-50%);
+					    color: @color-white;
+					}
+				}
+			}
+		}
+	}
+	.clever-innerrow-wrap-identify {
+		.element-items-wrapper {
+			.panel-info {
+				cursor: default;
+			}
+			.element-item {
+				&.innerrow-item {
+					&:after {
+				        content: "\e901";
+					    font-family: @font-icon-name__panels-icons;
+					    position: absolute;
+					    top: 50%;
+					    right: 15px;
+					    font-size: 11px;
+					    font-weight: normal;
+					    cursor: pointer;
+					    transform: translateY(-50%);
+					    color: @color-white;
+					}
+				}
+			}
+		}
+	}
+	.panels {
+		&-row-editor, &-innerrow-editor {
+	    	padding: 30px 15px 10px;
+	    	.form-group {
+			    position: relative;
+			    margin: 0;
+			    padding: 10px 0;
+			    display: -ms-flexbox;
+			    display: flex;
+			    -ms-flex-direction: row;
+			    flex-direction: row;
+			    -ms-flex-wrap: wrap;
+			    flex-wrap: wrap;
+			    -ms-flex-align: center;
+			    align-items: center;
+	    		.ui-slider {
+			        width: calc(~"100% - 65px");
+					margin-left: auto;
+	    		}
+	    	}
+		}
+		&-row-editor {
+    		input.row_item_width {
+			    width: 50px;
+			    height: 25px;
+			    padding: 0;
+			    text-align: center;
+			    background: @color-white;
+			    color: #333;
+    		}			
+		}
+		&-innerrow-editor {
+    		input.innerrow_item_width {
+			    width: 50px;
+			    height: 25px;
+			    padding: 0;
+			    text-align: center;
+			    background: @color-white;
+			    color: #333;
+    		}			
+		}
+	}
+	.row-box-shadow-1 .col-inner, .row-box-shadow-hover-1 .col-inner:hover, .box-shadow-1, .box-shadow-hover-1:hover {
+	    box-shadow: 0 1px 3px -2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	}
+	.row-box-shadow-1 .col-inner, .row-box-shadow-2 .col-inner, .row-box-shadow-3 .col-inner, .row-box-shadow-4 .col-inner, .row-box-shadow-5 .col-inner, .row-box-shadow-hover-1 .col-inner, .row-box-shadow-hover-2 .col-inner, .row-box-shadow-hover-3 .col-inner, .row-box-shadow-hover-4 .col-inner, .row-box-shadow-hover-5 .col-inner, .box-shadow-1, .box-shadow-2, .box-shadow-3, .box-shadow-4, .box-shadow-5, .box-shadow-hover-1, .box-shadow-hover-2, .box-shadow-hover-3, .box-shadow-hover-4, .box-shadow-hover-5 {
+	    transition: transform .3s, box-shadow .3s, background .3s, color .3s, opacity .3s;
+	}
+	.box-shadow, .row-box-shadow-2 .col-inner, .row-box-shadow-hover-2 .col-inner:hover, .box-shadow-2, .box-shadow-hover-2:hover {
+	    box-shadow: 0 3px 6px -4px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	}
+	.row-box-shadow-3 .col-inner, .row-box-shadow-hover-3 .col-inner:hover, .box-shadow-3, .box-shadow-hover-3:hover {
+	    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.22);
+	}
+	.row-box-shadow-4 .col-inner, .row-box-shadow-hover-4 .col-inner:hover, .box-shadow-4, .box-shadow-hover-4:hover {
+	    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.1);
+	}
+	.row-box-shadow-5 .col-inner, .row-box-shadow-hover-5 .col-inner:hover, .box-shadow-5, .box-shadow-hover-5:hover {
+	    box-shadow: 0px 30px 40px 0px rgba(0,0,0,0.2);
+	}
+	.row-box-shadow-hover-5 .col-inner:hover,
+	.box-shadow-hover-5:hover,
+	.box-shadow-hover-4:hover,
+	.row-box-shadow-hover-4 .col-inner:hover {
+		-ms-transform: translateY(-6px);
+		transform: translateY(-6px)
+	}
+    .row.row-stack {
+        height:auto !important;
+        display:flex !important;
+        flex-wrap:wrap;
+    }
+    .row.row-stack > .grid-stack-item {
+        position:static !important;
+        height:auto !important;
+        padding: 10px;
+    }
+    .row.row-stack > .grid-stack-item > .grid-stack-item-content {
+        position:static !important;
+        height:auto !important;
+    }
+    .row.row-stack.grid-stack-one-column-mode > .grid-stack-item {
+        width: 100% !important;
+    }
+    .innerrow.innerrow-stack {
+        height:auto !important;
+        display:flex !important;
+        flex-wrap:wrap;
+    }
+    .innerrow.innerrow-stack > .grid-stack-item {
+        position:static !important;
+        height:auto !important;
+        padding: 10px;
+    }
+    .innerrow.innerrow-stack > .grid-stack-item > .grid-stack-item-content {
+        position:static !important;
+        height:auto !important;
+    }
+    .innerrow.innerrow-stack.grid-stack-one-column-mode > .grid-stack-item {
+        width: 100% !important;
+    }
+	.clever-content-grid .ui-state-disabled {pointer-events: inherit}
+	.panels-grid-editor .cs-grid-item-wrapper {
+		padding: 0 10px;
+		.cleversoft-widget-field-type-slider {
+			.form-group {
+			    margin: 0;
+			    padding: 10px 0;
+			    display: -ms-flexbox;
+			    display: flex;
+			    -ms-flex-direction: row;
+			    flex-direction: row;
+			    -ms-flex-wrap: wrap;
+			    flex-wrap: wrap;
+			    -ms-flex-align: center;
+			    align-items: center;
+			    .control-label {
+			    	width: 100%;
+			    }
+				.ui-slider {
+				    width: calc(~"100% - 65px");
+				    margin-left: auto;
+				}
+			}
+		}
+	}
+	.panels-grid-editor ul {padding-left: 0}
+	.panels-grid-editor label {text-transform: uppercase }
+	.panels-grid-editor ul li {
+	    float: left;
+	    list-style: none;
+	    border: 1px solid;
+	    padding: 3px 11px;
+	    margin: 1px;
+	    text-align: -webkit-match-parent;
+	    text-align: left;
+	    color: @color-white;
+	    background: #5b5b5b;
+	    cursor: pointer;
+	    display: inline-table;
+	}
+	.panels-grid-editor ul li.active {
+	    background: @color-white;
+	    color: @color-black;
+	}
+	.panels-grid-editor .form-group {
+	    clear: both;
+	    position: relative;
+	    padding-top: 20px;
+	    white-space: nowrap;
+	}
+	.cleversoft-widget-field .form-group {
+		position: relative;
+		margin: 0;
+		padding: 10px 0;
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-direction: row;
+		flex-direction: row;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		-ms-flex-align: center;
+		align-items: center;
+		&.scroll-style {
+			min-height: 600px;
+		    overflow-y: auto;
+		    .form-control {
+	    	    font-size: 20px;
+			    margin: 15px 0;
+		    }
+		}
+		.control-label{
+			margin: 0 0 8px;
+		    width: 100%;
+		}
+		.toggle-btn{
+			margin-left: auto;
+		}
+		.select2-container {
+			width: 100% !important;
+		}
+	}
+	.select2-container {
+		ul.select2-results__options {
+			li.select2-results__option {
+				margin: 5px 0;
+			}
+		}
+		.gloss, .shade, .bevel {
+			&:after {
+				display: none;
+			}
+		}
+	}
+	.jarallax {
+	    min-height: 600px;
+	}
+	.widget-title {
+		display: none;
+	}
+	/*diviver*/
+	.element-divider {
+		line-height: 0;
+		&__separator {
+			display: inline-block;
+		}
+	}
+	.button-primary:hover{
+	    background: #008ec2;
+	    border-color: #006799;
+	    color: @color-white;
+	}
+	.button-primary {
+	    background: #0085ba;
+	    border-color: #0073aa #006799 #006799;
+	    box-shadow: 0 1px 0 #006799;
+	    color: @color-white;
+	    text-decoration: none;
+	    text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+	    display: inline-block;
+	    font-size: 13px;
+	    line-height: 26px;
+	    height: 28px;
+	    margin: 0;
+	    padding: 0 10px 1px;
+	    cursor: pointer;
+	    border-width: 1px;
+	    border-style: solid;
+	    -webkit-appearance: none;
+	    border-radius: 3px;
+	    white-space: nowrap;
+	    box-sizing: border-box;
+	    &.cs-close {
+	    	color: @color-white;
+	    }
+	}
+	.tab-control-element{
+		margin-bottom: 20px;
+		display: -webkit-box ;
+		display: -ms-flexbox ;
+		display: flex ;
+		-webkit-box-pack: justify ;
+		-ms-flex-pack: justify ;
+		justify-content: space-between ;
+		.tab-control {
+			padding: 10px 15px;
+			background: @color-white;
+			border-bottom: 2px solid transparent;
+			flex-grow: 1;
+			flex-basis: 0;
+			text-align: center;
+			-moz-transition: all 400ms;
+			-webkit-transition: all 400ms;
+			-o-transition: all 400ms;
+			transition: all 400ms;
+			&.active, &:hover{
+				background: #f4f4f4;
+				border-color: rgb(1, 114, 255);
+			}
+		}
+	}
+	.style-section-background{
+		margin-bottom: 20px;
+		margin-right: 10px;
+		display: -webkit-box ;
+		display: -ms-flexbox ;
+		display: flex ;
+		-webkit-box-pack: justify ;
+		-ms-flex-pack: justify ;
+		justify-content: space-between ;
+		> .tab{
+			cursor: pointer;
+			padding: 5px 15px;
+			border: 1px solid #a6a6a6;
+			flex-grow: 1;
+			flex-basis: 0;
+			text-align: center;
+			-moz-transition: all 400ms;
+			-webkit-transition: all 400ms;
+			-o-transition: all 400ms;
+			transition: all 400ms;
+			&.active, &:hover{
+				background: #a6a6a6;
+				color: @color-white;
+			}
+		}
+	}
+	.config-editor-mode {
+		color: rgb(153, 153, 153);
+		&.cs-active{
+			color: rgb(0, 115, 170);
+		}
+	}
+	.cs-sidebar-tools {
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	    padding: 0 10px;
+	    .ft3 {
+		    display: flex;
+		}
+	}
+	.overlay_save_template:before {
+	    content: "";
+	    position: fixed;
+	    top: 0;
+	    bottom: 0;
+	    height: 100%;
+	    width: 100%;
+	    background: rgba(0, 0, 0, 0.65);
+	    z-index: 10001;
+	}
+	.cs-panel-footer-sub-menu {
+	    background-color: #495157;
+	    cursor: pointer;
+	    color: #d5dadf;
+	    border-radius: 6px;
+	    padding: 3px 25px;
+	    cursor: pointer;
+	    &-wrapper {
+		    width: 360px;
+		    bottom: 46px;
+		    background: #556068;
+		    padding: 10px;
+		    -webkit-box-shadow: -2px -5px 8px rgba(0, 0, 0, 0.1);
+		    box-shadow: -2px -5px 8px rgba(0, 0, 0, 0.1);
+		    display: none;
+		    &.open {
+			    display: block;
+			    z-index: 10002;
+			}
+		}
+		&-item {
+			> i, > span {
+			    font-size: 14px;
+			}
+			.cs-title {
+			    padding-left: 10px;
+			}
+		}
+		.save_template {
+			&__inner {
+			    position: fixed;
+			    top: 50%;
+			    left: 50%;
+			    background: #f1f1f1;
+			    max-width: calc(~"100% - 50%");
+			    max-height: calc(~"100vh - 30%");
+			    transform: translate(-50%, -50%);
+			    width: 100%;
+			    height: 100%;
+			    color: @color-black;
+			    padding: 20px 0;
+			    height: 500px;
+			    max-height: 85vh;
+			    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+			    display: none;
+			    &.open {
+				    display: block;
+				}
+			}
+			&__btn-close {
+			    position: absolute;
+			    right: -20px;
+			    top: -20px;
+			    background: @color-black;
+			    color: @color-white;
+			    padding: 10px;
+			    &:hover {
+				    background: #0085ba;
+				    color: @color-white !important;
+				}
+			}
+			&__content {
+			    padding: 80px;
+			    text-align: center;
+				#cs-template-library-save-template {
+					> div {
+					    margin-bottom: 30px;
+						i {
+						    font-size: 50px;
+						    color: #666;
+						}
+					}
+				}
+			}
+		}
+		.cs-template-library-blank {
+			&-title {
+			    font-size: 45px;
+			}
+			&-message {
+			    font-size: 20px;
+			}
+		}
+		#cs-template-library-save-template {
+			&-form {
+			    display: flex;
+			    justify-content: center;
+			    align-items: center;
+			}
+			&-name {
+			    min-width: 500px;
+			    padding: 9px 15px;
+			    border: none;
+			    background: @color-white;
+			}
+			&-submit {
+			    padding: 8px 35px;
+			    background: #0085ba;
+			    &:hover {
+				    opacity: .85;
+				}
+			}
+		}
+	}
+	.add-shortcode-presets {
+	    margin: 0;
+	    >ul {
+		    margin: 0 !important;
+		}
+		ul li {
+		    margin: 0 10px;
+		    margin-bottom: 15px;
+		    list-style: none;
+		    width: calc(~"33.33% - 20px");
+		}
+	}
+	.clever-prebuilt {
+		.add-shortcode-presets {
+	    	margin: 0 -10px;
+	    }
+	}
+}
+@media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
+    .cleversoft-panels-builder .cs-rows-container .cs-row-container .cs-cells .cell.cell-selected .cell-wrapper {
+        background-size: 3px 3px
+    }
+}
+@media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
+    .cs-panels-dialog .cs-title-bar h3.cs-parent-link .cs-separator {
+        background: url(../images/dialog-separator@2x.png) no-repeat;
+        background-size: cover
+    }
+}
+@media (max-width: 1280px) {
+    .cs-panels-dialog.cs-panels-dialog-add-widget .widget-type-list .widget-type , .cs-panels-dialog.cs-panels-dialog-add-widget .element-type-list .widget-type, .cs-panels-dialog.cs-panels-dialog-add-widget .layout-type-list .widget-type{
+        width: 33.333%
+    }
+}
+@media (max-width: 960px) {
+    .cs-panels-dialog.cs-panels-dialog-add-widget .widget-type-list .widget-type, .cs-panels-dialog.cs-panels-dialog-add-widget .element-type-list .widget-type, .cs-panels-dialog.cs-panels-dialog-add-widget .layout-type-list .widget-type {
+        width: 50%
+    }
+}
+@media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
+    .cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item .cs-screenshot.cs-loading {
+        background-image: url('@{baseDir}CleverSoft_CleverBuilder/images/wpspin_light-2x.gif');
+        background-size: 16px 16px
+    }
+}
+@media only screen and (min-width: 1680px) {
+    .cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item {
+        width: 20%
+    }
+}
+@media only screen and (max-width: 1679px) and (min-width: 1280px) {
+    .cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item {
+        width: 25%
+    }
+}
+@media only screen and (max-width: 1279px) and (min-width: 1140px) {
+    .cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item {
+        width: 33.333%
+    }
+}
+@media only screen and (max-width: 1139px) {
+    .cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item {
+        width: 50%
+    }
+}
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__xl - 1)) {
+        .media-width('max', @screen__xl);
+        .cs-panels-live-editor.live-editor-mobile-mode .cs-preview iframe {
+	        position: static;
+	        margin-left: 0;
+	        margin-top: 0
+	    }
+	    .cs-panels-dialog.cs-panels-dialog-prebuilt-layouts .cs-content .cs-directory-items .cs-directory-item {
+	        width: 50%
+	    }
+    }
+}
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (min-width: @screen__xl) {
+        .media-width('min', @screen__xl);
+        // Fix for Magento Default
+		.cms-index-index {
+			#maincontent {
+				&.page-main, .container {
+					max-width: 1440px;
+				}
+			}
+		}
+    }
+}
+@media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
+    .cs-panels-loading {
+        background-image: url('@{baseDir}CleverSoft_CleverBuilder/images/wpspin_light-2x.gif');
+        background-size: 16px 16px
+    }
+}

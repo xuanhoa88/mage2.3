@@ -1,0 +1,169 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$listMenus = $objectManager->create('\CleverSoft\CleverMegaMenus\Model\Menuoptions')->toOptionArray();
+if ($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getId()) {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getHeaderStyle());
+} else {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',0)->getFirstItem()->getHeaderStyle());
+}
+if($settings){
+    $data = isset($settings->header) ? $settings->header : '{}';
+}
+?>
+<!-- Modal content -->
+<div class="headerbuilder-modal-content">
+    <div class="headerbuilder-modal-header">
+        <span class="headerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="headerbuilder-modal-body">
+        <strong>Primary Menu</strong>
+        <div class="modal-inner" id="header_desktop_primary_menu">
+            <ul>
+                <li>
+                    <select name="settings[header][_customize-select-primary_menu]">
+                        <option value="">Select Clever MegaMenu</option>
+                        <?php foreach ($listMenus as $menu):?>
+                            <option value="<?php echo $menu['value'];?>" <?php echo isset($data->{'_customize-select-primary_menu'}) && $data->{'_customize-select-primary_menu'} == $menu['value'] ? 'selected' : ''?>><?php echo $menu['label'];?></option>
+                        <?php endforeach;?>
+                    </select>
+                </li>
+                <li id="customize-control-primary_menu_border" class="customize-control customize-control-primary_menu_border"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Width</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top" type="text" name="settings[header][_customize-input-primary_menu_border-top]" value="<?= isset($data->{'_customize-input-primary_menu_border-top'}) && $data->{'_customize-input-primary_menu_border-top'} ? $data->{'_customize-input-primary_menu_border-top'} : '' ?>">
+                            <input placeholder="right" type="text" name="settings[header][_customize-input-primary_menu_border-right]" value="<?= isset($data->{'_customize-input-primary_menu_border-right'}) && $data->{'_customize-input-primary_menu_border-right'} ? $data->{'_customize-input-primary_menu_border-right'} : '' ?>">
+                            <input placeholder="bottom" type="text" name="settings[header][_customize-input-primary_menu_border-bottom]" value="<?= isset($data->{'_customize-input-primary_menu_border-bottom'}) && $data->{'_customize-input-primary_menu_border-bottom'} ? $data->{'_customize-input-primary_menu_border-bottom'} : '' ?>">
+                            <input placeholder="left" type="text" name="settings[header][_customize-input-primary_menu_border-left]" value="<?= isset($data->{'_customize-input-primary_menu_border-left'}) && $data->{'_customize-input-primary_menu_border-left'} ? $data->{'_customize-input-primary_menu_border-left'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-header_primary_menu_style" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Border Style</span>
+                    </label>
+                    <select name="settings[header][_customize_header_primary_menu_style]">
+                        <option value="" <?= isset($data->{'_customize_header_primary_menu_style'}) && $data->{'_customize_header_primary_menu_style'} == '' ? 'selected' : '' ?>>
+                            Default
+                        </option>
+                        <option value="none" <?= isset($data->{'_customize_header_primary_menu_style'}) && $data->{'_customize_header_primary_menu_style'} == 'none' ? 'selected' : '' ?>>
+                            None
+                        </option>
+                        <option value="solid" <?= isset($data->{'_customize_header_primary_menu_style'}) && $data->{'_customize_header_primary_menu_style'} == 'solid' ? 'selected' : '' ?>>
+                            Solid
+                        </option>
+                        <option value="dotted" <?= isset($data->{'_customize_header_primary_menu_style'}) && $data->{'_customize_header_primary_menu_style'} == 'dotted' ? 'selected' : '' ?>>
+                            Dotted
+                        </option>
+                        <option value="dashed" <?= isset($data->{'_customize_header_primary_menu_style'}) && $data->{'_customize_header_primary_menu_style'} == 'dashed' ? 'selected' : '' ?>>
+                            Dashed
+                        </option>
+                        <option value="double" <?= isset($data->{'_customize_header_primary_menu_style'}) && $data->{'_customize_header_primary_menu_style'} == 'double' ? 'selected' : '' ?>>
+                            Double
+                        </option>
+                        <option value="ridge" <?= isset($data->{'_customize_header_primary_menu_style'}) && $data->{'_customize_header_primary_menu_style'} == 'ridge' ? 'selected' : '' ?>>
+                            Ridge
+                        </option>
+                        <option value="inset" <?= isset($data->{'_customize_header_primary_menu_style'}) && $data->{'_customize_header_primary_menu_style'} == 'inset' ? 'selected' : '' ?>>
+                            Inset
+                        </option>
+                        <option value="outset" <?= isset($data->{'_customize_header_primary_menu_style'}) && $data->{'_customize_header_primary_menu_style'} == 'outset' ? 'selected' : '' ?>>
+                            Outset
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_primary_menu_border_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Border Color</span>
+                    <input id="input_header_primary_menu_border_color" name="settings[header][_customize-radio-primary_menu_border_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-radio-primary_menu_border_color'}) ? $data->{'_customize-radio-primary_menu_border_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_primary_menu_border_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-primary_menu_border-radius" class="customize-control customize-control-primary_menu_border-radius"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Radius</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top-left" type="text" name="settings[header][_customize-input-primary_menu_border-top-left-radius]" value="<?= isset($data->{'_customize-input-primary_menu_border-top-left-radius'}) && $data->{'_customize-input-primary_menu_border-top-left-radius'} ? $data->{'_customize-input-primary_menu_border-top-left-radius'} : '' ?>">
+                            <input placeholder="top-right" type="text" name="settings[header][_customize-input-primary_menu_border-top-right-radius]" value="<?= isset($data->{'_customize-input-primary_menu_border-top-right-radius'}) && $data->{'_customize-input-primary_menu_border-top-right-radius'} ? $data->{'_customize-input-primary_menu_border-top-right-radius'} : '' ?>">
+                            <input placeholder="bottom-right" type="text" name="settings[header][_customize-input-primary_menu_border-bottom-right-radius]" value="<?= isset($data->{'_customize-input-primary_menu_border-bottom-right-radius'}) && $data->{'_customize-input-primary_menu_border-bottom-right-radius'} ? $data->{'_customize-input-primary_menu_border-bottom-right-radius'} : '' ?>">
+                            <input placeholder="bottom-left" type="text" name="settings[header][_customize-input-primary_menu_border-bottom-left-radius]" value="<?= isset($data->{'_customize-input-primary_menu_border-bottom-left-radius'}) && $data->{'_customize-input-primary_menu_border-bottom-left-radius'} ? $data->{'_customize-input-primary_menu_border-bottom-left-radius'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-primary_menu_padding" class="customize-control customize-control-primary_menu-padding"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Padding (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-primary_menu_padding]" value="<?= isset($data->{'_customize-input-primary_menu_padding'}) && $data->{'_customize-input-primary_menu_padding'} ? $data->{'_customize-input-primary_menu_padding'} : '' ?>">
+                </li>
+                <li id="customize-control-header_primary_menu_merge_item" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[header][_customize_header_primary_menu_merge_item]">
+                        <option value="0" <?= isset($data->{'_customize_header_primary_menu_merge_item'}) && $data->{'_customize_header_primary_menu_merge_item'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_header_primary_menu_merge_item'}) && $data->{'_customize_header_primary_menu_merge_item'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_header_primary_menu_merge_item'}) && $data->{'_customize_header_primary_menu_merge_item'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-primary_menu_margin" class="customize-control customize-control-primary_menu-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-primary_menu_margin]" value="<?= isset($data->{'_customize-input-primary_menu_margin'}) && $data->{'_customize-input-primary_menu_margin'} ? $data->{'_customize-input-primary_menu_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-custom-class_primary_menu" class="customize-control customize-control-custom-class_primary_menu"
+                style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Extra class name</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-custom-class_primary_menu]" value="<?= isset($data->{'_customize-input-custom-class_primary_menu'}) && $data->{'_customize-input-custom-class_primary_menu'} ? $data->{'_customize-input-custom-class_primary_menu'} : '' ?>">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

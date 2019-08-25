@@ -1,0 +1,65 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverBuilder
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+$items = $this->getData('items');
+if(empty($items)) $items = [[[]],[[]]]; 
+?>
+<div class="clever-tabs prevent-click-show-form clever-tabs__<?php echo $this->getData('type') ?> global-element <?php if($isPreview) echo "cs-live-preview"?>" data-id="<?php echo $block->getData('widget_id') ?>">
+    <div class="clever-tabs__title <?php echo $this->getData('nav_style');?> nav-size__<?php echo $this->getData('size');?> <?php echo $this->getData('tabs_align');?>">
+        <div class="clever-tabs__name">
+            <h3 class="clever-tabs__name--title"><?php echo $this->getData('title');?></h3>
+        </div>
+        <div class="clever-tabs__links">
+            <ul class="nav nav-tabs <?php echo $this->getData('style');?>">
+                <?php for ($i=0 ; $i < count($items) ; $i++) { ?>
+                    <li class="nav-item <?php echo $i == 0 ? 'active' : '' ?>">
+                        <a class="nav-link" data-toggle="tab" data-id="tab<?php echo $i; ?>" href="#tab<?php echo $block->getData('widget_id') ?><?php echo $i; ?>"><?php echo (isset($items[$i][0]['tabTitle']) ? $items[$i][0]['tabTitle'] : __('Tab') .' '.($i+1) . ' ' . __('Title') ) ?></a>
+                    </li>
+                <?php } ?>
+            </ul>
+        </div>
+    </div>
+    <div class="tab-content">
+        <?php for ($i=0 ; $i < count($items) ; $i++) { ?>
+            <div id="tab<?php echo $block->getData('widget_id') ?><?php echo $i; ?>" class="tab-pane <?php echo $i == 0 ? 'active' : 'fade' ?> ">
+                <div class="tab-widget-items">
+                    <?php
+                        if(empty($items[$i])) {
+                            ?>
+                            <div class="col_grid-empty">
+                                <div class="uxb-empty-message">
+                                    <?php echo __('Add elements from left sidebar'); ?>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                    ?>
+                    <?php foreach($items[$i] as $k=>$it) {
+                        ?>
+                        <?php if (!isset($it['html'])) {
+                            ?>
+                            <div class="uxb-empty-message">
+                                <?php echo __('Add elements from left sidebar'); ?>
+                            </div>
+                        <?php
+                        } else {
+                            echo $it['html'];
+                        }
+                    }
+                    ?>
+                </div>
+
+            </div>
+        <?php } ?>
+    </div>
+    <?php if($isPreview) { ?>
+        <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+    <?php } ?>
+</div>

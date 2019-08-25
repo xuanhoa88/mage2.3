@@ -1,0 +1,445 @@
+{
+  "name": "Testimonial",
+  "title": "Testimonial",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "widget",
+  "icon" : "",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Testimonial",
+  "code": "clever-testimonial",
+  "layouts":[
+  ],
+  "content_fields": [
+    {
+      "type": "textarea",
+      "name": "testimonial_text",
+      "element_class": "element-testimonial__content",
+      "default": "Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+      "required": false,
+      "visible": true,
+      "label": "Content"
+    },
+    {
+      "type": "media",
+      "name": "image",
+      "attribute_type":"attribute",
+      "code":"src",
+      "element_class": "element-testimonial__inner-img",
+      "required": false,
+      "visible": true,
+      "label": "Choose Image"
+    },
+    {
+      "type": "select",
+      "name": "image_position",
+      "attribute_type":"class",
+      "element_class":"element-testimonial__meta",
+      "values": [
+        {
+          "value": "img-position__aside",
+          "label": "Aside"
+        },
+        {
+          "value": "img-position__top",
+          "label": "Top"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "default": "img-position__aside",
+      "label": "Image Position"
+    },
+    {
+      "type": "select",
+      "name": "alignment",
+      "attribute_type":"class",
+      "values": [
+        {
+          "value": "text-left",
+          "label": "Left"
+        },
+        {
+          "value": "text-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-right",
+          "label": "Right"
+        }
+      ],
+      "default": "text-center",
+      "required": false,
+      "visible": true,
+      "label": "Alignment"
+    },
+    {
+      "type": "text",
+      "name": "name",
+      "default": "David Berton",
+      "attribute_type": "html",
+      "element_class":"element-testimonial-name",
+      "required": false,
+      "visible": true,
+      "label": "Name"
+    },
+    {
+      "type": "text",
+      "name": "job",
+      "default": "Designer",
+      "attribute_type": "html",
+      "element_class":"element-testimonial-job",
+      "required": false,
+      "visible": true,
+      "label": "Job"
+    },
+    {
+      "type": "text",
+      "name": "link",
+      "required": false,
+      "visible": true,
+      "label": "Link"
+    },
+    {
+      "type": "toggle",
+      "name": "link_option",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Open in new window"
+    },
+    {
+      "type": "toggle",
+      "name": "link_option_rel",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Add nofollow"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "label",
+      "name": "content",
+      "required": false,
+      "visible": true,
+      "label": "Content"
+    },
+    {
+      "type": "color",
+      "name": "color",
+      "attribute_type": "style",
+      "element_class": "element-testimonial__content",
+      "code": "color",
+      "required": false,
+      "visible": true,
+      "label": "Color"
+    },
+    {
+      "type": "label",
+      "name": "image",
+      "required": false,
+      "visible": true,
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "name": "image_enable",
+      "values": [
+        {
+          "value": "",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "label": "No"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Image Enable"
+    },
+    {
+      "type": "slider",
+      "name": "img_size",
+      "required": false,
+      "min":20,
+      "default":60,
+      "max":200,
+      "visible": true,
+      "label": "Image Size (px)",
+      "depends" : {"image_enable" : ""}
+    },
+    {
+      "type": "select",
+      "name": "img_border_type",
+      "attribute_type": "style",
+      "element_class": "element-testimonial__inner-img",
+      "code": "border-style",
+      "values": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "double",
+          "label": "Double"
+        },
+        {
+          "value": "dotted",
+          "label": "Dotted"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        },
+        {
+          "value": "groove",
+          "label": "Groove"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Border Type",
+      "depends" : {"image_enable" : ""}
+    },
+    {
+      "type": "position",
+      "name": "border_width",
+      "attribute_type": "style",
+      "element_class": "element-testimonial__inner-img",
+      "code": "border-width",
+      "required": false,
+      "visible": true,
+      "label": "Border Width (px)",
+      "depends" : {"image_enable" : ""}
+    },
+    {
+      "type": "color",
+      "name": "border_color",
+      "attribute_type": "style",
+      "element_class": "element-testimonial__inner-img",
+      "code": "border-color",
+      "required": false,
+      "visible": true,
+      "label": "Border Color",
+      "depends" : {"image_enable" : ""}
+    },
+    {
+      "type": "position",
+      "name": "border_radius",
+      "attribute_type": "style",
+      "element_class": "element-testimonial__inner-img",
+      "code": "border-radius",
+      "required": false,
+      "visible": true,
+      "label": "Border Radius (px)",
+      "depends" : {"image_enable" : ""}
+    },
+    {
+      "type": "label",
+      "name": "name",
+      "required": false,
+      "visible": true,
+      "label": "Name"
+    },
+    {
+      "type": "color",
+      "name": "name_color",
+      "default": "#0172ff",
+      "attribute_type": "style",
+      "element_class": "element-testimonial-name",
+      "code": "color",
+      "required": false,
+      "visible": true,
+      "label": "Name Color"
+    },
+    {
+      "type": "label",
+      "name": "job",
+      "required": false,
+      "visible": true,
+      "label": "Job"
+    },
+    {
+      "type": "color",
+      "name": "job_color",
+      "attribute_type": "style",
+      "element_class": "element-testimonial-job",
+      "code": "color",
+      "required": false,
+      "visible": true,
+      "label": "Job Color"
+    },
+    {
+      "type": "label",
+      "name": "quotation_label",
+      "required": false,
+      "visible": true,
+      "label": "Quotation Icon"
+    },
+    {
+      "type": "color",
+      "name": "quotation_color",
+      "attribute_type": "style",
+      "element_class": "element-testimonial-quote",
+      "code": "color",
+      "required": false,
+      "visible": true,
+      "label": "Quotation Color"
+    },
+    {
+      "type": "slider",
+      "name": "quotation_size",
+      "required": false,
+      "min":5,
+      "default":80,
+      "max":250,
+      "attribute_type": "style",
+      "element_class": "element-testimonial-quote",
+      "code": "font-size",
+      "visible": true,
+      "label": "Quotation Size (px)"
+    },
+    {
+      "type": "select",
+      "name": "quotation_left_enable",
+      "values": [
+        {
+          "value": "",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ],
+      "default": "yes",
+      "required": false,
+      "visible": true,
+      "label": "Top Icon Enable"
+    },
+    {
+      "type": "select",
+      "name": "set_position_quotation_left",
+      "values": [
+        {
+          "value": "",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ],
+      "default": "",
+      "required": false,
+      "visible": true,
+      "label": "Set Position Top Icon",
+      "depends" : {"quotation_left_enable" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "position_icon_upper_top",
+      "min":0,
+      "max":250,
+      "attribute_type": "style",
+      "element_class": "element-testimonial-quote__upper",
+      "code": "top",
+      "required": false,
+      "visible": true,
+      "label": "Top Icon Position Top (Px)",
+      "depends" : {"set_position_quotation_left" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "position_icon_upper_left",
+      "min":0,
+      "max":250,
+      "attribute_type": "style",
+      "element_class": "element-testimonial-quote__upper",
+      "code": "left",
+      "required": false,
+      "visible": true,
+      "label": "Top Icon Position Left (Px)",
+      "depends" : {"set_position_quotation_left" : "yes"}
+    },
+    {
+      "type": "select",
+      "name": "quotation_right_enable",
+      "values": [
+        {
+          "value": "",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ],
+      "default": "yes",
+      "required": false,
+      "visible": true,
+      "label": "Bottom Icon Enable"
+    },
+    {
+      "type": "select",
+      "name": "set_position_quotation_right",
+      "values": [
+        {
+          "value": "",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ],
+      "default": "",
+      "required": false,
+      "visible": true,
+      "label": "Set Position Bottom Icon",
+      "depends" : {"quotation_right_enable" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "position_icon_lower_right",
+      "min":0,
+      "max":250,
+      "attribute_type": "style",
+      "element_class": "element-testimonial-quote__lower",
+      "code": "right",
+      "required": false,
+      "visible": true,
+      "label": "Bottom Icon Position Right (Px)",
+      "depends" : {"set_position_quotation_right" : "yes"}
+    },
+    {
+      "type": "slider",
+      "name": "position_icon_lower_bottom",
+      "min":0,
+      "max":250,
+      "attribute_type": "style",
+      "element_class": "element-testimonial-quote__lower",
+      "code": "bottom",
+      "required": false,
+      "visible": true,
+      "label": "Bottom Icon Position Bottom (Px)",
+      "depends" : {"set_position_quotation_right" : "yes"}
+    }
+  ]
+}

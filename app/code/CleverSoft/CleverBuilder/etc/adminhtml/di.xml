@@ -1,0 +1,8 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\User\Block\User\Edit\Tab\Main" type="CleverSoft\CleverBuilder\Block\Adminhtml\User\Edit\Tab\Main" />
+    <preference for="Magento\User\Block\User\Edit" type="CleverSoft\CleverBuilder\Block\Adminhtml\User\Edit" />
+    <!--<preference for="Magento\Widget\Model\Widget" type="CleverSoft\CleverBuilder\Model\Widget" />-->
+    <type name="Magento\User\Model\User">
+        <plugin name="clever_builder_frontend_role" type="CleverSoft\CleverBuilder\Plugin\User\Create" sortOrder="10" />
+    </type>
+</config>

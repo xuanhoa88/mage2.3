@@ -1,0 +1,171 @@
+//
+//  Base theme styles
+//
+
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+  body {
+    .abs-transition(transform 400ms ease);
+    .abs-colorfont(@main__color, @font-family__base);
+    background:@main_background-color url(@main__background-file) @main__background-image-option;
+  }
+
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: @color-black;
+  }
+
+  a {
+    -webkit-transition: color 400ms, background-color 400ms;
+    transition: color 400ms, background-color 400ms;
+    .abs-link(@link-color, @link-hover-color);
+  }
+
+
+  button, .btn, .action.primary{
+    .abs-cssall(@btn-primary__color, @btn-primary__border-color, @btn-primary__background-color);
+    &:hover{
+      .abs-cssall(@btn-primary__hover-color, @btn-primary__hover-border-color, @btn-primary__hover-background-color);
+    }
+  }
+
+  .product-sale-label  {
+    .abs-allstyle( @label-sale__color, @label-sale__background-color);
+  }
+
+
+  .page-wrapper .minicart-wrapper .action.showcart .counter.qty .counter-number,
+  .header-wishlist span.counter-number, .header-compare span.counter-number, .minicart-wrapper span.counter-number, .minicart span.counter-number{
+    .abs-allstyle( @label-sale__color, @label-sale__background-color);
+  }
+
+  .price-box .price{
+    color: @text-price__color;
+  }
+
+
+  .rating-summary .rating-result > span:before,
+  .review-control-vote label:before {
+    color: @rating-active__color;
+  }
+
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color : @heading-title__color  ;
+  }
+
+  .page-header {
+    opacity: @header__opacity;
+    color: @header__color;
+    background:@header__background-color url(@header__background-file) @header__background-image-option;
+    padding-top: @header__padding-top;
+    padding-bottom: @header__padding-bottom;
+    &.container{
+      background:@header-inner__background-color;
+    }
+  }
+  .zoo-menu-label{
+    color: @header__color;
+  }
+
+  //Header top
+
+  .page-header .panel.wrapper{
+    &.topbar-container{
+      padding-top: @header-top__padding-top;
+      padding-bottom: @header-top__padding-bottom;
+      line-height: @header-top__lineheight;
+    }
+  }
+
+  //Header primary
+
+  .page-header .header-content{
+    padding-top: @header-primary__padding-top;
+    padding-bottom: @header-primary__padding-bottom;
+    &.container{
+      background:@header-primary-inner__background-color;
+    }
+  }
+
+  // Main menu
+  .clever-menu a{
+    color: @main__hover-link__color;
+  }
+  .clever-menu ul.clever-mega-menu > li.level-top > a,
+  .clever-horizontal-menu .clever-mega-menu li.level0 > a.menu-link{
+    font-size:@menu__font-size;
+    text-transform:@menu__uppercase;
+  }
+  .clever-menu ul.clever-mega-menu > li.level-top > a:hover,
+  .clever-horizontal-menu .clever-mega-menu li.level0 > a.menu-link:hover{
+    color: @menu-hover__color;
+  }
+  .page-wrapper .nav-sections {
+    background-color: @menu-inner__background-color;
+  }
+  @media (min-width: 768px) {
+    .clever-menu ul.clever-mega-menu > li.level-top > a,
+    .clever-horizontal-menu .clever-mega-menu li.level0 > a.menu-link{
+      color: @menu__color;
+    }
+  }
+
+  // Footer
+
+
+
+  // product detail
+
+  .product-view-bg:before {
+    background: @product-detail__background-color;
+    border-top: 1px solid @product-detail__background-color;
+  }
+
+
+  [class^="clever-icon-"], [class*=" clever-icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'cleversoft' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Enable Ligatures ================ */
+    letter-spacing: 0;
+    -webkit-font-feature-settings: "liga";
+    -moz-font-feature-settings: "liga=1";
+    -moz-font-feature-settings: "liga";
+    -ms-font-feature-settings: "liga" 1;
+    font-feature-settings: "liga";
+    -webkit-font-variant-ligatures: discretionary-ligatures;
+    font-variant-ligatures: discretionary-ligatures;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+
+  a,
+  a:hover,
+  a:focus,
+  a:active,
+  input,
+  input:hover,
+  input:focus,
+  input:active{
+    text-decoration: none;
+    outline: none;
+  }
+
+  a:visited, .alink:visited {
+    color: inherit;
+  }
+} // end: media-common

@@ -1,0 +1,106 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverSocialLogin
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php if ($this->getHelper()->hasButtons()) : ?>
+<?php $openPopup = $this->helper('CleverSoft\CleverSocialLogin\Helper\Data'); ?>
+<?php if ($openPopup->positionButtonsLogin() == 'left'): ?>
+<div class="button-login-left-form  col-sm-offset-2 col-sm-4 button-login-social">
+    <?php elseif ($openPopup->positionButtonsLogin() == 'right'): ?>
+    <div class="button-login-right-form col-sm-4 button-login-social">
+        <?php endif; ?>
+        <div class="pslogin-block pslogin-login pslogin-login-form pslogin-block-head" data-mage-init='{"pslogin":{}}'>
+            <fieldset>
+            <legend>
+                <span><?php echo __('Login with your social account'); ?></span>
+            </legend>
+
+            <div class="pslogin-buttons <?php echo $this->showLoginFullButtons() ? 'pslogin-buttons-showfull' : ''; ?>">
+                <ul class="pslogin-clearfix">
+                    <?php foreach ($this->getPreparedButtons() as $button) : ?>
+                        <li class="pslogin-button <?php echo $button['type']; ?> <?php echo empty($button['visible']) ? 'pslogin-hidden' : 'pslogin-visible'; ?>" <?php echo empty($button['visible']) ? 'style="display: none;"' : ''; ?>
+                            title="<?php echo $this->escapeHtml($button['login_text']); ?>">
+                            <a class="pslogin-button-link pslogin-button-click" rel="nofollow"
+                               href="javascript:void(0);" data-href="<?php echo $button['href']; ?>"
+                               data-width="<?php echo $button['popup_width']; ?>"
+                               data-height="<?php echo $button['popup_height']; ?>">
+                        <span class="pslogin-button-auto">
+                            <span class="pslogin-button-icon"></span>
+                            <span
+                                class="pslogin-button-text"><?php echo $this->escapeHtml($button['login_text']); ?></span>
+                        </span>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+
+                <?php if ($this->getPreparedButtons('hidden')) : ?>
+                    <div class="pslogin-spacer pslogin-clearfix pslogin-showmore">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="pslogin-border"></div>
+                                </td>
+                                <td class="w100">
+                                    <div
+                                        class="pslogin-showmore-button pslogin-bordertext"><?php echo __('show more'); ?></div>
+                                </td>
+                                <td>
+                                    <div class="pslogin-border"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                <?php endif; ?>
+            </div>
+            </fieldset>
+        </div>
+        <?php if ($openPopup->positionButtonsLogin() == 'left' || $openPopup->positionButtonsLogin() == 'right'): ?>
+    </div>
+<?php endif; ?>
+    <div style="clear: both;"></div>
+
+    <script>
+        var showFullButtonsAfterViewMore = <?php echo $this->showFullButtons()? 'true' : 'false'; ?>;
+        if (window.psloginButtons) {
+            requirejs(['pslogin']);
+        }
+    </script>
+    <?php endif; ?>
+
+    <?php
+    $openPopup = $this->helper('CleverSoft\CleverSocialLogin\Helper\Data');
+    ?>
+
+    <script>
+        require(["jquery"], function ($) {
+            $(document).ready(function () {
+                <?php if($openPopup->positionButtonsLogin() == 'bottom'): ?>
+                $('.block-customer-login').append('<p class="hr-login"><span><?php /* @escapeNotVerified */ echo __('Or'); ?></span></p>');
+                $('.pslogin-login-form').insertBefore('.block-new-customer');
+                <?php endif; ?>
+                <?php if($openPopup->positionButtonsLogin() == 'left'): ?>
+				$('.button-login-left-form').append('<p class="hr-or"><span><?php /* @escapeNotVerified */ echo __('Or'); ?></span></p>');
+                $('.page-wrapper .button-login-left-form').insertBefore('.page-wrapper .login-form');
+                $('.page-wrapper .login-form').addClass(' col-sm-4');
+                $('.page-wrapper .login-container').addClass('login-container-flex');
+                <?php endif; ?>
+                <?php if($openPopup->positionButtonsLogin() == 'right'): ?>
+				$('.button-login-right-form').append('<p class="hr-or"><span><?php /* @escapeNotVerified */ echo __('Or'); ?></span></p>');
+                $('.page-wrapper .button-login-right-form').insertAfter('.page-wrapper .login-form');
+                $('.page-wrapper .login-form').addClass(' col-sm-offset-2 col-sm-4');
+                $('.page-wrapper .login-container').addClass('login-container-flex');
+                <?php endif; ?>
+
+                <?php if($openPopup->positionButtonsLogin() == 'top'): ?>
+                $('.pslogin-login-form').insertBefore('.login-form');
+                <?php endif; ?>
+            })
+        });
+    </script>
+

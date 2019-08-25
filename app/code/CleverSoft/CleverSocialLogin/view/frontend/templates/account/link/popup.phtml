@@ -1,0 +1,203 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverProduct
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+
+$openPopup = $this->helper('CleverSoft\CleverSocialLogin\Helper\Data');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->get('Magento\Customer\Model\Session');
+
+if($openPopup->popupEnabled() == 1):
+    ?>
+    <div id="zoo-login-form" style="display: none">
+    <h1 class="page-title">
+        <span><?php echo __('Customer Login'); ?></span>
+    </h1>
+    <div id="zoo-login-form-popup">
+        <div class="form-login-popup">
+            <?php echo $block->getChildHtml('popup.authentication') ?>
+            <?php echo $this->getLayout()->createBlock("Magento\Customer\Block\Form\Login\Info")->setTemplate("Magento_Customer::newcustomer.phtml")->toHtml(); ?>
+        </div>
+        <?php if($openPopup->positionButtonsLogin() == 'left'): ?>
+        <div class="button-login-left-form col-sm-6 button-login-social">
+            <?php elseif($openPopup->positionButtonsLogin() == 'right'): ?>
+            <div class="button-login-right-form col-sm-6 button-login-social">
+                <?php endif; ?>
+                <?php echo $this->getLayout()->createBlock("CleverSoft\CleverSocialLogin\Block\Buttons")->setTemplate("CleverSoft_CleverSocialLogin::customer/form/login/buttonspopup.phtml")->toHtml(); ?>
+                <?php if($openPopup->positionButtonsLogin() == 'left' || $openPopup->positionButtonsLogin() == 'right'): ?>
+            </div>
+        <?php endif; ?>
+        </div>
+    </div>
+
+    <div id="zoo-register-form" style="display: none">
+    <h1 class="page-title">
+        <span><?php echo __('Create New Customer Account'); ?></span>
+    </h1>
+    <div id="zoo-register-form-popup">
+        <div class="form-register-popup">
+            <?php echo $block->getChildHtml('popup.create') ?>
+        </div>
+        <?php if($openPopup->positionButtonsRegister() == 'left'): ?>
+        <div class="button-register-left-form col-sm-6 button-register-social">
+            <?php elseif($openPopup->positionButtonsRegister() == 'right'): ?>
+            <div class="button-register-right-form col-sm-6 button-register-social">
+                <?php endif; ?>
+                <?php echo $this->getLayout()->createBlock("CleverSoft\CleverSocialLogin\Block\Buttons")->setTemplate("CleverSoft_CleverSocialLogin::customer/form/register/buttonspopup.phtml")->toHtml(); ?>
+                <?php if($openPopup->positionButtonsRegister() == 'left' || $openPopup->positionButtonsRegister() == 'right'): ?>
+            </div>
+        <?php endif; ?>
+        </div>
+    </div>
+
+    <script>
+        require(["jquery", 'Magento_Ui/js/modal/modal'],function($,modal) {
+            $(document).ready(function() {
+                $('header').find('a').each(function () {
+                    var urlRedirect = $(this).attr('href');
+                    var urlLogin = "customer/account/login";
+                    var urlRegister = "customer/account/create";
+                    if (urlRedirect) {
+                        if (urlRedirect.indexOf(urlLogin) > -1) {
+                            //
+                            this.setAttribute('href', 'javascript:void(0)');
+                            //Add 'class' to element
+                            $(this).addClass("loginpopup");
+                        }
+                        if (urlRedirect.indexOf(urlRegister) > -1) {
+                            //change href to '#zoo-register-form'
+                            this.setAttribute('href', 'javascript:void(0)');
+                            //Add 'class' to element
+                            $(this).addClass("registerpopup");
+                        }
+                    }
+                });
+
+                $('#zoo-login-form').find('a').each(function () {
+                    var urlRedirect = $(this).attr('href');
+                    var urlRegister = "customer/account/create";
+                    if (urlRedirect.indexOf(urlRegister) > -1) {
+                        //change href to '#zoo-register-form'
+                        this.setAttribute('href', 'javascript:void(0)');
+                        //Add 'class' to element
+                        $(this).addClass("registerpopup");
+                    }
+                });
+
+                $('#zoo-register-form').find('a').each(function () {
+                    var urlRedirect = $(this).attr('href');
+                    var urlLogin = "customer/account/login";
+                    if (urlRedirect.indexOf(urlLogin) > -1) {
+                        //change href to '#zoo-login-form'
+                        this.setAttribute('href', 'javascript:void(0)');
+                        //Add 'class' to element
+                        $(this).addClass("loginpopup");
+                    }
+                });
+
+                var $modal_l = $('div#zoo-login-form');
+                var qsModal_l = $modal_l.modal({
+                    innerScroll: false,
+                    title: '',
+                    modalClass: 'zoo-log-popup',
+                    wrapperClass: 'ql-modal',
+                    buttons: [],
+                    opened: function(){
+                        if($('.ql-modal').children('.modals-overlay').length == 0)
+                        {
+                            $('.ql-modal').append('<div class="modals-overlay" style="z-index: 899;"></div>');
+                            $('.qr-modal').find('.modals-overlay').remove();
+                        }
+                    },
+                    closed: function(){
+                    }
+                });
+                var $modal_r = $('div#zoo-register-form');
+                var qsModal_r = $modal_r.modal({
+                    innerScroll: false,
+                    title: '',
+                    clickableOverlay: true,
+                    modalClass: 'zoo-reg-popup',
+                    wrapperClass: 'qr-modal',
+                    buttons: [],
+                    opened: function(){
+                        if($('.qr-modal').children('.modals-overlay').length == 0) {
+                            $('.qr-modal').append('<div class="modals-overlay" style="z-index: 899;"></div>');
+                            $('.ql-modal').find('.modals-overlay').remove();
+                        }
+                    },
+                    closed: function(){
+                    }
+                });
+                $('.loginpopup').on('click',function(){
+                    qsModal_r.modal('closeModal');
+                    qsModal_l.modal('openModal');
+                });
+                $('.registerpopup').on('click',function(event){
+                    qsModal_l.modal('closeModal');
+                    qsModal_r.modal('openModal');
+                });
+
+                <?php if($openPopup->positionButtonsRegister() == 'bottom'): ?>
+                $('.pslogin-register-popup').insertBefore('#zoo-register-form .form-register-popup a.action.create.loginpopup');
+                $('.pslogin-register-popup').before('<p class="hr-login"><span><?php /* @escapeNotVerified */ echo __('Or'); ?></span></p>');
+                <?php endif; ?>
+                <?php if($openPopup->positionButtonsLogin() == 'bottom'): ?>
+                $('.pslogin-login-popup').insertBefore('#zoo-login-form .block-new-customer');
+                $('#zoo-login-form .block-customer-login').append('<p class="hr-login"><span><?php /* @escapeNotVerified */ echo __('Or'); ?></span></p>');
+                <?php endif; ?>
+
+                <?php if($openPopup->positionButtonsRegister() == 'top'): ?>
+                $('#zoo-register-form-popup').prepend($('.pslogin-register-popup'));
+                $('.pslogin-register-popup').append('<p class="hr-login"><span><?php /* @escapeNotVerified */ echo __('Or'); ?></span></p>');
+                <?php endif; ?>
+                <?php if($openPopup->positionButtonsLogin() == 'top'): ?>
+                $('.pslogin-login-popup').insertBefore('#zoo-login-form .form-login-popup');
+                $('.pslogin-login-popup').append('<p class="hr-login"><span><?php /* @escapeNotVerified */ echo __('Or'); ?></span></p>');
+                <?php endif; ?>
+
+                <?php if($openPopup->positionButtonsLogin() == 'left' && $openPopup->popupEnabled() == 1): ?>
+				$('.button-login-left-form').append('<p class="hr-or"><span><?php /* @escapeNotVerified */ echo __('Or'); ?></span></p>');
+                $('#zoo-login-form-popup .button-login-left-form').insertBefore('.form-login-popup');
+                $('.form-login-popup').addClass('col-sm-6');
+                $('#zoo-login-form-popup').addClass('login-container-flex');
+                <?php endif; ?>
+                <?php if($openPopup->positionButtonsRegister() == 'left' && $openPopup->popupEnabled() == 1): ?>
+                $('#zoo-register-form-popup .button-register-left-form').append('<p class="hr-or"><?php /* @escapeNotVerified */ echo __('Or'); ?></p>');
+                $('#zoo-register-form-popup .button-register-left-form').insertBefore('.form-register-popup');
+                $('.form-register-popup').addClass('col-sm-6');
+                $('#zoo-register-form-popup').addClass('register-container-flex');
+                <?php endif; ?>
+
+
+                <?php if($openPopup->positionButtonsLogin() == 'right' && $openPopup->popupEnabled() == 1): ?>
+				$('.button-login-right-form').append('<p class="hr-or"><span><?php /* @escapeNotVerified */ echo __('Or'); ?></span></p>');
+                $('#zoo-login-form-popup .button-login-right-form').insertAfter('.form-login-popup');
+                $('.form-login-popup').addClass('col-sm-6');
+                $('#zoo-login-form-popup').addClass('login-container-flex');
+                <?php endif; ?>
+                <?php if($openPopup->positionButtonsRegister() == 'right' && $openPopup->popupEnabled() == 1): ?>
+                $('#zoo-register-form-popup .button-register-right-form').append('<p class="hr-or"><?php /* @escapeNotVerified */ echo __('Or'); ?></p>');
+                $('#zoo-register-form-popup .button-register-right-form').insertAfter('.form-register-popup');
+                $('.form-register-popup').addClass('col-sm-6');
+                $('#zoo-register-form-popup').addClass('register-container-flex');
+                <?php endif; ?>
+
+                <?php if($customerSession->getCustomerGroupId() == 0 || $customerSession->getCustomerGroupId() == '0') :?>
+                    $(".zoo-wishlist").find('a').click(function() {
+                        qsModal_l.modal('openModal');
+                        return false;
+                    });
+                    $(".header-wishlist.link.wishlist").click(function() {
+                        qsModal_l.modal('openModal');
+                        return false;
+                    });
+                <?php endif;?>
+            })
+        });
+    </script>
+<?php endif; ?>

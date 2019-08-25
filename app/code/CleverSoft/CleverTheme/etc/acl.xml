@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="CleverSoft_CleverTheme::all" title="CleverSoft" sortOrder="45">
+                    <resource id="CleverSoft_CleverTheme::config_mato" title="Clever Themes v2.1.1" sortOrder="10">
+                        <resource id="CleverSoft_CleverTheme::config_settings" title="Theme Settings" sortOrder="10" />
+                        <resource id="CleverSoft_CleverTheme::config_design" title="Theme Design" sortOrder="20" />
+                        <resource id="CleverSoft_CleverTheme::config_custom_css" title="Custom Css" sortOrder="30" />
+                    </resource>
+                    <resource id="CleverSoft_CleverTheme::config_cookielaw" title="Cookie Settings" sortOrder="20" />
+                    <resource id="CleverSoft_CleverTheme::config_deferjs" title="DeferJs Settings" sortOrder="30" />
+                    <resource id="CleverSoft_CleverTheme::config_cleversinstagram" title="Instagram Settings" sortOrder="40" />
+                    <resource id="CleverSoft_CleverTheme::config_layernavigation" title="Layer Navigation Settings" sortOrder="50" />
+                    <resource id="CleverSoft_CleverMegaMenus::index" title="Menus Manager" sortOrder="60" />
+                    <resource id="CleverSoft_CleverMegaMenus::save" title="Create New Menu" sortOrder="70" />
+                    <resource id="CleverSoft_CleverTheme::config_cleversearchautocomplete" title="Search Autocomplete Settings" sortOrder="80" />
+                    <resource id="CleverSoft_CleverTheme::config_cleversociallogin" title="Social Login Settings" sortOrder="110" />
+                    <resource id="CleverSoft_CleverTheme::config_clevernewsletter" title="NewsLetter Settings" sortOrder="120" />
+                    <resource id="CleverSoft_CleverTheme::config_socialproof" title="Social Proof Settings" sortOrder="130" />
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

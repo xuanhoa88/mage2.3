@@ -1,0 +1,56 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<script>
+require(['prototype'], function(){
+    function importSetting() {
+
+        var resultMessage = $('import_result<?php echo $block->getDemoVersion(); ?>');
+        params = {
+            demo_version: ($('cleversofttheme_install_demo_version'))?$('cleversofttheme_install_demo_version').value:'',
+            store_view: ($('cleversofttheme_install_store_view_theme_import'))?$('cleversofttheme_install_store_view_theme_import').value:''
+        };
+
+        new Ajax.Request('<?php echo $block->getAjaxUrl() ?>', {
+            parameters: params,
+            onSuccess: function(response) {
+                var validationMessage = document.getElementById("import_result<?php echo $block->getDemoVersion(); ?>");
+                var result = '<?php echo __('Error during Import '.$block->getDemoVersion().'.') ?>';
+                try {
+                    if (response.responseText.isJSON()) {
+                        response = response.responseText.evalJSON();
+                        result = response.message;
+                    }
+                    if (response.valid == 1) {
+                        validationMessage.removeClassName('hidden').addClassName('success').addClassName('message-success');
+                    } else {
+                        validationMessage.removeClassName('hidden').addClassName('error').addClassName('message-error');
+                    }
+                } catch (e) {
+                    validationMessage.removeClassName('hidden').addClassName('error').addClassName('message-error')
+                }
+                validationMessage.update(result);
+            }
+        });
+    }
+    window.importSetting = importSetting;
+});
+</script>
+<style type="text/css">
+#import_result<?php echo $block->getDemoVersion(); ?>:before{
+    top: 20px;
+    margin: 0;
+}
+</style>
+<div class="actions actions-import-data">
+    <button onclick="javascript:importSetting(); return false;" class="action-import-data" type="button" id="<?php echo $block->getHtmlId()     ?>">
+        <span><?php echo $block->escapeHtml($block->getButtonLabel()) ?></span>
+    </button>
+    <div id="import_result<?php echo $block->getDemoVersion(); ?>" class="message-validation hidden message"></div>
+</div>

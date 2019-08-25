@@ -1,0 +1,170 @@
+{
+  "name": "Tabs",
+  "title": "Tabs",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "layout",
+  "icon" : "",
+  "default_items": [[],[]],
+  "has_child": "tab",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Tabs",
+  "code": "clever-tabs",
+  "content_fields": [
+    {
+      "type": "text",
+      "name": "title",
+      "attribute_type": "html",
+      "element_class": "clever-tabs__name--title",
+      "required": false,
+      "placeholder": "Tabs Title",
+      "visible": true,
+      "label": "Title"
+    },
+    {
+      "type": "select",
+      "name": "style",
+      "attribute_type": "class",
+      "element_class": "nav-tabs",
+      "values": [
+        {
+          "value": "simple",
+          "label": "Simple"
+        },
+        {
+          "value": "line",
+          "label": "Line"
+        },
+        {
+          "value": "divided",
+          "label": "Divided"
+        },
+        {
+          "value": "line-grow",
+          "label": "Line Grow"
+        },
+        {
+          "value": "line-bottom",
+          "label": "Line Bottom"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "tabs",
+          "label": "Tabs"
+        },
+        {
+          "value": "bold",
+          "label": "Bold"
+        },
+        {
+          "value": "pills",
+          "label": "Pills"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Style"
+    },
+    {
+      "type": "select",
+      "name": "type",
+      "attribute_type": "class",
+      "prefix": "clever-tabs__",
+      "required": false,
+      "values": [
+        {
+          "value": "horizontal",
+          "label": "Horizontal"
+        },
+        {
+          "value": "vertical",
+          "label": "Vertical"
+        }
+      ],
+      "visible": true,
+      "label": "Type"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "buttonGroup",
+      "name": "nav_style",
+      "attribute_type": "class",
+      "element_class": "clever-tabs__title",
+      "values": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Nav Style"
+    },
+    {
+      "type": "buttonGroup",
+      "name": "size",
+      "attribute_type": "class",
+      "element_class": "clever-tabs__title",
+      "prefix": "nav-size__",
+      "required": false,
+      "values": [
+        {
+          "value": "xs",
+          "label": "XS"
+        },
+        {
+          "value": "s",
+          "label": "S"
+        },
+        {
+          "value": "m",
+          "label": "M"
+        },
+        {
+          "value": "l",
+          "label": "L"
+        },
+        {
+          "value": "xl",
+          "label": "XL"
+        }
+      ],
+      "visible": true,
+      "label": "Size"
+    },
+    {
+      "type": "buttonGroup",
+      "name": "tabs_align",
+      "attribute_type": "class",
+      "element_class": "clever-tabs__title",
+      "required": false,
+      "values": [
+        {
+          "value": "left",
+          "label": "Left",
+          "icon": "dashicons dashicons-editor-alignleft"
+        },
+        {
+          "value": "center",
+          "label": "Center",
+          "icon": "dashicons dashicons-editor-aligncenter"
+        },
+        {
+          "value": "right",
+          "label": "Right",
+          "icon": "dashicons dashicons-editor-alignright"
+        }
+      ],
+      "visible": true,
+      "label": "Tabs Align"
+    }
+  ]
+}

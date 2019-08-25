@@ -1,0 +1,48 @@
+@media (min-width: 992px) {
+  .page-footer .footer-top { background-color:#fc6a21; }
+  .page-footer .footer-top { padding-top:10px; }
+  .page-footer .footer-top { padding-bottom:10px; }
+  .page-footer .footer-top a { color:#ffffff; }
+  .page-footer .footer-top a:hover { color:#fc6a21; }
+  .page-footer .footer-top { color:#ffffff; }
+  .page-footer .footer-middle { background-color:#f7f7f7; }
+  .page-footer .footer-middle { padding-top:30px; }
+  .page-footer .footer-middle { padding-bottom:30px; }
+  .page-footer .footer-middle a { color:#666666; }
+  .page-footer .footer-middle a:hover { color:#fc6a21; }
+  .page-footer .footer-middle { color:#666666; }
+  .page-footer .footer-bottom { background-color:#282828; }
+  .page-footer .footer-bottom { padding-top:15px; }
+  .page-footer .footer-bottom { padding-bottom:15px; }
+  .page-footer .footer-bottom a { color:#aaaaaa; }
+  .page-footer .footer-bottom a:hover { color:#fc6a21; }
+  .page-footer .footer-bottom { color:#aaaaaa; }
+  .newsletters-builder .subscribe .actions .subscribe { background-color:#59b210; }
+  .newsletters-builder .subscribe .actions .subscribe:hover { background-color:#59b210; }
+  .page-wrapper ul.zoo-footer-payment li svg { height:28px; }
+  .page-wrapper .page-footer ul.zoo-footer-social-links li a { font-size:20px; }
+  .page-wrapper .page-footer ul.zoo-footer-social-links li a { color:#ffffff; }
+  .page-wrapper .page-footer ul.zoo-footer-social-links li a:hover { color:#ffffff; }
+}
+@media (max-width: 991px) {
+  .page-footer .footer-top { background-color:#fc6a21; }
+  .page-footer .footer-top { padding-top:10px; }
+  .page-footer .footer-top { padding-bottom:10px; }
+  .page-footer .footer-top a { color:#ffffff; }
+  .page-footer .footer-top a:hover { color:#fc6a21; }
+  .page-footer .footer-top { color:#ffffff; }
+  .page-footer .footer-middle { background-color:#f7f7f7; }
+  .page-footer .footer-middle { padding-top:30px; }
+  .page-footer .footer-middle { padding-bottom:30px; }
+  .page-footer .footer-middle a { color:#666666; }
+  .page-footer .footer-middle a:hover { color:#fc6a21; }
+  .page-footer .footer-middle { color:#666666; }
+  .page-footer .footer-bottom { background-color:#282828; }
+  .page-footer .footer-bottom { padding-top:15px; }
+  .page-footer .footer-bottom { padding-bottom:15px; }
+  .page-footer .footer-bottom a { color:#aaaaaa; }
+  .page-footer .footer-bottom a:hover { color:#fc6a21; }
+  .page-footer .footer-bottom { color:#aaaaaa; }
+  .newsletters-builder .subscribe .actions .subscribe { background-color:#59b210; }
+  .newsletters-builder .subscribe .actions .subscribe:hover { background-color:#59b210; }
+}

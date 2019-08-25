@@ -1,0 +1,117 @@
+{
+  "name": "Divider",
+  "title": "Divider",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "widget",
+  "icon" : "",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Divider",
+  "code": "clever-divider",
+  "layouts":[
+  ],
+  "content_fields": [
+    {
+      "type": "select",
+      "name": "style",
+      "values": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "double",
+          "label": "Double"
+        },
+        {
+          "value": "dotted",
+          "label": "Dotted"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "attribute_type": "style",
+      "element_class": "element-divider__separator",
+      "code": "border-top-style",
+      "required": false,
+      "visible": true,
+      "default": "solid",
+      "label": "Style"
+    },
+    {
+      "type": "slider",
+      "name": "weight",
+      "attribute_type": "style",
+      "element_class": "element-divider__separator",
+      "code": "border-top-width",
+      "unit": "px",
+      "required": false,
+      "min":0,
+      "max":10,
+      "default": 3,
+      "visible": true,
+      "label": "Weight"
+    },
+    {
+      "type": "slider",
+      "attribute_type": "style",
+      "element_class": "element-divider__separator",
+      "code": "width",
+      "unit": "%",
+      "name": "width",
+      "min":0,
+      "max":100,
+      "default": "5",
+      "required": false,
+      "visible": true,
+      "label": "Width(%)"
+    },
+    {
+      "type": "slider",
+      "name": "gap",
+      "required": false,
+      "min":0,
+      "max":50,
+      "visible": true,
+      "label": "Gap"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "color",
+      "name": "color",
+      "attribute_type": "style",
+      "element_class": "element-divider__separator",
+      "code": "border-top-color",
+      "default": "#999",
+      "required": false,
+      "visible": true,
+      "label": "Color"
+    },
+    {
+      "type": "buttonGroup",
+      "name": "align",
+      "required": false,
+      "values": [
+        {
+          "value": "text-left",
+          "label": "Left"
+        },
+        {
+          "value": "text-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-right",
+          "label": "Right"
+        }
+      ],
+      "attribute_type": "class",
+      "default": "text-center",
+      "visible": true,
+      "label": "Alignment"
+    }
+  ]
+}

@@ -1,0 +1,757 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+if ($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getId()) {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getHeaderStyle());
+} else {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',0)->getFirstItem()->getHeaderStyle());
+}
+if($settings){
+    $data = isset($settings->header) ? $settings->header : '{}';
+}
+?>
+<!-- Modal content -->
+<div class="headerbuilder-modal-content">
+    <div class="headerbuilder-modal-header">
+        <span class="headerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="headerbuilder-modal-body">
+        <strong>Mini Cart</strong>
+        <div class="modal-inner" id="header_desktop_minicart" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open"
+                id="sub-accordion-section-header_cart">
+                <li id="customize-control-minicart_margin" class="customize-control customize-control-minicart-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-minicart_margin]" value="<?= isset($data->{'_customize-input-minicart_margin'}) && $data->{'_customize-input-minicart_margin'} ? $data->{'_customize-input-minicart_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-minicart_align" class="customize-control customize-control-minicart_align"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Align items</span>
+                    </label>
+                    <select name="settings[header][_customize-input-minicart_align]">
+                        <option value="0" <?= isset($data->{'_customize-input-minicart_align'}) && $data->{'_customize-input-minicart_align'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="left" <?= isset($data->{'_customize-input-minicart_align'}) && $data->{'_customize-input-minicart_align'} == 'left' ? 'selected' : '' ?>>
+                            Left
+                        </option>
+                        </option>
+                        <option value="right" <?= isset($data->{'_customize-input-minicart_align'}) && $data->{'_customize-input-minicart_align'} == 'right' ? 'selected' : '' ?>>
+                            Right
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_minicart_merge_item" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[header][_customize_header_minicart_merge_item]">
+                        <option value="0" <?= isset($data->{'_customize_header_minicart_merge_item'}) && $data->{'_customize_header_minicart_merge_item'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_header_minicart_merge_item'}) && $data->{'_customize_header_minicart_merge_item'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_header_minicart_merge_item'}) && $data->{'_customize_header_minicart_merge_item'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_cart_style" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Cart Style</span>
+                    </label>
+                    <select name="settings[header][_customize_header_cart_style]">
+                        <option value="off-canvas" <?= isset($data->{'_customize_header_cart_style'}) && $data->{'_customize_header_cart_style'} == 'off-canvas' ? 'selected' : '' ?>>
+                            Off-Canvas Sidebar
+                        </option>
+                        <option value="dropdown" <?= isset($data->{'_customize_header_cart_style'}) && $data->{'_customize_header_cart_style'} == 'dropdown' ? 'selected' : '' ?>>
+                            Dropdown
+                        </option>
+                        <option value="link" <?= isset($data->{'_customize_header_cart_style'}) && $data->{'_customize_header_cart_style'} == 'link' ? 'selected' : '' ?>>
+                            Link Only
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-cart_icon_style" class="customize-control customize-control-builder-radio-image"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Cart Icon Style</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_cart_icon_style" class="image">
+                        <input class="image-select" type="radio" value="cart_icon_styleplain_default"
+                               name="settings[header][_customize-radio-cart_icon_style]" id="cart_icon_styleplain_default"
+                               data-customize-setting-link="cart_icon_style" <?= isset($data->{'_customize-radio-cart_icon_style'}) && $data->{'_customize-radio-cart_icon_style'} == 'cart_icon_styleplain_default' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="cart_icon_styleplain_default" class="cart_icon_styleplain_default">
+                            <i class="cs-font clever-icon-cart-6"></i>
+                            <span class="image-clickable"></span>
+                            <p class="number">10</p>
+                        </label>
+
+                        <input class="image-select" type="radio" value=""
+                               name="settings[header][_customize-radio-cart_icon_style]" id="cart_icon_styleplain"
+                               data-customize-setting-link="cart_icon_style" <?= isset($data->{'_customize-radio-cart_icon_style'}) && $data->{'_customize-radio-cart_icon_style'} ? '' : 'checked' ?>
+                               data-alt="">
+                        <label for="cart_icon_styleplain" class="cart_icon_styleplain">
+                            <i class="cs-font clever-icon-cart-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="button circle outline is-small"
+                               name="settings[header][_customize-radio-cart_icon_style]" id="cart_icon_styleoutline"
+                               data-customize-setting-link="cart_icon_style" <?= isset($data->{'_customize-radio-cart_icon_style'}) && $data->{'_customize-radio-cart_icon_style'} == 'button circle outline is-small' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="cart_icon_styleoutline" class="cart_icon_styleoutline">
+                            <i class="cs-font clever-icon-cart-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="primary button circle is-small"
+                               name="settings[header][_customize-radio-cart_icon_style]" id="cart_icon_stylefill"
+                               data-customize-setting-link="cart_icon_style" <?= isset($data->{'_customize-radio-cart_icon_style'}) && $data->{'_customize-radio-cart_icon_style'} == 'primary button circle is-small' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="cart_icon_stylefill" class="cart_icon_stylefill">
+                            <i class="cs-font clever-icon-cart-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="primary button round is-small"
+                               name="settings[header][_customize-radio-cart_icon_style]" id="cart_icon_stylefill-round"
+                               data-customize-setting-link="cart_icon_style" <?= isset($data->{'_customize-radio-cart_icon_style'}) && $data->{'_customize-radio-cart_icon_style'} == 'primary button round is-small' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="cart_icon_stylefill-round" class="cart_icon_stylefill-round">
+                            <i class="cs-font clever-icon-cart-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button round outline is-small"
+                               name="settings[header][_customize-radio-cart_icon_style]" id="cart_icon_styleoutline-round"
+                               data-customize-setting-link="cart_icon_style" <?= isset($data->{'_customize-radio-cart_icon_style'}) && $data->{'_customize-radio-cart_icon_style'} == 'button round outline is-small' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="cart_icon_styleoutline-round" class="cart_icon_styleoutline-round">
+                            <i class="cs-font clever-icon-cart-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-cart_icon" class="customize-control customize-control-builder-radio-image"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Cart Icon</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_cart_icon" class="image">
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-cart_icon]"
+                               id="cart_icon"
+                               data-customize-setting-link="cart_icon" <?= isset($data->{'_customize-radio-cart_icon'}) && $data->{'_customize-radio-cart_icon'} ? '' : 'checked' ?>
+                               data-alt="">
+                        <label for="cart_icon" class="cart_icon">
+                            <i class="cs-font clever-icon-cart-14"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-cart-1"
+                               name="settings[header][_customize-radio-cart_icon]" id="cart_icon1"
+                               data-customize-setting-link="cart_icon" <?= isset($data->{'_customize-radio-cart_icon'}) && $data->{'_customize-radio-cart_icon'} == 'clever-icon-cart-1' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="cart_icon1" class="cart_icon1">
+                            <i class="cs-font clever-icon-cart-1"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-cart-2"
+                               name="settings[header][_customize-radio-cart_icon]" id="cart_icon2"
+                               data-customize-setting-link="cart_icon" <?= isset($data->{'_customize-radio-cart_icon'}) && $data->{'_customize-radio-cart_icon'} == 'clever-icon-cart-2' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="cart_icon2" class="cart_icon2">
+                            <i class="cs-font clever-icon-cart-2"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-cart-3"
+                               name="settings[header][_customize-radio-cart_icon]" id="cart_icon3"
+                               data-customize-setting-link="cart_icon" <?= isset($data->{'_customize-radio-cart_icon'}) && $data->{'_customize-radio-cart_icon'} == 'clever-icon-cart-3' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="cart_icon3" class="cart_icon3">
+                            <i class="cs-font clever-icon-cart-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-cart-4"
+                               name="settings[header][_customize-radio-cart_icon]" id="cart_icon4"
+                               data-customize-setting-link="cart_icon" <?= isset($data->{'_customize-radio-cart_icon'}) && $data->{'_customize-radio-cart_icon'} == 'clever-icon-cart-4' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="cart_icon4" class="cart_icon4">
+                            <i class="cs-font clever-icon-cart-4"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-cart-5"
+                               name="settings[header][_customize-radio-cart_icon]" id="cart_icon5"
+                               data-customize-setting-link="cart_icon" <?= isset($data->{'_customize-radio-cart_icon'}) && $data->{'_customize-radio-cart_icon'} == 'clever-icon-cart-5' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="cart_icon5" class="cart_icon5">
+                            <i class="cs-font clever-icon-cart-5"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="icon-cart-6"
+                               name="settings[header][_customize-radio-cart_icon]" id="cart_icon6"
+                               data-customize-setting-link="cart_icon" <?= isset($data->{'_customize-radio-cart_icon'}) && $data->{'_customize-radio-cart_icon'} == 'icon-cart-6' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="cart_icon6" class="cart_icon6">
+                            <i class="cs-font clever-icon-cart-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-minicart_icon_size" class="customize-control customize-control-minicart-icon_size"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Icon Size (px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-minicart_icon_size]" value="<?= isset($data->{'_customize-input-minicart_icon_size'}) && $data->{'_customize-input-minicart_icon_size'} ? $data->{'_customize-input-minicart_icon_size'} : '' ?>">
+                </li>
+                <li id="customize-control-header_minicart_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Color</span>
+                    <input id="input_header_minicart_color" name="settings[header][_customize-radio-minicart_icon_color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-minicart_icon_color'}) ? $data->{'_customize-radio-minicart_icon_color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_header_minicart_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_minicart_hover_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Hover Color</span>
+                    <input id="input_header_minicart_hover_color"
+                           name="settings[header][_customize-radio-minicart_icon_hover_color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-minicart_icon_hover_color'}) ? $data->{'_customize-radio-minicart_icon_hover_color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_header_minicart_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-custom_cart_icon" class="customize-control customize-control-kirki-image"
+                    style="display: list-item;">
+                    <label>
+		         <span class="customize-control-title">
+		         Custom Cart Icon
+		         </span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="image-wrapper attachment-media-view image-upload">
+                        <?php if (isset($data->carticon->value) && $data->carticon->value): ?>
+                            <a href="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/' . $data->carticon->value ?>"
+                               onclick="imagePreview('customize-control_header_carticon_image'); return false;">
+                                <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/' . $data->carticon->value ?>"
+                                     id="customize-control_header_carticon_image" height="30" width="30"
+                                     class="small-image-preview v-middle">
+                            </a>
+                        <?php endif; ?>
+                        <input id="customize-control_header_carticon" name="settings_data_carticon"
+                               value="<?= isset($data->carticon->value) ? $data->carticon->value : '' ?>" class="input-file"
+                               type="file">
+                        <?php if (isset($data->carticon->value) && $data->carticon->value): ?>
+                            <span class="delete-image">
+                        <input type="checkbox" name="settings[header][carticon][delete]" value="1" class="checkbox"
+                               id="customize-control_header_carticon_delete">
+                        <label for="customize-control_header_carticon_delete"> Delete Image</label>
+                    </span>
+                        <?php endif; ?>
+                        <input type="hidden" name="settings[header][carticon][value]"
+                               value="<?= isset($data->carticon->value) ? $data->carticon->value : '' ?>">
+                    </div>
+                </li>
+                <li id="customize-control-header_cart_total" class="customize-control customize-control-checkbox"
+                    style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+    		            <input id="_customize-input-header_cart_total" name="settings[header][_customize_header_cart_total]"
+                         type="checkbox" value="1" <?= isset($data->{'_customize_header_cart_total'}) ? 'checked' : '' ?>
+                         data-customize-setting-link="header_cart_total">
+    		            <label for="_customize-input-header_cart_total">Show cart totals</label>
+		            </span>
+                </li>
+                <li id="customize-control-header_cart_title" class="customize-control customize-control-checkbox"
+                    style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+    		            <input id="_customize-input-header_cart_title" name="settings[header][_customize_header_cart_title]"
+                         type="checkbox" value="1" <?= isset($data->{'_customize_header_cart_title'}) ? 'checked' : '' ?>
+                         data-customize-setting-link="header_cart_title">
+    		            <label for="_customize-input-header_cart_title">Show cart title</label>
+		            </span>
+                </li>
+                <li id="customize-control-minicart_border" class="customize-control customize-control-minicart_border"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Width</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top" type="text" name="settings[header][_customize-input-minicart_border-top]" value="<?= isset($data->{'_customize-input-minicart_border-top'}) && $data->{'_customize-input-minicart_border-top'} ? $data->{'_customize-input-minicart_border-top'} : '' ?>">
+                            <input placeholder="right" type="text" name="settings[header][_customize-input-minicart_border-right]" value="<?= isset($data->{'_customize-input-minicart_border-right'}) && $data->{'_customize-input-minicart_border-right'} ? $data->{'_customize-input-minicart_border-right'} : '' ?>">
+                            <input placeholder="bottom" type="text" name="settings[header][_customize-input-minicart_border-bottom]" value="<?= isset($data->{'_customize-input-minicart_border-bottom'}) && $data->{'_customize-input-minicart_border-bottom'} ? $data->{'_customize-input-minicart_border-bottom'} : '' ?>">
+                            <input placeholder="left" type="text" name="settings[header][_customize-input-minicart_border-left]" value="<?= isset($data->{'_customize-input-minicart_border-left'}) && $data->{'_customize-input-minicart_border-left'} ? $data->{'_customize-input-minicart_border-left'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-header_minicart_style" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Border Style</span>
+                    </label>
+                    <select name="settings[header][_customize_header_minicart_style]">
+                        <option value="" <?= isset($data->{'_customize_header_minicart_style'}) && $data->{'_customize_header_minicart_style'} == '' ? 'selected' : '' ?>>
+                            Default
+                        </option>
+                        <option value="none" <?= isset($data->{'_customize_header_minicart_style'}) && $data->{'_customize_header_minicart_style'} == 'none' ? 'selected' : '' ?>>
+                            None
+                        </option>
+                        <option value="solid" <?= isset($data->{'_customize_header_minicart_style'}) && $data->{'_customize_header_minicart_style'} == 'solid' ? 'selected' : '' ?>>
+                            Solid
+                        </option>
+                        <option value="dotted" <?= isset($data->{'_customize_header_minicart_style'}) && $data->{'_customize_header_minicart_style'} == 'dotted' ? 'selected' : '' ?>>
+                            Dotted
+                        </option>
+                        <option value="dashed" <?= isset($data->{'_customize_header_minicart_style'}) && $data->{'_customize_header_minicart_style'} == 'dashed' ? 'selected' : '' ?>>
+                            Dashed
+                        </option>
+                        <option value="double" <?= isset($data->{'_customize_header_minicart_style'}) && $data->{'_customize_header_minicart_style'} == 'double' ? 'selected' : '' ?>>
+                            Double
+                        </option>
+                        <option value="ridge" <?= isset($data->{'_customize_header_minicart_style'}) && $data->{'_customize_header_minicart_style'} == 'ridge' ? 'selected' : '' ?>>
+                            Ridge
+                        </option>
+                        <option value="inset" <?= isset($data->{'_customize_header_minicart_style'}) && $data->{'_customize_header_minicart_style'} == 'inset' ? 'selected' : '' ?>>
+                            Inset
+                        </option>
+                        <option value="outset" <?= isset($data->{'_customize_header_minicart_style'}) && $data->{'_customize_header_minicart_style'} == 'outset' ? 'selected' : '' ?>>
+                            Outset
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_minicart_border_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Border Color</span>
+                    <input id="input_header_minicart_border_color" name="settings[header][_customize-radio-minicart_border_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-radio-minicart_border_color'}) ? $data->{'_customize-radio-minicart_border_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_minicart_border_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-minicart_border-radius" class="customize-control customize-control-minicart_border-radius"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Radius</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top-left" type="text" name="settings[header][_customize-input-minicart_border-top-left-radius]" value="<?= isset($data->{'_customize-input-minicart_border-top-left-radius'}) && $data->{'_customize-input-minicart_border-top-left-radius'} ? $data->{'_customize-input-minicart_border-top-left-radius'} : '' ?>">
+                            <input placeholder="top-right" type="text" name="settings[header][_customize-input-minicart_border-top-right-radius]" value="<?= isset($data->{'_customize-input-minicart_border-top-right-radius'}) && $data->{'_customize-input-minicart_border-top-right-radius'} ? $data->{'_customize-input-minicart_border-top-right-radius'} : '' ?>">
+                            <input placeholder="bottom-right" type="text" name="settings[header][_customize-input-minicart_border-bottom-right-radius]" value="<?= isset($data->{'_customize-input-minicart_border-bottom-right-radius'}) && $data->{'_customize-input-minicart_border-bottom-right-radius'} ? $data->{'_customize-input-minicart_border-bottom-right-radius'} : '' ?>">
+                            <input placeholder="bottom-left" type="text" name="settings[header][_customize-input-minicart_border-bottom-left-radius]" value="<?= isset($data->{'_customize-input-minicart_border-bottom-left-radius'}) && $data->{'_customize-input-minicart_border-bottom-left-radius'} ? $data->{'_customize-input-minicart_border-bottom-left-radius'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-minicart_padding" class="customize-control customize-control-minicart-padding"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Padding (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-minicart_padding]" value="<?= isset($data->{'_customize-input-minicart_padding'}) && $data->{'_customize-input-minicart_padding'} ? $data->{'_customize-input-minicart_padding'} : '' ?>">
+                </li>
+            </ul>
+        </div>
+        <div class="modal-inner" id="header_mobile_minicart" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open" id="sub-accordion-section-header_cart_mobile">
+                <li id="customize-control-header_minicart_merge_item_mobile" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[header][_customize_header_minicart_merge_item_mobile]">
+                        <option value="0" <?= isset($data->{'_customize_header_minicart_merge_item_mobile'}) && $data->{'_customize_header_minicart_merge_item_mobile'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_header_minicart_merge_item_mobile'}) && $data->{'_customize_header_minicart_merge_item_mobile'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_header_minicart_merge_item_mobile'}) && $data->{'_customize_header_minicart_merge_item_mobile'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-minicart-mobile_border" class="customize-control customize-control-minicart-mobile_border"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Width</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top" type="text" name="settings[header][_customize-input-minicart-mobile_border-top]" value="<?= isset($data->{'_customize-input-minicart-mobile_border-top'}) && $data->{'_customize-input-minicart-mobile_border-top'} ? $data->{'_customize-input-minicart-mobile_border-top'} : '' ?>">
+                            <input placeholder="right" type="text" name="settings[header][_customize-input-minicart-mobile_border-right]" value="<?= isset($data->{'_customize-input-minicart-mobile_border-right'}) && $data->{'_customize-input-minicart-mobile_border-right'} ? $data->{'_customize-input-minicart-mobile_border-right'} : '' ?>">
+                            <input placeholder="bottom" type="text" name="settings[header][_customize-input-minicart-mobile_border-bottom]" value="<?= isset($data->{'_customize-input-minicart-mobile_border-bottom'}) && $data->{'_customize-input-minicart-mobile_border-bottom'} ? $data->{'_customize-input-minicart-mobile_border-bottom'} : '' ?>">
+                            <input placeholder="left" type="text" name="settings[header][_customize-input-minicart-mobile_border-left]" value="<?= isset($data->{'_customize-input-minicart-mobile_border-left'}) && $data->{'_customize-input-minicart-mobile_border-left'} ? $data->{'_customize-input-minicart-mobile_border-left'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-header_minicart-mobile_style" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Border Style</span>
+                    </label>
+                    <select name="settings[header][_customize_header_minicart-mobile_style]">
+                        <option value="" <?= isset($data->{'_customize_header_minicart-mobile_style'}) && $data->{'_customize_header_minicart-mobile_style'} == '' ? 'selected' : '' ?>>
+                            Default
+                        </option>
+                        <option value="none" <?= isset($data->{'_customize_header_minicart-mobile_style'}) && $data->{'_customize_header_minicart-mobile_style'} == 'none' ? 'selected' : '' ?>>
+                            None
+                        </option>
+                        <option value="solid" <?= isset($data->{'_customize_header_minicart-mobile_style'}) && $data->{'_customize_header_minicart-mobile_style'} == 'solid' ? 'selected' : '' ?>>
+                            Solid
+                        </option>
+                        <option value="dotted" <?= isset($data->{'_customize_header_minicart-mobile_style'}) && $data->{'_customize_header_minicart-mobile_style'} == 'dotted' ? 'selected' : '' ?>>
+                            Dotted
+                        </option>
+                        <option value="dashed" <?= isset($data->{'_customize_header_minicart-mobile_style'}) && $data->{'_customize_header_minicart-mobile_style'} == 'dashed' ? 'selected' : '' ?>>
+                            Dashed
+                        </option>
+                        <option value="double" <?= isset($data->{'_customize_header_minicart-mobile_style'}) && $data->{'_customize_header_minicart-mobile_style'} == 'double' ? 'selected' : '' ?>>
+                            Double
+                        </option>
+                        <option value="ridge" <?= isset($data->{'_customize_header_minicart-mobile_style'}) && $data->{'_customize_header_minicart-mobile_style'} == 'ridge' ? 'selected' : '' ?>>
+                            Ridge
+                        </option>
+                        <option value="inset" <?= isset($data->{'_customize_header_minicart-mobile_style'}) && $data->{'_customize_header_minicart-mobile_style'} == 'inset' ? 'selected' : '' ?>>
+                            Inset
+                        </option>
+                        <option value="outset" <?= isset($data->{'_customize_header_minicart-mobile_style'}) && $data->{'_customize_header_minicart-mobile_style'} == 'outset' ? 'selected' : '' ?>>
+                            Outset
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_minicart-mobile_border_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Border Color</span>
+                    <input id="input_header_minicart-mobile_border_color" name="settings[header][_customize-radio-minicart-mobile_border_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-radio-minicart-mobile_border_color'}) ? $data->{'_customize-radio-minicart-mobile_border_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_minicart-mobile_border_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-minicart-mobile_border-radius" class="customize-control customize-control-minicart-mobile_border-radius"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Radius</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top-left" type="text" name="settings[header][_customize-input-minicart-mobile_border-top-left-radius]" value="<?= isset($data->{'_customize-input-minicart-mobile_border-top-left-radius'}) && $data->{'_customize-input-minicart-mobile_border-top-left-radius'} ? $data->{'_customize-input-minicart-mobile_border-top-left-radius'} : '' ?>">
+                            <input placeholder="top-right" type="text" name="settings[header][_customize-input-minicart-mobile_border-top-right-radius]" value="<?= isset($data->{'_customize-input-minicart-mobile_border-top-right-radius'}) && $data->{'_customize-input-minicart-mobile_border-top-right-radius'} ? $data->{'_customize-input-minicart-mobile_border-top-right-radius'} : '' ?>">
+                            <input placeholder="bottom-right" type="text" name="settings[header][_customize-input-minicart-mobile_border-bottom-right-radius]" value="<?= isset($data->{'_customize-input-minicart-mobile_border-bottom-right-radius'}) && $data->{'_customize-input-minicart-mobile_border-bottom-right-radius'} ? $data->{'_customize-input-minicart-mobile_border-bottom-right-radius'} : '' ?>">
+                            <input placeholder="bottom-left" type="text" name="settings[header][_customize-input-minicart-mobile_border-bottom-left-radius]" value="<?= isset($data->{'_customize-input-minicart-mobile_border-bottom-left-radius'}) && $data->{'_customize-input-minicart-mobile_border-bottom-left-radius'} ? $data->{'_customize-input-minicart-mobile_border-bottom-left-radius'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-minicart-mobile_padding" class="customize-control customize-control-minicart-mobile-padding"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Padding (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-minicart-mobile_padding]" value="<?= isset($data->{'_customize-input-minicart-mobile_padding'}) && $data->{'_customize-input-minicart-mobile_padding'} ? $data->{'_customize-input-minicart-mobile_padding'} : '' ?>">
+                </li>
+                <li id="customize-control-mobile_minicart_margin" class="customize-control customize-control-minicart-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-mobile_minicart_margin]" value="<?= isset($data->{'_customize-input-mobile_minicart_margin'}) && $data->{'_customize-input-mobile_minicart_margin'} ? $data->{'_customize-input-mobile_minicart_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-minicart_align-mobile" class="customize-control customize-control-minicart_align-mobile"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Align items</span>
+                    </label>
+                    <select name="settings[header][_customize-input-minicart_align-mobile]">
+                        <option value="0" <?= isset($data->{'_customize-input-minicart_align-mobile'}) && $data->{'_customize-input-minicart_align-mobile'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="left" <?= isset($data->{'_customize-input-minicart_align-mobile'}) && $data->{'_customize-input-minicart_align-mobile'} == 'left' ? 'selected' : '' ?>>
+                            Left
+                        </option>
+                        </option>
+                        <option value="right" <?= isset($data->{'_customize-input-minicart_align-mobile'}) && $data->{'_customize-input-minicart_align-mobile'} == 'right' ? 'selected' : '' ?>>
+                            Right
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_cart_mobile_style" class="customize-control customize-control-kirki-select" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Cart Style</span>
+                    </label>
+                    <select name="settings[header][_customize_header_cart_mobile_style]">
+                        <option value="off-canvas" <?=isset($data->{'_customize_header_cart_mobile_style'}) && $data->{'_customize_header_cart_mobile_style'} == 'off-canvas' ? 'selected' : ''?>>Off-Canvas Sidebar</option>
+                        <option value="dropdown" <?= isset($data->{'_customize_header_cart_mobile_style'}) && $data->{'_customize_header_cart_mobile_style'} == 'dropdown' ? 'selected' : ''?>>Dropdown</option>
+                        <option value="link" <?=isset($data->{'_customize_header_cart_mobile_style'}) && $data->{'_customize_header_cart_mobile_style'} == 'link' ? 'selected' : ''?>>Link Only</option>
+                    </select>
+                </li>
+                <li id="customize-control-cart_mobile_icon_style" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Cart Icon Style</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_cart_mobile_icon_style" class="image">
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-cart_mobile_icon_style]" id="cart_mobile_icon_styleplain" data-customize-setting-link="cart_mobile_icon_style" <?= isset($data->{'_customize-radio-cart_mobile_icon_style'}) && $data->{'_customize-radio-cart_mobile_icon_style'} ? '' : 'checked'?> data-alt="">
+                        <label for="cart_mobile_icon_styleplain" class="cart_icon_styleplain">
+                            <i class="cs-font clever-icon-cart-6"></i>
+                            <span class="image-clickable"></span>
+                            <p class="number">10</p>
+                        </label>
+                        <input class="image-select" type="radio" value="button circle outline is-small" name="settings[header][_customize-radio-cart_mobile_icon_style]" id="cart_mobile_icon_styleoutline" data-customize-setting-link="cart_mobile_icon_style" <?= isset($data->{'_customize-radio-cart_mobile_icon_style'}) && $data->{'_customize-radio-cart_mobile_icon_style'} == 'button circle outline is-small' ? 'checked' : ''?> data-alt="">
+                        <label for="cart_mobile_icon_styleoutline" class="cart_icon_styleoutline">
+                            <i class="cs-font clever-icon-cart-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="primary button circle is-small" name="settings[header][_customize-radio-cart_mobile_icon_style]" id="cart_mobile_icon_stylefill" data-customize-setting-link="cart_mobile_icon_style" <?= isset($data->{'_customize-radio-cart_mobile_icon_style'}) && $data->{'_customize-radio-cart_mobile_icon_style'} == 'primary button circle is-small' ? 'checked' : ''?> data-alt="">
+                        <label for="cart_mobile_icon_stylefill" class="cart_icon_stylefill">
+                            <i class="cs-font clever-icon-cart-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="primary button round is-small" name="settings[header][_customize-radio-cart_mobile_icon_style]" id="cart_mobile_icon_stylefill-round" data-customize-setting-link="cart_mobile_icon_style" <?= isset($data->{'_customize-radio-cart_mobile_icon_style'}) && $data->{'_customize-radio-cart_mobile_icon_style'} == 'primary button round is-small' ? 'checked' : ''?> data-alt="">
+                        <label for="cart_mobile_icon_stylefill-round" class="cart_icon_stylefill-round">
+                            <i class="cs-font clever-icon-cart-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button round outline is-small" name="settings[header][_customize-radio-cart_mobile_icon_style]" id="cart_mobile_icon_styleoutline-round" data-customize-setting-link="cart_mobile_icon_style" <?= isset($data->{'_customize-radio-cart_mobile_icon_style'}) && $data->{'_customize-radio-cart_mobile_icon_style'} == 'button round outline is-small' ? 'checked' : ''?> data-alt="">
+                        <label for="cart_mobile_icon_styleoutline-round" class="cart_icon_styleoutline-round">
+                            <i class="cs-font clever-icon-cart-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-cart_mobile_icon" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Cart Icon</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_cart_mobile_icon" class="image">
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-cart_mobile_icon]" id="cart_mobile_icon" data-customize-setting-link="cart_mobile_icon" <?= isset($data->{'_customize-radio-cart_mobile_icon'}) && $data->{'_customize-radio-cart_mobile_icon'} ? '' : 'checked'?> data-alt="">
+                        <label for="cart_mobile_icon" class="cart_icon">
+                            <i class="cs-font clever-icon-cart-14"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-cart-1" name="settings[header][_customize-radio-cart_mobile_icon]" id="cart_mobile_icon1" data-customize-setting-link="cart_mobile_icon" <?= isset($data->{'_customize-radio-cart_mobile_icon'}) && $data->{'_customize-radio-cart_mobile_icon'} == 'clever-icon-cart-1' ? 'checked' : ''?> data-alt="">
+                        <label for="cart_mobile_icon1" class="cart_icon1">
+                            <i class="cs-font clever-icon-cart-1"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-cart-2" name="settings[header][_customize-radio-cart_mobile_icon]" id="cart_mobile_icon2" data-customize-setting-link="cart_mobile_icon" <?= isset($data->{'_customize-radio-cart_mobile_icon'}) && $data->{'_customize-radio-cart_mobile_icon'} == 'clever-icon-cart-2' ? 'checked' : ''?> data-alt="">
+                        <label for="cart_mobile_icon2" class="cart_icon2">
+                            <i class="cs-font clever-icon-cart-2"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-cart-3" name="settings[header][_customize-radio-cart_mobile_icon]" id="cart_mobile_icon3" data-customize-setting-link="cart_mobile_icon" <?= isset($data->{'_customize-radio-cart_mobile_icon'}) && $data->{'_customize-radio-cart_mobile_icon'} == 'clever-icon-cart-3' ? 'checked' : ''?> data-alt="">
+                        <label for="cart_mobile_icon3" class="cart_icon3">
+                            <i class="cs-font clever-icon-cart-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-cart-4" name="settings[header][_customize-radio-cart_mobile_icon]" id="cart_mobile_icon4" data-customize-setting-link="cart_mobile_icon" <?= isset($data->{'_customize-radio-cart_mobile_icon'}) && $data->{'_customize-radio-cart_mobile_icon'} == 'clever-icon-cart-4' ? 'checked' : ''?> data-alt="">
+                        <label for="cart_mobile_icon4" class="cart_icon4">
+                            <i class="cs-font clever-icon-cart-4"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-cart-5" name="settings[header][_customize-radio-cart_mobile_icon]" id="cart_mobile_icon5" data-customize-setting-link="cart_mobile_icon" <?= isset($data->{'_customize-radio-cart_mobile_icon'}) && $data->{'_customize-radio-cart_mobile_icon'} == 'clever-icon-cart-5' ? 'checked' : ''?> data-alt="">
+                        <label for="cart_mobile_icon5" class="cart_icon5">
+                            <i class="cs-font clever-icon-cart-5"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-cart-6" name="settings[header][_customize-radio-cart_mobile_icon]" id="cart_mobile_icon6" data-customize-setting-link="cart_mobile_icon" <?= isset($data->{'_customize-radio-cart_mobile_icon'}) && $data->{'_customize-radio-cart_mobile_icon'} == 'clever-icon-cart-6' ? 'checked' : ''?> data-alt="">
+                        <label for="cart_mobile_icon6" class="cart_icon6">
+                            <i class="cs-font clever-icon-cart-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-minicart_mobile_icon_size" class="customize-control customize-control-minicart-mobile-icon_size"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Icon Size (px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-minicart_mobile_icon_size]" value="<?= isset($data->{'_customize-input-minicart_mobile_icon_size'}) && $data->{'_customize-input-minicart_mobile_icon_size'} ? $data->{'_customize-input-minicart_mobile_icon_size'} : '' ?>">
+                </li>
+                <li id="customize-control-header_minicart_color_mobile"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Color</span>
+                    <input id="input_header_minicart_color_mobile" name="settings[header][_customize-radio-minicart_icon_color_mobile]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-minicart_icon_color_mobile'}) ? $data->{'_customize-radio-minicart_icon_color_mobile'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_header_minicart_color_mobile").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_minicart_hover_color_mobile"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Hover Color</span>
+                    <input id="input_header_minicart_hover_color_mobile"
+                           name="settings[header][_customize-radio-minicart_hover_color_mobile]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-minicart_hover_color_mobile'}) ? $data->{'_customize-radio-minicart_hover_color_mobile'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_header_minicart_hover_color_mobile").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-custom_cart_mobile_icon" class="customize-control customize-control-kirki-image" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Custom Cart Icon</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="image-wrapper attachment-media-view image-upload">
+                        <?php if(isset($data->cart_mobileicon->value) && $data->cart_mobileicon->value):?>
+                            <a href="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/'.$data->cart_mobileicon->value?>" onclick="imagePreview('customize-control_header_cart_mobileicon_image'); return false;" >
+                                <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/'.$data->cart_mobileicon->value?>" id="customize-control_header_cart_mobileicon_image" height="22" width="22" class="small-image-preview v-middle" >
+                            </a>
+                        <?php endif;?>
+                        <input id="customize-control_header_cart_mobileicon" name="settings_data_cart_mobileicon" value="<?=isset($data->cart_mobileicon->value) ? $data->cart_mobileicon->value : ''?>" class="input-file" type="file">
+                        <?php if(isset($data->cart_mobileicon->value) && $data->cart_mobileicon->value):?>
+                            <span class="delete-image">
+                        <input type="checkbox" name="settings[header][cart_mobileicon][delete]" value="1" class="checkbox" id="customize-control_header_cart_mobileicon_delete">
+                        <label for="customize-control_header_cart_mobileicon_delete"> Delete Image</label>
+                    </span>
+                        <?php endif;?>
+                        <input type="hidden" name="settings[header][cart_mobileicon][value]" value="<?=isset($data->cart_mobileicon->value) ? $data->cart_mobileicon->value : ''?>">
+                    </div>
+                </li>
+                <li id="customize-control-header_cart_mobile_total" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+                    <input id="_customize-input-header_cart_mobile_total" name="settings[header][_customize_header_cart_mobile_total]" type="checkbox" value="1" <?=isset($data->{'_customize_header_cart_mobile_total'}) ? 'checked' : ''?> data-customize-setting-link="header_cart_mobile_total">
+                    <label for="_customize-input-header_cart_mobile_total">Show cart totals</label>
+                    </span>
+                    </li>
+                    <li id="customize-control-header_cart_mobile_title" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                    <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+                    <input id="_customize-input-header_cart_mobile_title" name="settings[header][_customize_header_cart_mobile_title]" type="checkbox" value="1" <?=isset($data->{'_customize_header_cart_mobile_title'}) ? 'checked' : ''?> data-customize-setting-link="header_cart_mobile_title">
+                    <label for="_customize-input-header_cart_mobile_title">Show cart title</label>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    require(['jquery', 'jquery/ui'], function ($) {
+        $('input[name="settings_data_carticon"]').change(function (e) {
+            var fileName = e.target.files[0].name;
+            $('input[name="settings[header][carticon][value]"]').val(fileName);
+        });
+        $('input[name="settings_data_cart_mobileicon"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            $('input[name="settings[header][cart_mobileicon][value]"]').val(fileName);
+        });
+    });
+</script>

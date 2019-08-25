@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="checkout_cart_item_renderers"/>
+    <body>
+        <referenceContainer name="page.messages">
+            <block class="Magento\Checkout\Block\Cart\ValidationMessages" name="checkout.cart.validationmessages"/>
+        </referenceContainer>
+
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Home</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Home</item>
+                    <item name="label" xsi:type="string">Home</item>
+                    <item name="link" xsi:type="string">/</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Shopping Cart</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Shopping Cart</item>
+                    <item name="label" xsi:type="string">Shopping Cart</item>
+                    <item name="link" xsi:type="string">/checkout/cart</item>
+                </argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="checkout.cart.container">
+            <container name="cart.discount" label="Cart Discount Container" htmlTag="div" htmlClass="cart-discount" after="-" />
+            <container htmlClass="left_checkout_cart" htmlTag="div" after="cart.summary" name="left.checkout.cart" />
+            <referenceContainer name="cart.summary">
+            	<block class="CleverSoft\CleverTheme\Block\Cart\CalculateShipping" name="checkout.cart.freeship" as="calculate-freeship" template="Magento_Checkout::cart/calculate-freeship.phtml"/>
+                <block class="Magento\Checkout\Block\Cart\Coupon" name="checkout.cart.coupon" as="coupon" template="cart/coupon.phtml"/>
+                <container name="cart.summary.wrap" htmlTag="div" htmlClass="cart-summary-wrap"  />
+            </referenceContainer>
+            <referenceContainer name="checkout.cart.totals.container">
+                <block class="Magento\Checkout\Block\Cart\Totals" name="checkout.cart.totals" template="cart/totals.phtml">
+                    <arguments>
+                        <argument name="jsLayout" xsi:type="array">
+                            <item name="components" xsi:type="array">
+                                <item name="block-totals" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magento_Checkout/js/view/cart/totals</item>
+                                    <item name="displayArea" xsi:type="string">totals</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="template" xsi:type="string">Magento_Checkout/cart/totals</item>
+                                    </item>
+                                    <item name="children" xsi:type="array">
+                                        <!-- sort order for this totals is configured on admin panel-->
+                                        <!-- Stores->Configuration->SALES->Sales->General->Checkout Totals Sort Order -->
+                                        <item name="subtotal" xsi:type="array">
+                                            <item name="component"  xsi:type="string">Magento_Tax/js/view/checkout/summary/subtotal</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="title" xsi:type="string" translate="true">Subtotal</item>
+                                                <item name="template" xsi:type="string">Magento_Tax/checkout/summary/subtotal</item>
+                                            </item>
+                                        </item>
+
+                                        <item name="shipping" xsi:type="array">
+                                            <item name="component"  xsi:type="string">Magento_Tax/js/view/checkout/cart/totals/shipping</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="title" xsi:type="string" translate="true">Shipping</item>
+                                                <item name="template" xsi:type="string">Magento_Tax/checkout/cart/totals/shipping</item>
+                                            </item>
+                                        </item>
+
+                                        <item name="before_grandtotal" xsi:type="array">
+                                            <item name="component"  xsi:type="string">uiComponent</item>
+                                            <item name="sortOrder" xsi:type="string">30</item>
+                                            <item name="children" xsi:type="array">
+                                                <item name="discount" xsi:type="array">
+                                                    <item name="component"  xsi:type="string">Magento_SalesRule/js/view/cart/totals/discount</item>
+                                                    <item name="config" xsi:type="array">
+                                                        <item name="title" xsi:type="string" translate="true">Discount</item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+
+                                        <item name="tax" xsi:type="array">
+                                            <item name="component"  xsi:type="string">Magento_Tax/js/view/checkout/cart/totals/tax</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="template" xsi:type="string">Magento_Tax/checkout/cart/totals/tax</item>
+                                                <item name="title" xsi:type="string" translate="true">Tax</item>
+                                            </item>
+                                        </item>
+                                        <item name="grand-total" xsi:type="array">
+                                            <item name="component"  xsi:type="string">Magento_Tax/js/view/checkout/cart/totals/grand-total</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="template" xsi:type="string">Magento_Tax/checkout/cart/totals/grand-total</item>
+                                                <item name="exclTaxLabel" xsi:type="string" translate="true">Order Total Excl. Tax</item>
+                                                <item name="inclTaxLabel" xsi:type="string" translate="true">Order Total Incl. Tax</item>
+                                                <item name="title" xsi:type="string" translate="true">Order Total</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+            </referenceContainer>
+        </referenceContainer>
+
+        <referenceBlock name="main.breadcrumbs" remove="true"/>
+        <move element="checkout.cart.crosssell" destination="left.checkout.cart" after="-" />
+        <move element="checkout.cart.coupon" destination="cart.discount" />
+        <move element="checkout.cart.shortcut.buttons" destination="checkout.cart.methods" after="checkout.cart.methods.onepage.bottom"/>
+        <move element="checkout.cart.form" destination="left.checkout.cart" after="-" />
+        <move element="cart.discount" destination="cart.summary" before="cart.summary.wrap" />
+
+        <move element="checkout.cart.summary.title" destination="cart.summary.wrap" before="-"/>
+        <move element="checkout.cart.shipping" destination="cart.summary.wrap" after="checkout.cart.summary.title"/>
+        <move element="checkout.cart.totals.container" destination="cart.summary.wrap" />
+        <move element="checkout.cart.methods.bottom" destination="cart.summary.wrap" />
+
+        <block class="Magento\Checkout\Block\Cart\Additional\Info" name="additional.product.info" template="cart/additional/info.phtml"/>
+    </body>
+</page>

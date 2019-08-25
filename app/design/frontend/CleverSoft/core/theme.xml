@@ -1,0 +1,16 @@
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverCore
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<theme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/theme.xsd">
+    <title>CleverSoft Core (Abstract Theme)</title>
+    <parent>Magento/blank</parent>
+    <media>
+        <preview_image>media/preview.jpg</preview_image>
+    </media>
+</theme>

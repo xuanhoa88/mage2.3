@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php /** @var $block \Magento\Catalog\Block\Product\Image */ ?>
+<?php
+$lazyhelper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$lazyload = $lazyhelper->getCfg('category/lazyload');
+$icon = $lazyhelper->getCfg('responsive/iconlazyload');
+if (!empty($icon)) {
+    $image = $icon;
+    $om = \Magento\Framework\App\ObjectManager::getInstance();
+    $storeManager = $om->create('Magento\Store\Model\StoreManagerInterface');
+    $image_url = $storeManager->getStore()
+            ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'lazyload/' . $image;
+} else {
+    $image_url = $block->getViewFileUrl('CleverSoft_CleverTheme::images/transparent.gif');
+}
+
+?>
+
+<span class="product-image-container"
+      style="width:<?php /* @escapeNotVerified */ echo $block->getWidth()?>px;">
+    <span class="product-image-wrapper"
+          style="padding-bottom: <?php /* @escapeNotVerified */ echo ($block->getRatio() * 100); ?>%;">
+        <img class="product-image-photo clazyload"
+            <?php /* @escapeNotVerified */ echo $block->getCustomAttributes(); ?>
+            <?php if($lazyload == 'true'): ?>
+                data-src="<?php /* @escapeNotVerified */ echo $block->getImageUrl(); ?>" src="<?php echo $image_url; ?>"
+            <?php else: ?>
+                src="<?php /* @escapeNotVerified */ echo $block->getImageUrl(); ?>"
+            <?php endif; ?>
+             width="<?php /* @escapeNotVerified */ echo $block->getResizedImageWidth(); ?>"
+             height="<?php /* @escapeNotVerified */ echo $block->getResizedImageHeight(); ?>"
+             alt="<?php /* @escapeNotVerified */ echo $block->stripTags($block->getLabel(), null, true); ?>"/></span>
+</span>

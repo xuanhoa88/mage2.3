@@ -1,0 +1,73 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
+ */
+use Magento\Catalog\Model\Product\ProductList\Toolbar;
+$_clnhelper = $this->helper('CleverSoft\CleverLayeredNavigation\Helper\Data');
+$is_ajax = $_clnhelper->isAjaxEnabled();
+?>
+<div class="toolbar-sorter sorter">
+    <label class="sorter-label" for="sorter"><?php /* @escapeNotVerified */ echo __('Sort by') ?></label>
+    <span class="select-style">
+    <select id="sorter" <?php if(!$is_ajax) echo "data-role='sorter'"; ?> class="sorter-options">
+        <?php foreach ($block->getAvailableOrders() as $_key => $_order): ?>
+            <option value="<?php /* @escapeNotVerified */echo  $block->getPagerUrl(array('product_list_order' => $_key, 'product_list_dir' =>'asc'))?>"
+                <?php if ($block->isOrderCurrent($_key) && $this->getRequest()->getParam('product_list_dir') == 'asc'): ?>
+                    selected="selected"
+                <?php endif; ?>
+                >
+                <?php 
+                    switch ($_key) {
+                        case 'position':
+                            echo __('date: new to old');
+                            break;
+                        case 'name':
+                            echo __('alplabetically: A-Z');
+                            break;
+                        case 'price':
+                            echo __('price: low to high');
+                            break;
+                        case 'best_seller':
+                            echo __('best_seller: low to high');
+                            break;
+                        default:
+                            echo('date: new to old');
+                    }
+                ?>
+            </option>
+            <option value="<?php /* @escapeNotVerified */echo  $block->getPagerUrl(array('product_list_order' => $_key, 'product_list_dir' =>'desc'))?>"
+                <?php if ($block->isOrderCurrent($_key) && $this->getRequest()->getParam('product_list_dir') == 'desc'): ?>
+                    selected="selected"
+                <?php endif; ?>
+                >
+                <?php 
+                    switch ($_key) {
+                        case 'position':
+                            echo __('date: old to new');
+                            break;
+                        case 'name':
+                            echo __('alplabetically: Z-A');
+                            break;
+                        case 'price':
+                            echo __('price: high to low');
+                            break;
+                        default:
+                            echo __('date: old to new');
+                    }
+                ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    </span>
+</div>

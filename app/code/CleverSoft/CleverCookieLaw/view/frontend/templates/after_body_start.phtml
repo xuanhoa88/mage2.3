@@ -1,0 +1,17 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverCookieLaw
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$_helper = $this->helper('CleverSoft\CleverCookieLaw\Helper\Data');
+?>
+<?php if ($_helper->isActive()): ?>
+    <?php if ($_helper->getSystemConfig('general','type') == 'v-bar' && $_helper->getSystemConfig('general','bar_position') == 'v-top'): ?>
+        <?php echo $this->getChildHtml('cookielaw.after_body_start.widget'); ?>
+    <?php endif; ?>
+<?php endif; ?>

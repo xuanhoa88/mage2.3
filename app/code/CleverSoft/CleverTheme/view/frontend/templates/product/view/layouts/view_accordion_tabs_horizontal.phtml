@@ -1,0 +1,177 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$theme = $block->getHelperTheme();
+$helperProductView = $block->getHelperProductView();
+//Get grid classes for product page sections
+$grid = $helperProductView->getGridClasses();
+
+//Get positions of blocks
+$position = $helperProductView->getPositions();
+
+
+//Brand info
+$brandHtml = $block->getChildHtml('brand-info');
+if (!empty($brandHtml)) {
+    if (isset($p[$position['brand']])) {
+        $p[$position['brand']] = $p[$position['brand']] . $brandHtml;
+    } else {
+        $p[$position['brand']] = $brandHtml;
+    }
+}
+
+
+//Related products
+$relatedProductsHtml = $block->getChildHtml('catalog.product.related');
+if (!empty($relatedProductsHtml)) {
+    if (isset($p[$position['related']])) {
+        $p[$position['related']] = $p[$position['related']] . $relatedProductsHtml;
+    } else {
+        $p[$position['related']] = $relatedProductsHtml;
+    }
+}
+
+//Up-sell products
+$upsellProductsHtml = $block->getChildHtml('product.info.upsell');
+if (!empty($upsellProductsHtml)) {
+    if (isset($p[$position['upsell']])) {
+        $p[$position['upsell']] = $p[$position['upsell']] . $upsellProductsHtml;
+    } else {
+        $p[$position['upsell']] = $upsellProductsHtml;
+    }
+}
+
+//Up-sell, related products tab
+$upsellrelatedProductsHtml = $block->getChildHtml('product.info.related');
+if (!empty($upsellrelatedProductsHtml)) {
+    if (isset($p[$position['upsell_related']])) {
+        $p[$position['upsell_related']] = $p[$position['upsell_related']] . $upsellrelatedProductsHtml;
+    } else {
+        $p[$position['upsell_related']] = $upsellrelatedProductsHtml;
+    }
+}
+?>
+<div class="product-view product-columns-wrapper">
+    <div class="product-view-bg product-view__content">
+        <div class="row">
+        <div class="product-img-column <?php echo $grid['imgCol']; ?> no-left-gutter product media">
+
+            <?php echo $block->getChildHtml('product.info.media'); ?>
+            <?php if (isset($p['imgCol_1'])) echo $p['imgCol_1']; ?>
+
+            <?php //Container at the bottom ?>
+            <?php echo $block->getChildHtml('container_product_image_1'); ?>
+
+            <div class="non-collapsing-column-placeholder"></div>
+
+        </div>
+
+        <?php //TODO: remove old classes such as "product-shop" (if possible. check it first, test old styles) ?>
+        <div class="product-primary-column product-shop <?php echo $grid['primCol']; ?> product-shop__gutter product-info-main">
+            <?php echo $block->getChildHtml('product.info.labels'); ?>
+            <?php echo $block->getChildHtml('simple.info.stock'); ?>
+            <?php echo $block->getChildHtml('configurable.info.stock'); ?>
+            <?php echo $block->getChildHtml('virtual.info.stock'); ?>
+            <?php echo $block->getChildHtml('grouped.stock.info.stock'); ?>
+            <?php echo $block->getChildHtml('page.main.title'); ?>
+            <?php echo $block->getChildHtml('product.info.review'); ?>
+            <?php echo $block->getChildHtml('product.info.sku.sold'); ?>
+            <?php echo $block->getChildHtml('product.info.price'); ?>
+            <?php echo $block->getChildHtml('product.info.overview'); ?>
+
+            <?php //Container at the top ?>
+            <?php echo $block->getChildHtml('container_product_primary_1'); ?>
+
+            <?php if (isset($p['primCol_1'])) echo $p['primCol_1']; ?>
+            <?php echo $block->getChildHtml('product.info.main'); ?>
+            <?php if (isset($p['primCol_2'])) echo $p['primCol_2']; ?>
+
+            <?php echo $block->getChildHtml('moved.downloadable.product-info'); ?>
+
+
+            <?php //echo $block->getChildHtml('product.category.name'); ?>
+            <?php echo $block->getChildHtml('product.social.links'); ?>
+
+            <?php //Container at the bottom ?>
+            <?php echo $block->getChildHtml('container_product_primary_2'); ?>
+            <?php echo $block->getChildHtml('product.info.details'); ?>
+
+        </div>
+
+        <?php if (isset($grid['secCol'])): ?>
+
+            <div class="product-secondary-column custom-sidebar-right <?php echo $grid['secCol']; ?> no-right-gutter">
+                <div class="inner">
+
+                    <?php //Container at the top ?>
+                    <?php echo $block->getChildHtml('container_product_secondary_1'); ?>
+
+                    <?php if (isset($p['secCol_1'])) echo $p['secCol_1']; ?>
+                    <?php echo $block->getChildHtml('block_product_secondary_bottom'); ?>
+                    <?php if (isset($p['secCol_2'])) echo $p['secCol_2']; ?>
+
+                    <?php //Container at the bottom ?>
+                    <?php echo $block->getChildHtml('container_product_secondary_2'); ?>
+
+                    <?php //if (isset($p['secCol_3'])) echo $p['secCol_3']; ?>
+
+                    <?php //TODO: ?>
+                    <?php if ($tmpHtml = $block->getChildHtml('product_secondary_top_placeholder')): ?>
+                        <div class="feature-wrapper bottom-border"><?php echo $tmpHtml; ?></div>
+                    <?php endif; ?>
+
+                </div>
+            </div>
+
+        <?php endif; ?>
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+
+    <div class="bundle-options">
+        <?php echo $block->getChildHtml('bundle.options.container'); ?>
+    </div>
+
+    <div class="product-lower-primary-column <?php echo $grid['lowerPrimCol']; ?>">
+        <div class="row">
+            <?php echo $block->getChildHtml('product.social'); ?>
+
+            <?php //Container at the top. Important: required AFTER the bundle and downloadable blocks. ?>
+
+            <?php echo $block->getChildHtml('container_product_lower_primary_1'); ?>
+
+            <?php if (isset($p['lowerPrimCol_1'])) echo $p['lowerPrimCol_1']; ?>
+            <?php //Container at the bottom ?>
+            <?php echo $block->getChildHtml('container_product_lower_primary_2'); ?>
+        </div>
+
+    </div>
+
+    <?php if (isset($grid['lowerSecCol'])
+    ): ?>
+
+        <div class="product-lower-secondary-column custom-sidebar-right <?php echo $grid['lowerSecCol']; ?>">
+            <div class="row">
+
+                <?php //Container at the top ?>
+                <?php echo $block->getChildHtml('container_product_lower_secondary_1'); ?>
+
+                <?php if (isset($p['lowerSecCol_1'])) echo $p['lowerSecCol_1']; ?>
+
+                <?php //Container at the bottom ?>
+                <?php echo $block->getChildHtml('container_product_lower_secondary_2'); ?>
+
+            </div>
+        </div>
+
+    <?php endif; ?>
+
+</div>

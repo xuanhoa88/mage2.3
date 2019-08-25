@@ -1,0 +1,404 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+if ($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getId()) {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getHeaderStyle());
+} else {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',0)->getFirstItem()->getHeaderStyle());
+}
+if($settings){
+    $data = isset($settings->header) ? $settings->header : '{}';
+}
+?>
+<!-- Modal content -->
+<div class="headerbuilder-modal-content">
+    <div class="headerbuilder-modal-header">
+        <span class="headerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="headerbuilder-modal-body">
+        <strong>Sticky Header</strong>
+        <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-builder-default open" id="sub-accordion-section-sidebar">
+            <li id="customize-control-header_sticky" class="customize-control customize-control-builder-radio-buttonset" style="display: list-item;">
+                <span class="customize-control-title">Enable Sticky Header</span>
+                <div class="customize-control-notifications-container" style="display: none;">
+                   <ul></ul>
+                </div>
+                <div id="input_header_sticky" class="buttonset">
+                   <input class="switch-input screen-reader-text" type="radio" value="" name="settings[header][_customize-radio-header_sticky]" id="header_sticky_enable" <?= isset($data->{'_customize-radio-header_sticky'}) && $data->{'_customize-radio-header_sticky'} ? '' : 'checked'?>>
+                   <label class="switch-label switch-label-off" for="header_sticky_enable">Enable</label>
+                   <input class="switch-input screen-reader-text" type="radio" value="1" name="settings[header][_customize-radio-header_sticky]" id="header_sticky" <?= isset($data->{'_customize-radio-header_sticky'}) && $data->{'_customize-radio-header_sticky'} == '1' ? 'checked' : ''?> >
+                   <label class="switch-label switch-label-on " for="header_sticky">Disable</label>
+                </div>
+            </li>
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-builder-default open" id="sub-accordion-section-transparent">
+                <li id="customize-control-transparent_header" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+                        <input id="_customize-input-transparent_header" name="settings[header][_customize-input-transparent_header]" type="checkbox" value="1" data-customize-setting-link="transparent_header" <?=isset($data->{'_customize-input-transparent_header'}) && $data->{'_customize-input-transparent_header'} ? 'checked' : ''?>>
+                        <label for="_customize-input-transparent_header">Transparent Header</label>
+                        </span>
+                </li>
+                <li id="customize-control-topbar_sticky" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+                        <input id="_customize-input-topbar_sticky" name="settings[header][_customize-input-topbar_sticky]" type="checkbox" value="sticker" data-customize-setting-link="topbar_sticky" <?=isset($data->{'_customize-input-topbar_sticky'}) && $data->{'_customize-input-topbar_sticky'} ? 'checked' : ''?>>
+                        <label for="_customize-input-topbar_sticky">Top Bar - Sticky on Scroll</label>
+                    </span>
+                </li>
+                <li id="customize-control-topbar_sticky" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+                        <input id="_customize-input-header-main_sticky" name="settings[header][_customize-input-header-main_sticky]" type="checkbox" value="sticker" data-customize-setting-link="header-main_sticky" <?=isset($data->{'_customize-input-header-main_sticky'}) && $data->{'_customize-input-header-main_sticky'} ? 'checked' : ''?>>
+                        <label for="_customize-input-header-main_sticky">Header Main - Sticky on Scroll</label>
+                    </span>
+                </li>
+                <li id="customize-control-header-bottom_sticky" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+                        <input id="_customize-input-header-bottom_sticky" name="settings[header][_customize-input-header-bottom_sticky]" type="checkbox" value="sticker" data-customize-setting-link="header-bottom_sticky" <?=isset($data->{'_customize-input-header-bottom_sticky'}) && $data->{'_customize-input-header-bottom_sticky'} ? 'checked' : ''?>>
+                        <label for="_customize-input-header-bottom_sticky">Header Bottom - Sticky on Scroll</label>
+                    </span>
+                </li>
+            </ul>
+            <li id="customize-control-custom-class_header" class="customize-control customize-control-custom-class_header"
+                style="display: list-item;">
+                <label class="customizer-text">
+                    <span class="customize-control-title">Extra class name</span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                </label>
+                <input type="text" name="settings[header][_customize-input-custom-class_header]" value="<?= isset($data->{'_customize-input-custom-class_header'}) && $data->{'_customize-input-custom-class_header'} ? $data->{'_customize-input-custom-class_header'} : '' ?>">
+            </li>
+            <li id="customize-control-site_sticky_logo" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                <label>
+                <span class="customize-control-title">
+                Logo image
+                </span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                </label>
+                <div class="menu-item-field row type__image field__background">
+                    <div class="col-xs-4 label"><span></span></div>
+                    <div class="col-xs-8">
+                        <input name="settings[header][sticky_logo][value]" value="<?php echo isset($data->sticky_logo->value) && $data->sticky_logo->value ? $data->sticky_logo->value :''?>" title="" data-ui-id="form-element-content" id="header_desktop_sticky_logo_value">
+                        <button type="button" class="scalable action-add-image plugin" onclick="MediabrowserUtility.openDialog('<?php echo $this->getUrl('cms/wysiwyg_images/index')?>target_element_id/header_desktop_sticky_logo_value/element_name/settings[header][sticky_logo][value]')" style=""><span><span><span>Insert Image...</span></span></span></button>
+                        <div class="preview-image-outer">
+                            <div class="desktop-sticky-logo-preview-image-inner">
+                                <?php if(isset($data->sticky_logo->value) && $data->sticky_logo->value):?>
+                                    <?php $imageUrl = $this->getBaseUrl()."/pub/media/".$data->sticky_logo->value?>
+                                    <img src="<?php echo $imageUrl?>">
+                                <?php else:?>
+                                    <img src="<?php echo $this->getBaseUrl()?>pub/static/adminhtml/Magento/backend/en_US/CleverSoft_CleverMegaMenus/images/menu/placeholder.jpg">
+                                <?php endif;?>
+                                
+                                </a>
+                                <button class="content-btn desktop-sticky-logo-image-delete"><i class="fa fa-remove"></i></button>
+                            </div>
+                        </div>
+                        <p class="content-note">Allow file types: jpg, jpeg, png, gif</p>
+                        
+                    </div>
+                </div>
+            </li>
+            <li id="customize-control-custom-config_header_main" class="customize-control customize-control-custom-config_header_main"
+                style="display: list-item;">
+                <label class="customizer-text">
+                    <span class="customize-control-title">-------- Config for Header Top Sticky --------</span>
+            </li>
+            <li id="customize-control-header_top_sticky_height" class="customize-control customize-control-builder-slider" style="display: list-item;">
+                <label>
+                    <span class="customize-control-title">Height (Exp: 100) - Unit: Pixel (px)</span>
+                    <p class="content-note">Please just input number exclude unit in this case</p>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+
+                    <div class="wrapper">
+                        <input value="<?=isset($data->{'_customize_header_top_sticky_height'}) ? $data->{'_customize_header_top_sticky_height'} : ''?>" name="settings[header][_customize_header_top_sticky_height]" type="text">
+                    </div>
+                </label>
+            </li>
+            <li id="customize-control-header_top_sticky_link_color" class="customize-control customize-control-builder-radio-buttonset" style="display: list-item;">
+                <span class="customize-control-title">Link Color</span>
+                <input id="input_header_top_sticky_link_color" name="settings[header][_customize-header_top_sticky_link_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_top_sticky_link_color'}) ? $data->{'_customize-header_top_sticky_link_color'} : ''?>" class="mColorPicker" type="text">
+                <script>
+                    require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_top_sticky_link_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                </script>
+            </li>
+            <li id="customize-control-header_top_sticky_link_hover_color" class="customize-control customize-control-builder-radio-buttonset" style="display: list-item;">
+                <span class="customize-control-title">Link Hover Color</span>
+                <input id="input_header_top_sticky_link_hover_color" name="settings[header][_customize-header_top_sticky_link_hover_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_top_sticky_link_hover_color'}) ? $data->{'_customize-header_top_sticky_link_hover_color'} : ''?>" class="mColorPicker" type="text">
+                <script>
+                    require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_top_sticky_link_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                </script>
+            </li>
+            <li id="customize-control-header_top_sticky_text_color" class="customize-control customize-control-builder-radio-buttonset" style="display: list-item;">
+                <span class="customize-control-title">Text Color</span>
+                <input id="input_header_top_sticky_text_color" name="settings[header][_customize-header_top_sticky_text_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_top_sticky_text_color'}) ? $data->{'_customize-header_top_sticky_text_color'} : ''?>" class="mColorPicker" type="text">
+                <script>
+                    require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_top_sticky_text_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                </script>
+            </li>
+            <li id="customize-control-header_top_sticky_bg_color" class="customize-control customize-control-builder-radio-buttonset" style="display: list-item;">
+                <span class="customize-control-title">Background Color</span>
+                <input id="input_header_top_sticky_bg_color" name="settings[header][_customize-header_top_sticky_bg_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_top_sticky_bg_color'}) ? $data->{'_customize-header_top_sticky_bg_color'} : ''?>" class="mColorPicker" type="text">
+                <script>
+                    require([
+                        "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                    ],function(){
+                        jQuery(document).ready(function(){
+                            jQuery("#input_header_top_sticky_bg_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                        });
+
+                    });
+                </script>
+            </li>
+            <li id="customize-control-custom-config_header_main" class="customize-control customize-control-custom-config_header_main"
+                style="display: list-item;">
+                <label class="customizer-text">
+                    <span class="customize-control-title">-------- Config for Header Main Sticky --------</span>
+            </li>
+            <li id="customize-control-header_main_sticky_height" class="customize-control customize-control-builder-slider" style="display: list-item;">
+                <label>
+                    <span class="customize-control-title">Height (Exp: 100) - Unit: Pixel (px)</span>
+                    <p class="content-note">Please just input number exclude unit in this case</p>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+
+                    <div class="wrapper">
+                        <input value="<?=isset($data->{'_customize_header_main_sticky_height'}) ? $data->{'_customize_header_main_sticky_height'} : ''?>" name="settings[header][_customize_header_main_sticky_height]" type="text">
+                    </div>
+                </label>
+            </li>
+            <li id="customize-control-header_main_sticky_padding_top" class="customize-control customize-control-builder-slider" style="display: list-item;">
+                <label>
+                    <span class="customize-control-title">Padding Top</span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+
+                    <div class="wrapper">
+                    <input id="customize-input-header_main_sticky_padding_top" type="text" name="settings[header][customize-input-header_main_sticky_padding_top]" value="<?= isset($data->{'customize-input-header_main_sticky_padding_top'}) ? $data->{'customize-input-header_main_sticky_padding_top'} :''?>" data-customize-setting-link="header_main_sticky_padding_top">
+                    </div>
+                </label>
+            </li>
+            <li id="customize-control-header_main_sticky_padding_bottom" class="customize-control customize-control-builder-slider" style="display: list-item;">
+                <label>
+                    <span class="customize-control-title">Padding Bottom</span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+
+                    <div class="wrapper">
+                    <input id="customize-input-header_main_sticky_padding_bottom" type="text" name="settings[header][customize-input-header_main_sticky_padding_bottom]" value="<?= isset($data->{'customize-input-header_main_sticky_padding_bottom'}) ? $data->{'customize-input-header_main_sticky_padding_bottom'} :''?>" data-customize-setting-link="header_main_sticky_padding_bottom">
+                    </div>
+                </label>
+            </li>
+            <li id="customize-control-header_main_sticky_link_color" class="customize-control customize-control-builder-radio-buttonset" style="display: list-item;">
+                <span class="customize-control-title">Link Color</span>
+                <input id="input_header_main_sticky_link_color" name="settings[header][_customize-header_main_sticky_link_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_sticky_link_color'}) ? $data->{'_customize-header_main_sticky_link_color'} : ''?>" class="mColorPicker" type="text">
+                <script>
+                    require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_sticky_link_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                </script>
+            </li>
+            <li id="customize-control-header_main_sticky_link_hover_color" class="customize-control customize-control-builder-radio-buttonset" style="display: list-item;">
+                <span class="customize-control-title">Link Hover Color</span>
+                <input id="input_header_main_sticky_link_hover_color" name="settings[header][_customize-header_main_sticky_link_hover_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_sticky_link_hover_color'}) ? $data->{'_customize-header_main_sticky_link_hover_color'} : ''?>" class="mColorPicker" type="text">
+                <script>
+                    require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_sticky_link_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                </script>
+            </li>
+            <li id="customize-control-header_main_sticky_text_color" class="customize-control customize-control-builder-radio-buttonset" style="display: list-item;">
+                <span class="customize-control-title">Text Color</span>
+                <input id="input_header_main_sticky_text_color" name="settings[header][_customize-header_main_sticky_text_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_sticky_text_color'}) ? $data->{'_customize-header_main_sticky_text_color'} : ''?>" class="mColorPicker" type="text">
+                <script>
+                    require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_sticky_text_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                </script>
+            </li>
+            <li id="customize-control-header_main_sticky_bg_color" class="customize-control customize-control-builder-radio-buttonset" style="display: list-item;">
+                <span class="customize-control-title">Background Color</span>
+                <input id="input_header_main_sticky_bg_color" name="settings[header][_customize-header_main_sticky_bg_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_sticky_bg_color'}) ? $data->{'_customize-header_main_sticky_bg_color'} : ''?>" class="mColorPicker" type="text">
+                <script>
+                    require([
+                        "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                    ],function(){
+                        jQuery(document).ready(function(){
+                            jQuery("#input_header_main_sticky_bg_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                        });
+
+                    });
+                </script>
+            </li>
+            <li id="customize-control-custom-config_header_bottom" class="customize-control customize-control-custom-config_header_bottom"
+                style="display: list-item;">
+                <label class="customizer-text">
+                    <span class="customize-control-title">-------- Config for Header Bottom Sticky --------</span>
+            </li>
+            <li id="customize-control-header_bottom_sticky_height" class="customize-control customize-control-builder-slider" style="display: list-item;">
+                <label>
+                    <span class="customize-control-title">Height (Exp: 100) - Unit: Pixel (px)</span>
+                    <p class="content-note">Please just input number exclude unit in this case</p>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+
+                    <div class="wrapper">
+                        <input id="_customize-input-header_bottom_sticky_height" type="text" name="settings[header][_customize-input-header_bottom_sticky_height]" value="<?= isset($data->{'_customize-input-header_bottom_sticky_height'}) ? $data->{'_customize-input-header_bottom_sticky_height'} :''?>" data-customize-setting-link="header_bottom_sticky_height">
+                    </div>
+                </label>
+            </li>
+            <li id="customize-control-header_bottom_sticky_bg_color" class="customize-control customize-control-builder-radio-buttonset" style="display: list-item;">
+                <span class="customize-control-title">Background Color</span>
+                <input id="input_header_bottom_sticky_bg_color" name="settings[header][_customize-header_bottom_sticky_bg_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_bottom_sticky_bg_color'}) ? $data->{'_customize-header_bottom_sticky_bg_color'} : ''?>" class="mColorPicker" type="text">
+                <script>
+                    require([
+                        "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                    ],function(){
+                        jQuery(document).ready(function(){
+                            jQuery("#input_header_bottom_sticky_bg_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                        });
+
+                    });
+                </script>
+            </li>
+            <li id="customize-control-header_bottom_sticky_padding_top" class="customize-control customize-control-builder-slider" style="display: list-item;">
+                <label>
+                    <span class="customize-control-title">Padding Top</span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+
+                    <div class="wrapper">
+                    <input id="customize-input-header_bottom_sticky_padding_top" type="text" name="settings[header][customize-input-header_bottom_sticky_padding_top]" value="<?= isset($data->{'customize-input-header_bottom_sticky_padding_top'}) ? $data->{'customize-input-header_bottom_sticky_padding_top'} :''?>" data-customize-setting-link="header_bottom_sticky_padding_top">
+                    </div>
+                </label>
+            </li>
+            <li id="customize-control-header_bottom_sticky_padding_bottom" class="customize-control customize-control-builder-slider" style="display: list-item;">
+                <label>
+                    <span class="customize-control-title">Padding Bottom</span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+
+                    <div class="wrapper">
+                    <input id="customize-input-header_bottom_sticky_padding_bottom" type="text" name="settings[header][customize-input-header_bottom_sticky_padding_bottom]" value="<?= isset($data->{'customize-input-header_bottom_sticky_padding_bottom'}) ? $data->{'customize-input-header_bottom_sticky_padding_bottom'} :''?>" data-customize-setting-link="header_bottom_sticky_padding_bottom">
+                    </div>
+                </label>
+            </li>
+            <li id="customize-control-header_bottom_sticky_link_color" class="customize-control customize-control-builder-radio-buttonset" style="display: list-item;">
+                <span class="customize-control-title">Link Color</span>
+                <input id="input_header_bottom_sticky_link_color" name="settings[header][_customize-header_bottom_sticky_link_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_bottom_sticky_link_color'}) ? $data->{'_customize-header_bottom_sticky_link_color'} : ''?>" class="mColorPicker" type="text">
+                <script>
+                    require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_bottom_sticky_link_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                </script>
+            </li>
+            <li id="customize-control-header_bottom_sticky_link_hover_color" class="customize-control customize-control-builder-radio-buttonset" style="display: list-item;">
+                <span class="customize-control-title">Link Hover Color</span>
+                <input id="input_header_bottom_sticky_link_hover_color" name="settings[header][_customize-header_bottom_sticky_link_hover_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_bottom_sticky_link_hover_color'}) ? $data->{'_customize-header_bottom_sticky_link_hover_color'} : ''?>" class="mColorPicker" type="text">
+                <script>
+                    require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_bottom_sticky_link_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                </script>
+            </li>
+            <li id="customize-control-header_bottom_sticky_text_color" class="customize-control customize-control-builder-radio-buttonset" style="display: list-item;">
+                <span class="customize-control-title">Text Color</span>
+                <input id="input_header_bottom_sticky_text_color" name="settings[header][_customize-header_bottom_sticky_text_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_bottom_sticky_text_color'}) ? $data->{'_customize-header_bottom_sticky_text_color'} : ''?>" class="mColorPicker" type="text">
+                <script>
+                    require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_bottom_sticky_text_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                </script>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+require(['jquery', 'jquery/ui'], function($){
+    $('input[name="settings[header][sticky_logo][value]"]').change(function(e){
+        var $val = $(this).val();
+        if ($val) {
+            var $image_url = "<?php echo $this->getBaseUrl()?>/pub/media/"+$val;
+            $(".desktop-sticky-logo-preview-image-inner img").attr("src",$image_url);
+        }
+    });
+    
+    $(".desktop-sticky-logo-image-delete").click(function(e) {
+       e.preventDefault();
+       $('input[name="settings[header][sticky_logo][value]"]').val("");
+       $(".desktop-sticky-logo-preview-image-inner img").attr("src","<?php echo $this->getBaseUrl()?>pub/static/adminhtml/Magento/backend/en_US/CleverSoft_CleverMegaMenus/images/menu/placeholder.jpg");
+    });
+    
+});
+</script>

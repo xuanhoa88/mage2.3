@@ -1,0 +1,45 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+$panelsItems = $this->getData('panelsItems');
+?>
+<?php if($this->getData('type') == "bullet"):?>
+<div id="scroll-<?php echo $this->getData('widget_id')?>" class="global-element vertical-menu-one-page <?php if($isPreview) echo "cs-live-preview"?>">
+	<ul class="vertical-menu-one-page__list scroll-to-bullets <?php echo $this->getData('position')?>">
+		<?php foreach ($panelsItems as $item): ?>
+			<li class="vertical-menu-one-page__item">
+				<a class="tooltip-section" href="#<?=$item['link']?>">
+					<div class="effect-tooltip">
+	                    <span class="tooltip"><?=$item['title']?></span>
+	                </div>
+				</a>
+			</li>
+		<?php endforeach ?>
+	</ul>
+	<?php if($isPreview) { ?>
+        <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+    <?php } ?>
+</div>
+<?php else:?>
+<div id="scroll-<?php echo $this->getData('widget_id')?>" class="global-element vertical-menu-one-page <?php echo $this->getData('position')?> <?php if($isPreview) echo "cs-live-preview"?>">
+	<ul class="vertical-menu-one-page__list scroll-to-icon">
+		<?php foreach ($panelsItems as $item): ?>
+			<li class="vertical-menu-one-page__item">
+				<a title="<?=$item['title']?>" class="menu-link" href="#<?=$item['link']?>"><i class="cs-font <?= $item['style']?>"></i></a>
+			</li>
+		<?php endforeach ?>
+	</ul>
+	<?php if($isPreview) { ?>
+        <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+    <?php } ?>
+</div>
+<?php endif?>
+    
+<script>
+	require(['jquery', 'jquery/ui'], function($){
+		  $(document).ready( function() {
+		    var scroll_el = '#scroll-'+'<?php echo $this->getData('widget_id')?>';
+		    $(scroll_el).closest('.panel-grid-cell').addClass('box-market');
+		  });
+		});
+</script>

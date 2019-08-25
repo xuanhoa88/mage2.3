@@ -1,0 +1,62 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<script>
+    require(['prototype'], function(){
+
+//<![CDATA[
+        function export<?php echo $block->getExportType(); ?>() {
+
+            var resultMessage = $('export_result<?php echo $block->getExportType(); ?>');
+
+            params = {
+                export_type: JSON.stringify($('cleversofttheme_install_export_type').getValue()),
+                store_view: $('cleversofttheme_install_store_view').getValue()
+            };
+
+            new Ajax.Request('<?php echo $block->getAjaxUrl() ?>', {
+                parameters: params,
+                onSuccess: function(response) {
+                    var validationMessage = document.getElementById("export_result<?php echo $block->getExportType(); ?>");
+                    var result = '<?php echo __('Error during Export Datas.') ?>';
+                    try {
+                        if (response.responseText.isJSON()) {
+                            response = response.responseText.evalJSON();
+                            result = response.message;
+                        }
+                        if (response.valid == 1) {
+                            validationMessage.removeClassName('hidden').addClassName('success').addClassName('message-success')
+                        } else {
+                            validationMessage.removeClassName('hidden').addClassName('error').addClassName('message-error')
+                        }
+                    } catch (e) {
+                        validationMessage.removeClassName('hidden').addClassName('error').addClassName('message-error')
+                    }
+                    validationMessage.update(result);
+                }
+            });
+        }
+
+        window.export<?php echo $block->getExportType(); ?> = export<?php echo $block->getExportType(); ?>;
+//]]>
+
+    });
+</script>
+<style type="text/css">
+    #export_result<?php echo $block->getDemoVersion(); ?>:before{
+        top: 20px;
+        margin: 0;
+    }
+</style>
+<div class="actions actions-export-data">
+    <button onclick="javascript:export<?php echo $block->getExportType(); ?>(); return false;" class="action-export-data" type="button" id="<?php echo $block->getHtmlId() ?>">
+        <span><?php echo $block->escapeHtml($block->getButtonLabel()) ?></span>
+    </button>
+    <div id="export_result<?php echo $block->getExportType(); ?>" class="message-validation hidden message"></div>
+</div>

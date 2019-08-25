@@ -1,0 +1,20 @@
+<?php
+$currentPercent = $this->getCurrentPercent();
+$ruleFreeShip = $this->getSalesRulesFreeShip();
+$neededTotal = $this->getNeededTotal();
+?>
+<?php if($ruleFreeShip):?>
+<div class="<?php echo $currentPercent < 100 ? 'second-parse' : 'final-parse'?> free-shipping-required-notice">
+    <div class="zoo-loading-bar">
+        <div class="load-percent" style="width:<?php echo $currentPercent?>%"><?php echo $currentPercent?>%</div>
+    </div>
+    <div class="shipping-heading-notice">
+    <?php if($currentPercent < 100):?>
+        Get <b>Free Shipping</b> if you order
+        <span><?php echo $neededTotal?> more!</span>
+    <?php else:?>
+        <span>Congratulations! You've got free shipping!</span>
+    <?php endif;?>
+    </div>
+</div>
+<?php endif;?>

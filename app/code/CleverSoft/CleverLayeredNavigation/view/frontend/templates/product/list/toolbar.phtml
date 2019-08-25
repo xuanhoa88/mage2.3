@@ -1,0 +1,45 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
+ */
+use Magento\Catalog\Model\Product\ProductList\Toolbar;
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$navigationBlock = $objectManager->create('CleverSoft\CleverLayeredNavigation\Block\Navigation');
+$layredType = $navigationBlock->getLayeredType();
+?>
+
+<?php if ($block->getCollection()->getSize()): ?>
+    <div class="toolbar toolbar-products" data-mage-init='<?php /* @escapeNotVerified */ echo $block->getWidgetOptionsJson(); ?>'>
+        <div class="toolbar-left">
+            <div class="action-for-medium-up <?php echo 'layered-'.$layredType.'-toggle'?>">
+                <a class="layered-nav-toggle">
+                    <i class="layered-nav-toggle__lines"></i>
+                    <span class="layered-nav-toggle__text-before"><?php /* @escapeNotVerified */ echo __('Filter') ?></span>
+                    <span class="layered-nav-toggle__text-after"><?php /* @escapeNotVerified */ echo __('Close') ?></span>
+                </a>
+            </div>
+            <?php if ($block->isExpanded()): ?>
+                <?php include ($block->getTemplateFile('Magento_Catalog::product/list/toolbar/viewmode.phtml')) ?>
+            <?php endif; ?>
+        </div>
+        <div class="toolbar-right">
+            <?php include ($block->getTemplateFile('Magento_Catalog::product/list/toolbar/amount.phtml')) ?>
+            <?php echo $block->getPagerHtml() ?>
+            <?php include ($block->getTemplateFile('Magento_Catalog::product/list/toolbar/limiter.phtml')) ?>
+            <?php if ($block->isExpanded()): ?>
+                <?php include ($block->getTemplateFile('CleverSoft_CleverLayeredNavigation::product/list/toolbar/sorter.phtml')) ?>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif ?>

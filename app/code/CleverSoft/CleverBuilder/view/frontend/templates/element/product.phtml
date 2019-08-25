@@ -1,0 +1,88 @@
+<?php
+$widgetId = $this->getData('widget_id');
+$productHelper = $this->helper('CleverSoft\CleverBuilder\Helper\Product\Data');
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+$isAjaxload = $this->getData('ajaxload');
+$this->updateData();
+?>
+<div class="product-<?php echo $widgetId ?> global-element <?php if($isPreview) echo "cs-live-preview"?>" style="position: relative;min-height: <?php echo $this->getData('style_height') ? $this->getData('style_height').'px' : '340px'?>;height: 100%">
+    <?php if($isPreview || !$isAjaxload):?>
+		<?php
+			$data = $this->getData();
+			$_id = uniqid();
+			$data['identify'] = $_id;
+			$layout = isset($data['layout_product']) ? $data['layout_product'] : '';
+	        $mode = isset($data['mode']) ? $data['mode'] : '';
+			$params = [];
+	        if(isset($data['enable_countdown']) && (bool) $data['enable_countdown'] == 1  ) {
+	            $params['countdown_filter'] =1;
+	        }
+	        if (isset($data['category_ids']) && $data['category_ids']){
+	            $params['category_ids'] = explode(',', $data['category_ids']);
+	        }
+	        if (isset($data['product_ids']) && $data['product_ids']){
+	            $params['product_ids'] = explode(',', $data['product_ids']);
+	        }
+
+	        $limit = isset($data['limit']) && $data['limit'] ? $data['limit'] : 6;
+			$data['collection'] = $productHelper->getProducts('collections', $mode, $params, $limit);
+			switch ($layout) {
+	            case 'list':
+	                echo $this->getLayout()
+	                    ->createBlock('CleverSoft\CleverBuilder\Block\Builder\Element\Render\Products\GridProducts')
+	                    ->setData($data)
+	                    ->setTemplate('CleverSoft_CleverBuilder::element/product/cases/list.phtml')
+	                    ->toHtml();
+	                break;
+	            case 'grid':
+	                echo $this->getLayout()
+	                    ->createBlock('CleverSoft\CleverBuilder\Block\Builder\Element\Render\Products\GridProducts')
+	                    ->setData($data)
+	                    ->setTemplate('CleverSoft_CleverBuilder::element/product/cases/grid.phtml')
+	                    ->toHtml();
+	                break;
+	            case 'carousel':
+	                echo $this->getLayout()
+	                    ->createBlock('CleverSoft\CleverBuilder\Block\Builder\Element\Render\Products\CarouselProducts')
+	                    ->setData($data)
+	                    ->setTemplate('CleverSoft_CleverBuilder::element/product/cases/carousel.phtml')
+	                    ->toHtml();
+	                break;
+	            case 'carousel-vertical':
+	                echo $this->getLayout()
+	                    ->createBlock('CleverSoft\CleverBuilder\Block\Builder\Element\Render\Products\CarouselProducts')
+	                    ->setData($data)
+	                    ->setTemplate('CleverSoft_CleverBuilder::element/product/cases/carousel_vertical.phtml')
+	                    ->toHtml();
+	                break;
+	            default:
+	                echo $this->getLayout()
+	                    ->createBlock('CleverSoft\CleverBuilder\Block\Builder\Element\Render\Products\GridProducts')
+	                    ->setData($data)
+	                    ->setTemplate('CleverSoft_CleverBuilder::element/product/cases/grid.phtml')
+	                    ->toHtml();
+	                break;
+	        }
+		?>
+	<?php else:?>
+		<div class="zoo-loading"></div>
+	<?php endif;?>
+	<?php if($isPreview) { ?>
+        <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+    <?php } ?>
+</div>
+<?php if($isPreview || !$isAjaxload):?>
+
+<?php else:?>
+<script type="text/x-magento-init">
+{
+    ".product-<?php echo $widgetId?>":{
+        "cleverProductLoader":{
+            "ajaxUrl": "<?php echo $this->getUrl('cleverbuilder/product/ajaxload') ?>",
+            "data": <?php echo json_encode($this->getData()) ?>
+        }
+    }
+}
+</script>
+<?php endif;?>

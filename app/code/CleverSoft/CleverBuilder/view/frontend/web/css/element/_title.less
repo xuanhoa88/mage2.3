@@ -1,0 +1,120 @@
+& when (@media-common =true) {
+    @background_color_1: currentColor;
+    @border_color_1: rgba(255, 255, 255, 0.2);
+    .section-title {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        width: 100%;
+        margin: 0;
+        i {
+            opacity: .6;
+            margin-right: 0.5em;
+        }
+        i.icon-angle-right {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+        span {
+            text-transform: uppercase;
+        }
+        small {
+            text-transform: none;
+            font-weight: normal;
+            padding-left: 15px;
+            font-size: 1em;
+            opacity: .7;
+        }
+        b {
+            display: block;
+            -ms-flex: 1;
+            flex: 1;
+            height: 2px;
+            opacity: .1;
+            background-color: @background_color_1;
+        }
+        a {
+            display: block;
+            padding-left: 15px;
+            font-size: .8em;
+            margin-left: auto;
+        }
+        &-main {
+            &.section-title__text {
+                margin: 0;
+            }
+        }
+        &-normal {
+            border-bottom: 2px solid #ececec;
+            span {
+                margin-right: 15px;
+                padding-bottom: 7.5px;
+                border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+                margin-bottom: -2px;
+            }
+            b {
+                display: none;
+            }
+        }
+        &--no-border {
+            &.section-title-normal {
+                border: none;
+            }
+        }
+        &-center {
+            text-align: center;
+            display: block;
+            span {
+                margin: 0 15px;
+                text-align: center;
+            }
+            small {
+                padding: 0 15px;
+                display: block;
+            }
+        }
+        &-right {
+            justify-content: flex-end;
+        }
+        &-bold {
+            span {
+                border: 2px solid rgba(0, 0, 0, 0.1);
+                padding: .3em .8em;
+            }
+            b {
+                &:first-of-type {
+                    display: none;
+                }
+            }
+            &-center {
+                .section-title-main.section-title__text {
+                    flex-grow: 1;
+                    text-align: center;
+                }
+                span {
+                    text-align: center;
+                    border: 2px solid rgba(0, 0, 0, 0.1);
+                    padding: .3em .8em;
+                }
+                small {
+                    padding: 0 15px;
+                    display: block;
+                }
+            }
+        }
+    }
+    .dark {
+        .section-title-normal {
+            span {
+                border-color: @border_color_1;
+            }
+            border-color: @border_color_1;
+        }
+    }
+}

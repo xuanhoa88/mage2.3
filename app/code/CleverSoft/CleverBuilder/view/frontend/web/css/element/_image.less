@@ -1,0 +1,94 @@
+& when (@media-common = true) {
+	img {
+	    transition: opacity 1s;
+	    opacity: 1;
+	    max-width: 100%;
+	    height: auto;
+	    display: inline-block;
+	    vertical-align: middle;
+	    border-style: none;
+	}
+	.img, .img img {
+	    width: 100%;
+	}
+	.img {
+		&__inner  {
+	        position: relative;
+    		overflow: hidden;
+	    }
+	}
+    .bg-zoom:hover .bg, .has-hover:hover .image-zoom img {
+	    -ms-transform: scale(1.1);
+	    transform: scale(1.1);
+	}
+    .thumbnail {
+        max-width: 100%;
+    }
+    .bg-color .bg,
+	.bg-grayscale:hover .bg,
+	.has-hover .image-color img,
+	.has-hover:hover .image-grayscale img {
+		filter: grayscale(100%)
+	}
+
+	.bg-color:hover .bg,
+	.has-hover:hover .image-color img {
+		filter: grayscale(0)
+	}
+	.bg-zoom:hover .bg,
+	.has-hover:hover .image-zoom img {
+		-ms-transform: scale(1.1);
+		transform: scale(1.1)
+	}
+	.bg-zoom-long .bg,
+	.has-hover .image-zoom-long img {
+		transition: transform 5s !important
+	}
+	.bg-zoom-long .bg,
+	.has-hover:hover .image-zoom-long img {
+		-ms-transform: scale(1.3);
+		transform: scale(1.3)
+	}
+	.bg-zoom-fade:hover .bg,
+	.has-hover:hover .image-zoom-fade img {
+		opacity: .7;
+		-ms-transform: scale(1.1);
+		transform: scale(1.1)
+	}
+	.bg-glow:hover .bg,
+	.has-hover:hover .image-glow img {
+		filter: brightness(1.1)
+	}
+	.bg-fade-out:hover .bg,
+	.has-hover:hover .image-fade-out img {
+		opacity: .7
+	}
+	.image-fade:hover .bg,
+	.has-hover:hover .image-fade img {
+		opacity: .6
+	}
+	.bg-fade-in .bg,
+	.image-fade-in img {
+		opacity: .7
+	}
+	.bg-fade-in:hover .bg,
+	.has-hover:hover .image-fade-in img {
+		opacity: 1
+	}
+	.bg-blur:hover .bg,
+	.has-hover:hover .image-blur img {
+		filter: blur(5px)
+	}
+	.bg-overlay-remove:hover .overlay,
+	.bg-overlay-add:not(:hover) .overlay,
+	.has-hover:hover .image-overlay-remove .overlay,
+	.has-hover:not(:hover) .image-overlay-add .overlay {
+		opacity: 0
+	}
+	.bg-overlay-remove-50:hover .overlay,
+	.bg-overlay-add-50:not(:hover) .overlay,
+	.has-hover:hover .image-overlay-remove-50 .overlay,
+	.has-hover:not(:hover) .image-overlay-add-50 .overlay {
+		opacity: .5
+	}
+}

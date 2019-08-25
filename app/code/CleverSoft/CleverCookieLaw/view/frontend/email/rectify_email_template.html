@@ -1,0 +1,27 @@
+<!--@subject {{trans "%templateSubject," templateSubject=$templateSubject}}  @-->
+{{template config_path="design/email/header_template"}}
+
+<p>Dear {{trans "%customer_name," customer_name=$customer_name}}</p>
+
+<p>{{trans "Someone placed a complaint on your behalf on our site." }}</p>
+<p>{{trans "By clicking confirm a request will be made and we will do our best to fulfil it. }}</p>
+
+
+<p>--------------------------------------------------------</p>
+<p>Request</p>
+<p>--------------------------------------------------------</p>
+<p>{{trans "%request_mess" request_mess=$request_mess }}</p>
+
+
+
+
+
+<p>To confirm this request, click here: <a href='"{{trans "%link1" link1=$link1 }}"' rel="noreferrer" target="_blank">{{trans "%link1" link4=$link1 }}</a></p>
+
+
+
+
+<p>---------------------------------------------------------------------------------</p>
+<p>If that wasn't you, reset your password: <a href='"{{trans "%link_reset" link_reset=$link_reset }}"' rel="noreferrer" target="_blank">{{trans "%link_reset" link_reset=$link_reset }}</a></p>
+
+{{template config_path="design/email/footer_template"}}

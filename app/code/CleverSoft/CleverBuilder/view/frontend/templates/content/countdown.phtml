@@ -1,0 +1,108 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+$time_units = $this->getData('time_units');
+$style = $this->getData('style'); 
+if ($this->getData('due_date')) {
+  $dueDate = date("F j, Y h:i:s", strtotime($this->getData('due_date')));
+} else {
+  $dueDate = date("F j, Y h:i:s", strtotime("+1 day"));
+}
+if (!is_array($time_units) || (is_array($time_units) && !count($time_units))) {
+  $time_units = ['years', 'month', 'day', 'hours', 'minutes', 'second'];
+} 
+ 
+?>
+<?php if($style == 'inline') :?>
+<!-- Display the countdown timer in an element -->
+<div class="global-element countdown-deal <?php if($isPreview) echo "cs-live-preview"?>" style="color: <?php echo $this->getData('unit_color'); ?>">
+  <div class="countdown-deal__content d-flex align-items-center">
+    <div class="countdown-deal__times d-flex align-items-center">
+      <span class="cs-font clever-icon-clock-1"></span> 
+      <div id="countdown-final" class="countdown-deal__times-content"> 
+        <p id="timer-<?=$this->getData('widget_id')?>" class="countdown-deal--time"></p> 
+      </div> 
+    </div> 
+  </div>
+  <?php if($isPreview) { ?>
+    <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+  <?php } ?>
+</div>
+<?php else:?>              
+<div id="2timer-<?=$this->getData('widget_id')?>" class="d-flex align-items-center" style="color: <?php echo $this->getData('unit_color'); ?>"></div> 
+
+<?php endif; ?>
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("<?=$dueDate?>").getTime();
+
+// Update the count down every 1 second
+var timer = setInterval(function() {
+
+  // Get todays date and time
+  var now = new Date().getTime();
+
+  var diff = Math.floor(countDownDate - now);
+  var 
+    lengthOfDayInSeconds = 1000* 60 * 60 * 24,
+    lengthOfMonthInSeconds = lengthOfDayInSeconds*31,
+    lengthOfYearInSeconds = lengthOfDayInSeconds*365;
+
+  var years = Math.floor(diff/lengthOfYearInSeconds);
+  diff -= years*lengthOfYearInSeconds;
+
+  var months = Math.floor(diff/lengthOfMonthInSeconds);
+  diff -= months*lengthOfMonthInSeconds;
+
+  var days = Math.floor(diff/lengthOfDayInSeconds);
+
+  var distance = Math.floor(countDownDate - now);
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    var message = '';
+    var message2 = '';
+
+    <?php if(in_array('years', $time_units)):?>
+      if(years > 0) message += years + "y : ";
+      if(years > 0) message2 += '<div class="countdown-block">'+'<div class="no">'+years+'</div>'+'<div class="text"><?php  echo __('Years') ?></div>'+'</div>';
+    <?php endif;?>
+    <?php if(in_array('month', $time_units)):?>
+      if(months > 0) message += months + "m : ";
+      if(years > 0) message2 += '<div class="countdown-block">'+'<div class="no">'+months+'</div>'+'<div class="text"><?php  echo __('Months') ?></div>'+'</div>';
+    <?php endif;?>
+    <?php if(in_array('day', $time_units)):?>
+      if(days > 0) message += days + "d : ";
+      if(years > 0) message2 += '<div class="countdown-block">'+'<div class="no">'+days+'</div>'+'<div class="text"><?php  echo __('Days') ?></div>'+'</div>';
+    <?php endif;?>
+
+    <?php if(in_array('hours', $time_units)):?>
+      if(hours > 0) message += hours + "h : ";
+      if(years > 0) message2 += '<div class="countdown-block">'+'<div class="no">'+hours+'</div>'+'<div class="text"><?php  echo __('Hours') ?></div>'+'</div>';
+    <?php endif;?>
+
+    <?php if(in_array('minutes', $time_units)):?>
+      if(minutes > 0) message += minutes + "m : ";
+      if(years > 0) message2 += '<div class="countdown-block">'+'<div class="no">'+minutes+'</div>'+'<div class="text"><?php  echo __('Minutes') ?></div>'+'</div>';
+    <?php endif;?>
+
+    <?php if(in_array('second', $time_units)):?>
+      message += seconds + "s ";
+      if(years > 0) message2 += '<div class="countdown-block">'+'<div class="no">'+seconds+'</div>'+'<div class="text"><?php  echo __('Seconds') ?></div>'+'</div>';
+    <?php endif;?>
+
+	<?php if($style  == 'inline') :?>
+    document.getElementById("timer-<?=$this->getData('widget_id')?>").innerHTML = message;
+  <?php endif;?>
+    
+  <?php if($style  == 'block') :?>
+    document.getElementById("2timer-<?=$this->getData('widget_id')?>").innerHTML = message2;
+  <?php endif;?>
+  // If the count down is finished, write some text 
+  if (distance < 0) {
+    clearInterval(timer);
+    var elementTimer = document.getElementById("timer-<?=$this->getData('widget_id')?>");
+    elementTimer.parentNode.removeChild(elementTimer);
+  }
+}, 1000);
+</script>

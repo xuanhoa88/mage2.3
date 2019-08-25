@@ -1,0 +1,8 @@
+<!-- File: app/code/Pulsestorm/MenuTutorial/etc/adminhtml/menu.xml -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="CleverSoft_CleverMegaMenus::megamenu" title="CleverMegaMenu" module="CleverSoft_CleverMegaMenus" sortOrder="50" parent="CleverSoft_Base::cl_all" resource="CleverSoft_CleverMegaMenus::megamenu"/>
+        <add id="CleverSoft_CleverMegaMenus::megamenu_manger" title="Menus Manager" module="CleverSoft_CleverMegaMenus" sortOrder="0" parent="CleverSoft_CleverMegaMenus::megamenu" action="megamenu/index/manager" resource="CleverSoft_CleverMegaMenus::index" />
+        <add id="CleverSoft_CleverMegaMenus::megamenu_new" title="Create New Menu" module="CleverSoft_CleverMegaMenus" sortOrder="0" parent="CleverSoft_CleverMegaMenus::megamenu" action="megamenu/index/new" resource="CleverSoft_CleverMegaMenus::save" />
+    </menu>
+</config>

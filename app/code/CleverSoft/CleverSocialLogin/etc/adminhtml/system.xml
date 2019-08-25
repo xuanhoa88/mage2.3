@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverSocialLogin
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="sociallogin" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>CleverSocialLogin</label>
+            <tab>cleverextensions</tab>
+            <resource>CleverSoft_CleverTheme::config_cleversociallogin</resource>
+            <group id="info_sociallogin" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <attribute type="expanded">1</attribute>
+                <frontend_model>CleverSoft\CleverSocialLogin\Block\System\Config\Form\Field\Information</frontend_model>
+            </group>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <attribute type="expanded">1</attribute>
+
+                <field id="enable" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Extension</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_for_login" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display on Login Form</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display Social Login buttons on magento customer login form</comment>
+                </field>
+                <field id="enable_for_register" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display on Registration Form</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display Social Login buttons on magento customer registration form</comment>
+                </field>
+
+                <field id="position_login" translate="label comment" type="select" sortOrder="61" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Position on Login Form</label>
+                    <source_model>CleverSoft\CleverSocialLogin\Model\Config\Source\Loginform</source_model>
+                </field>
+                <field id="position_register" translate="label comment" type="select" sortOrder="62" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Position on Registration Form</label>
+                    <source_model>CleverSoft\CleverSocialLogin\Model\Config\Source\Registerform</source_model>
+                </field>
+                <field id="show_when_click" translate="label comment" type="select" sortOrder="63" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show popup when click Login or click Register</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="enable_photo" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Customer Photo</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display customer photo from social network in your website header.</comment>
+                </field>
+                <field id="redirect_for_login" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Login Success Page</label>
+                    <source_model>CleverSoft\CleverSocialLogin\Model\Config\Source\Redirectto</source_model>
+                    <comment>User will be redirected to this page after each successful login</comment>
+                </field>
+                <field id="redirect_for_login_link" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Login Custom Success Page URL</label>
+                    <comment>Please enter the full URL of the page, including the domain name, to which you will be redirecting.</comment>
+                    <depends>
+                        <field id="redirect_for_login">__custom__</field>
+                    </depends>
+                </field>
+                <field id="redirect_for_register" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Success Page</label>
+                    <source_model>CleverSoft\CleverSocialLogin\Model\Config\Source\Redirectto</source_model>
+                    <comment>User will be redirected to this page after successful registration</comment>
+                </field>
+                <field id="redirect_for_register_link" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Custom Success Page URL</label>
+                    <comment>Please enter the full URL of the page, including the domain name, to which you will be redirecting.</comment>
+                    <depends>
+                        <field id="redirect_for_register">__custom__</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="facebook" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Facebook</label>
+                <attribute type="expanded">1</attribute>
+
+                <field id="enable" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Create app Facebook <a href="https://developers.facebook.com/apps" target="_bank">here</a>]]></comment>
+                </field>
+                <field id="application_id" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App ID</label>
+                </field>
+                <field id="secret" translate="label comment" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App Secret</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="callbackurl" translate="label comment" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Callback URL</label>
+                    <frontend_model>CleverSoft\CleverSocialLogin\Block\Adminhtml\System\Config\Form\Callbackurl</frontend_model>
+                    <comment>This URL should be used while creating new social login application.</comment>
+                </field>
+                <field id="login_btn_text" translate="label comment" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Login Button Text</label>
+                </field>
+                <field id="register_btn_text" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Button Text</label>
+                </field>
+            </group>
+
+            <group id="twitter" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Twitter</label>
+                <attribute type="expanded">1</attribute>
+
+                <field id="enable" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Create app Twitter <a href="https://dev.twitter.com/apps" target="_bank">here</a>]]></comment>
+                </field>
+                <field id="application_id" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Consumer Key (API Key)</label>
+                </field>
+                <field id="secret" translate="label comment" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Consumer Secret (API Secret)</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="callbackurl" translate="label comment" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Callback URL</label>
+                    <frontend_model>CleverSoft\CleverSocialLogin\Block\Adminhtml\System\Config\Form\Callbackurl</frontend_model>
+                    <comment>This URL should be used while creating new social login application.</comment>
+                </field>
+                <field id="login_btn_text" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Login Button Text</label>
+                </field>
+                <field id="register_btn_text" translate="label comment" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Button Text</label>
+                </field>
+            </group>
+
+            <group id="google" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Google</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Create app Google <a href="https://code.google.com/apis/console/" target="_bank">here</a>]]></comment>
+                </field>
+                <field id="application_id" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Client ID</label>
+                </field>
+                <field id="secret" translate="label" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Client Secret</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="callbackurl" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Callback URL</label>
+                    <frontend_model>CleverSoft\CleverSocialLogin\Block\Adminhtml\System\Config\Form\Callbackurl</frontend_model>
+                    <comment>This URL should be used while creating new social login application.</comment>
+                </field>
+                <field id="login_btn_text" translate="label comment" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Login Button Text</label>
+                </field>
+                <field id="register_btn_text" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Button Text</label>
+                </field>
+            </group>
+
+            <group id="linkedin" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>LinkedIn</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Create app LinkedIn <a href="https://www.linkedin.com/secure/developer" target="_bank">here</a>]]></comment>
+                </field>
+                <field id="application_id" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>ID Client</label>
+                </field>
+                <field id="secret" translate="label" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Secret client</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="callbackurl" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Callback URL</label>
+                    <frontend_model>CleverSoft\CleverSocialLogin\Block\Adminhtml\System\Config\Form\Callbackurl</frontend_model>
+                    <comment>This URL should be used while creating new social login application.</comment>
+                </field>
+                <field id="login_btn_text" translate="label comment" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Login Button Text</label>
+                </field>
+                <field id="register_btn_text" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Button Text</label>
+                </field>
+            </group>
+
+            <group id="instagram" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Instagram</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Create app Instagram <a href="http://instagram.com/developer/clients/manage/" target="_bank">here</a>]]></comment>
+                </field>
+                <field id="application_id" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Client ID</label>
+                </field>
+                <field id="secret" translate="label" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Client Secret</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="callbackurl" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Callback URL</label>
+                    <frontend_model>CleverSoft\CleverSocialLogin\Block\Adminhtml\System\Config\Form\Callbackurl</frontend_model>
+                    <comment>This URL should be used while creating new social login application.</comment>
+                </field>
+                <field id="login_btn_text" translate="label comment" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Login Button Text</label>
+                </field>
+                <field id="register_btn_text" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Registration Button Text</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

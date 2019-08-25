@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverNewsletter
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Newsletter\Block\Subscribe" name="clever.newsletter.cart" template="CleverSoft_CleverTheme::newsletter/subscribe.phtml" ifconfig="clevernewsletter/selected_pages/showon_cartpage" after="-"/>
+        </referenceContainer>
+    </body>
+</page>

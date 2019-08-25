@@ -1,0 +1,11 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="CleverSoft\CleverSocialProof\Block\Product" name="socialproof.before_body_end"  template="CleverSoft_CleverSocialProof::proof_widget.phtml" ifconfig="socialproof/general/enable">
+                <action method="setCacheLifetime">
+                    <argument name="lifetime" xsi:type="string">3600</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

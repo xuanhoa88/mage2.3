@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <clevervisualpagebuilder>
+            <general>
+                <is_enabled>1</is_enabled>
+                <home_page>0</home_page>
+                <home_page_default>0</home_page_default>
+                <home_template>home-panels.php</home_template>
+                <affiliate_id>0</affiliate_id>
+                <display_teaser-id>1</display_teaser-id>
+                <display_learn>1</display_learn>
+                <load_on_attach>0</load_on_attach>
+                <post_types>page,post</post_types>
+                <live_editor_quick_link>1</live_editor_quick_link>
+                <admin_widget_count>0</admin_widget_count>
+                <sidebars_emulator>1</sidebars_emulator>
+            </general>
+            <widget>
+                <list_widget>cleversoft_shopbybrand,cleversoft_megamenu,cleversoft_pinmarker,magefan_blog_featured,mt_cookielaw,magefan_blog_recent</list_widget>
+                <title_html><![CDATA[<h3 class="widget-title">{{title}}</h3>]]></title_html>
+                <add_widget_class>1</add_widget_class>
+                <bundled_widgets>0</bundled_widgets>
+                <recommended_widgets>1</recommended_widgets>
+            </widget>
+            <layout>
+                <responsive>1</responsive>
+                <tablet_layout>0</tablet_layout>
+                <legacy_layout>auto</legacy_layout>
+                <tablet_width>1024</tablet_width>
+                <mobile_width>780</mobile_width>
+                <margin_bottom>30</margin_bottom>
+                <margin_bottom_last_row>0</margin_bottom_last_row>
+                <margin_sides>30</margin_sides>
+                <full_width_container>body</full_width_container>
+            </layout>
+        </clevervisualpagebuilder>
+    </default>
+</config>

@@ -1,0 +1,125 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+/** @var $block \Magento\Swatches\Block\CleverLayeredNavigation\RenderLayered */
+?>
+<?php
+$swatchData = $block->getSwatchData();
+$filterSetting = $swatchData['filterSetting'];
+$tooltipUrl = $swatchData['tooltipUrl'];
+?>
+
+    <div class="swatch-attribute swatch-layered <?php /* @escapeNotVerified */ echo $swatchData['attribute_code'] ?>"
+         attribute-code="<?php /* @escapeNotVerified */ echo $swatchData['attribute_code'] ?>" attribute-id="<?php /* @escapeNotVerified */ echo $swatchData['attribute_id'] ?>">
+        <div class="swatch-attribute-options clearfix cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode();?>">
+            <?php foreach ($swatchData['options'] as $option => $label): ?>
+                <?php
+                $selected = $block->getRequest()->getParam($swatchData['attribute_code']);
+                if($selected) {
+                    $selected = explode(',',$selected);
+                    $sledClass = in_array($option,$selected) ?  'selected' : '';
+                } else {
+                    $sledClass = '';
+                }
+
+                ?>
+                <a href="<?php /* @escapeNotVerified */ echo $label['link'] ?>" class="swatch-option-link-layered">
+                    <?php if (isset($swatchData['swatches'][$option]['type'])) { ?>
+                        <?php switch ($swatchData['swatches'][$option]['type']) {
+                            case '3':
+                                ?>
+                                <div class="swatch-option <?php /* @escapeNotVerified */ echo $label['custom_style'] ?> <?php echo $sledClass ?>"
+                                     option-type="3"
+                                     option-id="<?php /* @escapeNotVerified */ echo $option ?>"
+                                     option-label="<?php /* @escapeNotVerified */ echo $label['label'] ?>"
+                                     option-tooltip-thumb=""
+                                     option-tooltip-value=""
+                                    >
+                                    <div style="margin-left: 20px"><?php /* @escapeNotVerified */ echo $label['label'] . '(' . $label['count']. ') ';?></div>
+                                </div>
+                                <br />
+                                <?php    break;
+                            case '2':
+                                ?>
+                                <?php $swatchThumbPath = $block->getSwatchPath('swatch_thumb',
+                                $swatchData['swatches'][$option]['value']); ?>
+                                <?php $swatchImagePath = $block->getSwatchPath('swatch_image',
+                                $swatchData['swatches'][$option]['value']); ?>
+                                <!--                            <?php /*if ($swatchData['filterSetting']->isMultiselect()): */?>
+                            <input type="checkbox">
+                            --><?php /*endif; */?>
+
+                                <div class="swatch-option image <?php /* @escapeNotVerified */ echo $label['custom_style'] ?> <?php echo $sledClass ?>"
+                                     option-type="2"
+                                     option-id="<?php /* @escapeNotVerified */ echo $option ?>"
+                                     option-label="<?php /* @escapeNotVerified */ echo $label['label'] ?>"
+                                     option-tooltip-thumb="<?php /* @escapeNotVerified */ echo $swatchThumbPath ?>"
+                                     option-tooltip-value=""
+                                     style="background: url(<?php /* @escapeNotVerified */ echo $swatchImagePath ?>) no-repeat center; background-size: initial;">
+                                    <div style="margin-left: 20px"><?php /* @escapeNotVerified */ echo $label['label'] . '(' . $label['count']. ') ';?></div>
+
+                                </div>
+                                <br />
+                                <?php    break;
+                            case '1':
+                                ?>
+                                <div class="swatch-option color <?php /* @escapeNotVerified */ echo $label['custom_style'] ?> <?php echo $sledClass ?>"
+                                     option-type="1"
+                                     option-id="<?php /* @escapeNotVerified */ echo $option ?>"
+                                     option-label="<?php /* @escapeNotVerified */ echo $label['label'] ?>"
+                                     option-tooltip-thumb=""
+                                     option-tooltip-value="<?php /* @escapeNotVerified */ echo $swatchData['swatches'][$option]['value'] ?>"
+                                     style="background: <?php /* @escapeNotVerified */ echo $swatchData['swatches'][$option]['value'] ?> no-repeat center; background-size: initial;">
+                                    <div style="margin-left: 20px"><?php /* @escapeNotVerified */ echo $label['label'] . '(' . $label['count']. ') ';?></div>
+                                </div>
+                                <br />
+                                <?php    break;
+                            case '0':
+                            default:
+                                ?>
+                                <div class="swatch-option text <?php /* @escapeNotVerified */ echo $label['custom_style'] ?> <?php echo $sledClass ?>"
+                                     option-type="0"
+                                     option-id="<?php /* @escapeNotVerified */ echo $option ?>"
+                                     option-label="<?php /* @escapeNotVerified */ echo $label['label'] ?>"
+                                     option-tooltip-thumb=""
+                                     option-tooltip-value=""
+                                    ><?php /* @escapeNotVerified */ echo $swatchData['swatches'][$option]['value'] ?>
+                                    <div style="margin-left: 30px;margin-top: -25px;"><?php /* @escapeNotVerified */ echo $label['label'] . '(' . $label['count']. ') ';?></div>
+                                </div>
+                                <br />
+                                <?php    break;
+                        } ?>
+                    <?php } ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <script>
+        require(["jquery", "jquery/ui", "Magento_Swatches/js/swatch-renderer"], function ($) {
+            $('.swatch-layered.<?php /* @escapeNotVerified */ echo $swatchData['attribute_code'] ?>')
+                .find('[option-type="1"], [option-type="2"], [option-type="0"], [option-type="3"]')
+                .SwatchRendererTooltip();
+        });
+    </script>
+
+<?php if($filterSetting->isShowTooltip()): ?>
+    <?php
+    $tooltipTemplate = '<span class="tooltip clevershopby-filter-tooltip" style="float:right" title="{content}"><img src="'.$tooltipUrl.'"/></span>';
+    ?>
+    <script type="text/x-magento-init">
+            {
+                ".cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode()?>": {
+                    "cleverLayeredNavigationFilterAddTooltip": {
+                        "content": <?php echo json_encode($filterSetting->getTooltip())?>,
+                        "tooltipTemplate": <?php echo json_encode($tooltipTemplate)?>
+                    }
+                }
+            }
+    </script>
+<?php endif; ?>

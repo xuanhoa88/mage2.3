@@ -1,0 +1,415 @@
+& when (@media-common = true) {
+	.clever-brand-view {
+		&.catalog-category-view {
+			.zoo-breadcrumbs {
+				padding: 60px 0 0;
+			}
+		}
+		.toolbar-top {
+			clear: both;
+		}
+	}
+	.brand-index-index {
+		.page-main {
+			.page-title-wrapper {
+				text-transform: uppercase;
+			    color: #282828;
+    			margin: 0 0 20px;
+    			.page-title {
+    				display: none;
+    			}
+			}
+		}
+		.zoo-breadcrumbs {
+			padding: 60px 0 0;
+		}
+	}
+	.zoo-sidebar-main {
+		.filter {
+			&-content {
+				.block-subtitle {
+				    color: @color-black;
+				    margin: 0;
+				    padding-bottom: 20px;
+				    font-size: 18px;
+				}
+			}
+		}
+	}
+	.filter.block {
+		.filter-options-title {
+		    font-size: 21px;
+		    font-weight: 600;
+		    line-height: 1.14;
+		    color: #252525;
+		    cursor: pointer;
+		    overflow: hidden;
+		    position: relative;
+		    word-break: break-all;
+		    z-index: 1;
+		    display: block;
+		    text-decoration: none;
+		    text-transform: capitalize;
+		    border-bottom: 1px solid @color-gray90;
+		    padding-bottom: 15px;
+		    margin-bottom: 20px;
+		    &:after{
+	    	    -webkit-font-smoothing: antialiased;
+			    font-size: 12px;
+			    line-height: inherit;
+			    color: inherit;
+			    position: absolute;
+			    vertical-align: middle;
+			    display: inline-block;
+			    font-weight: normal;
+			    overflow: hidden;
+			    speak: none;
+			    text-align: center;
+			    top: 7px;
+			    right: 0;
+			    font-family: 'cleversoft';
+			    content: '\c059';
+		    }
+		}
+		.active > .filter-options-title {
+			&:after {
+			    content: '\c009';
+			}
+		}
+		.filter-options .filter-options-item {
+		    border: none;
+		    padding-bottom: 25px;
+		}
+	}
+	.brand-container {
+	    overflow: hidden;
+		margin-bottom: 60px;
+		.banner-section {
+			&--desc {
+				.brand-desc {
+				    border-bottom: 1px solid @color-gray92;
+    				padding-bottom: 20px;
+				}
+				p {
+					font-weight: 500;
+				    color: #282828;
+				    line-height: 1.8;
+				}
+			}
+			&__social {
+				padding-top: 10px;
+				.social-section {
+					&__title {
+					    font-weight: 500;
+					    color: #282828;
+					    margin: 0;
+					    font-size: 22px;
+					    line-height: 31px;
+					}
+					&__listing {
+						list-style: none;
+						li {
+							float: left;
+							button {
+							    font-size: 16px;
+							    color: @color-black;
+						        padding: 9px 0;
+							    background: none;
+							    border: none;
+							}
+							i {
+					            transition: all .2s ease-in-out;
+							}
+							&:hover {
+								i {
+								    transform: translateY(-5px);
+								    color: #ab1d2a;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	// Feature Brand
+	.clever_brands {
+	    text-align: center;
+	    padding: 30px 0;
+	    background: @color-gray92;
+	    h1 {
+	    	margin: 0;
+	    }
+	    .brand-search-wrap {
+    	    max-width: 500px;
+    		margin: 0 auto;
+    		.brand-form {
+    			.input-text {
+				    height: 40px;
+	    			border-radius: 5px;
+    			}
+    		}
+    		.list-wrap {
+    			.ui-menu {
+    				&.ui-widget.ui-widget-content {
+					    max-width: 500px;
+					    left: 50% !important;
+					    transform: translateX(-50%);
+				        border: 1px solid @color-gray92;
+    					border-top: none;
+    					.ui-state-active, .ui-widget-content .ui-state-active {
+    						border: none;
+    						background: none;
+    						color: #282828;
+    					}
+    				}
+    				&-item {
+    					text-align: left;
+    					&-wrapper {
+    						.brand-img {
+    							margin-right: 20px;
+    						}
+    					}
+    				}
+    			}
+    		}
+	    }
+	}
+	.display_featured_brands {
+	    text-align: center;
+    	margin-top: 60px;
+    	.featured-brand {
+    		margin-top: 30px;
+    	}
+		.owl-carousel {
+			&:hover {
+				.owl-nav {
+					.owl-prev{
+					    left: 0;
+					    &:hover {
+					    	background: #ab1d2a;
+					    	color: @color-white;
+					    }
+					}
+					.owl-next {
+						right: 0;
+						&:hover {
+					    	background: #ab1d2a;
+					    	color: @color-white;
+					    }
+					}				
+				}
+			}
+			.owl-nav {
+				[class*="owl-"] {
+				    width: 40px;
+				    height: 40px;
+				    background: @color-gray92;
+				    color: @color-white;
+				    font-size: 26px;
+				}
+			}
+		}
+	}
+	.list_brands {
+		h3 {
+		    border-bottom: 1px solid @color-gray92;
+			padding-bottom: 15px;
+			position: relative;
+			display: none;
+			&:before {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				width: 150px;
+				height: 2px;
+				background: @primary__color__dark;
+			}
+		}
+		.brand-alphabet-list {
+			margin-top: 60px;
+			.brand-inner {
+				.char-list {
+				    overflow: hidden;
+    				margin-bottom: 60px;
+				    border-bottom: 1px solid #ddd;
+				}
+				.char-item {
+			        display: block;
+				    float: left;
+				    margin-bottom: 10px;
+				    margin-right: 10px;
+				    padding: 4px 10px;
+				    font-size: 18px;
+				    background: @color-white;
+				    color: #282828;
+				    border: 1px solid #ddd;
+				    text-decoration: none;
+				    border-radius: 3px;
+				    transition: all ease .4s;
+				    min-width: 32px;
+				    opacity: .5;
+				    cursor: default;
+				    font-size: 14px;
+				    cursor: not-allowed;
+				    &.available {
+			    	    opacity: 1;
+					    cursor: pointer;
+					    font-weight: 500;
+				    }
+				    &.active.available {
+				    	background: #ab1d2a;
+				    	color: @color-white;
+				    }
+				    &:hover {
+				    	background: #222;
+				    	color: @color-white;
+				    }
+				}
+				.brand-list {
+					.brand-group {
+						.group-header {
+						    font-weight: bold;
+						    width: 100%;
+						    border-bottom: 1px solid #ddd;
+						    margin-bottom: 20px;
+							.label {
+							    display: inline-block;
+							    padding: 4px 12px;
+							    min-width: 100px;
+							    font-size: 18px;
+							    background-color: #222 !important;
+							    color: @color-white;
+							    position: relative;
+							    text-align: center;
+							    margin-bottom: -1px;
+							    font-weight: 400;
+							}
+						}
+						.items {
+							.brand-item {
+								margin-bottom: 30px;
+								&-inner {
+									text-align: center;
+									border: 1px solid transparent;
+									transition: all .3s ease-in-out;
+									&:hover {
+									    box-shadow: 3px 3px 4px 0 rgba(0,0,0,0.3);
+									    border-color: @color-gray92;
+									}
+									.item {
+										&-top {
+											margin-bottom: 10px;
+											overflow: hidden;
+											&:hover {
+												.brand-link {
+													.brand-img {
+														transform: scale(1.2);
+													}
+												}
+											}
+											.brand-link {
+												.brand-img {
+													transition: all .3s ease-in-out;
+												}
+											}
+										}
+										&-bottom {
+											padding: 10px 0;
+											.brand-name {
+												&:hover {
+												    text-decoration: underline !important;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.page-title-wrapper.product {
+		.brand-logo {
+			margin-top: 10px;
+			.brand-img {
+				border: 1px solid @color-gray92;
+			}
+		}
+	}
+}
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__m - 1)) {
+        .media-width('max', @screen__m);
+        .brand-container {
+			.banner-section {
+				&__content {
+					margin-top: 45px;
+				}
+				&__social {
+					.social-section {
+						&__listing {
+						    margin-top: 10px;
+							li {
+							    padding-right: 25px;
+							    &:last-child {
+							    	padding-right: 0;
+							    }
+							}
+						}
+					}
+				}
+				&--thumb {
+					.brand-img-wrap {
+				        text-align: center;
+					}
+				}
+			}
+		}
+    }
+}
+/* Tablet */
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (min-width: @screen__m) {
+        .media-width('min', @screen__m);
+        .brand-container {
+			.banner-section {
+				display: flex;
+				&__social {
+					.social-section {
+						&__listing {
+							float: right;
+							li {
+								float: left;
+							    padding-left: 25px;
+							    &:first-child {
+							    	padding-left: 0;
+							    }
+								button {
+								    font-size: 16px;
+								    color: @color-black;
+							        padding: 0;
+								    background: none;
+								    border: none;
+							        line-height: 31px;
+								}
+							}
+						}
+					}
+				}
+				&--thumb {
+					.brand-img-wrap {
+						.brand-image {
+						    border: 1px solid @color-gray92;
+						    width: 100%;
+						}
+					}
+				}
+			}
+		}
+    }
+}

@@ -1,0 +1,221 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverBuilder
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+
+
+use Magento\Framework\App\Action\Action;
+$_id = $this->getData('identify') ? $this->getData('identify') : $this->getData('id');
+$_title = $this->getConfig('widget_title') ? $this->getConfig('widget_title') : $this->getData('widget_title');
+$_sub_title = $this->getData('widget_sub_title') ? $this->getData('widget_sub_title') : $this->getConfig('widget_sub_title');
+$t = microtime();
+$tab = $this->getData('tab');
+?>
+<div class="zoo-product-carousel <?php echo $this->getData('classes') ?> zoo-product-collection02" id="<?php echo $_id ?>">
+    <?php if ($_title || $_sub_title): ?>
+        <div class="zoo-main-heading">
+            <?php if($_title) : ?>
+                <div class="zoo-heading-wrapper-title">
+                    <h3><span><?php echo $_title ?></span></h3>
+                </div>
+            <?php endif; if($_sub_title): ?>
+                <div class="zoo-heading-wrapper-sub-title">
+                    <h3><span><?php echo $_sub_title ?></span></h3>
+                </div>
+            <?php endif; ?>
+        </div>
+    <?php endif;
+    ?>
+    <?php if ($exist = ($this->getData('collection') && $this->getData('collection')->getSize())): ?>
+        <?php
+        $type = 'widget-product-grid';
+
+        $mode = 'grid';
+
+        $count = $this->getData('collection') ? $this->getData('collection')->count() : 0;
+        //        $carousel = $this->getData('carousel');
+
+        $row = (int)$this->getData('limit');
+        $column = 1;
+
+        $image = 'new_products_content_widget_grid';
+        $items = $this->getData('collection')->getItems();
+
+//        $showWishlist = true;
+//        $showCompare = true;
+//        $showCart = true;
+        $showWishlist = $this->getData('display_addtowishlist');
+        $showCompare = $this->getData('display_addtocompare');
+        $showCart = $this->getData('display_addtocart');
+        $showPrice = $this->getData('display_price');
+        $showRating = $this->getData('display_rating');
+        $showProductName = $this->getData('display_productname');
+        ///
+
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+        $_imageHelper = $this->helper('CleverSoft\CleverBuilder\Helper\Product\Image');
+        $description = false;
+        $dataHelpder = $this->helper('CleverSoft\CleverBuilder\Helper\Product\Data');
+        $imgWidth = $this->getData('image_width') ;
+        $imgHeight = $this->getData('image_height') ;
+        //Get icon lazy load
+        $lazyload = $this->getData('lazyload');
+        if (is_null($lazyload) ) $lazyload = false;
+        //End get Icon lazy load
+        //Image aspect ratio settings
+        $keepAspectRatio = $this->getData('aspect_ratio');
+        if ($keepAspectRatio == 'true' || $keepAspectRatio == '1') {
+            $imgHeight = 0; //Height will be calculated automatically (based on width) to keep the aspect ratio
+            $catViewKeepFrame = FALSE;
+        } else {
+            $catViewKeepFrame = TRUE;
+        }
+        
+        $image_url = $this->getViewFileUrl('CleverSoft_CleverBuilder::images/transparent.gif');
+        $image_alt_url = $this->getViewFileUrl('CleverSoft_CleverBuilder::images/transparent.gif');
+
+        $extClass = '';
+        ?>
+        <div class="block widget zoo-block-products-list <?php /* @escapeNotVerified */  echo $mode; ?> ">
+            <div class="block-content">
+                <?php $i = 0;
+                foreach ($items as $_item): ?>
+                <?php /* @escapeNotVerified */
+                echo '<!-- ' . $image . '-->' ?>
+                <?php if (($row > 1 && $i % $row == 0)): ?>
+                <div class="products-<?php /* @escapeNotVerified */
+                echo $mode; ?> <?php /* @escapeNotVerified */
+                echo $mode; ?>">
+                    <ol class="product-items vertical-carousel <?php /* @escapeNotVerified */
+                    echo $type; ?>">
+                        <?php endif ?>
+
+                        <?php $i++ ?>
+                        <?php /* @escapeNotVerified */
+                        echo ($i == 1) ? '<li class="'. $extClass .'">' : '</li><li class="' . $extClass .'">';
+                        ?>
+                        <div class="product-item-info">
+                            <div class="zoo-inner-product-item-info slider">
+                                <a href="<?php /* @escapeNotVerified */
+                                echo $this->getProductUrl($_item) ?>" class="product-item-photo" style="width: <?php echo $this->getData('product_im_w') ?>!important;">
+                                    <?php echo $dataHelpder->getLabel($_item); ?>
+                                    <?php if(!$imgWidth) : ?>
+                                        <?php echo $this->getImage($_item, $image)->toHtml(); ?>
+                                    <?php
+                                    ////this else is for full width image - Hạnh issue
+                                    else: ?>
+                                        <img
+                                            <?php if($lazyload): ?>
+                                                <?php if(!$keepAspectRatio):?>
+                                                    class="clazyload product-image-photo" data-src="<?php echo $_imageHelper->getImg($_item, $imgWidth, $imgHeight, 'category_page_grid'); ?>"  src="<?php echo $image_url; ?>"
+                                                <?php else:?>
+                                                    class="clazyload product-image-photo" data-src="<?php echo $_imageHelper->getImg($_item, $imgWidth, $imgHeight, 'category_page_grid'); ?>"  src="<?php echo $image_url; ?>"
+                                                <?php endif;?>
+                                            <?php else: ?>
+                                                <?php if(!$keepAspectRatio):?>
+                                                    class="product-image-photo" src="<?php echo $_imageHelper->getImg($_item, $imgWidth, $imgHeight, 'category_page_grid'); ?>"
+                                                <?php else:?>
+                                                    class="product-image-photo" src="<?php echo $_imageHelper->getImg($_item, $imgWidth, $imgHeight, 'category_page_grid'); ?>"
+                                                <?php endif;?>
+                                            <?php endif; ?>
+                                            alt="<?php echo $this->stripTags($_item->getName(), null, true) ?>" width="<?php echo $imgWidth ?>"/>
+                                    <?php endif; ?>
+                                    <?php if ($block->getData('alt_image') && $dataHelpder->getAltImgHtml($_item, $imgWidth, $imgHeight, $image)): ?>
+                                        <?php if(!$keepAspectRatio):?>
+                                            <span class="product-img-additional alt-image">
+                                                <?php echo $dataHelpder->getAltImgHtml($_item, $imgWidth, $imgHeight, $image); ?>
+                                            </span>
+                                        <?php else:?>
+                                            <span class="product-img-additional alt-image">
+                                                <?php echo $dataHelpder->getAltImgHtml($_item, $imgWidth, $imgHeight, $image); ?>
+                                            </span>
+                                        <?php endif;?>
+                                    <?php endif; ?>
+                                </a>
+                                <div class="product details product-item-details">
+                                    <strong class="product-item-name">
+                                        <a title="<?php echo $this->escapeHtml($_item->getName()) ?>"
+                                           href="<?php /* @escapeNotVerified */
+                                           echo $this->getProductUrl($_item) ?>"
+                                           class="product-item-link">
+                                            <?php echo $this->escapeHtml($_item->getName()) ?>
+
+                                        </a>
+                                    </strong>
+                                    <?php
+                                    echo $this->getProductPriceHtml($_item, \Magento\Catalog\Pricing\Price\FinalPrice::PRICE_CODE);
+                                    ?>
+
+                                    <?php if ($templateType): ?>
+                                        <?php echo $this->getReviewsSummaryHtml($_item, $templateType,true) ?>
+                                    <?php endif; ?>
+                                    <?php echo $this->getColorSwatchDetailsHtml($_item); ?>
+
+                                </div>
+                            </div>
+                        </div>
+                        <?php echo ($i == count($items)) ? '</li>' : '' ?>
+                        <?php if ($i == $count || ($row > 1 && $i % $row == 0)): ?>
+                        <!--                --><?php //if ($i == $count || $i % $column == 0 || ($row > 1 && $i % $row == 0)): ?>
+                    </ol>
+                </div>
+            <?php endif ?>
+                <?php if ($i == $count): ?>
+            </div>
+            <?php endif ?>
+            <?php endforeach ?>
+        </div>
+    <?php endif; ?>
+    <?php if (!$this->isRedirectToCartEnabled()) : ?>
+        <script type="text/x-magento-init">
+        {
+            "[data-role=tocart-form], .form.map.checkout": {
+                "catalogAddToCart": {}
+            }
+        }
+        </script>
+    <?php endif; ?>
+</div>
+<script>
+    require([
+        "jquery",
+        "cleverProductMage"
+    ], function ($,cleverProductMage) {
+        $(function() {
+            $(document).on({
+                mouseenter: function () {
+                    var imgage_additional = $(this).find('.imgage-additional');
+                    var zoo_image = $(this).find('.zoo-product-image');
+                    zoo_image.addClass('hover-image-loading');
+                    imgage_additional.attr('src', imgage_additional.attr('data-src'));
+                    zoo_image.addClass('hover-image-loaded');
+                    zoo_image.removeClass('hover-image-loading');
+                },
+                mouseleave: function () {
+                    
+                }
+            }, ".product-item-info");
+            $('#<?php echo $_id ?>').cleverProductMage({
+                animation: <?php echo $this->getData('animation') ? 'true' : 'false' ?>,
+                parallax: <?php echo $this->getData('parallax') ? 'true' : 'false'?>,
+                carouselv: <?php echo $this->getData('carouselv') ?>,
+                countdown: <?php echo $this->getData('countdown') ?>,
+                countdownConfig: {
+                    dayText: '',
+                    hourText: '',
+                    minText: '',
+                    secText: '',
+                    daySingularText: '',
+                    hourSingularText: '',
+                    minSingularText: '',
+                    secSingularText: ''
+                },
+                countdownTemplate: '<div class="day"><span class="no">%d</span><span class="text">days</span></div><div class="hours"><span class="no">%h</span><span class="text">hours</span></div><div class="min"><span class="no">%i</span><span class="text">minutes</span></div><div class="second"><span class="no">%s</span><span class="text">seconds</span></div>',
+            });
+        });
+    });
+</script>

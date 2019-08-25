@@ -1,0 +1,9 @@
+<!--@subject {{trans "%templateSubject," templateSubject=$templateSubject}}  @-->
+{{template config_path="design/email/header_template"}}
+
+<p>Dear {{trans "%customer_name," customer_name=$customer_name}}</p>
+
+
+<p>{{trans "%request_mess" request_mess=$request_mess }}</p>
+
+{{template config_path="design/email/footer_template"}}

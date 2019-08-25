@@ -1,0 +1,541 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+if ($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getId()) {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getHeaderStyle());
+} else {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',0)->getFirstItem()->getHeaderStyle());
+}
+if($settings){
+    $data = isset($settings->header) ? $settings->header : '{}';
+}
+?>
+<!-- Modal content -->
+<div class="headerbuilder-modal-content">
+    <div class="headerbuilder-modal-header">
+        <span class="headerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="headerbuilder-modal-body">
+		<strong>Account</strong>
+        <div class="modal-inner" id="header_desktop_user_area" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open" id="sub-accordion-section-header_account">
+                <li id="customize-control-header_user_area_merge_item" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[header][_customize_header_user_area_merge_item]">
+                        <option value="0" <?= isset($data->{'_customize_header_user_area_merge_item'}) && $data->{'_customize_header_user_area_merge_item'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_header_user_area_merge_item'}) && $data->{'_customize_header_user_area_merge_item'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_header_user_area_merge_item'}) && $data->{'_customize_header_user_area_merge_item'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+
+                <li id="customize-control-account_icon_size" class="customize-control customize-control-account-icon_size"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Icon Size (px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-account_icon_size]" value="<?= isset($data->{'_customize-input-account_icon_size'}) && $data->{'_customize-input-account_icon_size'} ? $data->{'_customize-input-account_icon_size'} : '' ?>">
+                </li>
+                <li id="customize-control-account_border" class="customize-control customize-control-account_border"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Width</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top" type="text" name="settings[header][_customize-input-account_border-top]" value="<?= isset($data->{'_customize-input-account_border-top'}) && $data->{'_customize-input-account_border-top'} ? $data->{'_customize-input-account_border-top'} : '' ?>">
+                            <input placeholder="right" type="text" name="settings[header][_customize-input-account_border-right]" value="<?= isset($data->{'_customize-input-account_border-right'}) && $data->{'_customize-input-account_border-right'} ? $data->{'_customize-input-account_border-right'} : '' ?>">
+                            <input placeholder="bottom" type="text" name="settings[header][_customize-input-account_border-bottom]" value="<?= isset($data->{'_customize-input-account_border-bottom'}) && $data->{'_customize-input-account_border-bottom'} ? $data->{'_customize-input-account_border-bottom'} : '' ?>">
+                            <input placeholder="left" type="text" name="settings[header][_customize-input-account_border-left]" value="<?= isset($data->{'_customize-input-account_border-left'}) && $data->{'_customize-input-account_border-left'} ? $data->{'_customize-input-account_border-left'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-header_account_style" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Border Style</span>
+                    </label>
+                    <select name="settings[header][_customize_header_account_style]">
+                        <option value="" <?= isset($data->{'_customize_header_account_style'}) && $data->{'_customize_header_account_style'} == '' ? 'selected' : '' ?>>
+                            Default
+                        </option>
+                        <option value="none" <?= isset($data->{'_customize_header_account_style'}) && $data->{'_customize_header_account_style'} == 'none' ? 'selected' : '' ?>>
+                            None
+                        </option>
+                        <option value="solid" <?= isset($data->{'_customize_header_account_style'}) && $data->{'_customize_header_account_style'} == 'solid' ? 'selected' : '' ?>>
+                            Solid
+                        </option>
+                        <option value="dotted" <?= isset($data->{'_customize_header_account_style'}) && $data->{'_customize_header_account_style'} == 'dotted' ? 'selected' : '' ?>>
+                            Dotted
+                        </option>
+                        <option value="dashed" <?= isset($data->{'_customize_header_account_style'}) && $data->{'_customize_header_account_style'} == 'dashed' ? 'selected' : '' ?>>
+                            Dashed
+                        </option>
+                        <option value="double" <?= isset($data->{'_customize_header_account_style'}) && $data->{'_customize_header_account_style'} == 'double' ? 'selected' : '' ?>>
+                            Double
+                        </option>
+                        <option value="ridge" <?= isset($data->{'_customize_header_account_style'}) && $data->{'_customize_header_account_style'} == 'ridge' ? 'selected' : '' ?>>
+                            Ridge
+                        </option>
+                        <option value="inset" <?= isset($data->{'_customize_header_account_style'}) && $data->{'_customize_header_account_style'} == 'inset' ? 'selected' : '' ?>>
+                            Inset
+                        </option>
+                        <option value="outset" <?= isset($data->{'_customize_header_account_style'}) && $data->{'_customize_header_account_style'} == 'outset' ? 'selected' : '' ?>>
+                            Outset
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_account_border_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Border Color</span>
+                    <input id="input_header_account_border_color" name="settings[header][_customize-radio-account_border_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-radio-account_border_color'}) ? $data->{'_customize-radio-account_border_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_account_border_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-account_border-radius" class="customize-control customize-control-account_border-radius"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Radius</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top-left" type="text" name="settings[header][_customize-input-account_border-top-left-radius]" value="<?= isset($data->{'_customize-input-account_border-top-left-radius'}) && $data->{'_customize-input-account_border-top-left-radius'} ? $data->{'_customize-input-account_border-top-left-radius'} : '' ?>">
+                            <input placeholder="top-right" type="text" name="settings[header][_customize-input-account_border-top-right-radius]" value="<?= isset($data->{'_customize-input-account_border-top-right-radius'}) && $data->{'_customize-input-account_border-top-right-radius'} ? $data->{'_customize-input-account_border-top-right-radius'} : '' ?>">
+                            <input placeholder="bottom-right" type="text" name="settings[header][_customize-input-account_border-bottom-right-radius]" value="<?= isset($data->{'_customize-input-account_border-bottom-right-radius'}) && $data->{'_customize-input-account_border-bottom-right-radius'} ? $data->{'_customize-input-account_border-bottom-right-radius'} : '' ?>">
+                            <input placeholder="bottom-left" type="text" name="settings[header][_customize-input-account_border-bottom-left-radius]" value="<?= isset($data->{'_customize-input-account_border-bottom-left-radius'}) && $data->{'_customize-input-account_border-bottom-left-radius'} ? $data->{'_customize-input-account_border-bottom-left-radius'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-account_padding" class="customize-control customize-control-account-padding"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Padding (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-account_padding]" value="<?= isset($data->{'_customize-input-account_padding'}) && $data->{'_customize-input-account_padding'} ? $data->{'_customize-input-account_padding'} : '' ?>">
+                </li>
+                <li id="customize-control-account_margin" class="customize-control customize-control-account-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-account_margin]" value="<?= isset($data->{'_customize-input-account_margin'}) && $data->{'_customize-input-account_margin'} ? $data->{'_customize-input-account_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-user_area_align" class="customize-control customize-control-user_area_align"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Align items</span>
+                    </label>
+                    <select name="settings[header][_customize-input-user_area_align]">
+                        <option value="0" <?= isset($data->{'_customize-input-user_area_align'}) && $data->{'_customize-input-user_area_align'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="left" <?= isset($data->{'_customize-input-user_area_align'}) && $data->{'_customize-input-user_area_align'} == 'left' ? 'selected' : '' ?>>
+                            Left
+                        </option>
+                        </option>
+                        <option value="right" <?= isset($data->{'_customize-input-user_area_align'}) && $data->{'_customize-input-user_area_align'} == 'right' ? 'selected' : '' ?>>
+                            Right
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-account_icon_style" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Account Icon Style</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_account_icon_style" class="image">
+                        <input class="image-select" type="radio" value="no-icon" name="settings[header][_customize-radio-account_icon_style]" <?= isset($data->{'_customize-radio-account_icon_style'}) && $data->{'_customize-radio-account_icon_style'} == 'no-icon' ? 'checked' : ''?> id="account_icon_style" data-customize-setting-link="account_icon_style" data-alt="">
+                        <label for="account_icon_style" class="account_icon_style">
+                            <i class="cs-font clever-icon-close"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-account_icon_style]" <?= isset($data->{'_customize-radio-account_icon_style'})  && $data->{'_customize-radio-account_icon_style'} ? '' : 'checked'?> id="account_icon_styleplain" data-customize-setting-link="account_icon_style" data-alt="">
+                        <label for="account_icon_styleplain" class="account_icon_styleplain">
+                            <i class="cs-font clever-icon-user-1"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="primary button circle is-small" name="settings[header][_customize-radio-account_icon_style]" <?= isset($data->{'_customize-radio-account_icon_style'}) && $data->{'_customize-radio-account_icon_style'} == 'primary button circle is-small' ? 'checked' : ''?> id="account_icon_stylefill" data-customize-setting-link="account_icon_style" data-alt="">
+                        <label for="account_icon_stylefill" class="account_icon_stylefill">
+                            <i class="cs-font clever-icon-user-2"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="primary button round is-small" name="settings[header][_customize-radio-account_icon_style]" <?= isset($data->{'_customize-radio-account_icon_style'}) && $data->{'_customize-radio-account_icon_style'} == 'primary button round is-small' ? 'checked' : ''?> id="account_icon_stylefill-round" data-customize-setting-link="account_icon_style" data-alt="">
+                        <label for="account_icon_stylefill-round" class="account_icon_stylefill-round">
+                            <i class="cs-font clever-icon-user-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button circle outline is-small" name="settings[header][_customize-radio-account_icon_style]" <?= isset($data->{'_customize-radio-account_icon_style'}) && $data->{'_customize-radio-account_icon_style'} == 'button circle outline is-small' ? 'checked' : ''?> id="account_icon_styleoutline" data-customize-setting-link="account_icon_style" data-alt="">
+                        <label for="account_icon_styleoutline" class="account_icon_styleoutline">
+                            <i class="cs-font clever-icon-user-4"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button round outline is-small" name="settings[header][_customize-radio-account_icon_style]" <?= isset($data->{'_customize-radio-account_icon_style'}) && $data->{'_customize-radio-account_icon_style'} == 'button round outline is-small' ? 'checked' : ''?> id="account_icon_styleoutline-round" data-customize-setting-link="account_icon_style" data-alt="">
+                        <label for="account_icon_styleoutline-round" class="account_icon_styleoutline-round">
+                            <i class="cs-font clever-icon-user-5"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-account_icon" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Account Icon</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_account_icon" class="image">
+                        <input class="image-select" type="radio" value="clever-icon-user" name="settings[header][_customize-radio-account_icon]" <?= isset($data->{'_customize-radio-account_icon'}) && $data->{'_customize-radio-account_icon'} == 'clever-icon-user' ? 'checked' : ''?> id="account_icon" data-alt="">
+                        <label for="account_icon" class="account_icon">
+                            <i class="cs-font clever-icon-user"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-user-1" name="settings[header][_customize-radio-account_icon]" <?= isset($data->{'_customize-radio-account_icon'}) && $data->{'_customize-radio-account_icon'} == 'clever-icon-user-1' ? 'checked' : ''?> id="account_icon1" data-alt="">
+                        <label for="account_icon1" class="account_icon1">
+                            <i class="cs-font clever-icon-user-1"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-user-2" name="settings[header][_customize-radio-account_icon]" <?= isset($data->{'_customize-radio-account_icon'}) && $data->{'_customize-radio-account_icon'} == 'clever-icon-user-2' ? 'checked' : ''?> id="account_icon2" data-alt="">
+                        <label for="account_icon2" class="account_icon2">
+                            <i class="cs-font clever-icon-user-2"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-user-3" name="settings[header][_customize-radio-account_icon]" <?= isset($data->{'_customize-radio-account_icon'}) && $data->{'_customize-radio-account_icon'} == 'clever-icon-user-3' ? 'checked' : ''?> id="account_icon3" data-alt="">
+                        <label for="account_icon3" class="account_icon3">
+                            <i class="cs-font clever-icon-user-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-user-4" name="settings[header][_customize-radio-account_icon]" <?= isset($data->{'_customize-radio-account_icon'}) && $data->{'_customize-radio-account_icon'} == 'clever-icon-user-4' ? 'checked' : ''?> id="account_icon4" data-alt="">
+                        <label for="account_icon4" class="account_icon4">
+                            <i class="cs-font clever-icon-user-4"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-user-5" name="settings[header][_customize-radio-account_icon]" <?= isset($data->{'_customize-radio-account_icon'}) && $data->{'_customize-radio-account_icon'} == 'clever-icon-user-5' ? 'checked' : ''?> id="account_icon5" data-alt="">
+                        <label for="account_icon5" class="account_icon5">
+                            <i class="cs-font clever-icon-user-5"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-account_icon]" <?= isset($data->{'_customize-radio-account_icon'}) && $data->{'_customize-radio-account_icon'} ? '' : 'checked'?> id="account_icon6" data-alt="">
+                        <label for="account_icon6" class="account_icon6">
+                            <i class="cs-font clever-icon-user-6"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-header_account_title" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+					    <input id="_customize-input-header_account_title" name="settings[header][_customize-input-header_account_title]" type="checkbox" value="1" data-customize-setting-link="header_account_title" <?= isset($data->{'_customize-input-header_account_title'}) ? 'checked' : ''?>>
+					    <label for="_customize-input-header_account_title">Show label</label>
+					</span>
+                </li>
+                <li id="customize-control-header_account_register_title" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+					    <input id="_customize-input-header_account_register_title" name="settings[header][_customize-input-header_account_register_title]" type="checkbox" value="1" data-customize-setting-link="header_account_register_title" <?= isset($data->{'_customize-input-header_account_register_title'}) ? 'checked' : ''?>>
+					    <label for="_customize-input-header_account_register_title">Show "Register" label</label>
+				    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-inner" id="header_mobile_user_area" style="display:none;">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open" id="sub-accordion-section-header_account_mobile">
+                <li id="customize-control-mobile_account_margin" class="customize-control customize-control-account-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-mobile_account_margin]" value="<?= isset($data->{'_customize-input-mobile_account_margin'}) && $data->{'_customize-input-mobile_account_margin'} ? $data->{'_customize-input-mobile_account_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-user_area_align-mobile" class="customize-control customize-control-user_area_align-mobile"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Align items</span>
+                    </label>
+                    <select name="settings[header][_customize-input-user_area_align-mobile]">
+                        <option value="0" <?= isset($data->{'_customize-input-user_area_align-mobile'}) && $data->{'_customize-input-user_area_align-mobile'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="left" <?= isset($data->{'_customize-input-user_area_align-mobile'}) && $data->{'_customize-input-user_area_align-mobile'} == 'left' ? 'selected' : '' ?>>
+                            Left
+                        </option>
+                        </option>
+                        <option value="right" <?= isset($data->{'_customize-input-user_area_align-mobile'}) && $data->{'_customize-input-user_area_align-mobile'} == 'right' ? 'selected' : '' ?>>
+                            Right
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_user_area_merge_item_mobile" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[header][_customize_header_user_area_merge_item_mobile]">
+                        <option value="0" <?= isset($data->{'_customize_header_user_area_merge_item_mobile'}) && $data->{'_customize_header_user_area_merge_item_mobile'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_header_user_area_merge_item_mobile'}) && $data->{'_customize_header_user_area_merge_item_mobile'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_header_user_area_merge_item_mobile'}) && $data->{'_customize_header_user_area_merge_item_mobile'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-account_mobile_icon_style" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Account Icon Style</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_account_mobile_icon_style" class="image">
+                        <input class="image-select" type="radio" value="no-icon" name="settings[header][_customize-radio-account_mobile_icon_style]" <?= isset($data->{'_customize-radio-account_mobile_icon_style'}) && $data->{'_customize-radio-account_mobile_icon_style'} ? 'no-icon' : 'checked'?> id="account_mobile_icon_style" data-customize-setting-link="account_mobile_icon_style" data-alt="">
+                        <label for="account_mobile_icon_style" class="account_icon_style">
+                            <i class="cs-font clever-icon-close"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-account_mobile_icon_style]" <?= isset($data->{'_customize-radio-account_mobile_icon_style'})  && $data->{'_customize-radio-account_mobile_icon_style'} ? '' : 'checked'?> id="account_mobile_icon_styleplain" data-customize-setting-link="account_mobile_icon_style" data-alt="">
+                        <label for="account_mobile_icon_styleplain" class="account_icon_styleplain">
+                            <i class="cs-font clever-icon-user-1"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="primary button circle is-small" name="settings[header][_customize-radio-account_mobile_icon_style]" <?= isset($data->{'_customize-radio-account_mobile_icon_style'}) && $data->{'_customize-radio-account_mobile_icon_style'} == 'primary button circle is-small' ? 'checked' : ''?> id="account_mobile_icon_stylefill" data-customize-setting-link="account_mobile_icon_style" data-alt="">
+                        <label for="account_mobile_icon_stylefill" class="account_icon_stylefill">
+                            <i class="cs-font clever-icon-user-2"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="primary button round is-small" name="settings[header][_customize-radio-account_mobile_icon_style]" <?= isset($data->{'_customize-radio-account_mobile_icon_style'}) && $data->{'_customize-radio-account_mobile_icon_style'} == 'primary button round is-small' ? 'checked' : ''?> id="account_mobile_icon_stylefill-round" data-customize-setting-link="account_mobile_icon_style" data-alt="">
+                        <label for="account_mobile_icon_stylefill-round" class="account_icon_stylefill-round">
+                            <i class="cs-font clever-icon-user-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button circle outline is-small" name="settings[header][_customize-radio-account_mobile_icon_style]" <?= isset($data->{'_customize-radio-account_mobile_icon_style'}) && $data->{'_customize-radio-account_mobile_icon_style'} == 'button circle outline is-small' ? 'checked' : ''?> id="account_mobile_icon_styleoutline" data-customize-setting-link="account_mobile_icon_style" data-alt="">
+                        <label for="account_mobile_icon_styleoutline" class="account_icon_styleoutline">
+                            <i class="cs-font clever-icon-user-4"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="button round outline is-small" name="settings[header][_customize-radio-account_mobile_icon_style]" <?= isset($data->{'_customize-radio-account_mobile_icon_style'}) && $data->{'_customize-radio-account_mobile_icon_style'} == 'button round outline is-small' ? 'checked' : ''?> id="account_mobile_icon_styleoutline-round" data-customize-setting-link="account_mobile_icon_style" data-alt="">
+                        <label for="account_mobile_icon_styleoutline-round" class="account_icon_styleoutline-round">
+                            <i class="cs-font clever-icon-user-5"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-account_mobile_icon" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Account Icon</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_account_mobile_icon" class="image">
+                        <input class="image-select" type="radio" value="clever-icon-user" name="settings[header][_customize-radio-account_mobile_icon]" <?= isset($data->{'_customize-radio-account_mobile_icon'}) && $data->{'_customize-radio-account_mobile_icon'} == 'clever-icon-user' ? 'checked' : ''?> id="account_mobile_icon" data-alt="">
+                        <label for="account_mobile_icon" class="account_icon">
+                            <i class="cs-font clever-icon-user"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-user-1" name="settings[header][_customize-radio-account_mobile_icon]" <?= isset($data->{'_customize-radio-account_mobile_icon'}) && $data->{'_customize-radio-account_mobile_icon'} == 'clever-icon-user-1' ? 'checked' : ''?> id="account_mobile_icon1" data-alt="">
+                        <label for="account_mobile_icon1" class="account_icon1">
+                            <i class="cs-font clever-icon-user-1"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-user-2" name="settings[header][_customize-radio-account_mobile_icon]" <?= isset($data->{'_customize-radio-account_mobile_icon'}) && $data->{'_customize-radio-account_mobile_icon'} == 'clever-icon-user-2' ? 'checked' : ''?> id="account_mobile_icon2" data-alt="">
+                        <label for="account_mobile_icon2" class="account_icon2">
+                            <i class="cs-font clever-icon-user-2"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-user-3" name="settings[header][_customize-radio-account_mobile_icon]" <?= isset($data->{'_customize-radio-account_mobile_icon'}) && $data->{'_customize-radio-account_mobile_icon'} == 'clever-icon-user-3' ? 'checked' : ''?> id="account_mobile_icon3" data-alt="">
+                        <label for="account_mobile_icon3" class="account_icon3">
+                            <i class="cs-font clever-icon-user-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-user-4" name="settings[header][_customize-radio-account_mobile_icon]" <?= isset($data->{'_customize-radio-account_mobile_icon'}) && $data->{'_customize-radio-account_mobile_icon'} == 'clever-icon-user-4' ? 'checked' : ''?> id="account_mobile_icon4" data-alt="">
+                        <label for="account_mobile_icon4" class="account_icon4">
+                            <i class="cs-font clever-icon-user-4"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-user-5" name="settings[header][_customize-radio-account_mobile_icon]" <?= isset($data->{'_customize-radio-account_mobile_icon'}) && $data->{'_customize-radio-account_mobile_icon'} == 'clever-icon-user-5' ? 'checked' : ''?> id="account_mobile_icon5" data-alt="">
+                        <label for="account_mobile_icon5" class="account_icon5">
+                            <i class="cs-font clever-icon-user-5"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-account_mobile_icon]" <?= isset($data->{'_customize-radio-account_mobile_icon'}) && $data->{'_customize-radio-account_mobile_icon'} ? '' : 'checked'?> id="account_mobile_icon6" data-alt="">
+                        <label for="account_mobile_icon6" class="account_icon6">
+                            <i class="cs-font clever-icon-user-6"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-account_mobile_icon_size" class="customize-control customize-control-account-mobile-icon_size"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Icon Size (px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-account_mobile_icon_size]" value="<?= isset($data->{'_customize-input-account_mobile_icon_size'}) && $data->{'_customize-input-account_mobile_icon_size'} ? $data->{'_customize-input-account_mobile_icon_size'} : '' ?>">
+                </li>
+                <li id="customize-control-header_account_mobile_title" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+					    <input id="_customize-input-header_account_mobile_title" name="settings[header][_customize-input-header_account_mobile_title]" type="checkbox" value="1" data-customize-setting-link="header_account_mobile_title" <?= isset($data->{'_customize-input-header_account_mobile_title'}) ? 'checked' : ''?>>
+					    <label for="_customize-input-header_account_mobile_title">Show label</label>
+				    </span>
+                </li>
+                <li id="customize-control-header_account_mobile_register_title" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+					    <input id="_customize-input-header_account_mobile_register_title" name="settings[header][_customize-input-header_account_mobile_register_title]" type="checkbox" value="1" data-customize-setting-link="header_account_mobile_register_title" <?= isset($data->{'_customize-input-header_account_mobile_register_title'}) ? 'checked' : ''?>>
+					    <label for="_customize-input-header_account_mobile_register_title">Show "Register" label</label>
+				    </span>
+                </li>
+                <li id="customize-control-account-mobile_border" class="customize-control customize-control-account-mobile_border"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Width</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top" type="text" name="settings[header][_customize-input-account-mobile_border-top]" value="<?= isset($data->{'_customize-input-account-mobile_border-top'}) && $data->{'_customize-input-account-mobile_border-top'} ? $data->{'_customize-input-account-mobile_border-top'} : '' ?>">
+                            <input placeholder="right" type="text" name="settings[header][_customize-input-account-mobile_border-right]" value="<?= isset($data->{'_customize-input-account-mobile_border-right'}) && $data->{'_customize-input-account-mobile_border-right'} ? $data->{'_customize-input-account-mobile_border-right'} : '' ?>">
+                            <input placeholder="bottom" type="text" name="settings[header][_customize-input-account-mobile_border-bottom]" value="<?= isset($data->{'_customize-input-account-mobile_border-bottom'}) && $data->{'_customize-input-account-mobile_border-bottom'} ? $data->{'_customize-input-account-mobile_border-bottom'} : '' ?>">
+                            <input placeholder="left" type="text" name="settings[header][_customize-input-account-mobile_border-left]" value="<?= isset($data->{'_customize-input-account-mobile_border-left'}) && $data->{'_customize-input-account-mobile_border-left'} ? $data->{'_customize-input-account-mobile_border-left'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-header_account-mobile_style" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Border Style</span>
+                    </label>
+                    <select name="settings[header][_customize_header_account-mobile_style]">
+                        <option value="" <?= isset($data->{'_customize_header_account-mobile_style'}) && $data->{'_customize_header_account-mobile_style'} == '' ? 'selected' : '' ?>>
+                            Default
+                        </option>
+                        <option value="none" <?= isset($data->{'_customize_header_account-mobile_style'}) && $data->{'_customize_header_account-mobile_style'} == 'none' ? 'selected' : '' ?>>
+                            None
+                        </option>
+                        <option value="solid" <?= isset($data->{'_customize_header_account-mobile_style'}) && $data->{'_customize_header_account-mobile_style'} == 'solid' ? 'selected' : '' ?>>
+                            Solid
+                        </option>
+                        <option value="dotted" <?= isset($data->{'_customize_header_account-mobile_style'}) && $data->{'_customize_header_account-mobile_style'} == 'dotted' ? 'selected' : '' ?>>
+                            Dotted
+                        </option>
+                        <option value="dashed" <?= isset($data->{'_customize_header_account-mobile_style'}) && $data->{'_customize_header_account-mobile_style'} == 'dashed' ? 'selected' : '' ?>>
+                            Dashed
+                        </option>
+                        <option value="double" <?= isset($data->{'_customize_header_account-mobile_style'}) && $data->{'_customize_header_account-mobile_style'} == 'double' ? 'selected' : '' ?>>
+                            Double
+                        </option>
+                        <option value="ridge" <?= isset($data->{'_customize_header_account-mobile_style'}) && $data->{'_customize_header_account-mobile_style'} == 'ridge' ? 'selected' : '' ?>>
+                            Ridge
+                        </option>
+                        <option value="inset" <?= isset($data->{'_customize_header_account-mobile_style'}) && $data->{'_customize_header_account-mobile_style'} == 'inset' ? 'selected' : '' ?>>
+                            Inset
+                        </option>
+                        <option value="outset" <?= isset($data->{'_customize_header_account-mobile_style'}) && $data->{'_customize_header_account-mobile_style'} == 'outset' ? 'selected' : '' ?>>
+                            Outset
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_account-mobile_border_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Border Color</span>
+                    <input id="input_header_account-mobile_border_color" name="settings[header][_customize-radio-account-mobile_border_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-radio-account-mobile_border_color'}) ? $data->{'_customize-radio-account-mobile_border_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_account-mobile_border_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-account-mobile_border-radius" class="customize-control customize-control-account-mobile_border-radius"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Radius</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top-left" type="text" name="settings[header][_customize-input-account-mobile_border-top-left-radius]" value="<?= isset($data->{'_customize-input-account-mobile_border-top-left-radius'}) && $data->{'_customize-input-account-mobile_border-top-left-radius'} ? $data->{'_customize-input-account-mobile_border-top-left-radius'} : '' ?>">
+                            <input placeholder="top-right" type="text" name="settings[header][_customize-input-account-mobile_border-top-right-radius]" value="<?= isset($data->{'_customize-input-account-mobile_border-top-right-radius'}) && $data->{'_customize-input-account-mobile_border-top-right-radius'} ? $data->{'_customize-input-account-mobile_border-top-right-radius'} : '' ?>">
+                            <input placeholder="bottom-right" type="text" name="settings[header][_customize-input-account-mobile_border-bottom-right-radius]" value="<?= isset($data->{'_customize-input-account-mobile_border-bottom-right-radius'}) && $data->{'_customize-input-account-mobile_border-bottom-right-radius'} ? $data->{'_customize-input-account-mobile_border-bottom-right-radius'} : '' ?>">
+                            <input placeholder="bottom-left" type="text" name="settings[header][_customize-input-account-mobile_border-bottom-left-radius]" value="<?= isset($data->{'_customize-input-account-mobile_border-bottom-left-radius'}) && $data->{'_customize-input-account-mobile_border-bottom-left-radius'} ? $data->{'_customize-input-account-mobile_border-bottom-left-radius'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-account-mobile_padding" class="customize-control customize-control-account-mobile-padding"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Padding (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-account-mobile_padding]" value="<?= isset($data->{'_customize-input-account-mobile_padding'}) && $data->{'_customize-input-account-mobile_padding'} ? $data->{'_customize-input-account-mobile_padding'} : '' ?>">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

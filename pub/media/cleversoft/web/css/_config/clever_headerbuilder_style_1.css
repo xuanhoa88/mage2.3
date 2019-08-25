@@ -1,0 +1,17 @@
+.page-header .user_area i { font-size:24px; }
+.header-minimal-search a.icon i:before {
+  content:"\c013";
+  font-family:"cleversoft";
+}
+.page-header .header-compare i { font-size:24px; }
+.page-header .header-wishlist i { font-size:24px; }
+.page-header .minicart-wrapper i, .minicart-wrapper_dropdown i { font-size:24px; }
+.header-top { background:#000000; }
+.header-top .header-panel .topbar-container a { color:#ffffff; }
+.header-top .header-panel .topbar-container p, .header-top .header-panel .topbar-container span, .header-top .header-panel .topbar-container div { color:#ffffff; }
+.header_main-top .row { min-height:100px !important; }
+.logo-container .logo img { max-height:100px; }
+.header_main-top .user_area a, .header_main-top .minicart-wrapper a, .header_main-top .block-search a, .header_main-top .header-wishlist a, .header_main-top .header-compare a, .header_main-top .header-minimal-search a { color:#000000; }
+.header_main-top p, .header_main-top span { color:#000000; }
+.page-header-mobile .user_area i { font-size:18px; }
+.page-header-mobile .header-wishlist a.icon i { font-size:18px; }

@@ -1,0 +1,47 @@
+<?php
+$brand  = $this->getBrand();
+$helper = $this->helper('CleverSoft\CleverShopByBrand\Helper\Data');
+$url = urlencode($this->stripTags($this->getBrandPageUrl($brand)));
+$desc = urlencode($this->stripTags($brand->getDescription()));
+$name = urlencode($this->stripTags($brand->getBrandLabel()));
+$logo = $helper->getBrandImage($brand,'logo',['width' => 190, 'height' => 190]);
+$image = urlencode($this->stripTags($logo));
+?>
+<div class="brand-container">
+    <div class="block-content">
+        <div class="banner-section row">
+            <div class="banner-section__title col-sm-3">
+                <div class="banner-section--thumb">
+                    <div class="brand-img-wrap"><img class="brand-image" src="<?= $logo?>">
+                    </div>
+                </div>
+            </div>
+            <div class="banner-section__content col-sm-9">
+                <div class="banner-section--desc">
+                    <div class="brand-desc" itemprop="description"><?= $brand->getDescription()?></div>
+                    <div class="banner-section__social">
+                        <div class="social-section"><strong class="social-section__title"><?= $brand->getBrandLabel()?></strong>
+                            <ul class="social-section__listing">
+                                <li class="facebook item">
+                                    <button onclick='window.open("https://www.facebook.com/sharer/sharer.php?u=<?= $url; ?>","","menubar=1,resizable=1,width=700,height=600")' href="javascript:void(0)" class="share-btn" title="<?= __('Share on Facebook') ?>"><i class="fa fa-facebook"></i></button>
+                                </li>
+                                <li class="twitter item">
+                                    <button onclick='window.open("https://twitter.com/intent/tweet?url=<?= $url; ?>&text=<?= $desc ?>","","menubar=1,resizable=1,width=700,height=600")' target="_blank" rel="nofollow" href="javascript:void(0)" class="share-btn" title="<?= __('Share on Twitter') ?>"><i class="fa fa-twitter"></i></button>
+                                </li>
+                                <li class="linkedin item">
+                                    <button onclick='window.open("https://www.linkedin.com/shareArticle?mini=true&url=<?= $url; ?>&title=<?= $name ?>&ro=false&summary=<?= $desc ?>&source=","","menubar=1,resizable=1,width=700,height=600")' title="<?= __('Share on LinkedIn') ?>" rel="nofollow" title="" href="javascript:void(0)" class="share-btn"><i class="fa fa-linkedin"></i></button>
+                                </li>
+                                <li class="google-plus item">
+                                    <button onclick='window.open("https://plus.google.com/share?url=<?= $url; ?>","","menubar=1,resizable=1,width=700,height=600")' rel="nofollow" title="<?= __('Share on Google+') ?>" href="javascript:void(0)" class="share-btn"><i class="fa fa-google-plus"></i></button>
+                                </li>
+                                <li class="pinterest item">
+                                    <button onclick='window.open("https://www.pinterest.com/pin/create/button/?url=<?= $url; ?>&media=<?= $image ?>&description=<?= $desc ?>","","menubar=1,resizable=1,width=700,height=600")' rel="nofollow" title="<?= __('Share on Pinterest') ?>" href="javascript:void(0)" class="share-btn"><i class="fa fa-pinterest"></i></button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverSocialLogin
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$helper = $this->helper('CleverSoft\CleverSocialLogin\Helper\Data');
+if(!$helper->moduleEnabled()) {
+    return;
+}
+?>
+
+<script>
+    requirejs(['jquery', 'jquery/jquery.cookie', 'domReady!'], function($) {
+        'use strict';
+
+        window.psloginLoginPath = "<?php echo $block->escapeJsQuote($block->getUrl('pslogin/account/login')); ?>";
+        window.customerLogoutPath = "<?php echo $block->escapeJsQuote($block->getUrl('customer/account/logout')); ?>";
+
+        var url = document.URL.toLowerCase();
+        if (url) {
+            var skip = false;
+            $.each(<?php echo $this->getSkipModules(); ?>, function(i, path) {
+                if (url.indexOf(path) !== -1) {
+                    skip = true;
+                    return false;
+                }
+            });
+
+            if (!skip) {
+                $.cookie('<?php echo \CleverSoft\CleverSocialLogin\Helper\Data::REFERER_QUERY_PARAM_NAME ?>', document.URL, {
+                    path: '/'
+                });
+            }
+        }
+    });
+</script>
+
+<form style="display:none;" class="form"
+              action="<?php /* @escapeNotVerified */ echo $block->getUrl('pslogin/account/loginPost') ?>"
+              method="post"
+              id="pslogin-login-form"
+              >
+    <input id="pslogin-login-referer" name="<?php echo \Magento\Customer\Model\Url::REFERER_QUERY_PARAM_NAME ?>" type="hidden" value="" />
+    <input id="pslogin-login-submit" type="submit" value="" />
+</form>

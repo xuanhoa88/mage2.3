@@ -1,0 +1,104 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $helper \Magento\Search\Helper\Data */
+$helper = $this->helper('Magento\Search\Helper\Data');
+$headerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\HeaderData');
+$settingData = $headerBuilderHelper->getSettingData();
+
+$isMobile = $headerBuilderHelper->isMobile();
+?>
+  <?php if(isset($settingData->{'_customize-radio-header_search_form_type'}) && $settingData->{'_customize-radio-header_search_form_type'} == 'lightbox'):?>
+  <div class="header-minimal-search">
+    <a class="icon <?= isset($settingData->{'_customize-radio-search_icon_style'}) && $settingData->{'_customize-radio-search_icon_style'} ? $settingData->{'_customize-radio-search_icon_style'} : '';?>">
+     <i class="cs-font <?= isset($settingData->{'_customize-radio-search_icon'}) && $settingData->{'_customize-radio-search_icon'} ? $settingData->{'_customize-radio-search_icon'} : 'clever-icon-search-4';?>"></i>
+    </a>
+  </div>
+  <div class="full-search">
+    <div class="full-sc-search">
+      <div class="full-search_content">
+        <i class="cs-font clever-icon-close"></i>
+        <div class="block block-search">
+          <div class="block block-title"><strong><?php /* @escapeNotVerified */ echo __('Search'); ?></strong></div>
+          <div class="block block-content">
+              <form class="form minisearch" id="search_mini_form" action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
+                  <div class="field search">
+                      <div class="control btn-group">
+                          <div class="form-group">
+                              <input id="search"
+                                     data-mage-init='{"quickSearch":{
+                                      "formSelector":"#search_mini_form",
+                                      "url":"<?php /* @escapeNotVerified */ echo $block->getUrl('search/ajax/suggest', ['_secure' => $block->getRequest()->isSecure()]); ?>",
+                                      "destinationSelector":"#search_autocomplete"}}'
+                                     type="text"
+                                     name="<?php /* @escapeNotVerified */ echo $helper->getQueryParamName() ?>"
+                                     value="<?php /* @escapeNotVerified */ echo $helper->getEscapedQueryText() ?>"
+                                     placeholder="<?=isset($settingData->{'search_placeholder'}) && $settingData->{'search_placeholder'} ? $settingData->{'search_placeholder'} : 'Search for products...' ?>"
+                                     class="input-text"
+                                     maxlength="<?php /* @escapeNotVerified */ echo $helper->getMaxQueryLength();?>"
+                                     role="combobox"
+                                     aria-haspopup="false"
+                                     aria-autocomplete="both"
+                                     aria-expanded="true"
+                                     autocomplete="off"/>
+                          </div>
+                          <div id="search_autocomplete" class="search-autocomplete"></div>
+                          <?php echo $block->getChildHtml() ?>
+                          <button type="submit"
+                          title="<?php echo $block->escapeHtml(__('Search')) ?>"
+                          class="action search"></button>
+                      </div>
+                  </div>
+                  <input type="hidden" name="cat" id="cat-search" value="" />
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php else:?>
+  <div class="block block-search">
+      <div class="block block-title"><strong><?php /* @escapeNotVerified */ echo __('Search'); ?></strong></div>
+      <div class="block block-content">
+          <form class="form minisearch" id="search_mini_form" action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
+              <div class="field search">
+                <div class="control btn-group">
+                  <div class="form-group">
+                      <input id="search"
+                             data-mage-init='{"quickSearch":{
+                              "formSelector":"#search_mini_form",
+                              "url":"<?php /* @escapeNotVerified */ echo $block->getUrl('search/ajax/suggest', ['_secure' => $block->getRequest()->isSecure()]); ?>",
+                              "destinationSelector":"#search_autocomplete"}}'
+                             type="text"
+                             name="<?php /* @escapeNotVerified */ echo $helper->getQueryParamName() ?>"
+                             value="<?php /* @escapeNotVerified */ echo $helper->getEscapedQueryText() ?>"
+                             placeholder="<?=isset($settingData->{'search_placeholder'}) && $settingData->{'search_placeholder'} ? $settingData->{'search_placeholder'} : 'Search for products...' ?>"
+                             class="input-text"
+                             maxlength="<?php /* @escapeNotVerified */ echo $helper->getMaxQueryLength();?>"
+                             role="combobox"
+                             aria-haspopup="false"
+                             aria-autocomplete="both"
+                             aria-expanded="true"
+                             autocomplete="off"/>
+                  </div>
+                  <div id="search_autocomplete" class="search-autocomplete"></div>
+                  <?php echo $block->getChildHtml() ?>
+                  <button type="submit"
+                          title="<?php echo $block->escapeHtml(__('Search')) ?>"
+                          class="action search">
+                          <?php echo $block->escapeHtml(__('Search')) ?>
+                  </button>
+                </div>
+              </div>
+              <input type="hidden" name="cat" id="cat-search" value="" />
+          </form>
+      </div>
+  </div>
+  <?php endif;?>

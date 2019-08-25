@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverInstagram
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="instagram" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>CleverInstagram</label>
+            <tab>cleverextensions</tab>
+            <resource>CleverSoft_CleverTheme::config_cleversinstagram</resource>
+            <group id="info_instagram" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <attribute type="expanded">1</attribute>
+                <frontend_model>CleverSoft\CleverInstagram\Block\System\Config\Form\Field\Information</frontend_model>
+            </group>
+            <group id="general" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Instagram</label>
+                <field id="get_id_accesstoken" translate="label comment" type="button" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Get Id and Token</label>
+                    <frontend_model>CleverSoft\CleverInstagram\Block\System\Config\GetIdAccessToken</frontend_model>
+                </field>
+                <field id="modetakeimg" translate="label comment" type="select" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Show Photos From</label>
+                    <source_model>CleverSoft\CleverInstagram\Model\Config\Source\ModeImg</source_model>
+                </field>
+                <field id="userid" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>User Id</label>
+                    <comment>Display Image from a specific User Id.</comment>
+                    <depends>
+                        <field id="modetakeimg">userid</field>
+                    </depends>
+                </field>
+                <field id="hash_tag" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Hash tag</label>
+                    <comment>Display Image from a specific hashtag.</comment>
+                    <depends>
+                        <field id="modetakeimg">hashtag</field>
+                    </depends>
+                </field>
+                <field id="latitude" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Latitude</label>
+                    <comment>Your latitude</comment>
+                    <depends>
+                        <field id="modetakeimg">location</field>
+                    </depends>
+                </field>
+                <field id="longitude" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Longitude</label>
+                    <comment>Your longitude</comment>
+                    <depends>
+                        <field id="modetakeimg">location</field>
+                    </depends>
+                </field>
+                <field id="accessToken" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Access Token</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

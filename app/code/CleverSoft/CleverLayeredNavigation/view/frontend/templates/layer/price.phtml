@@ -1,0 +1,37 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$item = array_shift($filterItems);
+?>
+<ol class="items">
+    <li>
+        <div id="mt_layer_filter_display"></div>
+        <div id="mt_layer_filter"
+             data-template="<?=$item['template']?>"
+             data-step="<?=$item['step']?>"
+             data-from="<?=$item['from']?>"
+             data-to="<?=$item['to']?>"
+             data-min="<?=$item['min']?>"
+             data-max="<?=$item['max']?>"
+             data-count="<?=$item['count']?>"
+             data-url="<?=$block->getUrl(
+                 '*/*/*',
+                 [
+                     '_current'=>true,
+                     '_use_rewrite' => true,
+                     '_query'=>[$item['requestVar']=>'slider_from-slider_to']
+                 ]); ?>">
+
+        </div>
+        <div class="items-price text-center"><?=$item['count']?> items</div>
+    </li>
+</ol>
+
+

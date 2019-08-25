@@ -1,0 +1,565 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+if ($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getId()) {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getHeaderStyle());
+} else {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',0)->getFirstItem()->getHeaderStyle());
+}
+if($settings){
+    $data = isset($settings->header) ? $settings->header : '{}';
+}
+?>
+<!-- Modal content -->
+<div class="headerbuilder-modal-content">
+    <div class="headerbuilder-modal-header">
+        <span class="headerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="headerbuilder-modal-body">
+        <strong>Compare</strong>
+        <div class="modal-inner" id="header_desktop_compare_link" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open"
+                id="sub-accordion-section-header_search">
+                <li id="customize-control-header_compare_title" class="customize-control customize-control-checkbox"
+                    style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+                        <input id="_customize-input-header_compare_title" name="settings[header][_customize_header_compare_title]"
+                         type="checkbox" value="1" <?= isset($data->{'_customize_header_compare_title'}) ? 'checked' : '' ?>
+                         data-customize-setting-link="header_compare_title">
+                        <label for="_customize-input-header_compare_title">Show compare title</label>
+                    </span>
+                </li>
+                <li id="customize-control-compare_margin" class="customize-control customize-control-compare-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-compare_margin]" value="<?= isset($data->{'_customize-input-compare_margin'}) && $data->{'_customize-input-compare_margin'} ? $data->{'_customize-input-compare_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-compare_align" class="customize-control customize-control-compare_align"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Align items</span>
+                    </label>
+                    <select name="settings[header][_customize-input-compare_align]">
+                        <option value="0" <?= isset($data->{'_customize-input-compare_align'}) && $data->{'_customize-input-compare_align'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="left" <?= isset($data->{'_customize-input-compare_align'}) && $data->{'_customize-input-compare_align'} == 'left' ? 'selected' : '' ?>>
+                            Left
+                        </option>
+                        </option>
+                        <option value="right" <?= isset($data->{'_customize-input-compare_align'}) && $data->{'_customize-input-compare_align'} == 'right' ? 'selected' : '' ?>>
+                            Right
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_compare_link_merge_item" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[header][_customize_header_compare_link_merge_item]">
+                        <option value="0" <?= isset($data->{'_customize_header_compare_link_merge_item'}) && $data->{'_customize_header_compare_link_merge_item'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_header_compare_link_merge_item'}) && $data->{'_customize_header_compare_link_merge_item'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_header_compare_link_merge_item'}) && $data->{'_customize_header_compare_link_merge_item'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-compare_icon" class="customize-control customize-control-builder-radio-image"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Compare Icon</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_compare_icon" class="image">
+                        <input class="image-select" type="radio" value="clever-icon-compare-1"
+                               name="settings[header][_customize-radio-compare_icon]" <?= isset($data->{'_customize-radio-compare_icon'}) && $data->{'_customize-radio-compare_icon'} == 'clever-icon-compare-1' ? 'checked' : '' ?>
+                               id="compare_icon1" data-alt="">
+                        <label for="compare_icon1" class="compare_icon1">
+                            <i class="cs-font clever-icon-compare-1"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-compare-2"
+                               name="settings[header][_customize-radio-compare_icon]" <?= isset($data->{'_customize-radio-compare_icon'}) && $data->{'_customize-radio-compare_icon'} == 'clever-icon-compare-2' ? 'checked' : '' ?>
+                               id="compare_icon2" data-alt="">
+                        <label for="compare_icon2" class="compare_icon2">
+                            <i class="cs-font clever-icon-compare-2"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-compare-3"
+                               name="settings[header][_customize-radio-compare_icon]" <?= isset($data->{'_customize-radio-compare_icon'}) && $data->{'_customize-radio-compare_icon'} == 'clever-icon-compare-3' ? 'checked' : '' ?>
+                               id="compare_icon3" data-alt="">
+                        <label for="compare_icon3" class="compare_icon3">
+                            <i class="cs-font clever-icon-compare-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-compare-4"
+                               name="settings[header][_customize-radio-compare_icon]" <?= isset($data->{'_customize-radio-compare_icon'}) && $data->{'_customize-radio-compare_icon'} == 'clever-icon-compare-4' ? 'checked' : '' ?>
+                               id="compare_icon4" data-alt="">
+                        <label for="compare_icon4" class="compare_icon4">
+                            <i class="cs-font clever-icon-compare-4"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-compare-6"
+                               name="settings[header][_customize-radio-compare_icon]" <?= isset($data->{'_customize-radio-compare_icon'}) && $data->{'_customize-radio-compare_icon'} == 'clever-icon-compare-6' ? 'checked' : '' ?>
+                               id="compare_icon5" data-alt="">
+                        <label for="compare_icon5" class="compare_icon5">
+                            <i class="cs-font clever-icon-compare-6"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-refresh-1"
+                               name="settings[header][_customize-radio-compare_icon]" <?= isset($data->{'_customize-radio-compare_icon'}) && $data->{'_customize-radio-compare_icon'} == 'clever-icon-refresh-1' ? 'checked' : '' ?>
+                               id="compare_icon6" data-alt="">
+                        <label for="compare_icon6" class="compare_icon6">
+                            <i class="cs-font clever-icon-refresh-1"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value=""
+                               name="settings[header][_customize-radio-compare_icon]" <?= isset($data->{'_customize-radio-compare_icon'}) && $data->{'_customize-radio-compare_icon'} ? '' : 'checked' ?>
+                               id="compare_icon7" data-alt="">
+                        <label for="compare_icon7" class="compare_icon7">
+                            <i class="cs-font clever-icon-refresh-2"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-refresh-3"
+                               name="settings[header][_customize-radio-compare_icon]" <?= isset($data->{'_customize-radio-compare_icon'}) && $data->{'_customize-radio-compare_icon'} == 'clever-icon-refresh-3' ? 'checked' : '' ?>
+                               id="compare_icon8" data-alt="">
+                        <label for="compare_icon8" class="compare_icon8">
+                            <i class="cs-font clever-icon-refresh-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-refresh-4"
+                               name="settings[header][_customize-radio-compare_icon]" <?= isset($data->{'_customize-radio-compare_icon'}) && $data->{'_customize-radio-compare_icon'} == 'clever-icon-refresh-4' ? 'checked' : '' ?>
+                               id="compare_icon9" data-alt="">
+                        <label for="compare_icon9" class="compare_icon9">
+                            <i class="cs-font clever-icon-refresh-4"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-refresh-5"
+                               name="settings[header][_customize-radio-compare_icon]" <?= isset($data->{'_customize-radio-compare_icon'}) && $data->{'_customize-radio-compare_icon'} == 'clever-icon-refresh-5' ? 'checked' : '' ?>
+                               id="compare_icon10" data-alt="">
+                        <label for="compare_icon10" class="compare_icon10">
+                            <i class="cs-font clever-icon-refresh-5"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-compare_icon_size" class="customize-control customize-control-compare-icon_size"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Icon Size (px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-compare_icon_size]" value="<?= isset($data->{'_customize-input-compare_icon_size'}) && $data->{'_customize-input-compare_icon_size'} ? $data->{'_customize-input-compare_icon_size'} : '' ?>">
+                </li>
+                <li id="customize-control-header_compare_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Color</span>
+                    <input id="input_header_compare_color" name="settings[header][_customize-radio-compare_icon_color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-compare_icon_color'}) ? $data->{'_customize-radio-compare_icon_color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_header_compare_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_compare_hover_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Hover Color</span>
+                    <input id="input_header_compare_hover_color"
+                           name="settings[header][_customize-radio-compare_icon_hover_color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-compare_icon_hover_color'}) ? $data->{'_customize-radio-compare_icon_hover_color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_header_compare_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-compare_border" class="customize-control customize-control-compare_border"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Width</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top" type="text" name="settings[header][_customize-input-compare_border-top]" value="<?= isset($data->{'_customize-input-compare_border-top'}) && $data->{'_customize-input-compare_border-top'} ? $data->{'_customize-input-compare_border-top'} : '' ?>">
+                            <input placeholder="right" type="text" name="settings[header][_customize-input-compare_border-right]" value="<?= isset($data->{'_customize-input-compare_border-right'}) && $data->{'_customize-input-compare_border-right'} ? $data->{'_customize-input-compare_border-right'} : '' ?>">
+                            <input placeholder="bottom" type="text" name="settings[header][_customize-input-compare_border-bottom]" value="<?= isset($data->{'_customize-input-compare_border-bottom'}) && $data->{'_customize-input-compare_border-bottom'} ? $data->{'_customize-input-compare_border-bottom'} : '' ?>">
+                            <input placeholder="left" type="text" name="settings[header][_customize-input-compare_border-left]" value="<?= isset($data->{'_customize-input-compare_border-left'}) && $data->{'_customize-input-compare_border-left'} ? $data->{'_customize-input-compare_border-left'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-header_compare_style" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Border Style</span>
+                    </label>
+                    <select name="settings[header][_customize_header_compare_style]">
+                        <option value="" <?= isset($data->{'_customize_header_compare_style'}) && $data->{'_customize_header_compare_style'} == '' ? 'selected' : '' ?>>
+                            Default
+                        </option>
+                        <option value="none" <?= isset($data->{'_customize_header_compare_style'}) && $data->{'_customize_header_compare_style'} == 'none' ? 'selected' : '' ?>>
+                            None
+                        </option>
+                        <option value="solid" <?= isset($data->{'_customize_header_compare_style'}) && $data->{'_customize_header_compare_style'} == 'solid' ? 'selected' : '' ?>>
+                            Solid
+                        </option>
+                        <option value="dotted" <?= isset($data->{'_customize_header_compare_style'}) && $data->{'_customize_header_compare_style'} == 'dotted' ? 'selected' : '' ?>>
+                            Dotted
+                        </option>
+                        <option value="dashed" <?= isset($data->{'_customize_header_compare_style'}) && $data->{'_customize_header_compare_style'} == 'dashed' ? 'selected' : '' ?>>
+                            Dashed
+                        </option>
+                        <option value="double" <?= isset($data->{'_customize_header_compare_style'}) && $data->{'_customize_header_compare_style'} == 'double' ? 'selected' : '' ?>>
+                            Double
+                        </option>
+                        <option value="ridge" <?= isset($data->{'_customize_header_compare_style'}) && $data->{'_customize_header_compare_style'} == 'ridge' ? 'selected' : '' ?>>
+                            Ridge
+                        </option>
+                        <option value="inset" <?= isset($data->{'_customize_header_compare_style'}) && $data->{'_customize_header_compare_style'} == 'inset' ? 'selected' : '' ?>>
+                            Inset
+                        </option>
+                        <option value="outset" <?= isset($data->{'_customize_header_compare_style'}) && $data->{'_customize_header_compare_style'} == 'outset' ? 'selected' : '' ?>>
+                            Outset
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_compare_border_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Border Color</span>
+                    <input id="input_header_compare_border_color" name="settings[header][_customize-radio-compare_border_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-radio-compare_border_color'}) ? $data->{'_customize-radio-compare_border_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_compare_border_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-compare_border-radius" class="customize-control customize-control-compare_border-radius"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Radius</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top-left" type="text" name="settings[header][_customize-input-compare_border-top-left-radius]" value="<?= isset($data->{'_customize-input-compare_border-top-left-radius'}) && $data->{'_customize-input-compare_border-top-left-radius'} ? $data->{'_customize-input-compare_border-top-left-radius'} : '' ?>">
+                            <input placeholder="top-right" type="text" name="settings[header][_customize-input-compare_border-top-right-radius]" value="<?= isset($data->{'_customize-input-compare_border-top-right-radius'}) && $data->{'_customize-input-compare_border-top-right-radius'} ? $data->{'_customize-input-compare_border-top-right-radius'} : '' ?>">
+                            <input placeholder="bottom-right" type="text" name="settings[header][_customize-input-compare_border-bottom-right-radius]" value="<?= isset($data->{'_customize-input-compare_border-bottom-right-radius'}) && $data->{'_customize-input-compare_border-bottom-right-radius'} ? $data->{'_customize-input-compare_border-bottom-right-radius'} : '' ?>">
+                            <input placeholder="bottom-left" type="text" name="settings[header][_customize-input-compare_border-bottom-left-radius]" value="<?= isset($data->{'_customize-input-compare_border-bottom-left-radius'}) && $data->{'_customize-input-compare_border-bottom-left-radius'} ? $data->{'_customize-input-compare_border-bottom-left-radius'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-compare_padding" class="customize-control customize-control-compare-padding"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Padding (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-compare_padding]" value="<?= isset($data->{'_customize-input-compare_padding'}) && $data->{'_customize-input-compare_padding'} ? $data->{'_customize-input-compare_padding'} : '' ?>">
+                </li>
+            </ul>
+        </div>
+        <div class="modal-inner" id="header_mobile_compare_link" style="display:none;">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open" id="sub-accordion-section-header_search">
+                <li id="customize-control-header_compare_mobile_title" class="customize-control customize-control-checkbox"
+                    style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+                        <input id="_customize-input-header_compare_mobile_title" name="settings[header][_customize_header_compare_mobile_title]"
+                         type="checkbox" value="1" <?= isset($data->{'_customize_header_compare_mobile_title'}) ? 'checked' : '' ?>
+                         data-customize-setting-link="header_compare_title">
+                        <label for="_customize-input-header_compare_mobile_title">Show compare title</label>
+                    </span>
+                </li>
+                <li id="customize-control-mobile_compare_margin" class="customize-control customize-control-compare-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-mobile_compare_margin]" value="<?= isset($data->{'_customize-input-mobile_compare_margin'}) && $data->{'_customize-input-mobile_compare_margin'} ? $data->{'_customize-input-mobile_compare_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-compare_align" class="customize-control customize-control-compare_align"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Align items</span>
+                    </label>
+                    <select name="settings[header][_customize-input-compare_align-mobile]">
+                        <option value="0" <?= isset($data->{'_customize-input-compare_align-mobile'}) && $data->{'_customize-input-compare_align-mobile'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="left" <?= isset($data->{'_customize-input-compare_align-mobile'}) && $data->{'_customize-input-compare_align-mobile'} == 'left' ? 'selected' : '' ?>>
+                            Left
+                        </option>
+                        </option>
+                        <option value="right" <?= isset($data->{'_customize-input-compare_align-mobile'}) && $data->{'_customize-input-compare_align-mobile'} == 'right' ? 'selected' : '' ?>>
+                            Right
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_compare_link_merge_item_mobile" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[header][_customize_header_compare_link_merge_item_mobile]">
+                        <option value="0" <?= isset($data->{'_customize_header_compare_link_merge_item_mobile'}) && $data->{'_customize_header_compare_link_merge_item_mobile'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_header_compare_link_merge_item_mobile'}) && $data->{'_customize_header_compare_link_merge_item_mobile'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_header_compare_link_merge_item_mobile'}) && $data->{'_customize_header_compare_link_merge_item_mobile'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-compare_mobile_icon" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Compare Icon</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_compare_mobile_icon" class="image">
+                        <input class="image-select" type="radio" value="clever-icon-compare-1" name="settings[header][_customize-radio-compare_mobile_icon]" <?= isset($data->{'_customize-radio-compare_mobile_icon'}) && $data->{'_customize-radio-compare_mobile_icon'} == 'clever-icon-compare-1' ? 'checked' : ''?> id="compare_mobile_icon1" data-alt="">
+                        <label for="compare_mobile_icon1" class="compare_icon1">
+                            <i class="cs-font clever-icon-compare-1"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-compare-2" name="settings[header][_customize-radio-compare_mobile_icon]" <?= isset($data->{'_customize-radio-compare_mobile_icon'}) && $data->{'_customize-radio-compare_mobile_icon'} == 'clever-icon-compare-2' ? 'checked' : ''?> id="compare_mobile_icon2" data-alt="">
+                        <label for="compare_mobile_icon2" class="compare_icon2">
+                            <i class="cs-font clever-icon-compare-2"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-compare-3" name="settings[header][_customize-radio-compare_mobile_icon]" <?= isset($data->{'_customize-radio-compare_mobile_icon'}) && $data->{'_customize-radio-compare_mobile_icon'} == 'clever-icon-compare-3' ? 'checked' : ''?> id="compare_mobile_icon3" data-alt="">
+                        <label for="compare_mobile_icon3" class="compare_icon3">
+                            <i class="cs-font clever-icon-compare-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-compare-4" name="settings[header][_customize-radio-compare_mobile_icon]" <?= isset($data->{'_customize-radio-compare_mobile_icon'}) && $data->{'_customize-radio-compare_mobile_icon'} == 'clever-icon-compare-4' ? 'checked' : ''?> id="compare_mobile_icon4" data-alt="">
+                        <label for="compare_mobile_icon4" class="compare_icon4">
+                            <i class="cs-font clever-icon-compare-4"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-compare-6" name="settings[header][_customize-radio-compare_mobile_icon]" <?= isset($data->{'_customize-radio-compare_mobile_icon'}) && $data->{'_customize-radio-compare_mobile_icon'} == 'clever-icon-compare-6' ? 'checked' : ''?> id="compare_mobile_icon5" data-alt="">
+                        <label for="compare_mobile_icon5" class="compare_icon5">
+                            <i class="cs-font clever-icon-compare-6"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-refresh-1" name="settings[header][_customize-radio-compare_mobile_icon]" <?= isset($data->{'_customize-radio-compare_mobile_icon'}) && $data->{'_customize-radio-compare_mobile_icon'} == 'clever-icon-refresh-1' ? 'checked' : ''?> id="compare_mobile_icon6" data-alt="">
+                        <label for="compare_mobile_icon6" class="compare_icon6">
+                            <i class="cs-font clever-icon-refresh-1"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-compare_mobile_icon]" <?= isset($data->{'_customize-radio-compare_mobile_icon'}) && $data->{'_customize-radio-compare_mobile_icon'} ? '' : 'checked'?> id="compare_mobile_icon7" data-alt="">
+                        <label for="compare_mobile_icon7" class="compare_icon7">
+                            <i class="cs-font clever-icon-refresh-2"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-refresh-3" name="settings[header][_customize-radio-compare_mobile_icon]" <?= isset($data->{'_customize-radio-compare_mobile_icon'}) && $data->{'_customize-radio-compare_mobile_icon'} == 'clever-icon-refresh-3' ? 'checked' : ''?> id="compare_mobile_icon8" data-alt="">
+                        <label for="compare_mobile_icon8" class="compare_icon8">
+                            <i class="cs-font clever-icon-refresh-3"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-refresh-4" name="settings[header][_customize-radio-compare_mobile_icon]" <?= isset($data->{'_customize-radio-compare_mobile_icon'}) && $data->{'_customize-radio-compare_mobile_icon'} == 'clever-icon-refresh-4' ? 'checked' : ''?> id="compare_mobile_icon9" data-alt="">
+                        <label for="compare_mobile_icon9" class="compare_icon9">
+                            <i class="cs-font clever-icon-refresh-4"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="clever-icon-refresh-5" name="settings[header][_customize-radio-compare_mobile_icon]" <?= isset($data->{'_customize-radio-compare_mobile_icon'}) && $data->{'_customize-radio-compare_mobile_icon'} == 'clever-icon-refresh-5' ? 'checked' : ''?> id="compare_mobile_icon10" data-alt="">
+                        <label for="compare_mobile_icon10" class="compare_icon10">
+                            <i class="cs-font clever-icon-refresh-5"></i>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-compare_mobile_icon_size" class="customize-control customize-control-compare-mobile-icon_size"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Icon Size (px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-compare_mobile_icon_size]" value="<?= isset($data->{'_customize-input-compare_mobile_icon_size'}) && $data->{'_customize-input-compare_mobile_icon_size'} ? $data->{'_customize-input-compare_mobile_icon_size'} : '' ?>">
+                </li>
+                <li id="customize-control-header_compare_mobile_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Color</span>
+                    <input id="input_header_compare_mobile_color" name="settings[header][_customize-radio-compare_mobile_icon_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-radio-compare_mobile_icon_color'}) ? $data->{'_customize-radio-compare_mobile_icon_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_compare_mobile_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_compare_mobile_hover_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Hover Color</span>
+                    <input id="input_header_compare_mobile_hover_color" name="settings[header][_customize-radio-compare_mobile_icon_hover_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-radio-compare_mobile_icon_hover_color'}) ? $data->{'_customize-radio-compare_mobile_icon_hover_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_compare_mobile_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-compare-mobile_border" class="customize-control customize-control-compare-mobile_border"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Width</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top" type="text" name="settings[header][_customize-input-compare-mobile_border-top]" value="<?= isset($data->{'_customize-input-compare-mobile_border-top'}) && $data->{'_customize-input-compare-mobile_border-top'} ? $data->{'_customize-input-compare-mobile_border-top'} : '' ?>">
+                            <input placeholder="right" type="text" name="settings[header][_customize-input-compare-mobile_border-right]" value="<?= isset($data->{'_customize-input-compare-mobile_border-right'}) && $data->{'_customize-input-compare-mobile_border-right'} ? $data->{'_customize-input-compare-mobile_border-right'} : '' ?>">
+                            <input placeholder="bottom" type="text" name="settings[header][_customize-input-compare-mobile_border-bottom]" value="<?= isset($data->{'_customize-input-compare-mobile_border-bottom'}) && $data->{'_customize-input-compare-mobile_border-bottom'} ? $data->{'_customize-input-compare-mobile_border-bottom'} : '' ?>">
+                            <input placeholder="left" type="text" name="settings[header][_customize-input-compare-mobile_border-left]" value="<?= isset($data->{'_customize-input-compare-mobile_border-left'}) && $data->{'_customize-input-compare-mobile_border-left'} ? $data->{'_customize-input-compare-mobile_border-left'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-header_compare-mobile_style" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Border Style</span>
+                    </label>
+                    <select name="settings[header][_customize_header_compare-mobile_style]">
+                        <option value="" <?= isset($data->{'_customize_header_compare-mobile_style'}) && $data->{'_customize_header_compare-mobile_style'} == '' ? 'selected' : '' ?>>
+                            Default
+                        </option>
+                        <option value="none" <?= isset($data->{'_customize_header_compare-mobile_style'}) && $data->{'_customize_header_compare-mobile_style'} == 'none' ? 'selected' : '' ?>>
+                            None
+                        </option>
+                        <option value="solid" <?= isset($data->{'_customize_header_compare-mobile_style'}) && $data->{'_customize_header_compare-mobile_style'} == 'solid' ? 'selected' : '' ?>>
+                            Solid
+                        </option>
+                        <option value="dotted" <?= isset($data->{'_customize_header_compare-mobile_style'}) && $data->{'_customize_header_compare-mobile_style'} == 'dotted' ? 'selected' : '' ?>>
+                            Dotted
+                        </option>
+                        <option value="dashed" <?= isset($data->{'_customize_header_compare-mobile_style'}) && $data->{'_customize_header_compare-mobile_style'} == 'dashed' ? 'selected' : '' ?>>
+                            Dashed
+                        </option>
+                        <option value="double" <?= isset($data->{'_customize_header_compare-mobile_style'}) && $data->{'_customize_header_compare-mobile_style'} == 'double' ? 'selected' : '' ?>>
+                            Double
+                        </option>
+                        <option value="ridge" <?= isset($data->{'_customize_header_compare-mobile_style'}) && $data->{'_customize_header_compare-mobile_style'} == 'ridge' ? 'selected' : '' ?>>
+                            Ridge
+                        </option>
+                        <option value="inset" <?= isset($data->{'_customize_header_compare-mobile_style'}) && $data->{'_customize_header_compare-mobile_style'} == 'inset' ? 'selected' : '' ?>>
+                            Inset
+                        </option>
+                        <option value="outset" <?= isset($data->{'_customize_header_compare-mobile_style'}) && $data->{'_customize_header_compare-mobile_style'} == 'outset' ? 'selected' : '' ?>>
+                            Outset
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-header_compare-mobile_border_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Border Color</span>
+                    <input id="input_header_compare-mobile_border_color" name="settings[header][_customize-radio-compare-mobile_border_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-radio-compare-mobile_border_color'}) ? $data->{'_customize-radio-compare-mobile_border_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_compare-mobile_border_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-compare-mobile_border-radius" class="customize-control customize-control-compare-mobile_border-radius"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Border Radius</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div class="d-flex element-parent">
+                        <div class="row">
+                            <input placeholder="top-left" type="text" name="settings[header][_customize-input-compare-mobile_border-top-left-radius]" value="<?= isset($data->{'_customize-input-compare-mobile_border-top-left-radius'}) && $data->{'_customize-input-compare-mobile_border-top-left-radius'} ? $data->{'_customize-input-compare-mobile_border-top-left-radius'} : '' ?>">
+                            <input placeholder="top-right" type="text" name="settings[header][_customize-input-compare-mobile_border-top-right-radius]" value="<?= isset($data->{'_customize-input-compare-mobile_border-top-right-radius'}) && $data->{'_customize-input-compare-mobile_border-top-right-radius'} ? $data->{'_customize-input-compare-mobile_border-top-right-radius'} : '' ?>">
+                            <input placeholder="bottom-right" type="text" name="settings[header][_customize-input-compare-mobile_border-bottom-right-radius]" value="<?= isset($data->{'_customize-input-compare-mobile_border-bottom-right-radius'}) && $data->{'_customize-input-compare-mobile_border-bottom-right-radius'} ? $data->{'_customize-input-compare-mobile_border-bottom-right-radius'} : '' ?>">
+                            <input placeholder="bottom-left" type="text" name="settings[header][_customize-input-compare-mobile_border-bottom-left-radius]" value="<?= isset($data->{'_customize-input-compare-mobile_border-bottom-left-radius'}) && $data->{'_customize-input-compare-mobile_border-bottom-left-radius'} ? $data->{'_customize-input-compare-mobile_border-bottom-left-radius'} : '' ?>">
+                        </div>
+                    </div>
+                </li>
+                <li id="customize-control-compare-mobile_padding" class="customize-control customize-control-compare-mobile-padding"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Padding (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-compare-mobile_padding]" value="<?= isset($data->{'_customize-input-compare-mobile_padding'}) && $data->{'_customize-input-compare-mobile_padding'} ? $data->{'_customize-input-compare-mobile_padding'} : '' ?>">
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

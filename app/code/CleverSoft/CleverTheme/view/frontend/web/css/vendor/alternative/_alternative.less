@@ -1,0 +1,23 @@
+& when (@media-common = true) {
+    .product-item-info.have-alternative-image {
+        &:hover {
+      .product-img-additional {
+        opacity: 1;
+        visibility: visible;
+      }
+      .main-image {
+        opacity: 0;
+        visibility: hidden;
+      }
+        }
+        .product-img-additional {
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      transition: all 0.2s ease-in-out 0s;
+      visibility: hidden;
+      width: 100%;
+        }
+    }
+}

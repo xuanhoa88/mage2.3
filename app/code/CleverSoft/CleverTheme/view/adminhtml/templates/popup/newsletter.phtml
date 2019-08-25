@@ -1,0 +1,263 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+if ($objectManager->create('CleverSoft\CleverTheme\Model\FooterBlock')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getId()) {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\FooterBlock')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getFooterStyle());
+} else {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\FooterBlock')->getCollection()->addFieldToFilter('store_id',0)->getFirstItem()->getFooterStyle());
+}
+if($settings){
+    $data = isset($settings->footer) ? $settings->footer : '{}';
+}
+?>
+<!-- Modal content -->
+<div class="footerbuilder-modal-content">
+    <div class="footerbuilder-modal-footer">
+        <span class="footerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="footerbuilder-modal-body">
+        <strong>Newsletter</strong>
+        <div class="modal-inner" id="footer_desktop_newsletter" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open"
+                id="sub-accordion-section-footer_newsletter">
+                <li id="customize-control-newsletter_margin" class="customize-control customize-control-newsletter-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-newsletter_margin]" value="<?= isset($data->{'_customize-input-newsletter_margin'}) && $data->{'_customize-input-newsletter_margin'} ? $data->{'_customize-input-newsletter_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-footer_newsletter_merge_item" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[footer][_customize_footer_newsletter_merge_item]">
+                        <option value="0" <?= isset($data->{'_customize_footer_newsletter_merge_item'}) && $data->{'_customize_footer_newsletter_merge_item'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_footer_newsletter_merge_item'}) && $data->{'_customize_footer_newsletter_merge_item'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_footer_newsletter_merge_item'}) && $data->{'_customize_footer_newsletter_merge_item'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-newsletter_title" class="customize-control customize-control-newsletter_title"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Title</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-newsletter_title]" value="<?= isset($data->{'_customize-input-newsletter_title'}) && $data->{'_customize-input-newsletter_title'} ? $data->{'_customize-input-newsletter_title'} : '' ?>">
+                </li>
+                <li id="customize-control-newsletter_subtitle" class="customize-control customize-control-newsletter_subtitle"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Sub Title</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-newsletter_subtitle]" value="<?= isset($data->{'_customize-input-newsletter_subtitle'}) && $data->{'_customize-input-newsletter_subtitle'} ? $data->{'_customize-input-newsletter_subtitle'} : '' ?>">
+                </li>
+                <li id="customize-control-newsletter_placeholder" class="customize-control customize-control-newsletter_placeholder"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Placeholder</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-newsletter_placeholder]" value="<?= isset($data->{'_customize-input-newsletter_placeholder'}) && $data->{'_customize-input-newsletter_placeholder'} ? $data->{'_customize-input-newsletter_placeholder'} : '' ?>">
+                </li>
+                <li id="customize-control-newsletter_buttontext" class="customize-control customize-control-newsletter_buttontext"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Button Text</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-newsletter_buttontext]" value="<?= isset($data->{'_customize-input-newsletter_buttontext'}) && $data->{'_customize-input-newsletter_buttontext'} ? $data->{'_customize-input-newsletter_buttontext'} : '' ?>">
+                </li>
+                <li id="customize-control-newsletter_custom-class" class="customize-control customize-control-newsletter_custom-class"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Custom Class</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-newsletter_custom-class]" value="<?= isset($data->{'_customize-input-newsletter_custom-class'}) && $data->{'_customize-input-newsletter_custom-class'} ? $data->{'_customize-input-newsletter_custom-class'} : '' ?>">
+                </li>
+                <li id="customize-control-footer_newsletter_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Button Background Color</span>
+                    <input id="input_footer_newsletter_color" name="settings[footer][_customize-radio-newsletter_background-color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-newsletter_background-color'}) ? $data->{'_customize-radio-newsletter_background-color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_footer_newsletter_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-footer_newsletter_hover_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Button Background Hover Color</span>
+                    <input id="input_footer_newsletter_hover_color"
+                           name="settings[footer][_customize-radio-newsletter_hover_background-color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-newsletter_hover_background-color'}) ? $data->{'_customize-radio-newsletter_hover_background-color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_footer_newsletter_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-inner" id="footer_mobile_newsletter" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open" id="sub-accordion-section-footer_newsletter_mobile">
+                <li id="customize-control-mobile_newsletter_margin" class="customize-control customize-control-newsletter-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-mobile_newsletter_margin]" value="<?= isset($data->{'_customize-input-mobile_newsletter_margin'}) && $data->{'_customize-input-mobile_newsletter_margin'} ? $data->{'_customize-input-mobile_newsletter_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-footer_newsletter_merge_item_mobile" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[footer][_customize_footer_newsletter_merge_item_mobile]">
+                        <option value="0" <?= isset($data->{'_customize_footer_newsletter_merge_item_mobile'}) && $data->{'_customize_footer_newsletter_merge_item_mobile'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_footer_newsletter_merge_item_mobile'}) && $data->{'_customize_footer_newsletter_merge_item_mobile'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_footer_newsletter_merge_item_mobile'}) && $data->{'_customize_footer_newsletter_merge_item_mobile'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-newsletter_title_mobile" class="customize-control customize-control-newsletter_title_mobile"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Title</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-newsletter_title_mobile]" value="<?= isset($data->{'_customize-input-newsletter_title_mobile'}) && $data->{'_customize-input-newsletter_title_mobile'} ? $data->{'_customize-input-newsletter_title_mobile'} : '' ?>">
+                </li>
+                <li id="customize-control-newsletter_subtitle" class="customize-control customize-control-newsletter_subtitle"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-subtitle_mobile">Sub Title</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-newsletter_subtitle_mobile]" value="<?= isset($data->{'_customize-input-newsletter_subtitle_mobile'}) && $data->{'_customize-input-newsletter_subtitle_mobile'} ? $data->{'_customize-input-newsletter_subtitle_mobile'} : '' ?>">
+                </li>
+                <li id="customize-control-newsletter_placeholder_mobile" class="customize-control customize-control-newsletter_placeholder_mobile"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Placeholder</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-newsletter_placeholder_mobile]" value="<?= isset($data->{'_customize-input-newsletter_placeholder_mobile'}) && $data->{'_customize-input-newsletter_placeholder_mobile'} ? $data->{'_customize-input-newsletter_placeholder_mobile'} : '' ?>">
+                </li>
+                <li id="customize-control-newsletter_buttontext_mobile" class="customize-control customize-control-newsletter_buttontext_mobile"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Button Text</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-newsletter_buttontext_mobile]" value="<?= isset($data->{'_customize-input-newsletter_buttontext_mobile'}) && $data->{'_customize-input-newsletter_buttontext_mobile'} ? $data->{'_customize-input-newsletter_buttontext_mobile'} : '' ?>">
+                </li>
+                <li id="customize-control-newsletter_mobile_custom-class" class="customize-control customize-control-newsletter_mobile_custom-class"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Custom Class</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-newsletter_mobile_custom-class]" value="<?= isset($data->{'_customize-input-newsletter_mobile_custom-class'}) && $data->{'_customize-input-newsletter_mobile_custom-class'} ? $data->{'_customize-input-newsletter_mobile_custom-class'} : '' ?>">
+                </li>
+                <li id="customize-control-footer_newsletter_mobile_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Color</span>
+                    <input id="input_footer_newsletter_mobile_color" name="settings[footer][_customize-radio-newsletter_mobile_background-color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-newsletter_mobile_background-color'}) ? $data->{'_customize-radio-newsletter_mobile_background-color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_footer_newsletter_mobile_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-footer_newsletter_mobile_hover_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Hover Color</span>
+                    <input id="input_footer_newsletter_mobile_hover_color"
+                           name="settings[footer][_customize-radio-newsletter_mobile_hover_background-color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-newsletter_mobile_hover_background-color'}) ? $data->{'_customize-radio-newsletter_mobile_hover_background-color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_footer_newsletter_mobile_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

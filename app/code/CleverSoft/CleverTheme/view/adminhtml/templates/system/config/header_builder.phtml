@@ -1,0 +1,473 @@
+<?php
+$desktopData = $this->getHeaderDesktopData();
+$mobileData = $this->getHeaderMobileData();
+$storeId = $this->getCurrentStore();
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$settings = '';
+if ($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeId)->getFirstItem()->getId()) {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeId)->getFirstItem()->getHeaderStyle());
+}
+
+if($settings){
+    $data = isset($settings->header) ? $settings->header : '{}';
+}
+?>
+<?php if($storeId):?>
+<div class="toggle-header-builder">
+    <h4>Use Header Builder</h4>
+    <small>Use Header Builder to custom header layout for specific store view.</small>
+    <div class="onoffswitch">
+        <input type="checkbox" name="settings[header][onoffswitch-headerbuilder]" class="onoffswitch-checkbox" id="myonoffswitch" <?php echo isset($data->{'onoffswitch-headerbuilder'}) && $data->{'onoffswitch-headerbuilder'} ? 'checked' : ''?>>
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+</div>
+<div class="wp-full-overlay header-full-overlay expanded in-sub-panel section-open preview-desktop" style="display:none">
+<?php else:?>
+<div class="wp-full-overlay header-full-overlay expanded in-sub-panel section-open preview-desktop">
+<?php endif;?>
+    <script type="text/html" id="tmpl-customize-panel-default-content">
+        <li class="panel-meta customize-info accordion-section <# if ( ! data.description ) { #> cannot-expand<# } #>">
+
+        </li>
+    </script>
+    <script type="text/html" id="tmpl-customize-panel-default">
+        <li id="accordion-panel-{{ data.id }}"
+            class="accordion-section control-section control-panel control-panel-{{ data.type }}">
+
+        </li>
+    </script>
+
+    <script type="text/html" id="tmpl-customize-section-default">
+        <li id="accordion-section-{{ data.id }}"
+            class="accordion-section control-section control-section-{{ data.type }}">
+
+        </li>
+    </script>
+    <script type="text/html" id="tmpl-customize-section-themes">
+        <li id="accordion-section-{{ data.id }}" class="theme-section">
+            <div class="customize-themes-section themes-section-{{ data.id }} control-section-content themes-php">
+            </div>
+        </li>
+    </script>
+
+    <script type="text/html" id="tmpl-cleversoft--builder-panel">
+        <div class="">
+            <div class="cleversoft--cb-inner">
+                <div class="cleversoft--cb-header">
+                    <div class="cleversoft--cb-devices-switcher">
+                    </div>
+                    <div class="cleversoft--cb-actions">
+                        <button data-id="header_sticky" class="focus-section button button-secondary" onclick="openHeaderModal(event, 'header_sticky')">Header Sticky</button>
+                        <button data-id="header_templates" class="focus-section button button-secondary" onclick="openHeaderModal(event, 'header_templates')">Templates</button>
+                        <button id="header_clear_section" class="focus-section button button-secondary">Clear</button>
+                    </div>
+                </div>
+                <div class="cleversoft--cb-body"></div>
+            </div>
+        </div>
+    </script>
+
+
+    <script type="text/html" id="tmpl-cleversoft--cb-panel">
+        <div class="cleversoft--cp-rows">
+
+            <# if ( ! _.isUndefined( data.rows.top ) ) { #>
+            <div class="cleversoft--row-top cleversoft--cb-row" data-id="{{ data.id }}_top">
+                <a class="cleversoft--cb-row-settings" title="{{ data.rows.top }}" data-id="top_bar" href="#"></a>
+                <div class="cleversoft--row-inner">
+                    <div class="row--grid">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div class="cleversoft--cb-items grid-stack gridster" data-id="top"></div>
+                </div>
+            </div>
+            <# } #>
+
+            <# if ( ! _.isUndefined( data.rows.main ) ) { #>
+            <div class="cleversoft--row-main cleversoft--cb-row" data-id="{{ data.id }}_main">
+                <a class="cleversoft--cb-row-settings" title="{{ data.rows.main }}" data-id="main_bar"
+                   href="#"></a>
+
+                <div class="cleversoft--row-inner">
+                    <div class="row--grid">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div class="cleversoft--cb-items grid-stack gridster" data-id="main"></div>
+                </div>
+            </div>
+            <# } #>
+
+
+            <# if ( ! _.isUndefined( data.rows.bottom ) ) { #>
+            <div class="cleversoft--row-bottom cleversoft--cb-row" data-id="{{ data.id }}_bottom">
+                <a class="cleversoft--cb-row-settings" title="{{ data.rows.bottom }}"
+                   data-id="bottom_bar" href="#"></a>
+                <div class="cleversoft--row-inner">
+                    <div class="row--grid">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div class="cleversoft--cb-items grid-stack gridster" data-id="bottom"></div>
+                </div>
+            </div>
+            <# } #>
+        </div>
+
+
+        <# if ( ! _.isUndefined( data.rows.sidebar ) ) { #>
+        <div class="cleversoft--cp-sidebar">
+            <div class="cleversoft--row-bottom cleversoft--cb-row" data-id="{{ data.id }}_sidebar">
+                <a class="cleversoft--cb-row-settings" title="{{ data.rows.sidebar }}" data-id="sidebar"
+                   href="#"></a>
+                <div class="cleversoft--row-inner">
+                    <div class="cleversoft--cb-items cleversoft--sidebar-items" data-id="sidebar"></div>
+                </div>
+            </div>
+        </div>
+        <# } #>
+
+    </script>
+
+    <script type="text/html" id="tmpl-cleversoft--cb-item">
+        <div class="grid-stack-item item-from-list for-s-{{ data.section }}"
+             title="{{ data.name }}"
+             data-id="{{ data.id }}"
+             data-control="{{ data.control }}"
+             data-gs-x="{{ data.x }}"
+             data-gs-y="{{ data.y }}"
+             data-gs-width="{{ data.width }}"
+             data-df-width="{{ data.width }}"
+             data-gs-height="1"
+        >
+            <div class="item-tooltip" data-section="{{ data.id }}">{{ data.name }}</div>
+            <div class="grid-stack-item-content">
+                <span class="cleversoft--cb-item-name" data-id="{{ data.id }}">{{ data.name }}</span>
+                <span class="cleversoft--cb-item-remove cleversoft-cb-icon"></span>
+                <span class="cleversoft--cb-item-setting cleversoft-cb-icon" data-id="{{ data.id }}"></span>
+            </div>
+        </div>
+    </script>
+
+    <script>
+        var _headerBuilderSettings = {
+            "changeset": {
+                "lockUser": null
+            },
+            "timeouts": {"previewFrameSensitivity": 2000},
+            "theme": {"_canInstall": true},
+            "url": {
+                "preview": ""
+            },
+            "panels": {
+                "header_settings": {
+                    "id": "header_settings",
+                    "description": "",
+                    "priority": 1,
+                    "type": "cleversoft_panel",
+                    "title": "Header",
+                    "content": "",
+                    "active": true,
+                    "instanceNumber": 11
+                }
+            },
+            "sections": {
+                "header_builder_panel": {
+                    "id": "header_builder_panel",
+                    "description": "",
+                    "priority": 160,
+                    "panel": "header_settings",
+                    "type": "cleversoft_section",
+                    "description_hidden": false,
+                    "title": "Header Builder",
+                    "content": "",
+                    "active": true,
+                    "instanceNumber": 48,
+                    "customizeAction": "Customizing &#9656; Header"
+                }
+            },
+            "autofocus": []
+        };
+
+        _headerBuilderSettings.controls = {};
+        _headerBuilderSettings.settings = {};
+
+        (function (c) {
+
+            c["header_builder_panel"] = {
+                "settings": {"default": "header_builder_panel"},
+                "type": "cleversoft",
+                "priority": 10,
+                "active": true,
+                "section": "header_builder_panel",
+                "content": "<li id=\"customize-control-header_builder_panel\" class=\"customize-control customize-control-cleversoft-js_raw\">\r\n                <\/li>",
+                "label": "Header Builder",
+                "description": "",
+                "instanceNumber": 146,
+                "device_settings": false,
+                "value": {
+                    "desktop": <?php echo $desktopData ? $desktopData : '{}';?>,
+                    "mobile": <?php echo $mobileData ? $mobileData : '{}';?>,
+                },
+                "default": null,
+                "placeholder": "",
+                "fields": [],
+                "setting_type": "js_raw",
+                "required": null,
+                "devices": null,
+                "reset_controls": [],
+                "min": 0,
+                "max": 700,
+                "step": 1,
+                "unit": false
+            }
+
+        })(_headerBuilderSettings.controls);
+    </script>
+</div>
+<input id="headerbuilder-desktop-data" name="headerbuilder-desktop-data" type="hidden" value='<?php echo $desktopData ? $desktopData : '{}';?>'>
+<input id="headerbuilder-mobile-data" name="headerbuilder-mobile-data" type="hidden" value='<?php echo $mobileData ? $mobileData : '{}';?>'>
+<!-- popup setting -->
+<div id="headerbuilder-popup-header_sticky" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/header_sticky.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-header_templates" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/header_templates.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-top_bar" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/top_bar.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-main_bar" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/main_bar.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-bottom_bar" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/bottom_bar.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-logo" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/logo.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-compare_link" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/compare_link.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-primary_menu" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/primary_menu.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-top_menu" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/top_menu.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-menu" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/menu-mobile.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-minicart" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/minicart.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-top.search" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/top.search.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-user_area" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/user_area.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-wishlist" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/wishlist.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-store_language" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/store_language.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-currency" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/currency.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-html-1" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/html-1.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-html-2" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/html-2.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-html-3" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/html-3.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-html-4" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/html-4.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-html-5" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/html-5.phtml";
+    echo $this->getLayout()
+        ->createBlock('Magento\Framework\View\Element\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<div id="headerbuilder-popup-sidebar_icon" class="headerbuilder-modal">
+    <?php
+    $template = "CleverSoft_CleverTheme::popup/sidebar_icon.phtml";
+    echo $this->getLayout()
+        ->createBlock('CleverSoft\CleverTheme\Block\Template')
+        ->setTemplate($template)
+        ->toHtml(); ?>
+</div>
+<script>
+    require(['jquery', 'jquery/ui', 'headerbuilder'], function($){
+        if($('input[name="settings[header][onoffswitch-headerbuilder]"]').prop('checked')) {
+            $(".header-full-overlay").css("display","block");
+        }
+        $('input[name="settings[header][onoffswitch-headerbuilder]"]').change(function(e){
+            if($('input[name="settings[header][onoffswitch-headerbuilder]"]').prop('checked')) {
+                $(".header-full-overlay").css("display","block");
+            } else {
+                $(".header-full-overlay").css("display","none");
+                $(".headerbuilder-modal").css("display","none");
+            }
+        });
+        $('input[name="settings_data_logo"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            $('input[name="settings[header][logo][value]"]').val(fileName);
+        });
+        $('input[name="settings_data_logo_mobile"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            $('input[name="settings[header][logo_mobile][value]"]').val(fileName);
+        });
+    });
+</script>
+
+<script>
+    function openHeaderModal(evt, popup) {
+        evt.preventDefault();
+        var i, poupcontent, popup_link;
+        poupcontent = document.getElementsByClassName("headerbuilder-modal");
+        for (i = 0; i < poupcontent.length; i++) {
+            poupcontent[i].style.display = "none";
+        }
+        popup_link = "headerbuilder-popup-"+popup;
+        document.getElementById(popup_link).style.display = "block";
+    }
+</script>

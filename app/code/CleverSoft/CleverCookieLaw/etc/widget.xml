@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverCookieLaw
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="mt_cookielaw" class="CleverSoft\CleverCookieLaw\Block\Widget" is_email_compatible="true" placeholder_image="CleverSoft_CleverBlock::images/clever-block.png">
+        <label translate="true">Privacy and Cookie Policy</label>
+        <description>Show Privacy and Cookie Policy with request forms</description>
+        <parameters>
+            <parameter name="show_request_account" xsi:type="select" required="true"  visible="true">
+                <label translate="true">Enable form request to be remove account</label>
+                <options>
+                    <option name="yes" value="1" selected="true">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="show_request_data" xsi:type="select" required="true"  visible="true">
+                <label translate="true">Enable form request access to data</label>
+                <options>
+                    <option name="yes" value="1" selected="true">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="show_request_complaint" xsi:type="select" required="true"  visible="true">
+                <label translate="true">Enable form submit complaint</label>
+                <options>
+                    <option name="yes" value="1" selected="true">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="show_request_rectification" xsi:type="select" required="true"  visible="true">
+                <label translate="true">Enable form request rectification</label>
+                <options>
+                    <option name="yes" value="1" selected="true">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

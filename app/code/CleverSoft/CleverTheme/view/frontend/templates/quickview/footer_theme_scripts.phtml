@@ -1,0 +1,81 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+
+$theme = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$equalHeight = $theme->getCfg('category_grid/equal_height');
+$displayAddtocart = $theme->getCfg('category_grid/display_addtocart');
+$displayAddtolink = $theme->getCfg('category_grid/display_addtolinks');
+$compareHeader = $theme->getCfg('header/compare');
+?>
+<div id="clever-quickview" class="quickview-modal">
+    <div class="column main">
+        <div class="content-wrap">
+            <div class="clever-loading-wrap" style="display:none;">
+                <span class="zoo-loading" style="opacity: 1; visibility: visible"></span>
+            </div>
+            <div class="clever-content clever-main" style="display:none;"></div>
+        </div>
+    </div>
+</div>
+<script>
+    require([
+        "jquery",
+        "jquery/ui",
+
+        'Magento_Ui/js/modal/modal'
+    ],function($,ui,modal){
+        $(function() {
+            //Quickview
+            window.quickViewModal = function() {
+                var $modal = $('#clever-quickview');
+                var qsModal = $modal.modal({
+                    innerScroll: true,
+                    title: '',
+                    wrapperClass: 'qv-modal',
+                    modalClass: 'zoo-quickview-popup',
+                    buttons: [],
+                    opened: function(){
+                        var $loader = $modal.find('.clever-loading-wrap');
+                        var $content = $modal.find('.clever-content');
+                        $loader.show(); $content.hide();
+                        var qsUrl = window.qsUrl;
+                        $.ajax({
+                            url:qsUrl,
+                            type: 'POST',
+                            cache:false,
+                            success: function(res){
+                                var new_res = res.replace(/gallery-placeholder/g, 'quickview-gallery-placeholder');
+                                $content.html(new_res);
+                                $content.trigger('contentUpdated');
+                                $content.show();
+                            }
+                        }).always(function(){$loader.hide();});
+                    },
+                    closed: function(){
+                        $modal.find('.clever-content').html('');
+                    }
+                });
+                $(document).on('click', '.zoo-quickview', function(){
+                    $(this).unbind('click');
+                    window.qsUrl = $(this).children('a').attr('href');
+                    qsModal.modal('openModal');
+                });
+            }
+            window.quickViewModal();
+        });
+        // JavaScript Document
+        $(window).load(function(){
+            if($(".zoo-tooltip").length>0) {
+                $(".zoo-tooltip").tooltip();
+            }
+
+        });
+    });
+
+</script>

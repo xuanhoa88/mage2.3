@@ -1,0 +1,32 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverBuilder
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php /** @var $block \Magento\Swatches\Block\Product\Renderer\Configurable */ ?>
+<?php
+$radom = $block->getRandom();
+?>
+<div class="swatch-opt-<?php /* @escapeNotVerified */ echo $block->getProduct()->getId().$radom; ?> swatch-opt"
+     data-swatch-obj-data-id="id_<?php /* @escapeNotVerified */ echo $block->getProduct()->getId().$radom; ?>" data-mage-init='{"cleverSwatchRenderer":{
+                    "selectorProduct":".product-item-cleverSwatchRenderer",
+                    "onlySwatches":"true",
+                    "classes": {
+                            "attributeClass": "swatch-attribute",
+                            "attributeInput": "swatch-input",
+                            "optionClass": "swatch-option"
+                    },
+                    "equalHeightConfig":"<?php echo $this->getData('equal_height')?>",
+                    "enableControlLabel":"false",
+                    "inProductList": "true",
+                    "selectorProductTile": ".zoo-inner-product-item-info",
+                    "numberToShow":"<?php /* @escapeNotVerified */ echo $block->getNumberSwatchesPerProduct(); ?>",
+                    "jsonConfig":<?php /* @escapeNotVerified */ echo $block->getJsonConfig(); ?>,
+                    "jsonSwatchConfig":<?php /* @escapeNotVerified */ echo $block->getJsonSwatchConfig(); ?>,
+                    "mediaCallback":"<?php /* @escapeNotVerified */ echo $block->getMediaCallback(); ?>"
+                }}'>
+</div>

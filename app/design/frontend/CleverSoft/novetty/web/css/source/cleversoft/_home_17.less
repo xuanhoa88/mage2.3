@@ -1,0 +1,301 @@
+/**
+//
+//  To add custom CSS styles, create custom child-theme
+//
+*/
+@home17_color_1: #383838;
+@home17_color_2: #ff4d9d;
+@home17_color_3: #6cd3fe;
+body.cms-cleversoft-homepage-17 {
+  #zoo-sticky-header {
+    border-bottom: none;
+  }
+  .flexslider {
+    .flex-direction-nav {
+      a {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        color: @color-white;
+        border: 0;
+        text-align: center;
+        border-radius: 50%;
+        background-color: @home17_color_2;
+        opacity: 1;
+        &:before {
+          font-size: 18px !important;
+          width: 100%;
+          color: @color-white;
+        }
+        &.flex-prev {
+          left: 15px;
+          opacity: 1;
+        }
+        &.flex-next {
+          right: 15px;
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .home17-banner3 {
+    position: relative; 
+    .text {
+      font-size: 60px;
+      line-height: 1;
+      text-transform: inherit;
+      letter-spacing: 3px; 
+      z-index: 9; 
+    }
+  }
+  .zoo-main-heading .zoo-heading-wrapper-title h3, h3.title {
+    font-weight: normal;
+    font-size: 30px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .newsletter-left-home {
+    background: @home17_color_3;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 30px;
+    text-align: center;
+    color: @color-white;
+    .newsletter-border {
+      border: 1px dashed @color-white;
+      padding: 15px;
+    }
+    h3 {
+      margin-top: 20px;
+      font-size: 18px;
+      line-height: 22px;
+      color: @color-white;
+      font-weight: 500;
+      &:before {
+        content: "\c117";
+        font-size: 18px;
+        color: @color-white;
+        font-family: 'cleversoft';
+        position: absolute;
+        z-index: 0;
+        width: 40px;
+        top: 12px;
+        left: 50%;
+        margin-left: -20px;
+        height: 40px;
+        background: @home17_color_2;
+        line-height: 40px;
+        border-radius: 50%;
+        font-weight: 100;
+      }
+    }
+    #newsletter-validate-detail {
+      .btn-novetty {
+        &.action {
+          &.subscribe {
+            letter-spacing: 0;
+            width: 100%;
+            padding: 10px;
+            border-radius: 3px;
+            font-weight: 500;
+          }
+        }
+      }
+      .newsletter {
+        input {
+          text-align: center;
+          background: transparent;
+          border-color: @color-white;
+        }
+
+        ::-webkit-input-placeholder {
+          /* Chrome/Opera/Safari */
+          color: @color-white;
+        }
+        ::-moz-placeholder {
+          /* Firefox 19+ */
+          color: @color-white;
+        }
+        :-ms-input-placeholder {
+          /* IE 10+ */
+          color: @color-white;
+        }
+        :-moz-placeholder {
+          /* Firefox 18- */
+          color: @color-white;
+        }
+      }
+    }
+  }
+  .zoo-widget-tab-style2 {
+    .tabs-collection {
+      .widget-tabs {
+        li {
+          &.active, &:hover {
+            a {
+              background: @home17_color_2;
+            }
+          }
+        }
+      }
+    }
+  }
+  .zoo-product-collection01 {
+    .owl-carousel .owl-nav {
+      .owl-prev, .owl-next {
+        width: 40px;
+        height: 40px;
+        background: @home17_color_2;
+        line-height: 40px;
+        text-align: center;
+        font-size: 24px;
+        color: @color-white;
+        opacity: 1;
+        right: 10px;
+        border-radius: 50%;
+        &[class*=owl-] a:before {
+          color: @color-white;
+        }
+      }
+      .owl-prev {
+        left: 10px;
+      }
+    }
+  }
+  .wrap-images-block { 
+    h3 {
+      font-size: 24px;
+      line-height: 30px;
+      letter-spacing: 0;
+      margin: 0;
+      text-transform: capitalize;
+      font-weight: normal;
+    }
+    h2 {
+      padding: 0;
+      margin: 0;
+      font-size: 40px;
+      line-height: 60px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      font-weight: normal;
+    }
+    .btn2 {
+      background: @color-white;
+      height: 30px;
+      min-width: 100px;
+      text-align: center;
+      position: relative;
+      line-height: 30px;
+      display: inline-block;
+      border: 0;
+      font-size: 18px;
+      text-transform: lowercase;
+      font-weight: normal;
+      letter-spacing: 0;
+      padding: 0;
+      &:before {
+        content: '';
+        border-top: 0 solid transparent;
+        border-bottom: 30px solid transparent;
+        border-right: 10px solid @color-white;
+        position: absolute;
+        left: -10px;
+        bottom: 0;
+        z-index: 9;
+      }
+      &:after {
+        content: '';
+        border-bottom: 10px solid transparent;
+        border-top: 0 solid transparent;
+        border-right: 100px solid @color-white;
+        position: absolute;
+        right: 0;
+        bottom: -10px;
+        z-index: 9;
+      }
+    }
+  }
+  .brand-home17 {
+    background: @color-white;
+    padding: 20px 0 30px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+  .bx-wrapper {
+    .bx-viewport {
+      box-shadow: none;
+    }
+    .bx-controls {
+      display: none;
+    }
+    .product-new-label {
+      display: none;
+    }
+  }
+  .products-grid.grid .product-item-info a.product-item-link, .widget-product-grid .product-item-info a.product-item-link {
+    font-weight: normal;
+  }
+  .zoo-product-collection02 .products-grid.grid li .product-item-info .zoo-inner-product-item-info {
+    border-top: none;
+  }
+  .zoo-copyright-links a {
+    color: inherit;
+  }
+  .page-wrapper {
+    .copyright {
+      overflow: hidden;
+    }
+    .page-footer {
+      .zoo-footer-bottom-content {
+        margin: 50px 0 30px;
+        padding: 0;
+        h4.zoo-widget-title-sm{
+          margin: 0 0 15px;
+          font-size: 30px;
+          font-weight: normal;
+        }
+      }
+    }
+
+  }
+  #clever-quickview .footer-copyright{
+    display: none;
+  }
+}
+body.cms-cleversoft-homepage-17 {
+  &.catalog-category-view, &.clevershopby-index-index {
+    .sidebar {
+      &.sidebar-left, &.sidebar-right {
+        border-right: none;
+        padding-right: 0;
+        .zoo-sidebar-main {
+          background: @color-white;
+          padding: 30px;
+          border-radius: 5px;
+        }
+      }
+    }
+    .zoo-main-content-area {
+      background: @color-white;
+      padding: 30px;
+      border-radius: 5px;
+    }
+  }
+  &.rtl{
+    .clever-horizontal-menu ul.clever-mega-menu>li.level-top.parent>a {
+      padding-left: 30px !important;
+      padding-right: 30px !important;
+    }
+    .clever-menu.clever-horizontal-menu ul.clever-mega-menu>li.level-top.parent>a:before {
+      left: 0!important;
+      right: 15px !important;
+    }
+  }
+  .zoo-quickview-popup{
+    .zoo-main-content-area {
+      padding-bottom: 0;
+      overflow: hidden;
+    }
+  }
+}

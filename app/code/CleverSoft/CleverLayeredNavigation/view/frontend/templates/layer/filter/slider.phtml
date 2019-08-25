@@ -1,0 +1,63 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$item = array_shift($filterItems);
+?>
+<ol class="items">
+    <li>
+        <div id="cleversoft_shopby_filter_<?php echo $filterSetting->getFilterCode(); ?>">
+            <div class="cleversoft_shopby_filter_slider_slider"></div>
+            <div class="price-filter d-flex align-items-center">
+                <div class="price-filter__text">
+                    <?php echo __('Price:') ?>
+                </div>
+                <div class="cleversoft_shopby_filter_slider_min price-filter__space"></div>
+                <div class="price-filter__space">-</div>
+                <div class="cleversoft_shopby_filter_slider_max price-filter__space"></div>
+            </div>
+        </div>
+
+        <script type="text/x-magento-init">
+            {
+                "#cleversoft_shopby_filter_<?php echo $filterSetting->getFilterCode(); ?>": {
+                    "cleverLayeredNavigationFilterSlider": {
+                            "template":"<?php echo $item['template']?>",
+                            "step":"<?php echo $item['step']?>",
+                            "from":<?php echo $item['from'];?>,
+                            "to":<?php echo $item['to'];?>,
+                            "min":<?php echo $item['min'];?>,
+                            "max":<?php echo $item['max'];?>,
+                            "url": "<?php echo $block->getSliderUrlTemplate(); ?>",
+                            "currency_symbol": "<?php echo $block->getCurrencySymbol(); ?>",
+                            "sliderClass":".cleversoft_shopby_filter_slider_slider",
+                            "minClass":".cleversoft_shopby_filter_slider_min",
+                            "maxClass":".cleversoft_shopby_filter_slider_max"
+                        }
+                }
+            }
+            </script>
+    </li>
+</ol>
+
+<?php if($filterSetting->isShowTooltip()): ?>
+    <?php
+    $tooltipTemplate = '<span class="tooltip clevershopby-filter-tooltip" style="float:right" title="{content}"><img src="'.$tooltipUrl.'"/></span>';
+    ?>
+    <script type="text/x-magento-init">
+            {
+                ".cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode()?>": {
+                    "cleverLayeredNavigationFilterAddTooltip": {
+                        "content": <?php echo json_encode($filterSetting->getTooltip())?>,
+                        "tooltipTemplate": <?php echo json_encode($tooltipTemplate)?>
+                    }
+                }
+            }
+    </script>
+<?php endif; ?>

@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Catalog\Block\Product\View*/
+?>
+<?php
+$_product = $block->getProduct();
+$_wishlistSubmitParams = $this->helper('Magento\Wishlist\Helper\Data')->getAddParams($_product);
+$compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+?>
+
+<div class="product-addto-links d-flex align-items-center" data-role="add-to-links">
+    <?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow()) : ?>
+        <a href="#"
+            class="action to-wishlist"
+            data-post='<?php /* @escapeNotVerified */ echo $_wishlistSubmitParams; ?>'
+            data-action="add-to-wishlist"><span class="cs-font clever-icon-heart-4"></span></a>
+    <?php endif; ?>
+    <?php
+    $data = [];
+    $data['product'] = $_product->getId();
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $data[\Magento\Framework\App\ActionInterface::PARAM_NAME_URL_ENCODED] = $objectManager->create('Magento\Framework\Url\EncoderInterface')->encode($objectManager->create('Magento\Framework\App\Response\RedirectInterface')->getRefererUrl());
+    ?>
+    <a href="#" data-post='<?php /* @escapeNotVerified */ echo json_encode(['action' => $compareHelper->getAddUrl(), 'data' => $data]);?>'
+        data-role="add-to-links"
+        class="action tocompare"><span class="cs-font clever-icon-refresh-2"></span></a>
+</div>
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "addToWishlist": <?php /* @escapeNotVerified */ echo $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode($block->getWishlistOptions())?>
+        }
+    }
+</script>

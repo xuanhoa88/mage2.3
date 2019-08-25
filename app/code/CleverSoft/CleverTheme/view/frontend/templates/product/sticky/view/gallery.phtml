@@ -1,0 +1,218 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product media data template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ */
+?>
+<?php
+    $theme = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+    $product_layout = $theme->getCfg('product_page/page_layout');
+    $product = $block->getProduct();
+    $images = $block->getGalleryImages();
+    $key = 0;
+?>
+<div class="d-none d-lg-block">
+    <div class="gallery-sticky2 _block-content-loading">
+        <div data-role="loader" class="loading-mask" style="display: none">
+            <div class="loader">
+                <img src="<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('images/loader-1.gif'); ?>"
+                     alt="<?php /* @escapeNotVerified */ echo __('Loading...') ?>">
+            </div>
+        </div>
+        <div class="gallery-sticky2__img">
+            <div class="row">
+                <div class="col-lg-12 gallery-sticky2-image-col">
+                    <?php foreach ($images as $image) {?>
+                        <?php if ($image->getData('media_type') == 'image'): ?>
+                            <div class="gallery-sticky2-image-wrapper">
+                                <a class="gallery-sticky2__img-main" href="<?php echo ($image->getData('large_image_url')); ?>">
+                                    <img src="<?php echo($image->getData('medium_image_url')) ;?>">
+                                </a>
+                            </div>
+                        <?php elseif ($image->getData('media_type') == 'external-video'): ?>
+                            <div class="gallery-sticky2-video-wrapper" data-media-type="external-video" data-media-url="<?php echo($image->getData('video_url')); ?>">
+                                <a href="<?php echo ($image->getData('large_image_url')); ?>">
+                                    <img src="<?php echo($image->getData('medium_image_url')) ;?>">
+                                </a>
+                            </div>
+                        <?php endif;?>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require(["jquery","stickyCustom"], function ($) {
+        var sticky_gallery_content = $(".gallery-sticky2");
+        var sticky_gallery_image_thumb_content = sticky_gallery_content.find('.gallery-sticky2-image-thumb-col');
+        var sticky_gallery_image_content = sticky_gallery_content.find('.gallery-sticky2-image-col');
+        var active_index = -1;
+        sticky_gallery_image_thumb_content.find( ".gallery-sticky2-image-thumb-wrapper a" ).click(function( event ) {
+            event.preventDefault();
+            sticky_gallery_image_thumb_content.find(".gallery-sticky2-image-thumb-wrapper").removeClass('active');
+            $(this).parent().addClass('active');
+            active_index =$(this).parent().index();
+
+
+            var active_div = sticky_gallery_image_content.find(">div:eq(" + active_index + ")");
+
+            var windown_height = $(window).height();
+            var top_position = active_div.offset().top;
+            var height_div = active_div.height();
+
+            var scroll_value = top_position + (height_div / 2) - (windown_height / 2);
+
+            if ($(this).closest('.modal-content').length > 0) {
+                $(this).closest('.modal-content').animate({
+                    scrollTop: scroll_value
+                }, 1000);
+            } else {
+                $('html, body').animate({
+                    scrollTop: scroll_value
+                }, 1000);
+            }
+        });
+
+        var option = {
+            class: {
+                sticky_gallery_content: '.gallery-sticky2',
+                thumb_content: '.gallery-sticky2-image-thumb-col',
+                image_content: '.gallery-sticky2-image-col',
+                image_wrapper: '.gallery-sticky2-image-wrapper',
+                video_wrapper: '.gallery-sticky2-video-wrapper',
+            }
+        };
+
+        $.cleversoft.cleverBaseApllyImageAndVideoEvent(option);
+    });
+</script>
+<!--Fix for jumping content. Loader must be the same size as gallery.-->
+
+<div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
+    <div data-role="loader" class="loading-mask">
+    </div>
+
+</div>
+
+
+<!--Fix for jumping content. Loader must be the same size as gallery.-->
+<script>
+    var config = {
+            "width": <?= /* @escapeNotVerified */ $block->getImageAttribute('product_page_image_medium', 'width') ?>,
+            "thumbheight": <?php /* @escapeNotVerified */ echo $block->getImageAttribute('product_page_image_small', 'height')
+                ?: $block->getImageAttribute('product_page_image_small', 'width'); ?>,
+            "navtype": "<?= /* @escapeNotVerified */ $block->getVar("gallery/navtype") ?>",
+            "height": <?= /* @escapeNotVerified */ $block->getImageAttribute('product_page_image_medium', 'height') ?>
+        },
+        thumbBarHeight = 0,
+        loader = document.querySelectorAll('[data-gallery-role="gallery-placeholder"] [data-role="loader"]')[0];
+
+    if (config.navtype === 'horizontal') {
+        thumbBarHeight = config.thumbheight;
+    }
+
+    loader.style.paddingBottom = ( config.height / config.width * 100) + "%";
+</script>
+<script type="text/x-magento-init">
+    {
+        "[data-gallery-role=gallery-placeholder]": {
+            "mage/gallery/gallery": {
+                "mixins":["magnifier/magnify"],
+                "magnifierOpts": <?= /* @escapeNotVerified */ $block->getMagnifier() ?>,
+                "data": <?= /* @escapeNotVerified */ $block->getGalleryImagesJson() ?>,
+                "options": {
+                    "nav": "<?= /* @escapeNotVerified */ $block->getVar("gallery/nav") ?>",
+                    <?php if (($block->getVar("gallery/loop"))): ?>
+                        "loop": <?= /* @escapeNotVerified */ $block->getVar("gallery/loop") ?>,
+                    <?php endif; ?>
+                    <?php if (($block->getVar("gallery/keyboard"))): ?>
+                        "keyboard": <?= /* @escapeNotVerified */ $block->getVar("gallery/keyboard") ?>,
+                    <?php endif; ?>
+                    <?php if (($block->getVar("gallery/arrows"))): ?>
+                        "arrows": <?= /* @escapeNotVerified */ $block->getVar("gallery/arrows") ?>,
+                    <?php endif; ?>
+                    <?php if (($block->getVar("gallery/allowfullscreen"))): ?>
+                        "allowfullscreen": <?= /* @escapeNotVerified */ $block->getVar("gallery/allowfullscreen") ?>,
+                    <?php endif; ?>
+                    <?php if (($block->getVar("gallery/caption"))): ?>
+                        "showCaption": <?= /* @escapeNotVerified */ $block->getVar("gallery/caption") ?>,
+                    <?php endif; ?>
+                    "width": "<?= /* @escapeNotVerified */ $block->getImageAttribute('product_page_image_medium', 'width') ?>",
+                    "thumbwidth": "<?= /* @escapeNotVerified */ $block->getImageAttribute('product_page_image_small', 'width') ?>",
+                    <?php if ($block->getImageAttribute('product_page_image_small', 'height') || $block->getImageAttribute('product_page_image_small', 'width')): ?>
+                        "thumbheight": <?php /* @escapeNotVerified */ echo $block->getImageAttribute('product_page_image_small', 'height')
+        ?: $block->getImageAttribute('product_page_image_small', 'width'); ?>,
+                    <?php endif; ?>
+                    <?php if ($block->getImageAttribute('product_page_image_medium', 'height') || $block->getImageAttribute('product_page_image_medium', 'width')): ?>
+                        "height": <?php /* @escapeNotVerified */ echo $block->getImageAttribute('product_page_image_medium', 'height')
+        ?: $block->getImageAttribute('product_page_image_medium', 'width'); ?>,
+                    <?php endif; ?>
+                    <?php if ($block->getVar("gallery/transition/duration")): ?>
+                        "transitionduration": <?= /* @escapeNotVerified */ $block->getVar("gallery/transition/duration") ?>,
+                    <?php endif; ?>
+                    "transition": "<?= /* @escapeNotVerified */ $block->getVar("gallery/transition/effect") ?>",
+                    <?php if (($block->getVar("gallery/navarrows"))): ?>
+                        "navarrows": <?= /* @escapeNotVerified */ $block->getVar("gallery/navarrows") ?>,
+                    <?php endif; ?>
+                    "navtype": "<?= /* @escapeNotVerified */ $block->getVar("gallery/navtype") ?>",
+                    "navdir": "<?= /* @escapeNotVerified */ $block->getVar("gallery/navdir") ?>"
+                },
+                "fullscreen": {
+                    "nav": "<?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/nav") ?>",
+                    <?php if ($block->getVar("gallery/fullscreen/loop")): ?>
+                        "loop": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/loop") ?>,
+                    <?php endif; ?>
+                    "navdir": "<?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/navdir") ?>",
+                    <?php if ($block->getVar("gallery/transition/navarrows")): ?>
+                        "navarrows": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/navarrows") ?>,
+                    <?php endif; ?>
+                    "navtype": "<?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/navtype") ?>",
+                    <?php if ($block->getVar("gallery/fullscreen/arrows")): ?>
+                        "arrows": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/arrows") ?>,
+                    <?php endif; ?>
+                    <?php if ($block->getVar("gallery/fullscreen/caption")): ?>
+                        "showCaption": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/caption") ?>,
+                    <?php endif; ?>
+                    <?php if ($block->getVar("gallery/fullscreen/transition/duration")): ?>
+                        "transitionduration": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/transition/duration") ?>,
+                    <?php endif; ?>
+                    "transition": "<?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/transition/effect") ?>"
+                },
+                "breakpoints": <?= /* @escapeNotVerified */ $block->getBreakpoints() ?>
+            }
+        }
+    }
+</script>
+
+<script>
+        require(['jquery'],function($){ 
+            jQuery(document).on('click', '.swatch-option',function(){
+                if($('.swatch-attribute').is('[option-selected]')) {
+                    if($('body').hasClass('type-sticky-accordion')) $('body').removeClass('type-sticky-accordion');
+                    if($('body').hasClass('type-sticky-images')) $('body').removeClass('type-sticky-images');
+                    if($('body').hasClass('type-sticky-right-content')) $('body').removeClass('type-sticky-right-content');
+                    
+                    $('.gallery-sticky2._block-content-loading').hide(); 
+                    $(window).trigger('resize');
+                }else {
+                    <?php if($product_layout == 'sticky_layout_3'):?>
+                        $('body').addClass('type-sticky-accordion');
+                    <?php elseif($product_layout == 'sticky_layout_1'):?>
+                        $('body').addClass('type-sticky-images');
+                    <?php elseif($product_layout == 'sticky_layout_2'):?>
+                        $('body').addClass('type-sticky-right-content');
+                    <?php endif;?>
+                    $('.gallery-sticky2._block-content-loading').show(); 
+                }
+            });      
+        }); 
+</script>

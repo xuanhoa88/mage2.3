@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverSocialProof
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <socialproof>
+            <general>
+                <enable>1</enable>
+                <limit_product>10</limit_product>
+                <delay_time>6</delay_time>
+                <display_time>10</display_time>
+                <name>Ronaldo | Messi | Neymar | Mbappé</name>
+                <country>Melbourne, Australia | London, England | New York | Washington</country>
+                <time>2 hours ago | 15 minutes ago | 40 minutes ago</time>
+            </general>
+        </socialproof>
+    </default>
+</config>

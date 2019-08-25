@@ -1,0 +1,161 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+/**
+ * Category layered navigation
+ *
+ * @var $block \Magento\LayeredNavigation\Block\Navigation
+ */
+$helper = $this->helper('CleverSoft\CleverLayeredNavigation\Helper\Data');
+$brandHelper = $this->helper('CleverSoft\CleverShopByBrand\Helper\Data');
+$assignAttributeCode = $brandHelper->getAssignAttributeCode();
+?>
+
+<div class="transparent-bg"></div>
+<?php if ($block->canShowBlock()): ?>
+    <?php if($helper->isHorizontal() && $block->getLayeredType() == "horizontal"):?>
+        <div class="layered-horizontal">
+    <?php endif;?>
+    <div id="zoo-layer-navigation" class="zoo-layer-navigation <?php if($helper->isHorizontal() && $block->getLayeredType() != "horizontal") echo 'layered-vertical'?> <?php echo $helper->isHorizontal() ? 'zoo-sidebar-main' : ''?>">
+        <div class="block filter" id="layered-filter-block" data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false, "collateral": { "openedState": "filter-active", "element": "body" } }}'>
+            <?php $filtered = count($block->getLayer()->getState()->getFilters()) ?>
+            <div class="block-title filter-title" data-count="<?php /* @escapeNotVerified */ echo $filtered; ?>">
+                <strong data-role="title"><?php /* @escapeNotVerified */ echo __('Shop By') ?></strong>
+            </div>
+            <?php if ($helper->isHorizontal() && $block->getLayeredType() != "horizontal" && $block->getLayer()->getState()->getFilters()): ?>
+                <div class="block-actions filter-actions">
+                    <div class="block-title" data-count="<?php /* @escapeNotVerified */ echo $filtered; ?>">
+                        <h4 data-role="title"><?php /* @escapeNotVerified */ echo __('Refine') ?></h4>
+                    </div>
+                    <a href="<?php /* @escapeNotVerified */ echo $block->getClearUrl() ?>" class="ml-auto action clear filter-clear"><span><?php /* @escapeNotVerified */ echo __('Clear All') ?></span></a>
+                </div>
+            <?php endif; ?>
+            <div class="block-content filter-content d-flex flex-column-reverse">
+                <?php echo $block->getChildHtml('state') ?>
+                <div class="apply-clear__action">
+                    <?php if ($helper->isHorizontal() && $block->getLayeredType() == "horizontal" && $block->getLayer()->getState()->getFilters()): ?>
+                        <div class="block-actions filter-actions">
+                            <div class="block-title" data-count="<?php /* @escapeNotVerified */ echo $filtered; ?>">
+                                <h4 data-role="title"><?php /* @escapeNotVerified */ echo __('Refine') ?></h4>
+                            </div>
+                            <a href="<?php /* @escapeNotVerified */ echo $block->getClearUrl() ?>" class="ml-auto action clear filter-clear"><span><?php /* @escapeNotVerified */ echo __('Clear All') ?></span></a>
+                        </div>
+                    <?php endif; ?>
+                    <?php if($this->helper('CleverSoft\CleverLayeredNavigation\Helper\Data')->isApplyEnabled()):?>
+                        <div class="block apply-filter">
+                            <button type="button" id="zoo-apply-filter">Apply</button>
+                        </div>
+                    <?php endif;?>
+                </div>
+                <?php $wrapOptions = false; ?>
+                <?php $number = 0; ?>
+                <?php foreach ($block->getFilters() as $filter):?>
+                    <?php 
+                        if($filter->getRequestVar() == $assignAttributeCode && !$brandHelper->getConfig('cleversoft_shopbybrand/all_brand_page/general')) continue;
+                    ?>
+                    <?php if ($filter->getItemsCount()): ?>
+                        <?php $number++; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                <?php foreach ($block->getFilters() as $filter): ?>
+                <?php 
+                    if($filter->getRequestVar() == $assignAttributeCode && !$brandHelper->getConfig('cleversoft_shopbybrand/all_brand_page/general')) continue;
+                ?>
+            <?php if ($filter->getItemsCount()): ?>
+            <?php if (!$wrapOptions): ?>
+                <div class="filter-options" id="narrow-by-list" data-role="content">
+                    <?php  $wrapOptions = true; endif; ?>
+                    <div data-role="collapsible" class="zoo-filter-options-item filter-options-item">
+                        <div data-role="title" class="zoo-filter-options-title"><?php /* @escapeNotVerified */ echo __($filter->getName()) ?></div>
+                        <div data-role="content" class="zoo-filter-options-content">
+                            <?php if($filter->getRequestVar() == $assignAttributeCode):?>
+                                <div class="brand-search-wrap">
+                                    <div class="brand-form">
+                                        <input id="brand-search-criteria" placeholder="<?= __('Search brand here') ?>" type="text" class="input-text search-input" />
+                                    </div>
+                                </div>
+                                <script>
+                                    require([
+                                        'jquery'
+                                    ], function ($) {
+                                        $('#brand-search-criteria').keyup(function(){
+                                            $('.cleversoft_shopby_filter_items_attr_<?=$assignAttributeCode?> li').hide();
+                                            var txt = $('#brand-search-criteria').val();
+                                            $('.cleversoft_shopby_filter_items_attr_<?=$assignAttributeCode?> li').each(function(){
+                                                if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
+                                                    $(this).show();
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+                            <?php endif;?>
+                            <?php /* @escapeNotVerified */ echo $block->getChildBlock('renderer')->render($filter); ?>
+
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
+                    <?php if ($wrapOptions): ?>
+                </div>
+            <?php else: ?>
+                <script>
+                    require([
+                        'jquery'
+                    ], function ($) {
+                        $('#layered-filter-block').addClass('filter-no-options');
+                    });
+                </script>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php if($this->helper('CleverSoft\CleverLayeredNavigation\Helper\Data')->isApplyEnabled()):?>
+            <script type="text/x-magento-init">
+            {
+                "#zoo-apply-filter": {
+                    "cleverLayeredNavigationApplyFilter": {}
+                }
+            }
+            </script>
+        <?php endif;?>
+    </div>
+    <?php if($helper->isHorizontal() && $block->getLayeredType() == "horizontal"):?>
+        </div>
+    <?php endif;?>
+    <div class="loading-bar"></div>
+<?php else:  ?>
+    <div id="zoo-layer-navigation">
+        <h3 class="heading-filter-unavailable"><?php /* @escapeNotVerified */ echo __('There are no filters available') ?></h3>
+    </div>
+<?php endif; ?>
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $('.layered-horizontal .zoo-filter-options-content > ol.items').each(function () {
+            var LiN = $(this).children('li.item').length;
+            if (LiN > 5) {
+                $(this).css('height', '150px');
+                $(this).css('overflow', 'scroll');
+                $(this).css('overflow-x', 'hidden');
+            }
+        });
+
+        $('.layered-horizontal .zoo-filter-options-content ol.items.items-children').each(function () {
+            var LiN = $(this).children('li').length;
+            if (LiN > 5) {
+                if ($(".zoo-toggle-category").hasClass("active")) {
+                    $('.layered-horizontal .zoo-filter-options-content ol.items.cleversoft_shopby_filter_items_attr_category_ids').css('height', '150px');
+                    $('.layered-horizontal .zoo-filter-options-content ol.items.cleversoft_shopby_filter_items_attr_category_ids').css('overflow', 'scroll');
+                    $('.layered-horizontal .zoo-filter-options-content ol.items.cleversoft_shopby_filter_items_attr_category_ids').css('overflow-x', 'hidden');
+                }
+            }
+        });
+    });
+</script>
+

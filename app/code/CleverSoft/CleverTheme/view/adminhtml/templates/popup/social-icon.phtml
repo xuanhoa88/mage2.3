@@ -1,0 +1,452 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+if ($objectManager->create('CleverSoft\CleverTheme\Model\FooterBlock')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getId()) {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\FooterBlock')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getFooterStyle());
+} else {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\FooterBlock')->getCollection()->addFieldToFilter('store_id',0)->getFirstItem()->getFooterStyle());
+}
+if($settings){
+    $data = isset($settings->footer) ? $settings->footer : '{}';
+}
+?>
+<!-- Modal content -->
+<div class="footerbuilder-modal-content">
+    <div class="footerbuilder-modal-footer">
+        <span class="footerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="footerbuilder-modal-body">
+        <strong>Social Icon</strong>
+        <div class="modal-inner" id="footer_desktop_social-icon" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open"
+                id="sub-accordion-section-footer_social">
+                <li id="customize-control-social-icon_margin" class="customize-control customize-control-social-icon-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-social-icon_margin]" value="<?= isset($data->{'_customize-input-social-icon_margin'}) && $data->{'_customize-input-social-icon_margin'} ? $data->{'_customize-input-social-icon_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-social-icon_align" class="customize-control customize-control-social-icon_align"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Align items</span>
+                    </label>
+                    <select name="settings[footer][_customize-input-social-icon_align]">
+                        <option value="0" <?= isset($data->{'_customize-input-social-icon_align'}) && $data->{'_customize-input-social-icon_align'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="left" <?= isset($data->{'_customize-input-social-icon_align'}) && $data->{'_customize-input-social-icon_align'} == 'left' ? 'selected' : '' ?>>
+                            Left
+                        </option>
+                        </option>
+                        <option value="right" <?= isset($data->{'_customize-input-social-icon_align'}) && $data->{'_customize-input-social-icon_align'} == 'right' ? 'selected' : '' ?>>
+                            Right
+                        </option>
+                        </option>
+                        <option value="center" <?= isset($data->{'_customize-input-social-icon_align'}) && $data->{'_customize-input-social-icon_align'} == 'center' ? 'selected' : '' ?>>
+                            Center
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-footer_social-icon_merge_item" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[footer][_customize_footer_social-icon_merge_item]">
+                        <option value="0" <?= isset($data->{'_customize_footer_social-icon_merge_item'}) && $data->{'_customize_footer_social-icon_merge_item'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_footer_social-icon_merge_item'}) && $data->{'_customize_footer_social-icon_merge_item'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_footer_social-icon_merge_item'}) && $data->{'_customize_footer_social-icon_merge_item'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-social-title" class="customize-control customize-control-social-title"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Title</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-social-title]" value="<?= isset($data->{'_customize-input-social-title'}) && $data->{'_customize-input-social-title'} ? $data->{'_customize-input-social-title'} : '' ?>">
+                </li>
+                <li id="customize-control-social-icon" class="customize-control customize-control-social-icon"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Social Links</span>
+                        <small class="customize-control-description">If blank social icon will not showing.</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <ul>
+                        <li>
+                            <small>Facebook</small>
+                            <input type="text" name="settings[footer][_customize-input-social-facebook]" value="<?= isset($data->{'_customize-input-social-facebook'}) && $data->{'_customize-input-social-facebook'} ? $data->{'_customize-input-social-facebook'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>Twitter</small>
+                            <input type="text" name="settings[footer][_customize-input-social-twitter]" value="<?= isset($data->{'_customize-input-social-twitter'}) && $data->{'_customize-input-social-twitter'} ? $data->{'_customize-input-social-twitter'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>Instagram</small>
+                            <input type="text" name="settings[footer][_customize-input-social-instagram]" value="<?= isset($data->{'_customize-input-social-instagram'}) && $data->{'_customize-input-social-instagram'} ? $data->{'_customize-input-social-instagram'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>Linkedin</small>
+                            <input type="text" name="settings[footer][_customize-input-social-linkedin]" value="<?= isset($data->{'_customize-input-social-linkedin'}) && $data->{'_customize-input-social-linkedin'} ? $data->{'_customize-input-social-linkedin'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>Rss</small>
+                            <input type="text" name="settings[footer][_customize-input-social-rss]" value="<?= isset($data->{'_customize-input-social-rss'}) && $data->{'_customize-input-social-rss'} ? $data->{'_customize-input-social-rss'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>Email</small>
+                            <input type="text" name="settings[footer][_customize-input-social-email]" value="<?= isset($data->{'_customize-input-social-email'}) && $data->{'_customize-input-social-email'} ? $data->{'_customize-input-social-email'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>Pinterest</small>
+                            <input type="text" name="settings[footer][_customize-input-social-pinterest]" value="<?= isset($data->{'_customize-input-social-pinterest'}) && $data->{'_customize-input-social-pinterest'} ? $data->{'_customize-input-social-pinterest'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>VKontakte</small>
+                            <input type="text" name="settings[footer][_customize-input-social-vk]" value="<?= isset($data->{'_customize-input-social-vk'}) && $data->{'_customize-input-social-vk'} ? $data->{'_customize-input-social-vk'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>Tumblr</small>
+                            <input type="text" name="settings[footer][_customize-input-social-tumblr]" value="<?= isset($data->{'_customize-input-social-tumblr'}) && $data->{'_customize-input-social-tumblr'} ? $data->{'_customize-input-social-tumblr'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>WhatsApp</small>
+                            <input type="text" name="settings[footer][_customize-input-social-whatsapp]" value="<?= isset($data->{'_customize-input-social-whatsapp'}) && $data->{'_customize-input-social-whatsapp'} ? $data->{'_customize-input-social-whatsapp'} : '' ?>">
+                        </li>
+                    <ul>
+                </li>
+                <li id="customize-control-social_icon_style" class="customize-control customize-control-builder-radio-image"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Social Icon Style</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_social_icon_style" class="image">
+                        <input class="image-select" type="radio" value=""
+                               name="settings[footer][_customize-radio-social_icon_style]" id="social_icon_style_default"
+                               data-customize-setting-link="social_icon_style" <?= isset($data->{'_customize-radio-social_icon_style'}) && $data->{'_customize-radio-social_icon_style'} ? '' : 'checked' ?>
+                               data-alt="">
+                        <label for="social_icon_style_default" class="social_icon_style_default">
+                            <div><div class="fa fa-heart"></div></div>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="style2"
+                               name="settings[footer][_customize-radio-social_icon_style]" id="social_icon_style_style2"
+                               data-customize-setting-link="social_icon_style" <?= isset($data->{'_customize-radio-social_icon_style'}) && $data->{'_customize-radio-social_icon_style'} == 'style2' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="social_icon_style_style2" class="">
+                            <div class="social_icon_style_style2"><div class="fa fa-heart"></div></div>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="style3"
+                               name="settings[footer][_customize-radio-social_icon_style]" id="social_icon_style_style3"
+                               data-customize-setting-link="social_icon_style" <?= isset($data->{'_customize-radio-social_icon_style'}) && $data->{'_customize-radio-social_icon_style'} == 'style3' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="social_icon_style_style3" class="">
+                            <div class="social_icon_style_style3"><div class="fa fa-heart-o"></div></div>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="style4"
+                               name="settings[footer][_customize-radio-social_icon_style]" id="social_icon_style_style4"
+                               data-customize-setting-link="social_icon_style" <?= isset($data->{'_customize-radio-social_icon_style'}) && $data->{'_customize-radio-social_icon_style'} == 'style4' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="social_icon_style_style4" class="">
+                            <div class="social_icon_style_style4"><div class="fa fa-heart-o"></div></div>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="style5"
+                               name="settings[footer][_customize-radio-social_icon_style]" id="social_icon_style_style5"
+                               data-customize-setting-link="social_icon_style" <?= isset($data->{'_customize-radio-social_icon_style'}) && $data->{'_customize-radio-social_icon_style'} == 'style5' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="social_icon_style_style5" class="">
+                            <div class="social_icon_style_style5"><div class="fa fa-heart"></div></div>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-social-icon_size" class="customize-control customize-control-social-icon_size"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Icon Size (px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-social-icon_size]" value="<?= isset($data->{'_customize-input-social-icon_size'}) && $data->{'_customize-input-social-icon_size'} ? $data->{'_customize-input-social-icon_size'} : '' ?>">
+                </li>
+                <li id="customize-control-footer_social-icon_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Color</span>
+                    <input id="input_footer_social-icon_color" name="settings[footer][_customize-radio-social-icon_color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-social-icon_color'}) ? $data->{'_customize-radio-social-icon_color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_footer_social-icon_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-footer_social-icon_hover_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Hover Color</span>
+                    <input id="input_footer_social-icon_hover_color"
+                           name="settings[footer][_customize-radio-social-icon_hover_color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-social-icon_hover_color'}) ? $data->{'_customize-radio-social-icon_hover_color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_footer_social-icon_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-inner" id="footer_mobile_social-icon" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open" id="sub-accordion-section-footer_social_mobile">
+                <li id="customize-control-mobile_social-icon_margin" class="customize-control customize-control-social-icon-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-mobile_social-icon_margin]" value="<?= isset($data->{'_customize-input-mobile_social-icon_margin'}) && $data->{'_customize-input-mobile_social-icon_margin'} ? $data->{'_customize-input-mobile_social-icon_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-social-icon_align-mobile" class="customize-control customize-control-social-icon_align-mobile"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Align items</span>
+                    </label>
+                    <select name="settings[footer][_customize-input-social-icon_align-mobile]">
+                        <option value="0" <?= isset($data->{'_customize-input-social-icon_align-mobile'}) && $data->{'_customize-input-social-icon_align-mobile'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="left" <?= isset($data->{'_customize-input-social-icon_align-mobile'}) && $data->{'_customize-input-social-icon_align-mobile'} == 'left' ? 'selected' : '' ?>>
+                            Left
+                        </option>
+                        </option>
+                        <option value="right" <?= isset($data->{'_customize-input-social-icon_align-mobile'}) && $data->{'_customize-input-social-icon_align-mobile'} == 'right' ? 'selected' : '' ?>>
+                            Right
+                        </option>
+                        </option>
+                        <option value="center" <?= isset($data->{'_customize-input-social-icon_align-mobile'}) && $data->{'_customize-input-social-icon_align-mobile'} == 'center' ? 'selected' : '' ?>>
+                            Center
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-footer_social-icon_merge_item_mobile" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[footer][_customize_footer_social-icon_merge_item_mobile]">
+                        <option value="0" <?= isset($data->{'_customize_footer_social-icon_merge_item_mobile'}) && $data->{'_customize_footer_social-icon_merge_item_mobile'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_footer_social-icon_merge_item_mobile'}) && $data->{'_customize_footer_social-icon_merge_item_mobile'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_footer_social-icon_merge_item_mobile'}) && $data->{'_customize_footer_social-icon_merge_item_mobile'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-social-title-mobile" class="customize-control customize-control-social-title-mobile"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Title</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-social-title-mobile]" value="<?= isset($data->{'_customize-input-social-title-mobile'}) && $data->{'_customize-input-social-title-mobile'} ? $data->{'_customize-input-social-title-mobile'} : '' ?>">
+                </li>
+                <li id="customize-control-social-icon-mobile" class="customize-control customize-control-social-icon-mobile"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Social Links</span>
+                        <small class="customize-control-description">If blank social icon will not showing.</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <ul>
+                        <li>
+                            <small>Facebook</small>
+                            <input type="text" name="settings[footer][_customize-input-social-mobile-facebook]" value="<?= isset($data->{'_customize-input-social-mobile-facebook'}) && $data->{'_customize-input-social-mobile-facebook'} ? $data->{'_customize-input-social-mobile-facebook'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>Twitter</small>
+                            <input type="text" name="settings[footer][_customize-input-social-mobile-twitter]" value="<?= isset($data->{'_customize-input-social-mobile-twitter'}) && $data->{'_customize-input-social-mobile-twitter'} ? $data->{'_customize-input-social-mobile-twitter'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>Instagram</small>
+                            <input type="text" name="settings[footer][_customize-input-social-mobile-instagram]" value="<?= isset($data->{'_customize-input-social-mobile-instagram'}) && $data->{'_customize-input-social-mobile-instagram'} ? $data->{'_customize-input-social-mobile-instagram'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>LinkedIn</small>
+                            <input type="text" name="settings[footer][_customize-input-social-mobile-linkedin]" value="<?= isset($data->{'_customize-input-social-mobile-linkedin'}) && $data->{'_customize-input-social-mobile-linkedin'} ? $data->{'_customize-input-social-mobile-linkedin'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>Rss</small>
+                            <input type="text" name="settings[footer][_customize-input-social-mobile-rss]" value="<?= isset($data->{'_customize-input-social-mobile-rss'}) && $data->{'_customize-input-social-mobile-rss'} ? $data->{'_customize-input-social-mobile-rss'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>Email</small>
+                            <input type="text" name="settings[footer][_customize-input-social-mobile-email]" value="<?= isset($data->{'_customize-input-social-mobile-email'}) && $data->{'_customize-input-social-mobile-email'} ? $data->{'_customize-input-social-mobile-email'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>Pinterest</small>
+                            <input type="text" name="settings[footer][_customize-input-social-mobile-pinterest]" value="<?= isset($data->{'_customize-input-social-mobile-pinterest'}) && $data->{'_customize-input-social-mobile-pinterest'} ? $data->{'_customize-input-social-mobile-pinterest'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>VKontakte</small>
+                            <input type="text" name="settings[footer][_customize-input-social-mobile-vk]" value="<?= isset($data->{'_customize-input-social-mobile-vk'}) && $data->{'_customize-input-social-mobile-vk'} ? $data->{'_customize-input-social-mobile-vk'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>Tumblr</small>
+                            <input type="text" name="settings[footer][_customize-input-social-mobile-tumblr]" value="<?= isset($data->{'_customize-input-social-mobile-tumblr'}) && $data->{'_customize-input-social-mobile-tumblr'} ? $data->{'_customize-input-social-mobile-tumblr'} : '' ?>">
+                        </li>
+                        <li>
+                            <small>WhatsApp</small>
+                            <input type="text" name="settings[footer][_customize-input-social-mobile-whatsapp]" value="<?= isset($data->{'_customize-input-social-mobile-whatsapp'}) && $data->{'_customize-input-social-mobile-whatsapp'} ? $data->{'_customize-input-social-mobile-whatsapp'} : '' ?>">
+                        </li>
+                    <ul>
+                </li>
+                <li id="customize-control-social_mobile_icon_style" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Social Icon Style</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_social_icon_style_mobile" class="image">
+                        <input class="image-select" type="radio" value=""
+                               name="settings[footer][_customize-radio-social_icon_style_mobile]" id="social_icon_style_default_mobile"
+                               data-customize-setting-link="social_icon_style_mobile" <?= isset($data->{'_customize-radio-social_icon_style_mobile'}) && $data->{'_customize-radio-social_icon_style_mobile'} ? '' : 'checked' ?>
+                               data-alt="">
+                        <label for="social_icon_style_default_mobile" class="social_icon_style_default_mobile">
+                            <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/social-default.svg' ?>">
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="style2"
+                               name="settings[footer][_customize-radio-social_icon_style_mobile]" id="social_icon_style_style2"
+                               data-customize-setting-link="social_icon_style" <?= isset($data->{'_customize-radio-social_icon_style_mobile'}) && $data->{'_customize-radio-social_icon_style_mobile'} == 'style2' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="social_icon_style_style2" class="">
+                            <div class="social_icon_style_style2"><div class="fa fa-heart"></div></div>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="style3"
+                               name="settings[footer][_customize-radio-social_icon_style_mobile]" id="social_icon_style_style3"
+                               data-customize-setting-link="social_icon_style" <?= isset($data->{'_customize-radio-social_icon_style_mobile'}) && $data->{'_customize-radio-social_icon_style_mobile'} == 'style3' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="social_icon_style_style3" class="">
+                            <div class="social_icon_style_style3"><div class="fa fa-heart-o"></div></div>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="style4"
+                               name="settings[footer][_customize-radio-social_icon_style_mobile]" id="social_icon_style_style4"
+                               data-customize-setting-link="social_icon_style" <?= isset($data->{'_customize-radio-social_icon_style_mobile'}) && $data->{'_customize-radio-social_icon_style_mobile'} == 'style4' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="social_icon_style_style4" class="">
+                            <div class="social_icon_style_style4"><div class="fa fa-heart-o"></div></div>
+                            <span class="image-clickable"></span>
+                        </label>
+                        <input class="image-select" type="radio" value="style5"
+                               name="settings[footer][_customize-radio-social_icon_style_mobile]" id="social_icon_style_style5"
+                               data-customize-setting-link="social_icon_style" <?= isset($data->{'_customize-radio-social_icon_style_mobile'}) && $data->{'_customize-radio-social_icon_style_mobile'} == 'style5' ? 'checked' : '' ?>
+                               data-alt="">
+                        <label for="social_icon_style_style5" class="">
+                            <div class="social_icon_style_style5"><div class="fa fa-heart"></div></div>
+                            <span class="image-clickable"></span>
+                        </label>
+                    </div>
+                </li>
+                <li id="customize-control-social-icon_mobile_icon_size" class="customize-control customize-control-social-icon-mobile-icon_size"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Icon Size (px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-social-icon_mobile_icon_size]" value="<?= isset($data->{'_customize-input-social-icon_mobile_icon_size'}) && $data->{'_customize-input-social-icon_mobile_icon_size'} ? $data->{'_customize-input-social-icon_mobile_icon_size'} : '' ?>">
+                </li>
+                <li id="customize-control-footer_social-icon_mobile_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Color</span>
+                    <input id="input_footer_social-icon_mobile_color" name="settings[footer][_customize-radio-social-icon_mobile_color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-social-icon_mobile_color'}) ? $data->{'_customize-radio-social-icon_mobile_color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_footer_social-icon_mobile_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-footer_social-icon_mobile_hover_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Hover Color</span>
+                    <input id="input_footer_social-icon_mobile_hover_color"
+                           name="settings[footer][_customize-radio-social-icon_mobile_hover_color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-social-icon_mobile_hover_color'}) ? $data->{'_customize-radio-social-icon_mobile_hover_color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_footer_social-icon_mobile_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

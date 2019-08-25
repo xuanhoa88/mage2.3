@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="page-with-filter"/>
+        <referenceContainer name="sidebar.main">
+            <block class="CleverSoft\CleverLayeredNavigation\Block\Navigation\FilterCollapsing\Search" name="catalog.navigation.collapsing" after="catalogsearch.leftnav" template="CleverSoft_CleverLayeredNavigation::layer/filter_collapsing.phtml"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="CleverSoft\CleverLayeredNavigation\Block\Product\ProductList\Ajax" name="category.clevershopby.ajax" template="product/productlist/ajax.phtml" after="-"/>
+        </referenceContainer>
+        <referenceBlock name="product_list_toolbar_pager">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">CleverSoft_CleverLayeredNavigation::html/pager.phtml</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

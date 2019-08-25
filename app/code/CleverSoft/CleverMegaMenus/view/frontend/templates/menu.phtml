@@ -1,0 +1,115 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverMegaMenus
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+
+$menu = $this->getMenuObject();
+$htmlHelper = $this->getHtmlHelper(); 
+?>
+
+<?php if($menu->getData('id')): ?>
+
+    <?php
+    $content = $menu->getMenucontent();
+    $oldContent = $menu->getContent();
+    $oldStyle = $menu->getStyle();
+    $styles = $menu->getMenustyles();
+    $direction = $menu->getData('direction') ? $menu->getData('direction') : $menu->getData('type');
+    $style = empty($oldStyle) ? json_decode($styles) : json_decode($oldStyle);
+    $customClass = isset($style->custom_class) ? $style->custom_class : (isset($style->css_class) ? $style->css_class :'');
+    $animation = isset($style->animation) ?  $style->animation : (isset($style->dropdown_animation) ? $style->dropdown_animation : '');
+    $items = empty($content) ? json_decode($oldContent) : json_decode($content);
+    $catTreeHtml = $this->getCategoryTreeBlock();
+    $uniqId = uniqid('clevermenu-');
+    ?>
+
+    <div class="global-element clever-menu <?php echo ($direction == 1)?'clever-vertical-menu':'clever-horizontal-menu' ?> <?php echo $customClass ?> <?php echo 'clever-'.$animation ?>" id="<?php echo $uniqId ?>">
+        <ul class="clever-mega-menu <?php echo ($direction == 1)?'clever-vertical-menu':'clever-horizontal-menu' ?>">
+            <?php $i = 0;foreach($items as $item): ?>
+                <?php
+                $depth = (int)$item->depth;
+                $content = $item->content;
+                $itemType = $item->item_type;
+                if ($itemType == 'category') {
+                    if($content->display_type == 1){
+                        $extra_class = 'clever-mega-menu-nondrop';
+                    } else {
+                        $extra_class = ' slidedown';
+                    }
+                } else {$extra_class = '' ;}
+                ?>
+                <?php echo $this->openTag($items,$i) ?>
+                <?php if($itemType == 'link'|| $itemType =='page'): ?> class="<?php echo $this->getItemCSSClass($items,$i) ?>" >
+                    <?php /* Link */ if (!isset($content->disable_link_this_item) || $content->disable_link_this_item == 0 ) { ?>
+                        <a title="<?php echo $content->label; ?>" class="menu-link" href="<?php echo $itemType == 'page' ? ($block->getBaseUrl().$content->url) : $content->url;  ?>"><?php echo $this->getIcon($content) ?> <?php if(!isset($content->hide_text) || $content->hide_text == 0) { ?><span><?php echo $content->label ?></span><?php } ?></a>
+                    <?php } /* End Link */ ?>
+                <?php elseif($itemType == 'text'): ?>
+                    class="<?php echo $this->getItemCSSClass($items,$i) ?>">
+                    <?php /* Text */ ?>
+                    <?php
+                    $text = $content->content;
+                    $layout = $htmlHelper->getNewLayout($content);
+                    ?>
+                    <div class="<?php echo $content->class ?> clever-mega-menu-container <?php echo (isset($content->width_class))?'clever-mega-menu-width-'.$content->width_class:'' ?>" style="<?php echo $content->style ?>;">
+                        <?php if(count($layout) > 1): ?>
+                            <div class="row">
+                                <?php foreach($text as $key => $value):
+                                    $_layout = explode('/',$layout[$key]);
+                                    if(count($_layout) == 1 and $_layout[0] ==  1) $_layout[1] = 1;
+                                    $a = ((int)$_layout[0]*12)/(int)$_layout[1];
+                                    ?>
+                                    <div class="col-lg-<?php echo ((int)$_layout[0]*12)/(int)$_layout[1]; ?>"><?php echo $value ?></div>
+                                <?php endforeach ?>
+                            </div>
+                        <?php else: ?>
+                            <?php echo $text ?>
+                        <?php endif ?>
+                    </div>
+                    <?php if($content->background): ?>
+                        <img class="clever-mega-menu-image" src="<?php echo $content->background ?>" style="<?php echo $this->getBackgroundStyle($content) ?>" alt="bg_menu"/>
+                    <?php endif ?>
+                    <?php /* End Text */ ?>
+                <?php elseif($itemType == 'category'): ?> class="<?php echo $this->getItemCSSClass($items,$i); ?>">
+                    <?php /* Category */ ?>
+                    <?php if($content->label): ?>
+                        <a class="<?php echo ($depth == 0)?'menu-link':'mega-block-title' ?>" href="<?php echo $content->url ?>"><?php echo $this->getIcon($content) ?> <span><?php echo $content->label ?></span></a>
+                    <?php endif ?>
+                    <?php $counter = $catTreeHtml->getChildrenNodes($content->category); ?>
+                    <?php if($counter > 0 ) { ?>
+                        <ul class="category-menu clever-mega-menu-sub <?php echo $extra_class;  ?> <?php if(isset($content->hide_sub_menu_mobile) && $content->hide_sub_menu_mobile == 1 ) echo ' hidden-xs' ?>">
+                            <?php
+                            echo $catTreeHtml->setData('parent_id',$content->category)->setData('level',$depth)->getHtml('', '', 0);
+                            ?>
+                        </ul>
+                    <?php } ?>
+                    <?php /* End Category */ ?>
+                <?php endif ?>
+
+                <?php echo $this->closeTag($items,$i) ?>
+                <?php $i++; endforeach ?>
+        </ul>
+    </div>
+    <script>
+        require([
+            "jquery",
+            "megamenu"
+        ],function($){
+            $(function(){
+                cleverMegaMenu._init({
+                    'direction': '<?php echo ($direction == 1)?'vertical':'horizontal' ?>',
+                    'animation':'<?php echo $animation;?>',
+                    'mm_timeout': 250,
+                    'uniqueMenu':"#<?php echo $uniqId; ?> > .clever-mega-menu"
+                });
+                var url = window.location.href;
+                $("li.clever-mega-menu-item a[href="+'"'+url+'"'+"]").parent().addClass('active');
+                    
+            });
+        });
+    </script>
+<?php endif ?>
+

@@ -1,0 +1,167 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php $_product = $block->getProduct(); ?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()): ?>
+<div class="box-tocart">
+    <div class="fieldset">
+        <div class="d-flex">
+            <?php if ($block->shouldRenderQuantity()): ?>
+                <div class="field qty">
+                    <div class="control">
+                        <button type="button" class="reduced items  items-count" onclick="decreaseQty();">
+                            <span class="cs-font clever-icon-minus"></span>
+                        </button>
+                        <input type="number"
+                               name="qty"
+                               id="qty"
+                               maxlength="12"
+                               value="<?php /* @escapeNotVerified */ echo $block->getProductDefaultQty() * 1 ?>"
+                               title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
+                               data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                               />
+                        <button type="button"  class="increase items items-count" onclick="increaseQty();">
+                            <span class="cs-font clever-icon-plus"></span>
+                        </button>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <div class="actions">
+                <button type="submit" class="action tocart btn-addcart" id="product-addtocart-button">
+                    <i class="cs-font clever-icon-cart-6"></i>
+                    <span class="btn-addcart__title"><?= __('Add to Cart')?></span>
+                </button>
+                <?php echo $block->getChildHtml('', true) ?>
+            </div>
+        </div>
+        <?php
+        $_product = $block->getProduct();
+        $_wishlistSubmitParams = $this->helper('Magento\Wishlist\Helper\Data')->getAddParams($_product);
+        $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+        ?>
+
+        <div class="product-addto-links d-flex align-items-center" data-role="add-to-links">
+            <?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow()) : ?>
+                <a href="#"
+                   class="action to-wishlist action-wishlist d-flex align-items-center"
+                   data-post='<?php /* @escapeNotVerified */ echo $_wishlistSubmitParams; ?>'
+                   data-action="add-to-wishlist">
+                   <i class="cs-font clever-icon-heart-4"></i>
+                   <span class="action-wishlist__text">Add to wishlist</span>
+                </a>
+            <?php endif; ?>
+            <a href="#" data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($_product);?>'
+               data-role="add-to-links"
+               class="action to-compare action-compare d-flex align-items-center">
+               <i class="cs-font clever-icon-refresh-2"></i>
+               <span class="action-compare__text">Add to compare</span>
+            </a>
+        </div>
+        <script type="text/x-magento-init">
+            {
+                "body": {
+                    "addToWishlist": <?php /* @escapeNotVerified */ echo $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode($block->getWishlistOptions())?>
+                }
+            }
+        </script>
+    </div>
+</div>
+<?php endif; ?>
+<?php if ($block->isRedirectToCartEnabled()) : ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/product/view/validation": {
+                "radioCheckboxClosest": ".nested"
+            }
+        }
+    }
+</script>
+<?php else : ?>
+<script>
+        require([
+            'jquery',
+            'mage/mage',
+            'Magento_Catalog/product/view/validation',
+            'Magento_Catalog/js/catalog-add-to-cart'
+        ], function ($) {
+            'use strict';
+            $('.product_addtocart_form_<?php echo($_product->getId())?>').mage('validation', {
+                radioCheckboxClosest: '.nested',
+                submitHandler: function (form) {
+                    var widget = $(form).catalogAddToCart({
+                        bindSubmit: false
+                    });
+                    widget.catalogAddToCart('submitForm', $(form));
+                    $('.block.block-minicart').dropdownDialog('open');
+//                $('.header-content .action.showcart').addClass('active');
+//                $('.header-content .ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.mage-dropdown-dialog').show();
+                    return false;
+                },
+                errorPlacement: function (error, element) {
+                    var errorPlacement = element;
+                    // logic for date-picker error placement
+                    if (element.hasClass('hasDatepicker')) {
+                        errorPlacement = element.siblings('img');
+                    }
+                    // logic for field wrapper
+                    var fieldWrapper = element.closest('.addon');
+                    if (fieldWrapper.length) {
+                        errorPlacement = fieldWrapper.after(error);
+                    }
+                    //logic for checkboxes/radio
+                    if (element.is(':checkbox') || element.is(':radio')) {
+                        errorPlacement = element.siblings('label').last();
+                    }
+                    var $top = $(window).scrollTop();
+                    var $target = errorPlacement.offset().top;
+                    errorPlacement.after(error);
+                    if($top > $target) {
+                        $("html, body").animate({ scrollTop: $target-200 }, 600);
+                    }
+                    $('.block.block-minicart').dropdownDialog('close');
+//                $('.action.showcart').removeClass('active');
+//                $('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.mage-dropdown-dialog').hide();
+                }
+            });
+        });
+        
+        function increaseQty() {
+            require([
+            'jquery'
+            ], function ($) {
+                if($('#clever-quickview').find('.product-quickview-view').length > 0) {
+                    var result = $('#clever-quickview').find('#qty');
+                } else { 
+                    var result = $('#qty');
+                }
+                var qty = result.val();
+                if( !isNaN( qty )) result.val(parseInt(qty) + 1);
+            });
+        }
+
+        function decreaseQty() {
+            require([
+            'jquery'
+            ], function ($) {
+                if($('#clever-quickview').find('.product-quickview-view').length > 0) {
+                    var result = $('#clever-quickview').find('#qty');
+                } else { 
+                    var result = $('#qty');
+                }
+                var qty = result.val();
+                if( !isNaN( qty ) && qty > 1 ) result.val(parseInt(qty) - 1);
+            });
+        }
+
+    </script>
+<?php endif; ?>
+

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="catalog_category_view_type_layered"/>
+    <body>
+        <referenceBlock name="catalog.leftnav">
+            <block class="CleverSoft\CleverLayeredNavigation\Block\Navigation\FilterRenderer" name="catalog.navigation.renderer" as="renderer" template="layer/filter.phtml"/>
+        </referenceBlock>
+        <referenceContainer name="sidebar.main">
+            <block class="CleverSoft\CleverLayeredNavigation\Block\Navigation\FilterCollapsing\Category" name="catalog.navigation.collapsing" after="catalog.leftnav" template="CleverSoft_CleverLayeredNavigation::layer/filter_collapsing.phtml"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <referenceBlock name="product_list_toolbar">
+                <action method="setTemplate">
+                    <argument name="template" xsi:type="string">CleverSoft_CleverLayeredNavigation::product/list/toolbar.phtml</argument>
+                </action>
+                <block class="Magento\Theme\Block\Html\Breadcrumbs" name="breadcrumbs" template="Magento_Theme::html/breadcrumbs.phtml"/>
+            </referenceBlock>
+        </referenceContainer>
+        <move element="sidebar.main" destination="category.product.list.additional" before="-" />
+    </body>
+</page>

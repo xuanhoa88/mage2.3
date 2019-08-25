@@ -1,0 +1,80 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$templates = $objectManager->create('CleverSoft\CleverTheme\Model\FooterTemplate')->getCollection();
+
+?>
+<!-- Modal content -->
+<div class="footerbuilder-modal-content">
+    <div class="footerbuilder-modal-footer">
+        <span class="footerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="footerbuilder-modal-body">
+        <strong>Templates</strong>
+        <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open"
+            id="sub-accordion-section-sidebar">
+            <li id="customize-control-footer_templates_save" class="customize-control customize-control-zoo-custom_html"
+                style="display: list-item;">
+                <div class="zoo--settings-wrapper">
+                    <div data-control="footer_templates_save" class="zoo-control-field-footer zoo-field-heading">
+                        <label>
+                            <span class="customize-control-title">Save Template</span>
+                            <div class="customize-control-notifications-container">
+                                <div class="save-template-form"><p class="description customize-control-description">
+                                        Save
+                                        current footer layout and use it later.</p>
+                                    <div class="zoo-flexbox"><input type="text"
+                                                                    name="settings[footer][_customize-input-footer_template_name]"
+                                                                    class="template-input-name">
+                                        <button type="submit">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </li>
+            <li id="customize-control-footer_templates_saved"
+                class="customize-control customize-control-zoo-custom_html"
+                style="display: list-item;">
+                <div class="customize-control customize-control-builder-radio-image">
+                    <span class="customize-control-title">Saved Templates</span>
+                    <div class="customize-control-notifications-container"></div>
+                    <div id="input_footer_template_saved" class="image">
+                        <?php if(count($templates)):?>
+                            <?php foreach ($templates as $item):?>
+                                <input class="image-select" type="radio" value="preset_<?php echo $item->getId()?>"
+                                       name="settings[footer][_customize-radio-footer_template_saved]"
+                                       id="footer_template_saved<?php echo str_replace(' ','-', $item->getTemplateName());?>"
+                                       data-customize-setting-link="footer_template_saved" data-alt="">
+                                <label for="footer_template_saved<?php echo str_replace(' ','-', $item->getTemplateName());?>" class="footer_template_saved<?php echo str_replace(' ','-', $item->getTemplateName());?>">
+
+                                    <span class="footer_template_saved image-clickable"><?php echo $item->getTemplateName();?></span>
+                                </label>
+                                <a href="#" class="footer-delete-tpl" data-id="<?=$item->getId()?>" title="Delete Template"><i class="dashicons dashicons-trash"></i></a>
+                            <?php endforeach;?>
+                        <?php endif;?>
+                    </div>
+                    <input id="footer_preset_delete" name="settings[footer][_customize-radio-footer_template_deleted]" value="">
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    require([
+        "jquery"
+    ], function ($) {
+        $(document).ready(function () {
+            $(".footer-delete-tpl").click(function (e) {
+                var r = confirm("Are you sure want to delete this template?");
+                if (r == true) {
+                    $("input[name='settings[footer][_customize-radio-footer_template_deleted]']").val($(this).attr("data-id"));
+                    $("#config-edit-form").submit();
+                }
+            })
+        });
+
+    });
+</script>

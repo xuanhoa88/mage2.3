@@ -1,0 +1,436 @@
+{
+  "name": "Button",
+  "title": "Button",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "default_items": [],
+  "area" : "widget",
+  "icon" : "",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+  "code": "clever-button",
+  "layouts":[
+  ],
+  "content_fields": [
+    {
+      "type": "text",
+      "name": "button_text",
+      "required": false,
+      "visible": true,
+      "default":"Click here",
+      "attribute_type": "html",
+      "element_class":"button-element__content",
+      "events": "change-text-if-on-banner-widget",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "name": "letter_case",
+      "attribute_type": "class",
+      "values": [
+        {
+          "value": "uppercase",
+          "label": "ABC"
+        },
+        {
+          "value": "lowercase",
+          "label": "Abc"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Letter case"
+    },
+    {
+      "type": "select",
+      "name": "style",
+      "attribute_type": "class",
+      "values": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "link",
+          "label": "Simple"
+        },
+        {
+          "value": "underline",
+          "label": "Underline"
+        },
+        {
+          "value": "underline2",
+          "label": "Underline 2"
+        },
+        {
+          "value": "shade",
+          "label": "Shade"
+        },
+        {
+          "value": "bevel",
+          "label": "Bevel"
+        },
+        {
+          "value": "gloss",
+          "label": "Gloss"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "default": "",
+      "label": "Style"
+    },
+    {
+      "type": "select",
+      "name": "animate",
+      "values": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "fadeInLeft",
+          "label": "Fade In Left"
+        },
+        {
+          "value": "fadeInRight",
+          "label": "Fade In Right"
+        },
+        {
+          "value": "fadeInUp",
+          "label": "Fade In Up"
+        },
+        {
+          "value": "fadeInDown",
+          "label": "Fade In Down"
+        },
+        {
+          "value": "bounceIn",
+          "label": "Bounce In"
+        },
+        {
+          "value": "bounceInUp",
+          "label": "Bounce In Up"
+        },
+        {
+          "value": "bounceInDown",
+          "label": "Bounce In Down"
+        },
+        {
+          "value": "bounceInLeft",
+          "label": "Bounce In Left"
+        },
+        {
+          "value": "bounceInRight",
+          "label": "Bounce In Right"
+        },
+        {
+          "value": "blurIn",
+          "label": "Blur In"
+        },
+        {
+          "value": "flipInX",
+          "label": "Flip In X"
+        },
+        {
+          "value": "flipInY",
+          "label": "Flip In Y"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Animate"
+    },
+    {
+      "type": "toggle",
+      "name": "expand",
+      "attribute_type":"class",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "expand",
+          "label": "On"
+        }
+      ],
+      "label": "Expand"
+    },
+    {
+      "type": "select",
+      "name": "icon-checkmark",
+      "values": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "clever-icon-down",
+          "label": "Arrow Down"
+        },
+        {
+          "value": "clever-icon-arrow-left",
+          "label": "Arrow Left"
+        },
+        {
+          "value": "clever-icon-arrow-right",
+          "label": "Arrow Right"
+        },
+        {
+          "value": "clever-icon-arrow-left-4",
+          "label": "Arrow Left 2"
+        },
+        {
+          "value": "clever-icon-arrow-right-4",
+          "label": "Arrow Right 2"
+        },
+        {
+          "value": "clever-icon-check",
+          "label": "Checkmark"
+        },
+        {
+          "value": "clever-icon-clock",
+          "label": "Clock"
+        },
+        {
+          "value": "clever-icon-email-envelope",
+          "label": "Envelope"
+        },
+        {
+          "value": "clever-icon-expand",
+          "label": "Expand"
+        },
+        {
+          "value": "clever-icon-facebook",
+          "label": "Facebook"
+        },
+        {
+          "value": "clever-icon-skype",
+          "label": "Skype"
+        },
+        {
+          "value": "clever-icon-googleplus",
+          "label": "Google Plus"
+        },
+        {
+          "value": "clever-icon-heart-6",
+          "label": "Heart"
+        },
+        {
+          "value": "clever-icon-heart-1",
+          "label": "Heart Outline"
+        },
+        {
+          "value": "clever-icon-instagram",
+          "label": "Instagram"
+        },
+        {
+          "value": "clever-icon-map-3",
+          "label": "Map Pen"
+        },
+        {
+          "value": "clever-icon-menu-1",
+          "label": "Menu"
+        },
+        {
+          "value": "clever-icon-phone-2",
+          "label": "Phone"
+        },
+        {
+          "value": "clever-icon-pinterest",
+          "label": "Pinterest"
+        },
+        {
+          "value": "clever-icon-play-2",
+          "label": "Play"
+        },
+        {
+          "value": "clever-icon-plus",
+          "label": "Plus"
+        },
+        {
+          "value": "clever-icon-search-1",
+          "label": "Search"
+        },
+        {
+          "value": "clever-icon-cart-18",
+          "label": "Shopping Bag"
+        },
+        {
+          "value": "clever-icon-online-shopping",
+          "label": "Shopping Online"
+        },
+        {
+          "value": "clever-icon-cart-8",
+          "label": "Shopping Cart"
+        },
+        {
+          "value": "clever-icon-star",
+          "label": "Star"
+        },
+        {
+          "value": "clever-icon-star-o",
+          "label": "Star Outline"
+        },
+        {
+          "value": "clever-icon-twitter",
+          "label": "Twitter"
+        },
+        {
+          "value": "clever-icon-user-4",
+          "label": "User"
+        },
+        {
+          "value": "clever-icon-user-6",
+          "label": "User Outline"
+        },
+        {
+          "value": "clever-icon-youtube-1",
+          "label": "Youtube"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Icon"
+    },
+    {
+      "type": "select",
+      "name": "position",
+      "attribute_type":"class",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "label": "Icon Position"
+    },
+    {
+      "type": "toggle",
+      "name": "visibility",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "Visible on hover"
+        }
+      ],
+      "label": "Visible on hover"
+    },
+    {
+      "type": "text",
+      "name": "link",
+      "required": false,
+      "visible": true,
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "name": "target",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "",
+          "label": "Same window"
+        },
+        {
+          "value": "_blank",
+          "label": "New window"
+        }
+      ],
+      "label": "Target"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "slider",
+      "name": "opacity",
+      "attribute_type":"class",
+      "prefix": "button__opacity-",
+      "required": false,
+      "min":0,
+      "max":9,
+      "visible": true,
+      "label": "Opacity"
+    },
+    {
+      "type": "select",
+      "name": "size",
+      "attribute_type":"class",
+      "values": [
+        {
+          "value": "xxsmall",
+          "label": "XX-Small"
+        },
+        {
+          "value": "xsmall",
+          "label": "X-Small"
+        },
+        {
+          "value": "smaller",
+          "label": "Smaller"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "",
+          "label": "Normal"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "larger",
+          "label": "Larger"
+        },
+        {
+          "value": "xlarge",
+          "label": "X-Large"
+        },
+        {
+          "value": "xxlarge",
+          "label": "XX-Large"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Size"
+    },
+    {
+      "type": "slider",
+      "name": "depth",
+      "attribute_type":"class",
+      "prefix": "box-shadow-",
+      "required": false,
+      "min":0,
+      "max":5,
+      "visible": true,
+      "label": "Depth"
+    },
+    {
+      "type": "slider",
+      "name": "depth_hover",
+      "attribute_type":"class",
+      "prefix": "box-shadow-hover-",
+      "required": false,
+      "min":0,
+      "max":5,
+      "visible": true,
+      "label": "Depth Hover"
+    }
+  ]
+}

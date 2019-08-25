@@ -1,0 +1,75 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+
+$_matoHelper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+?>
+<?php if($_matoHelper->getCfg('contact_google_map/display_google_map') && ($_matoHelper->getCfg('contact_google_map/address_google_map') !='')): ?>
+	<?php // $image = $currentUrl.'map/'.$themeSettings['contact_google_map']['pin_google_map'] ?>
+    <div id="contact-map" style="height: 200px;"></div>
+	<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $_matoHelper->getCfg('contact_google_map/api_key') ?>&libraries=places&sensor=false"></script>
+    <script>
+        require([
+            'jquery'
+        ], function(jQuery){
+            (function($) {
+                var address = '<?php echo $_matoHelper->getCfg('contact_google_map/address_google_map'); ?>';
+                var html = '<?php echo $_matoHelper->getCfg('contact_google_map/address_google_map'); ?>';
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "//maps.googleapis.com/maps/api/geocode/json",
+                    data: {'address': address,'sensor':false},
+                    success: function(data){
+                        if(data.results.length){
+                            latitude = data.results[0].geometry.location.lat;
+                            longitude = data.results[0].geometry.location.lng;
+
+                            var locations = [
+                                [html, latitude, longitude, 2]
+                            ];
+
+                            var map = new google.maps.Map(document.getElementById('contact-map'), {
+                                zoom: 14,
+                                scrollwheel: false,
+                                navigationControl: true,
+                                mapTypeControl: false,
+                                scaleControl: false,
+                                draggable: true,
+                                center: new google.maps.LatLng(latitude, longitude),
+                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                            });
+
+                            var infowindow = new google.maps.InfoWindow();
+
+                            var marker, i;
+
+                            for (i = 0; i < locations.length; i++) {
+
+                                marker = new google.maps.Marker({
+                                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                                    map: map
+                                });
+
+
+                                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                                    return function() {
+                                        infowindow.setContent(locations[i][0]);
+                                        infowindow.open(map, marker);
+                                    }
+                                })(marker, i));
+                            }
+                        }
+                    }
+                });
+            })(jQuery);
+        });
+    </script>
+<?php endif ?>

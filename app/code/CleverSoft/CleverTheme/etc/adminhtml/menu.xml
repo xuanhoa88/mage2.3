@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="CleverSoft_CleverTheme::mato" title="CleverThemes v4.2.0" module="CleverSoft_CleverTheme" sortOrder="45"  resource="CleverSoft_CleverTheme::config_mato" parent="CleverSoft_Base::cl_all"/>
+        <add id="CleverSoft_CleverTheme::settings" title="Theme Settings" module="CleverSoft_CleverTheme" sortOrder="10" parent="CleverSoft_CleverTheme::mato" action="adminhtml/system_config/edit/section/cleversofttheme" resource="CleverSoft_CleverTheme::config_settings"/>
+        <add id="CleverSoft_CleverTheme::design" title="Theme Design" module="CleverSoft_CleverTheme" sortOrder="20" parent="CleverSoft_CleverTheme::mato" action="adminhtml/system_config/edit/section/cleversofttheme_design" resource="CleverSoft_CleverTheme::config_design"/>
+        <add id="CleverSoft_CleverTheme::custom_css" title="Custom Css" module="CleverSoft_CleverTheme" sortOrder="30" parent="CleverSoft_CleverTheme::mato" action="adminhtml/system_config/edit/section/cleversofttheme_custom_css" resource="CleverSoft_CleverTheme::config_custom_css"/>
+    </menu>
+</config>
+

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     Base
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="cleverextensions" class="cleverextensions-config-tab" translate="label" sortOrder="175">
+            <label>CleverSoft Extensions</label>
+        </tab>
+        <section id="cleversoft_base" translate="label" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Information</label>
+            <tab>cleverextensions</tab>
+            <resource>Cleversoft_Base::config_cleverbase</resource>
+            <group id="information" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Information</label>
+                <frontend_model>CleverSoft\Base\Block\System\Config\Information</frontend_model>
+            </group>
+        </section>
+    </system>
+</config>

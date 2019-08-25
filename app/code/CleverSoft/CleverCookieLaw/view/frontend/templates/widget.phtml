@@ -1,0 +1,328 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverCookieLaw
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author        ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$_helper = $this->helper('CleverSoft\CleverCookieLaw\Helper\Data');
+if ($_helper->getSystemConfig('general', 'enablecookie')):
+    ?>
+    <div id="clever-cookielaw"
+         class="clever-cookielaw <?php echo $_helper->getSystemConfig('general', 'type'); ?> <?php echo $_helper->getSystemConfig('general', 'skin'); ?> <?php echo ($_helper->getSystemConfig('general', 'type') == 'v-bar') ? $_helper->getSystemConfig('general', 'bar_position') : $_helper->getSystemConfig('general', 'box_position'); ?>"
+         style="display: none">
+        <h3 class="clever-cookielaw__title"><?php echo __('Cookies Control'); ?></h3>
+        <div class="clever-cookielaw__message">
+            <div class="clever-cookielaw__message-content">
+                <span><?php echo $_helper->getSystemConfig('content','custom_message') ? $_helper->getSystemConfig('content', 'custom_message') : __('We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it.')?></span>
+                <a href="javascript:void(0);" id="move_gdpr_cookie_modal" class="v-button">
+                    <span><?php echo $_helper->getSystemConfig('content', 'custom_more_info') ? $_helper->getSystemConfig('content', 'custom_more_info') : __("Settings") ?></span>
+                </a>
+            </div>
+        <div id="gdpr_cookie_modal" style="display:none;">
+                <div class="move-gdpr-modal-content move-clearfix logo-position-left">
+                    <div class="move-gdpr-modal-left-content">
+                        <!--  .move-gdpr-company-logo-holder -->
+                        <ul id="move-gdpr-menu">
+                            <li class="menu-item-on menu-item-privacy_overview">
+                                <button data-href="#privacy_overview" class="move-gdpr-tab-nav"><i
+                                            class="cs-font clever-icon-website-protection"></i> <span><?php echo $_helper->getSystemConfig('privacy', 'tab_title');?></span>
+                                </button>
+                            </li>
+                            <li class="menu-item-strict-necesarry-cookies menu-item-off menu-item-selected">
+                                <button data-href="#strict-necesarry-cookies" class="move-gdpr-tab-nav"><i
+                                            class="cs-font clever-icon-check-box"></i>
+                                    <span><?php echo $_helper->getSystemConfig('strictly', 'tab_title');?></span></button>
+                            </li>
+                            <?php if($_helper->getSystemConfig('third_party', 'is_active')):?>
+                                <li class="menu-item-off menu-item-third_party_cookies">
+                                    <button data-href="#third_party_cookies" class="move-gdpr-tab-nav"><i
+                                                class="cs-font clever-icon-horizontal-tablet-with-pencil"></i> <span><?php echo $_helper->getSystemConfig('third_party', 'tab_title');?></span></button>
+                                </li>
+                            <?php endif;?>
+                            <?php if($_helper->getSystemConfig('additional', 'is_active')):?>
+                                <li class="menu-item-advanced-cookies menu-item-off">
+                                    <button data-href="#advanced-cookies" class="move-gdpr-tab-nav"><i class="cs-font clever-icon-web-development"></i> <span><?php echo $_helper->getSystemConfig('additional', 'tab_title');?></span></button>
+                                </li>
+                            <?php endif;?>
+                                <li class="menu-item-moreinfo menu-item-off">
+                                    <button data-href="#cookie_policy_modal" class="move-gdpr-tab-nav" rel="nofollow">
+                                        <i class="cs-font clever-icon-wishlist"></i> <span><?php echo $_helper->getSystemConfig('policy', 'tab_title');?></span></button>
+                                </li>
+                        </ul>
+
+                        <!--  .move-gdpr-branding -->
+                    </div>
+                    <!--  .move-gdpr-modal-left-content -->
+                    <div class="move-gdpr-modal-right-content">
+                        <div class="main-modal-content">
+                            <div class="move-gdpr-modal-title">
+
+                            </div>
+                            <!-- .move-gdpr-modal-ritle -->
+                            <div class="move-gdpr-tab-content">
+                                <div id="privacy_overview" class="move-gdpr-tab-main" style="display: block;">
+                                    <h3 class="tab-title"><?php echo $_helper->getSystemConfig('privacy', 'tab_title');?></h3>
+                                    <div class="move-gdpr-tab-main-conent">
+        <div><?php echo $_helper->getSystemConfig('privacy', 'tab_content');?></div>
+        </div>
+        <!--  .move-gdpr-tab-main-conent -->
+    </div>
+
+    <div id="strict-necesarry-cookies" class="move-gdpr-tab-main" style="display: none;">
+        <h3 class="tab-title"><?php echo $_helper->getSystemConfig('strictly', 'tab_title');?></h3>
+        <div class="move-gdpr-tab-main-conent">
+            <div><?php echo $_helper->getSystemConfig('strictly', 'tab_content');?></div>
+            <div class="move-gdpr-status-bar">
+                <form>
+                    <fieldset>
+                        <label class="switch">
+                            <input type="checkbox" style="display:none" id="move_gdpr_strict_cookies">
+                            <span class="slide-toggle"></span>
+                        </label>
+                        <div class="gdpr-cookies">
+                            <span><?php echo $_helper->getSystemConfig('strictly', 'cookie_used');?></span>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="move-gdpr-tab-main-conent move-gdpr-strict-warning-message" style="margin-top: 10px; display: block;">
+                <div><?php echo $_helper->getSystemConfig('strictly', 'tab_warning');?></div>
+            </div>
+            <!--  .move-gdpr-tab-main-conent -->
+        </div>
+        <!--  .move-gdpr-tab-main-conent -->
+    </div>
+
+    <?php if($_helper->getSystemConfig('third_party', 'is_active')):?>
+        <div id="third_party_cookies" class="move-gdpr-tab-main" style="display: none;">
+            <h3 class="tab-title"><?php echo $_helper->getSystemConfig('third_party', 'tab_title');?></h3>
+            <div class="move-gdpr-tab-main-conent">
+                <div><?php echo $_helper->getSystemConfig('third_party', 'tab_content');?></div>
+                <div class="move-gdpr-status-bar">
+                    <form>
+                        <fieldset class="fl-disabled">
+                            <label class="switch">
+                                <input type="checkbox" class="checkbox-slide" style="display:none" id="move_gdpr_performance_cookies" disabled="">
+                                <span class="slide-toggle"></span>
+                            </label>
+                            <div class="gdpr-cookies">
+                                <span><?php echo $_helper->getSystemConfig('third_party', 'cookie_used');?></span>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- .move-gdpr-status-bar -->
+            </div>
+            <!--  .move-gdpr-tab-main-conent -->
+        </div>
+    <?php endif;?>
+    <?php if($_helper->getSystemConfig('additional', 'is_active')):?>
+        <div id="advanced-cookies" class="move-gdpr-tab-main" style="display:none">
+            <h3 class="tab-title"><?php echo $_helper->getSystemConfig('additional', 'tab_title');?></h3>
+            <div class="move-gdpr-tab-main-conent">
+                <div><?php echo $_helper->getSystemConfig('additional', 'tab_content');?></div>
+                <div class="move-gdpr-status-bar">
+                    <form>
+                        <fieldset class="fl-disabled">
+                            <label class="switch">
+                                <input type="checkbox" class="checkbox-slide" style="display:none" id="move_gdpr_advanced_cookies" disabled="">
+                                <span class="slide-toggle"></span>
+                            </label>
+                            <div class="gdpr-cookies">
+                                <span><?php echo $_helper->getSystemConfig('additional', 'cookie_used');?></span>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- .move-gdpr-status-bar -->
+            </div>
+            <!--  .move-gdpr-tab-main-conent -->
+        </div>
+    <?php endif;?>
+        <div id="cookie_policy_modal" class="move-gdpr-tab-main" style="display: none;">
+            <h3 class="tab-title"><?php echo $_helper->getSystemConfig('policy', 'tab_title');?></h3>
+            <div class="move-gdpr-tab-main-conent">
+                <div><?php echo $_helper->getSystemConfig('policy', 'tab_content');?></div>
+            </div>
+            <!--  .move-gdpr-tab-main-conent -->
+        </div>
+    </div>
+    <!--  .move-gdpr-tab-content -->
+    </div>
+    <!--  .main-modal-content -->
+
+    <!--  .move-gdpr-modal-footer-content -->
+    </div>
+    <!--  .move-gdpr-modal-right-content -->
+
+    <div class="move-clearfix"></div>
+
+    </div>
+    </div>
+    <div class="clever-cookielaw__action">
+        <a href="javascript:cookieLawAccept();" class="clever-cookielaw__action--btn">
+            <span data-hover="<?php echo $_helper->getSystemConfig('content', 'custom_accept') ? $_helper->getSystemConfig('content', 'custom_accept') : __("Accept") ?>">
+                <span><?php echo $_helper->getSystemConfig('content', 'custom_accept') ? $_helper->getSystemConfig('content', 'custom_accept') : __("Accept") ?></span>
+            </span>
+        </a>
+    </div>
+    </div>
+    </div>
+    <script>
+        require(["jquery", "Magento_Ui/js/modal/modal", "CleverSoft_CleverCookieLaw/js/cookies"], function ($, modal) {
+            $(function () {
+                window.cookieLawAccept = function (setting = false) {
+                    $("body").removeClass("clever-cookielaw__active");
+                    var d = null;
+                    <?php if($_helper->getSystemConfig('general', 'behaviour')): ?>
+                    d = new Date();
+                    d.setTime(d.getTime() + (<?php echo $_helper->getSystemConfig('general', 'behaviour'); ?> * 24 * 60 * 60 * 1000)
+                )
+                    ;
+                    <?php endif; ?>
+                    var strict = '"strict":"1"';
+                    var thirdparty = ',"thirdparty":"1"';
+                    var advanced = ',"advanced":"1"';
+                    var cookies = "'" + "{" + strict + "}" + "'";
+                    if (setting) {
+                        if($("#move_gdpr_performance_cookies").is(":checked")) {
+                            var cookies = "'" + "{" + strict + thirdparty + "}" + "'";
+                        }
+                        if($("#move_gdpr_advanced_cookies").is(":checked")) {
+                            var cookies = "'" + "{" + strict + advanced + "}" + "'";
+                        }
+                        if($("#move_gdpr_performance_cookies").is(":checked")) {
+                            var cookies = "'" + "{" + strict + thirdparty + "}" + "'";
+                        }
+                        if($("#move_gdpr_advanced_cookies").is(":checked") || $("#move_gdpr_performance_cookies").is(":checked")) {
+                            <!-- Google Analytics -->
+                            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                            ga('create', 'UA-XXXXX-Y', 'auto');
+                            ga('send', 'pageview');
+                            <!-- End Google Analytics -->
+                        }
+                        if($("#move_gdpr_performance_cookies").is(":checked") && $("#move_gdpr_advanced_cookies").is(":checked")) {
+                            var cookies = '{"strict":"1",thirdparty":"1","advanced":"1"}';
+                        }
+                    } else {
+                        <?php if($_helper->getSystemConfig('third_party', 'is_active')):?>
+                            var cookies = "'" + "{" + strict + thirdparty + "}" + "'";
+                        <?php endif;?>
+                        <?php if($_helper->getSystemConfig('additional', 'is_active')):?>
+                            var cookies = "'" + "{" + strict + advanced + "}" + "'";
+                            <!-- Google Analytics -->
+                            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+                            ga('create', 'UA-XXXXX-Y', 'auto');
+                            ga('send', 'pageview');
+                            <!-- End Google Analytics -->
+                        <?php endif;?>
+                        <?php if($_helper->getSystemConfig('third_party', 'is_active') && $_helper->getSystemConfig('additional', 'is_active')):?>
+                            var cookies = '{"strict":"1",thirdparty":"1","advanced":"1"}';
+                        <?php endif;?>
+                    }
+                    var val = encodeURIComponent(cookies);
+
+                    $.mage.cookies.set('cookielaw', val, d);
+                    document.getElementById('clever-cookielaw').style.display = 'none';
+                    $("body").removeClass("clever-cookielaw__active");
+                };
+
+                window.cookieLawDisplay = function () {
+                    if (!$.mage.cookies.get('cookielaw')) {
+                        document.getElementById('clever-cookielaw').style.display = '';
+                        $("body").addClass("clever-cookielaw__active");
+                    }
+                };
+                
+                //Set timeout to display popup
+                <?php if ($_helper->getSystemConfig('general', 'load_after')): ?>
+                setTimeout(function () {
+                    <?php endif; ?>
+                    cookieLawDisplay();
+                    <?php if ($_helper->getSystemConfig('general', 'load_after')): ?>
+                }, <?php echo $_helper->getSystemConfig('general', 'load_after') * 100; ?>);
+                <?php endif; ?>
+                //End Set timeout to display popup
+
+                <?php if ($_helper->getSystemConfig('general', 'autohide')): ?>
+                setTimeout(function () {
+                    cookieLawAccept();
+                }, <?php echo $_helper->getSystemConfig('general', 'autohide') * 1000; ?>);
+                <?php endif; ?>
+            });
+
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: '',
+                modalClass: 'cookie-modal',
+                buttons: [{
+                    text: $.mage.__('Enable All'),
+                    class: 'gdpr-modal-allow-all',
+                    click: function () {
+                        cookieLawAccept();
+                        this.closeModal();
+                    }
+                },
+                {
+                    text: $.mage.__('Save Settings'),
+                    class: 'gdpr-modal-save-settings',
+                    click: function () {
+                        if($("#move_gdpr_strict_cookies").is(":checked")) {
+                            cookieLawAccept(true);
+                        }
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('#gdpr_cookie_modal'));
+            $("#move_gdpr_cookie_modal").on('click', function () {
+                $("#gdpr_cookie_modal").modal("openModal");
+            });
+
+            $("#move_gdpr_strict_cookies").on('click', function () {
+                $('.gdpr-modal-save-settings').show();
+                if($(this).is(":checked")) {
+                    $('.checkbox-slide').removeAttr('disabled');
+                    $('.move-gdpr-strict-warning-message').fadeOut();
+                } else {
+                    $('.checkbox-slide').attr('checked', false);
+                    $('.checkbox-slide').attr('disabled','disabled');
+                    $('.move-gdpr-strict-warning-message').fadeIn();
+                }
+            });
+            
+            $('.slide-toggle').on('click', function () {
+                if(!$("#move_gdpr_strict_cookies").is(":checked")) {
+                    $('.move-gdpr-tab-nav').parent().removeClass('active');
+                    $('.move-gdpr-tab-main').hide();
+                    $('#strict-necesarry-cookies').show();
+                    $('.movegdpr-strict-necessary').closest('li').addClass('active');
+                }
+            });
+
+            $('.move-gdpr-tab-nav').on('click', function () {
+                $('.move-gdpr-tab-nav').parent().removeClass('active');
+                $(this).parent().addClass('active');
+                var modal_content_id = $(this).attr('data-href');
+                $('.move-gdpr-tab-main').hide();
+                $(modal_content_id).show();
+            });
+            
+        });
+    </script>
+<?php endif; ?>

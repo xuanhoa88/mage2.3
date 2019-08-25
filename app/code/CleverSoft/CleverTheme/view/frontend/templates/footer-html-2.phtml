@@ -1,0 +1,16 @@
+<?php
+$footerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\FooterData');
+$settingData = $footerBuilderHelper->getSettingData();
+
+$htmlBlock = isset($settingData->{'_customize-textarea-footer-html-2'}) && $settingData->{'_customize-textarea-footer-html-2'} ? $settingData->{'_customize-textarea-footer-html-2'} : '';
+
+?>
+<?php if ($htmlBlock ): ?>
+    <?php if (isset($settingData->{'_customize-input-footer-html-2_margin'}) && $settingData->{'_customize-input-footer-html-2_margin'}): ?>
+        <div style="margin: <?php echo $settingData->{'_customize-input-footer-html-2_margin'} ?>">
+    <?php endif; ?>
+    <?php echo $htmlBlock ; ?>
+    <?php if (isset($settingData->{'_customize-input-footer-html-2_margin'}) && $settingData->{'_customize-input-footer-html-2_margin'}): ?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,313 @@
+{
+  "name": "Products List",
+  "title": "Products List",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Element\\Form\\Products",
+  "installed": true,
+  "groups": [],
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Element\\Render\\Products\\GridProducts",
+  "icon" : "",
+  "area" : "element",
+  "code": "clever-products-list",
+  "content_fields": [
+    {
+      "type": "select",
+      "name": "layout_product",
+      "required": true,
+      "values": [
+        {
+          "value": "list",
+          "label": "List"
+        }
+      ],
+      "visible": true,
+      "label": "Layout"
+    },
+    {
+      "type": "toggle",
+      "name": "enable_fullwidth",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Full Width"
+    },
+    {
+      "type": "toggle",
+      "name": "alt_image",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "default": "1",
+      "label": "Alteration Image"
+    },
+    {
+      "type": "select",
+      "name": "mode",
+      "required": true,
+      "values": [
+        {
+          "value": "latest",
+          "label": "Latest Products"
+        },
+        {
+          "value": "new",
+          "label": "New Products"
+        },
+        {
+          "value": "bestsell",
+          "label": "Best Sell Products"
+        },
+        {
+          "value": "mostviewed",
+          "label": "Most Viewed Products"
+        },
+        {
+          "value": "random",
+          "label": "Random Products"
+        },
+        {
+          "value": "related",
+          "label": "Related Products"
+        },{
+          "value": "upsell",
+          "label": "Up-sell Products"
+        },{
+          "value": "crosssell",
+          "label": "Cross-sell Products"
+        },
+        {
+          "value": "discount",
+          "label": "Discount Products"
+        },
+        {
+          "value": "rating",
+          "label": "Top Rated Products"
+        },
+        {
+          "value": "recentviewed",
+          "label": "Recent Viewed Products"
+        }
+      ],
+      "visible": true,
+      "label": "Collection"
+    },
+    {
+      "type": "conditions",
+      "name": "category_ids",
+      "required": false,
+      "visible": true,
+      "label": "Categories",
+      "description": "If category is selected, the product collection will be filtered by this categories"
+    },
+    {
+      "type": "slider",
+      "name": "limit",
+      "required": false,
+      "min":1,
+      "max":99,
+      "default": 6,
+      "visible": true,
+      "label": "Max Products Count"
+    },
+    {
+      "type": "toggle",
+      "name": "show_label",
+      "required": true,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Show Label"
+    },
+    {
+      "type": "text",
+      "name": "labels",
+      "required": false,
+      "visible": true,
+      "default": 10,
+      "label": "Custom Labels"
+    },
+    {
+      "type": "text",
+      "name": "cache",
+      "required": false,
+      "visible": true,
+      "label": "Cache Lifetime"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "select",
+      "name": "ajaxload",
+      "required": false,
+      "visible": true,
+      "default": 0,
+      "source_model": "Magento\\Config\\Model\\Config\\Source\\Yesno",
+      "label": "Enable Ajax Load"
+    },
+    {
+      "type": "select",
+      "name": "lazyload",
+      "required": true,
+      "visible": true,
+      "default": 1,
+      "source_model": "Magento\\Config\\Model\\Config\\Source\\Yesno",
+      "label": "Lazy load Image"
+    },
+    {
+      "type": "text",
+      "name": "height_image",
+      "required": false,
+      "visible": true,
+      "label": "Image lazy load height(px)",
+      "depends" : {"lazyload" : 1}
+    },
+    {
+      "type": "toggle",
+      "name": "display_rating",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Ratings"
+    },
+    {
+      "type": "toggle",
+      "name": "display_addtocart",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": 1,
+          "label": "On"
+        }
+      ],
+      "label": "Add To Cart"
+    },
+    {
+      "type": "toggle",
+      "name": "display_quickview",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Quickview"
+    },
+    {
+      "type": "toggle",
+      "name": "display_addtowishlist",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Add To Wishlist"
+    },
+    {
+      "type": "toggle",
+      "name": "display_addtocompare",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Add To Compare"
+    },
+    {
+      "type": "toggle",
+      "name": "display_swatch_attributes",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Swatch Attributes (Colors,Sizes,Style....)"
+    },
+    {
+      "type": "toggle",
+      "name": "display_productname",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Product name"
+    },
+    {
+      "type": "toggle",
+      "name": "display_price",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Price"
+    },
+    {
+      "type": "select",
+      "name": "aspect_ratio",
+      "required": false,
+      "visible": true,
+      "default": 0,
+      "source_model": "Magento\\Config\\Model\\Config\\Source\\Yesno",
+      "label": "Keep Image Aspect Ratio"
+    },
+    {
+      "type": "text",
+      "name": "image_width",
+      "required": false,
+      "visible": true,
+      "label": "Image Width"
+    },
+    {
+      "type": "text",
+      "name": "image_height",
+      "required": false,
+      "visible": true,
+      "label": "Image Height",
+      "depends" : {"aspect_ratio" : 0}
+    },
+    {
+      "type": "text",
+      "name": "classes",
+      "required": false,
+      "visible": true,
+      "label": "Widget Classes"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverBuilder
+ * @copyright   Copyright © 2019 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+$dataStyle = $helper->widget_style($block->getData('widget_id'));
+$image = $this->getData('image');
+$alignment = $this->getData('alignment');
+$title = $this->getData('title');
+$description = $this->getData('description');
+$link = $this->getData('link');
+$link_option = $this->getData('link_option');
+$link_option_rel = $this->getData('link_option_rel');
+$tag = $this->getData('tag');
+$spacing = $this->getData('spacing');
+$width = $this->getData('width');
+$hover_animation = $this->getData('hover_animation');
+$alignment_content_text = $this->getData('alignment_content_text');
+$alignment_content = $this->getData('alignment_content');
+$spacing_title = $this->getData('spacing_title');
+$color_title = $this->getData('color_title');
+$color_desc = $this->getData('color_desc');
+$blur = $this->getData('blur');
+$brightness = $this->getData('brightness');
+$contrast = $this->getData('contrast');
+$saturation = $this->getData('saturation');
+$hue = $this->getData('hue');
+$transition = $this->getData('transition') / 10;
+$blur_hover = $this->getData('blur_hover');
+$brightness_hover = $this->getData('brightness_hover');
+$contrast_hover = $this->getData('contrast_hover');
+$saturation_hover = $this->getData('saturation_hover');
+$hue_hover = $this->getData('hue_hover');
+$opacity = $this->getData('opacity') /10;
+$opacity_hover = $this->getData('opacity_hover') /10;
+$img_placeholder = $this->getViewFileUrl("CleverSoft_CleverBuilder::images/placeholder.png");
+$image_url = $this->getViewFileUrl('CleverSoft_CleverBuilder::images/transparent.gif');
+?>
+<style>
+    <?php if(isset($alignment) && $alignment == "left"): ?>
+    .image-box-<?= $block->getData('widget_id')?>.image-box__element.element-position-left .image-box__wrapper-img {
+        margin-right: <?=$spacing."px"?>;
+    }
+    <?php endif?>
+    <?php if(isset($alignment) && $alignment == "top"): ?>
+    .image-box-<?= $block->getData('widget_id')?>.image-box__element.element-position-top .image-box__wrapper-img {
+        margin-bottom: <?=$spacing."px"?>;
+    }
+    <?php endif?>
+    <?php if(isset($alignment) && $alignment == "right"): ?>
+    .image-box-<?= $block->getData('widget_id')?>.image-box__element.element-position-right .image-box__wrapper-img {
+        margin-left: <?=$spacing."px"?>;
+    }
+    <?php endif?>
+    .image-box-<?= $block->getData('widget_id')?>.image-box__element .image-box__wrapper-img img {
+        <?php if($brightness != "0" || $contrast != "0" || $saturation != "0" || $blur != "0" || $hue != "0"): ?>
+        filter: brightness(<?=$brightness."%"?>) contrast(<?=$contrast."%"?>) saturate(<?=$saturation."%"?>) blur(<?=$blur."px"?>) hue-rotate(<?=$hue."deg"?>);
+    	<?php endif?>
+    	<?php if(isset($transition) && $transition): ?>
+    	transition-duration: <?=$transition."s"?>;
+    	<?php endif?>
+    	<?php if(isset($opacity) && $opacity): ?>
+    	opacity: <?=$opacity?>;
+    	<?php endif?>
+    }
+    .image-box-<?= $block->getData('widget_id')?>.image-box__element .image-box__wrapper-img img:hover {
+        <?php if($brightness_hover != "0" || $contrast_hover != "0" || $saturation_hover != "0" || $blur_hover != "0" || $hue_hover != "0"): ?>
+        filter: brightness(<?=$brightness_hover."%"?>) contrast(<?=$contrast_hover."%"?>) saturate(<?=$saturation_hover."%"?>) blur(<?=$blur_hover."px"?>) hue-rotate(<?=$hue_hover."deg"?>);
+        <?php endif?>
+        <?php if(isset($opacity_hover) && $opacity_hover): ?>
+    	opacity: <?=$opacity_hover?>;
+    	<?php endif?>
+    }    
+</style>
+<div class="global-element image-box-<?= $block->getData('widget_id')?> image-box__element element-position-<?=$alignment ? $alignment : "top"?> element-vertical-align-<?=$alignment_content ? $alignment_content : "top"?> <?= $alignment_content_text ? "text-$alignment_content_text" : "text-center" ?> <?php if($isPreview) echo "cs-live-preview"?>">		
+	<div class="image-box__container">
+		<div class="image-box__wrapper">
+			<figure class="image-box__wrapper-img" style="<?= $width ? "width: $width"."%" : "width: 30%" ?>">
+				<?php if(isset($link) && $link != ""): ?>
+			    <a href="<?= $link ?>" <?php if(isset($link_option) && $link_option != "") { echo 'target="_blank"'; }?> <?php if(isset($link_option_rel) && $link_option_rel != "") { echo 'rel="nofollow"'; }?>>
+			    <?php endif;?>
+				<img data-src="<?= $image ? "$image" : "$img_placeholder" ?>" src="<?php echo $image_url; ?>" class="image-box__img clazyload <?php if(isset($hover_animation)) { echo "element-animation-".$hover_animation; }?>" alt="img">
+				<?php if(isset($link) && $link != ""): ?>
+			    </a>
+			    <?php endif;?>
+			</figure>
+			<div class="image-box__content">
+				<<?=$tag ? $tag : "h3"?> class="image-box__content-title" style="<?= $color_title ? "color: $color_title" : "" ?>;<?= $spacing_title ? "margin-bottom: $spacing_title"."px" : "" ?>">
+				<?php if(isset($link) && $link != ""): ?>
+			    <a href="<?= $link ?>" <?php if(isset($link_option) && $link_option != "") { echo 'target="_blank"'; }?> <?php if(isset($link_option_rel) && $link_option_rel != "") { echo 'rel="nofollow"'; }?>>
+			    <?php endif;?>
+					<?=$title ? $title : "This is the heading"?>
+				<?php if(isset($link) && $link != ""): ?>
+			    </a>
+			    <?php endif;?>
+				</<?=$tag ? $tag : "h3"?>>
+				<p class="image-box__content-description" style="<?php echo $color_desc ? "color: $color_desc" : "" ?>"> <?=$description ? $description : "Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."?> </p>
+			</div>
+		</div>
+	</div>
+    <?php if($isPreview) { ?>
+        <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+    <?php } ?>
+</div>

@@ -1,0 +1,25 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!-- ko if: isVisible -->
+<div data-role="checkout-integrates">
+    <div class="checkout-integrates" data-bind="visible: isVisible">
+        <!-- ko foreach: integrates -->
+            <div class="checkout-integrate required">
+                <input type="checkbox" class="required-entry"
+                       data-bind="attr: {
+                                    'id': $parent.getCheckboxId($parentContext, integrateId),
+                                    'name': 'integrate[' + integrateId + ']',
+                                    'value': integrateId
+                                    }"/>
+                <label>
+                    <span data-bind="html: checkboxText"></span>
+                </label>
+            </div>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->

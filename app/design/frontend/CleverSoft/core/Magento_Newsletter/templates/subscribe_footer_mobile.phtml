@@ -1,0 +1,43 @@
+<?php
+$footerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\FooterData');
+$settingData = $footerBuilderHelper->getSettingData();
+$title_subscribe_mobile = $settingData->{'_customize-input-newsletter_title_mobile'};
+$sub_subscribe_mobile = $settingData->{'_customize-input-newsletter_subtitle_mobile'};
+?>
+<div class="newsletters-builder <?php echo
+isset($settingData->{'_customize-input-newsletter_mobile_custom-class'}) && $settingData->{'_customize-input-newsletter_mobile_custom-class'} ? $settingData->{'_customize-input-newsletter_mobile_custom-class'} : ''
+?>">
+    <span class="cs-font"></span>
+    <?php if(isset($title_subscribe_mobile) && $title_subscribe_mobile): ?>
+    <h3><?=$title_subscribe_mobile?></h3>
+    <?php endif?>
+    <form class="form subscribe"
+          novalidate
+          action="<?php /* @escapeNotVerified */
+          echo $block->getFormActionUrl() ?>"
+          method="post"
+          data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+          id="newsletter-validate-detail-mobile">
+        <div class="d-flex">
+            <div class="field newsletter">
+                <input name="email" type="email" id="newsletter-mobile" class="form-control" placeholder="<?php echo
+                isset($settingData->{'_customize-input-newsletter_placeholder_mobile'}) && $settingData->{'_customize-input-newsletter_placeholder_mobile'} ? $settingData->{'_customize-input-newsletter_placeholder_mobile'} : __('Email Address')
+                ?>"
+                       data-validate="{required:true, 'validate-email':true}"/>
+            </div>
+            <div class="actions">
+                <button class="action subscribe "
+                        type="submit">
+                    <?php echo
+                    isset($settingData->{'_customize-input-newsletter_buttontext_mobile'}) && $settingData->{'_customize-input-newsletter_buttontext_mobile'} ? $settingData->{'_customize-input-newsletter_buttontext_mobile'} : __('Subscribe')
+                    ?>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <?php if(isset($sub_subscribe_mobile) && $sub_subscribe_mobile): ?>
+    <p><?=$sub_subscribe_mobile?></p>
+    <?php endif?>
+</div>
+

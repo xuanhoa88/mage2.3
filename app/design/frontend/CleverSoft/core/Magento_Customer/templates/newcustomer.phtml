@@ -1,0 +1,23 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * New Customer block template
+ *
+ * @var $block \Magento\Customer\Block\Form\Login\Info
+ */
+?>
+<?php if ($block->getRegistration()->isAllowed()): ?>
+<div class="block-new-customer">
+    <div class="block-content">
+                <a href="<?php /* @escapeNotVerified */ echo $block->getCreateAccountUrl() ?>" class="action create"><span><?php /* @escapeNotVerified */ echo __('Don’t have an account? Register Now') ?></span></a>
+     </div>
+</div>
+<?php endif; ?>

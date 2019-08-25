@@ -1,0 +1,60 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $helper \Magento\Search\Helper\Data */
+$helper = $this->helper('Magento\Search\Helper\Data');
+?>
+  <form class="form minisearch" id="search_mini_form_categories" action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
+      <div class="field search"> 
+          <div class="control btn-group btn-group-raised">
+          
+              <div class="form-group label-floating is-focused">
+                  <label for="i7" class=" control-label" ><?php /* @escapeNotVerified */
+                          echo __('Search for Products'); ?></label>
+                  <input id="search-cat"
+                         data-mage-init='{"quickSearch":{
+                              "formSelector":"#search_mini_form_categories",
+                              "url":"<?php /* @escapeNotVerified */ echo $block->getUrl('search/ajax/suggest'); ?>",
+                              "destinationSelector":"#search_autocomplete_categories"}
+                         }'
+                         
+                         type="text" 
+                         name="<?php /* @escapeNotVerified */ echo $helper->getQueryParamName() ?>"
+                         class="form-control"  
+                         
+                         maxlength="<?php /* @escapeNotVerified */ echo $helper->getMaxQueryLength();?>"
+                         role="combobox"
+                         aria-haspopup="false"
+                         aria-autocomplete="both"
+                         autocomplete="off" /> 
+                </div> 
+              <div id="search_autocomplete_categories" class="search-autocomplete"></div>
+              <?php echo $block->getChildHtml() ?>
+          </div> 
+            <button type="button" title="<?php echo $block->escapeHtml(__('Search')) ?>"  class="search-categories">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <input type="hidden" name="cat" id="cat-search" value="" />
+  </form>
+<script>
+
+
+jQuery('.search-categories').click(function(){  
+        if(jQuery('.form-mini-categories').hasClass('show-search')){
+            jQuery('.form-mini-categories').removeClass('show-search').find('.form-group').css('width',60).removeClass('is-focused');
+        }          
+        else{
+      var width_mtnav = jQuery('#mtnav').width();
+      search_width = width_mtnav + parseInt(30);
+            jQuery('.form-mini-categories').addClass('show-search').find('.form-group').css('width',search_width).addClass('is-focused').find('input').focus();
+        }         
+    });
+</script>

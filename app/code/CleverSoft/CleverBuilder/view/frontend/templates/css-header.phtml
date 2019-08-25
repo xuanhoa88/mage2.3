@@ -1,0 +1,21 @@
+<?php
+$builder_id = uniqid();
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$panelHelper = $this->helper('CleverSoft\CleverBuilder\Helper\Panels\Panels');
+if (!$helper->isEnabledBuilder() || !$helper->getCustomerEnablePanel()) return;
+$renderer = $panelHelper->renderer();
+?>
+<script>
+    window.panelsOptions = <?php echo $helper->getPanelsOption(); ?>;
+    window.panelsStyles = <?php echo $helper->getpanelsStyles(); ?>;
+    window.imagePlaceholder = '';
+    window.mediaUrl = '<?php echo $this->helper('Magento\Cms\Helper\Wysiwyg\Images')->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA); ?>';
+    window.pageContent = JSON.stringify( <?php echo json_encode( array('content'=>$helper->getPageContent()) ); ?> )
+    window.wpColorPickerL10n = {"clear":"Clear","clearAriaLabel":"Clear color","defaultAriaLabel":"Select default color","defaultString":"Default","pick":"Select Color","current":"Current Color"};
+    require([
+        'jquery',
+        "liveEditor"
+    ], function($) {
+    });
+</script>
+<link rel="stylesheet" media="all" href="<?php /* @escapeNotVerified */ echo $renderer->front_css_url() ?>"/>

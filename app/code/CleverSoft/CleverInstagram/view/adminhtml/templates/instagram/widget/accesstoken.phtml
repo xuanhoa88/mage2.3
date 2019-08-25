@@ -1,0 +1,111 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverInstagram
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$element = $block->getElement();
+$fieldId = ($element->getHtmlContainerId()) ? ' id="' . $element->getHtmlContainerId() . '"' : '';
+$fieldClass = "field admin__field field-{$element->getId()} {$element->getCssClass()}";
+$fieldClass .= ($element->getRequired()) ? ' required' : '';
+$fieldAttributes = $fieldId . ' class="' . $fieldClass . '" ' . $block->getUiId('form-field', $element->getId());
+
+//Get value to access token and user id field
+$getValue = $block->getInputHtml();
+$getStoreConfig = $block->getTokenAndIdInStoreConfig();
+$accessToken = isset($getValue['getaccesstoken']) ? $getValue['getaccesstoken'] : '';
+$userId = isset($getValue['getuserid']) ? $getValue['getuserid'] : '';
+$widgetedited = isset($getValue['widgetedit']) ? $getValue['widgetedit'] : 0;
+$urlCurrent = preg_replace('{/$}', '', $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]));
+?>
+
+<div<?php /* @escapeNotVerified */ echo $fieldAttributes ?>>
+    <?php echo $element->getLabelHtml() ?>
+    <div class="control admin__field-control">
+        <table>
+            <tr class="instagram">
+                <td>
+                    <button type="button" value="getid" class="getTokenandId">Get Access Token and User Id</button>
+                </td>
+            </tr>
+            <tr class="instagram">
+                <td class="col-value">
+                    <input type="text" value="<?php echo $accessToken; ?>" name="parameters[getaccesstoken]" placeholder="Access Token" id="accessToken"/>
+                </td>
+            </tr>
+            <tr class="instagram">
+                <td class="col-value">
+                    <input type="text" value="<?php echo $userId; ?>" name="parameters[getuserid]" placeholder="User Id" id="userId"/>
+                </td>
+            </tr>
+            <tr class="instagram">
+                <td class="col-value">
+                    <input type="text" value="<?php echo $widgetedited; ?>" name="parameters[widgetedit]" placeholder="User Id" id="widgetedit"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<script>
+    require(['jquery'], function(jQuery){
+        jQuery('.getTokenandId').click(function() {
+            window.location = "https://instagram.com/oauth/authorize/?client_id=3a81a9fa2a064751b8c31385b91cc25c&scope=basic+public_content&redirect_uri=https://smashballoon.com/instagram-feed/instagram-token-plugin/?return_uri=" + window.location.href + "&response_type=token";
+        });
+
+        jQuery(document).ready(function($) {
+
+            //Autofill the token and id
+            var hash = window.location.hash,
+                token = hash.substring(14),
+                id = token.split('.')[0];
+            //If there's a hash then autofill the token and id
+            if(hash){
+                $('#accessToken').val(token);
+                $('#userId').val(id);
+
+                //Set value for field accessToken and Userid
+                $('input[name="parameters[userid]"]').val(id);
+                $('input[name="parameters[accessToken]"]').val(token);
+            }
+
+            $('select').on('change', function() {
+                if(hash){
+                    $('#accessToken').val(token);
+                    $('#userId').val(id);
+                    //Set value for field accessToken and Userid
+                    $('input[name="parameters[userid]"]').val(id);
+                    $('input[name="parameters[accessToken]"]').val(token);
+                }else{
+                    //Set value for field accessToken and Userid
+                    $('input[name="parameters[userid]"]').val(<?php echo $userId; ?>);
+                    $('input[name="parameters[accessToken]"]').val(<?php echo $accessToken; ?>);
+                }
+            });
+
+            //If this widget is create new
+            <?php if($widgetedited == 0): ?>
+                //Set value for mode image 
+                $('select[name="parameters[modetakeimg]"]').val("<?php echo $getStoreConfig['ModeImgConfig'] ? $getStoreConfig['ModeImgConfig'] : 'userid' ?>");
+                $('input[name="parameters[accessToken]"]').val("<?php echo $getStoreConfig['accessTokenConfig'] ? $getStoreConfig['accessTokenConfig'] : '' ?>");
+                $('input[name="parameters[userid]"]').val("<?php echo $getStoreConfig['UserIdConfig'] ? $getStoreConfig['UserIdConfig'] : '' ?>");
+                $('input[name="parameters[hash_tag]"]').val("<?php echo $getStoreConfig['HashTagConfig'] ? $getStoreConfig['HashTagConfig'] : '' ?>");
+                $('input[name="parameters[latitude]"]').val("<?php echo $getStoreConfig['LatitudeConfig'] ? $getStoreConfig['LatitudeConfig'] : '' ?>");
+                $('input[name="parameters[longitude]"]').val("<?php echo $getStoreConfig['LongtitudeConfig'] ? $getStoreConfig['LongtitudeConfig'] : '' ?>");
+                
+                $('input[name="parameters[widgetedit]"]').val(<?php echo 1 ?>);
+            <?php endif; ?>
+
+            //Hide field accesstoken and userid and widgetedited
+            $("#widgetedit").css("display", "none");
+            $("#accessToken").css("display", "none");
+            $("#userId").css("display", "none");
+            
+        })
+    });
+</script>

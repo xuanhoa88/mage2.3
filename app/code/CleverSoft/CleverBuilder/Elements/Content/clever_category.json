@@ -1,0 +1,42 @@
+{
+  "name": "Categories",
+  "title": "Categories Navigation",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Element\\Form\\Categories",
+  "installed": true,
+  "groups": [],
+  "area" : "widget",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Element\\Render\\Categories",
+  "icon" : "",
+  "code": "clever-category",
+  "content_fields": [
+    {
+      "type": "text",
+      "name": "category_title",
+      "required": false,
+      "visible": true,
+      "default":"Element Title",
+      "placeholder" : "Element Title",
+      "label": "Category Title"
+    },
+    {
+      "type": "conditions",
+      "name": "category_ids",
+      "required": false,
+      "visible": true,
+      "label": "Categories",
+      "description": "If category is selected, the product collection will be filtered by this categories"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "select",
+      "name": "enable_fullwidth",
+      "required": false,
+      "source_model": "Magento\\Config\\Model\\Config\\Source\\Yesno",
+      "visible": true,
+      "default": 0,
+      "label": "Enable FullWidth",
+      "description": "Enable If you want to show this to fit to the screen width"
+    }
+  ]
+}

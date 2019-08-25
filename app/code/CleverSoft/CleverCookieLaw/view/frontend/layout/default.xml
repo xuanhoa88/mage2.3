@@ -1,0 +1,21 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="after.body.start">
+            <block class="Magento\Framework\View\Element\Template" name="cookielaw.after_body_start"  template="CleverSoft_CleverCookieLaw::after_body_start.phtml">
+                <action method="setCacheLifetime">
+                    <argument name="lifetime" xsi:type="string">3600</argument>
+                </action>
+                <block class="Magento\Framework\View\Element\Template" name="cookielaw.after_body_start.widget" before="-" template="CleverSoft_CleverCookieLaw::widget.phtml"/>
+            </block>
+        </referenceContainer>
+
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="cookielaw.before_body_end"  template="CleverSoft_CleverCookieLaw::before_body_end.phtml">
+                <action method="setCacheLifetime">
+                    <argument name="lifetime" xsi:type="string">3600</argument>
+                </action>
+                <block class="Magento\Framework\View\Element\Template" name="cookielaw.before_body_end.widget" before="-" template="CleverSoft_CleverCookieLaw::widget.phtml"/>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

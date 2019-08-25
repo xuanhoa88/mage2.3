@@ -1,0 +1,146 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$enableDeliveryCountdown = $helper->getConfig('cleversofttheme/product_page/enable_delivery_countdown');
+$resetTimeDelivery = $helper->getConfig('cleversofttheme/product_page/hours_reset_delivery');
+$timeDelivery = $helper->getConfig('cleversofttheme/product_page/time_of_delivery');
+$enableProductVisitor = $helper->getConfig('cleversofttheme/product_page/enable_product_visitor');
+$visitorMin = $helper->getConfig('cleversofttheme/product_page/visitor_min_value');
+$visitorMax = $helper->getConfig('cleversofttheme/product_page/visitor_max_value');
+$visitorMaxStroke = $helper->getConfig('cleversofttheme/product_page/visitor_max_value_stroke');
+$visitorMinInterVal = $helper->getConfig('cleversofttheme/product_page/visitor_min_interval');
+$visitorMaxInterVal = $helper->getConfig('cleversofttheme/product_page/visitor_max_interval');
+$enableBageImage = $helper->getConfig('cleversofttheme/product_page/enable_badge_image');
+$bageImage = $helper->getConfig('cleversofttheme/product_page/badge_image');
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $om->create('Magento\Store\Model\StoreManagerInterface');
+$bageImageUrl = $storeManager->getStore()
+        ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'wysiwyg/cleversoft/' . $bageImage;
+$enableProductShipping = $helper->getConfig('cleversofttheme/product_page/enable_product_shipping');
+$totalFreeShipping = $this->getTotalFreeShipping();
+?>
+<?php if($enableDeliveryCountdown):?>
+<div class="product-view-countdown">
+    <div class="text-countdowns auto-countdown">
+        <i class="cs-font clever-icon-clock-2"></i> Order in The Next <span class="text-countdown" countdown-counter=""></span> to get it by <span class="text-time" countdown-delivery=""></span>
+    </div>
+</div>
+<?php endif?>
+<?php if($enableProductVisitor):?>
+<div class="product-visitors">
+    <div class="visitors auto-visitors">
+        <i class="cs-font clever-icon-team"></i> Real Time <span class="visitors-text" data-js-counter=""></span> Visitor Right Now
+    </div>
+</div>
+<?php endif?>
+<?php if($enableProductShipping):?>
+<div class="product-spend-shiping cart-congrats">
+    <i class="cs-font clever-icon-truck"></i> 
+    <span>
+    <?php if($totalFreeShipping):?>
+        Spend  <span class="moneys"><span class="money"><?=$totalFreeShipping?></span></span> to get Free Shipping
+    <?php else:?>
+        Congratulations! You've got free shipping!
+    <?php endif;?>
+    <span>
+</div>
+<?php endif?>
+<?php if($enableBageImage):?>
+<div class="product-badge-image">
+    <img src="<?=$bageImageUrl?>" alt="">
+</div>
+<?php endif?>
+<script>
+    require(['jquery', 'jquery/ui', 'jQueryLibMin'], function($){
+        $(document).ready(function() {
+            var $countdown = $('.auto-countdown');
+            $countdown.each(function () {
+                var $this = $(this),
+                    $counter = $this.find('[countdown-counter]'),
+                    $date = $this.find('[countdown-delivery]'),
+                    reset_time = "<?=$resetTimeDelivery?>",
+                    delivery_time = "<?=$timeDelivery?>",
+                    date_counter = new Date(),
+                    structure = [
+                    ['hours', 'hours'],
+                    ['minutes', 'minutes']
+                ],
+                    days_of_week = [
+                    ['Sunday'],
+                    ['Monday'],
+                    ['Tuesday'],
+                    ['Wednesday'],
+                    ['Thursday'],
+                    ['Friday'],
+                    ['Saturday']
+                  ],
+                    date_now,
+                    date_delivery,
+                    delivery_html,
+                    format,
+                    prop,
+                    time,
+                    postfix;
+                    date_counter.setDate(date_counter.getDate() + 1);
+                    date_counter.setHours(reset_time, 0, 0, 0);
+                    var t = $counter.countdown(date_counter, function (e) {
+                    format = '';
+                    delivery_html = '';
+                    for(var i = 0; i < structure.length; i++) {
+                      prop = structure[i][0];
+                      time = e.offset[prop];
+                      postfix = structure[i][1];
+                      if (i === 0 && time === 0) {
+                        continue;
+                      }
+                      if(i !== 0) {
+                        format += ' ';
+                      }
+                      format += time + ' ' + postfix;
+                    }
+                    $(this).html(format);
+                    date_delivery = new Date();
+                    date_delivery.setDate(date_delivery.getDate() + delivery_time);
+                    date_now = new Date();
+                    if(date_now.getHours() >= date_counter.getHours() && date_now.getMinutes() >= date_counter.getMinutes() && date_now.getSeconds() >= date_counter.getSeconds()) {
+                      date_delivery.setDate(date_delivery.getDate() + 1);
+                    }
+                    delivery_html += days_of_week[date_delivery.getDay()];
+                    delivery_html += ' ';
+                    delivery_html += ('0' + (date_delivery.getMonth() + 1)).slice(-2) + '/' + ('0' + date_delivery.getDate()).slice(-2) + '/'  + date_delivery.getFullYear();
+                    $date.html(delivery_html);
+                });
+            });
+
+            var $countdown = $('.auto-visitors');
+
+            function randomInteger(min, max) {
+                return Math.round(min - 0.5 + Math.random() * (max - min + 1));
+            };
+            $countdown.each(function () {
+                var $this = $(this);
+                var   $counter = $this.find('[data-js-counter]');
+                var   min = "<?=$visitorMin?>";
+                var   max = "<?=$visitorMax?>";
+                var   interval_min = "<?=$visitorMinInterVal?>";
+                var   interval_max = "<?=$visitorMaxInterVal?>";
+                var  stroke = "<?=$visitorMaxStroke?>";
+                var  current_value;
+                var  new_value;
+
+                function update() {
+                    setTimeout(function() {
+                        current_value = +$counter.text();
+                        new_value = randomInteger(min, max);
+                        if(Math.abs(current_value - new_value) > stroke) {
+                            new_value = new_value > current_value ? current_value + stroke : current_value - stroke;
+                            new_value = randomInteger(current_value, new_value);
+                        }
+                        $counter.text(new_value);
+                        update();
+                  }, randomInteger(interval_min, interval_max) * 1000);
+                };
+                update();
+              });
+        });
+    });
+</script>

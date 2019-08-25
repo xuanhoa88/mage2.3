@@ -1,0 +1,39 @@
+<?php
+/**
+ * Copyright © 2016 MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+
+<div data-bind="scope: 'cleversearchautocomplete_form_mobile'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "cleversearchautocomplete_form_mobile": {
+                    "component": "CleverSoft_CleverSearchAutoComplete/js/autocomplete"
+                },
+                "cleversearchautocompleteBindEventsMobile": {
+                    "component": "CleverSoft_CleverSearchAutoComplete/js/bindEventsMobile",
+                    "config": {
+                        "searchFormSelector": "#search_mini_form_mobile",
+                        "searchButtonSelector": "button.search",
+                        "inputSelector": "#search_mobile",
+                        "searchDelay": "<?php echo $block->getSearchDelay() ?>"
+                    }
+                },
+                "cleversearchautocompleteDataProviderMobile": {
+                    "component": "CleverSoft_CleverSearchAutoComplete/js/dataProviderMobile",
+                    "config": {
+                        "url": "<?php echo $block->getSearchUrl() ?>"
+                    }
+                }
+            }
+        }
+    }
+}
+</script>

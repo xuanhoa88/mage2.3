@@ -1,0 +1,1543 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$panelHelper = $this->helper('CleverSoft\CleverBuilder\Helper\Panels\Panels');
+if (!$helper->isEnabledBuilder() || !$helper->getCustomerEnablePanel()) return;
+if($this->getRequest()->getParam('previewUrl')) return;
+$layouts = array();
+$this->_assetRepo = $helper->getAssetRespo();
+$prebuiltTemplate = $this->getPrebuiltTemplate();
+?>
+
+<script type="text/template" id="cleversoft-panels-builder">
+
+    <div class="cleversoft-panels-builder">
+
+        <div class="cs-builder-toolbar">
+
+            <a class="cs-tool-button cs-widget-add" title="<?php echo __( 'Add Widget') ?>">
+                <span class="cs-panels-icon cs-panels-icon-add-widget"></span>
+                <span class="cs-button-text"><?php echo __('Add Widget') ?></span>
+            </a>
+            <a class="cs-tool-button cs-row-add" style="display:none" title="<?php echo __( 'Add Row') ?>">
+                <span class="cs-panels-icon cs-panels-icon-add-row"></span>
+                <span class="cs-button-text"><?php echo __('Add Row') ?></span>
+            </a>
+            <a href="#" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
+                <g>
+                    <g>
+                        <circle fill="#ffffff" cx="14.913" cy="99.947" r="12.997"></circle>
+                    </g>
+                    <path fill="#ffffff" d="M86.539,198.02c-27.05-3.8-49.261-15.489-66.31-35.699c-0.01-0.011-0.02-0.021-0.03-0.03   c-1.63-1.94-3.22-3.96-4.76-6.06c-0.01-0.021-0.02-0.03-0.03-0.04c-0.38-0.54-0.75-1.08-1.11-1.62   c-0.01-0.011-0.02-0.011-0.02-0.021c-3.06-4.46-5.62-8.859-6.89-11.12c-0.01-0.02-0.02-0.029-0.03-0.05   c-0.35-0.62-0.6-1.07-0.74-1.32c-0.02-0.029-0.04-0.06-0.05-0.09c-0.01-0.029-0.03-0.05-0.04-0.069c0-0.03-0.01-0.04-0.01-0.04   c-0.9-1.851-1.4-3.92-1.4-6.11c0-7.8,6.33-14.13,14.13-14.13c1.62,0,3.17,0.27,4.62,0.78c2.38,0.819,4.479,2.27,6.09,4.14   c0.12,0.14,0.24,0.28,0.351,0.42c0.09,0.11,0.18,0.22,0.26,0.34c0.14,0.181,0.27,0.36,0.4,0.55c1.43,1.98,2.59,4.2,3.799,6.341   c19.541,34.31,61.33,47.43,96.721,30.04c4.54-2.24,8.93-5.66,12.14-9.561c5.05-6.15,4.24-14.62-0.86-20.229   c-5.479-6-12.02-6.21-18.55-2.29c-6.33,3.819-12.91,6.31-19.77,7.06c-2.09,0.35-4.23,0.521-6.431,0.521   c-22.039,0-39.899-17.881-39.899-39.92c0-22.04,17.86-39.9,39.899-39.9c5.031,0,9.851,0.92,14.281,2.64   c1.94,0.62,3.891,1.36,5.84,2.21c1.91,0.83,3.641,2.09,5.5,3.05c8.521,4.37,15.25,3.17,20.23-3.59c4.96-6.72,4.1-15.91-2.74-22.02   c-9.34-8.34-20.95-11.6-33.05-13.25c-3.12-0.43-6.29-0.36-10.721-0.6C71.378,29.2,50.369,40.87,35.949,64.14   c-1.37,2.23-2.55,4.59-4.05,6.75c-4.94,7.15-12.38,9.29-19.041,5.56c-6.32-3.52-9.13-10.89-5.03-18.44   c4.95-9.13,10.32-18.6,17.6-25.8c28.39-28.04,62.7-37.73,101.19-26.85c37.899,10.72,60.86,36.69,69.21,75.17   C210.229,146.84,153.539,207.48,86.539,198.02z"></path>
+                </g>
+                </svg>
+            </a>
+            <a class="cs-tool-button cs-prebuilt-add" title="<?php echo __( 'Prebuilt Layouts') ?>">
+                <span class="cs-panels-icon cs-panels-icon-layouts"></span>
+                <span class="cs-button-text"><?php echo __('Layouts') ?></span>
+            </a>
+
+            <?php if( !empty($post) ) : ?>
+
+                <a class="cs-tool-button cs-history" style="display: none" title="<?php echo __( 'Edit History') ?>">
+                    <span class="cs-panels-icon cs-panels-icon-history"></span>
+                    <span class="cs-button-text"><?php echo __('History') ?></span>
+                </a>
+
+                <a class="cs-tool-button cs-live-editor" style="display: none" title="<?php echo __( 'Live Editor') ?>">
+                    <span class="cs-panels-icon cs-panels-icon-live-editor"></span>
+                    <span class="cs-button-text"><?php echo __('Live Editor') ?></span>
+                </a>
+
+            <?php endif; ?>
+
+            <a class="cs-switch-to-standard"><?php echo __('Revert to Editor') ?></a>
+
+        </div>
+
+        <div class="cs-rows-container">
+
+        </div>
+
+        <div class="cs-panels-welcome-message">
+            <div class="cs-message-wrapper">
+                <?php
+                printf(
+                    __( 'Add a %s or %s to get started. Read our %s if you need help.'),
+                    "<a href='#' class='cs-tool-button cs-widget-add'>" . __( 'Widget') . "</a>",
+                    "<a href='#' class='cs-tool-button cs-prebuilt-add'>" . __( 'Prebuilt Layout') . "</a>",
+                    "<a href='http://doc.zootemplate.com/cleveraddon-for-cs/' target='_blank' rel='noopener noreferrer'>" . __( 'documentation') . "</a>"
+                );
+                ?>
+            </div>
+        </div>
+
+    </div>
+
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-row">
+    <div class="cs-row-container ui-draggable cs-row-color-{{%= rowColorLabel %}}">
+        <div class="cs-cells">
+        </div>
+    </div>
+    <div class="button-clear">
+        <a class="cs-row-delete cs-tool-button button-primary" title="Clear"><?= __('Clear Post Content') ?></a>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-cell">
+    <div class="cell">
+        <div class="resize-handle"></div>
+        <div class="cell-wrapper widgets-container">
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-tab-items">
+    <div class="clever-wrap-identify clever-wrap-element clever-tab-wrap-identify" id="{{%= widget_id %}}">
+        <div class="element-items-wrapper">
+            {{% _.each(items, function(item,key) { %}}
+            <div class="element-item-wrapper" data-widget-id="{{%= widget_id %}}" data-id="#tab{{%= key %}}">
+                <div data-widget-id="{{%= widget_id %}}" data-id="#tab{{%= key %}}" class="element-item tab-item"><div class="panel-info"><?php echo __('Tab Panel') ?>&nbsp;&nbsp;<span class="widget-info">{{% if ( !_.isUndefined(tabTitleArray[key]) ) { %}}{{%= tabTitleArray[key] %}}{{% } else { %}}<?php echo  __('Tab') ?>&nbsp;{{%= (key+1) %}}&nbsp;<?php echo  __('Title') ?>{{% } %}}</span> </div></div>
+                <div class="element-item-elements tab-item-elements">
+                    <div class="cs-tab-item-button"><span idx="{{%= key %}}" condition="tab" parent-widget-id="{{%= widget_id %}}" class="label cs-element-insert button{{%= widget_id %}}"><span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span><?php echo __('Add To Tab Panel') ?></span></div>
+                </div>
+            </div>
+            {{% }); %}}
+            <div class="clever-tab-plus-icon plus-icon" condition="tab" parent-widget-id="{{%= widget_id %}}" data-id="{{%= widget_id %}}_addIcon"><div class="icon-container tab" style="cursor: pointer"><span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span><?php echo __('Add To Tabs') ?></div></div>
+            <div data-widget-id="{{%= widget_id %}}" class="empty_tab" style="display: none">
+                <div class="element-item-wrapper" data-widget-id="{{%= widget_id %}}" data-id="#tab{$key}"><div data-widget-id="{{%= widget_id %}}" data-id="#tab{$key}" class="tab-item$remove"><div class="panel-info"><?php echo __('Tab Panel') ?>&nbsp;&nbsp;<span class="widget-info"><?php echo  __('Tab {$key+1} Title') ?></span> </div></div>
+                    <div class="element-item-elements tab-item-elements">
+                        <div class="cs-tab-item-button">
+                            <span idx="{$key}" condition="tab" parent-widget-id="{{%= widget_id %}}" class="label cs-element-insert button{{%= widget_id %}}">
+                                <span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span><?php echo __('Add To Tab Panel') ?>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-scrollto-items">
+    <div class="clever-wrap-identify clever-wrap-element clever-scrollto-wrap-identify" id="{{%= widget_id %}}">
+        <div class="element-items-wrapper">
+            {{% _.each(panelsItems, function(item,key) { %}}
+            <div class="element-item-wrapper" data-widget-id="{{%= widget_id %}}" data-id="#scrollto{{%= key %}}">
+                <div data-widget-id="{{%= widget_id %}}" data-id="#scrollto{{%= key %}}" class="element-item scrollto-item"><div class="panel-info"><?php echo __('ScrollTo Panel') ?>&nbsp;&nbsp;</div></div>
+            </div>
+            {{% }); %}}
+            <div class="clever-scrollto-plus-icon plus-icon" condition="scrollto" parent-widget-id="{{%= widget_id %}}" data-id="{{%= widget_id %}}_addIcon"><div class="icon-container scrollto" style="cursor: pointer"><span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span><?php echo __('Add To Scroll') ?></div></div>
+            <div data-widget-id="{{%= widget_id %}}" class="empty_scrollto" style="display: none">
+                <div class="element-item-wrapper" data-widget-id="{{%= widget_id %}}" data-id="#scrollto{$key}"><div data-widget-id="{{%= widget_id %}}" data-id="#scrollto{$key}" class="scrollto-item$remove"><div class="panel-info"><?php echo __('ScrollTo Panel') ?>&nbsp;&nbsp;</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-textbox-items">
+    <div class="clever-wrap-identify clever-wrap-element clever-textbox-wrap-identify" id="{{%= widget_id %}}">
+        <div class="element-items-wrapper">
+            {{% _.each(items, function(item,key) { %}}
+            <div class="element-item-wrapper" data-widget-id="{{%= widget_id %}}" data-id="#textbox{{%= key %}}">
+                <div data-widget-id="{{%= widget_id %}}" data-id="#textbox{{%= key %}}" class="textbox-item"></div>
+            </div>
+            {{% }); %}}
+            <div class="clever-textbox-plus-icon plus-icon cs-element-insert" parent-widget-id="{{%= widget_id %}}" condition="textbox" data-id="{{%= widget_id %}}_addIcon"><div class="icon-container textbox"><span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span><?php echo __('Add To Text Box') ?></div></div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-slider-items">
+    <div class="clever-wrap-identify clever-wrap-element clever-slider-wrap-identify" id="{{%= widget_id %}}">
+        <div class="element-items-wrapper">
+            {{% _.each(items, function(item,key) { %}}
+            <div class="element-item-wrapper" data-widget-id="{{%= widget_id %}}" data-id="#slider{{%= key %}}">
+                <div data-widget-id="{{%= widget_id %}}" data-id="#slider{{%= key %}}" class="slider-item"></div>
+            </div>
+            {{% }); %}}
+            <div class="clever-slider-plus-icon plus-icon cs-element-insert" parent-widget-id="{{%= widget_id %}}" condition="slider" data-id="{{%= widget_id %}}_addIcon"><div class="icon-container slider"><span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span><?php echo __('Add To Slider') ?></div></div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-banner-items">
+    <div class="clever-wrap-identify clever-wrap-element clever-banner-wrap-identify" id="{{%= widget_id %}}">
+        <div class="element-items-wrapper">
+            {{% _.each(items, function(item,key) { %}}
+            <div class="element-item-wrapper" data-widget-id="{{%= widget_id %}}" data-id="#banner{{%= key %}}">
+                <div data-widget-id="{{%= widget_id %}}" data-id="#banner{{%= key %}}" class="banner-item"></div>
+            </div>
+            {{% }); %}}
+            <div class="clever-banner-plus-icon plus-icon cs-element-insert" parent-widget-id="{{%= widget_id %}}" condition="banner" data-id="{{%= widget_id %}}_addIcon"><div class="icon-container banner"><span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span><?php echo __('Add To Banner') ?></div></div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-row-items">
+    <div class="clever-wrap-identify clever-wrap-element clever-row-wrap-identify" id="{{%= widget_id %}}">
+        <div class="element-items-wrapper">
+            {{% _.each(panelsItems, function(item,key) { %}}
+            <div class="element-item-wrapper" data-widget-id="{{%= widget_id %}}" data-id="#row{{%= key %}}">
+                <div data-widget-id="{{%= widget_id %}}" data-id="#row{{%= key %}}" class="element-item row-item">
+                    <div class="panel-info"><?php echo __('Column') ?>&nbsp;&nbsp;<span class="widget-info">{{% if ( !_.isUndefined(rowTitleArray[key]) ) { %}}{{%= rowTitleArray[key] %}}/12{{% } else { %}} {{%= item.width %}}/12{{% } %}}</span> </div>
+                </div>
+                <div class="element-item-elements row-item-elements">
+                    <div class="cs-row-item-button"><span idx="{{%= key %}}" condition="row" parent-widget-id="{{%= widget_id %}}" class="label cs-element-insert button{{%= widget_id %}}" data-key-filter="row" parent-widget-id="{{%= widget_id %}}"><span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span><?php echo __('Add To Column') ?></span></div>
+                </div>
+            </div>
+            {{% }); %}}
+            <div class="clever-row-plus-icon plus-icon" condition="row" parent-widget-id="{{%= widget_id %}}" data-id="{{%= widget_id %}}_addIcon"><div class="icon-container row"><span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span><?php echo __('Add To Row') ?></div></div>
+            <div data-widget-id="{{%= widget_id %}}" class="empty_row" style="display: none">
+                <div class="element-item-wrapper" data-widget-id="{{%= widget_id %}}" data-id="#row{$key}">
+                    <div data-widget-id="{{%= widget_id %}}" data-id="#row{$key}" class="element-item row-item$remove">
+                        <div class="panel-info">
+                            <?php echo __('Column') ?>&nbsp;&nbsp;<span class="widget-info">12/12</span>
+                        </div>
+                    </div>
+                    <div class="element-item-elements row-item-elements">
+                        <div class="cs-row-item-button"><span idx="{$key}" condition="row" parent-widget-id="{{%= widget_id %}}" class="label cs-element-insert button{{%= widget_id %}}"><span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span><?php echo __('Add To Column') ?></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-innerrow-items">
+    <div class="clever-wrap-identify clever-wrap-element clever-innerrow-wrap-identify" id="{{%= widget_id %}}">
+        <div class="element-items-wrapper">
+            {{% _.each(panelsItems, function(item,key) { %}}
+                {{% if (item) { %}}
+                <div class="element-item-wrapper" data-widget-id="{{%= widget_id %}}" data-id="#innerrow{{%= key %}}">
+                    <div data-widget-id="{{%= widget_id %}}" data-id="#innerrow{{%= key %}}" class="element-item innerrow-item">
+                        <div class="panel-info"><?php echo __('Column') ?>&nbsp;&nbsp;<span class="widget-info">{{% if ( !_.isUndefined(innerrowTitleArray[key]) ) { %}}{{%= innerrowTitleArray[key] %}}/12{{% } else { %}} {{%= item.width %}}/12{{% } %}}</span> </div>
+                    </div>
+                    <div class="element-item-elements innerrow-item-elements">
+                        <div class="cs-innerrow-item-button"><span idx="{{%= key %}}" condition="innerrow" parent-widget-id="{{%= widget_id %}}" class="label cs-element-insert button{{%= widget_id %}}" data-key-filter="innerrow" parent-widget-id="{{%= widget_id %}}"><span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span><?php echo __('Add To Column') ?></span></div>
+                    </div>
+                </div>
+                {{% } %}}
+            {{% }); %}}
+            <div class="clever-innerrow-plus-icon plus-icon" condition="innerrow" parent-widget-id="{{%= widget_id %}}" data-id="{{%= widget_id %}}_addIcon"><div class="icon-container innerrow"><span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span><?php echo __('Add To InnerRow') ?></div></div>
+            <div data-widget-id="{{%= widget_id %}}" class="empty_innerrow" style="display: none">
+                <div class="element-item-wrapper" data-widget-id="{{%= widget_id %}}" data-id="#innerrow{$key}">
+                    <div data-widget-id="{{%= widget_id %}}" data-id="#innerrow{$key}" class="element-item innerrow-item$remove">
+                        <div class="panel-info">
+                            <?php echo __('Column') ?>&nbsp;&nbsp;<span class="widget-info">12/12</span>
+                        </div>
+                    </div>
+                    <div class="element-item-elements innerrow-item-elements">
+                        <div class="cs-innerrow-item-button"><span idx="{$key}" condition="innerrow" parent-widget-id="{{%= widget_id %}}" class="label cs-element-insert button{{%= widget_id %}}"><span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span><?php echo __('Add To Column') ?></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-widget">
+    <div class="cs-widget ui-draggable" data-widget-id="{{%= widget_id %}}">
+        <div class="cs-widget-wrapper">
+            <div class="title">
+                {{% if (code == 'clever-row') { %}}
+                    <a class="cs-tool-button cs-row-add" title="<?php echo __( 'Add Row') ?>">
+                        <span class="cs-panels-icon cs-panels-icon-add-row"></span>
+                        <span class="cs-button-text"><?php echo __('Add Row') ?></span>
+                    </a>
+                {{% } else { %}}
+                    <h4>{{%= title %}}</h4>
+                {{% } %}}
+                <span class="actions">
+                    <a class="widget-edit"><?php echo __('Edit') ?></a>
+                    <a class="widget-duplicate"><?php echo __('Duplicate') ?></a>
+                    <a class="widget-delete"><?php echo __('Delete') ?></a>
+                </span>
+            </div>
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-dialog">
+    <div class="cs-panels-dialog {{% if(typeof left_sidebar != 'undefined') print('cs-panels-dialog-has-left-sidebar '); if(typeof right_sidebar != 'undefined') print('cs-panels-dialog-has-right-sidebar '); %}}">
+
+
+        <div class="cs-title-bar {{% if ( dialogIcon ) print( 'cs-has-icon' ) %}}">
+            {{% if ( ! _.isEmpty( dialogIcon ) ) { %}}
+            <div class="cs-panels-icon cs-panels-icon-{{%- dialogIcon %}}" />
+            {{% } %}}
+            <h4 class="cs-title{{% if ( editableLabel ) print(' cs-title-editable')%}}"
+                {{% if ( editableLabel ) print('contenteditable="true" spellcheck="false" tabIndex="1"')%}}
+            >{{%= title %}}</h4>
+            <a class="cs-close"><span class="cs-dialog-icon"></span></a>
+        </div>
+
+        <div class="cs-searchbar">
+           <input type="text" id="cs-search-element-panel" onkeyup="searchElementFunction()" placeholder="Search Widget..." title="Type in a name">
+        </div>
+
+        <div class="cs-content panel-dialog">
+            {{%= content %}}
+            <div class="cs-sidebar cs-right-sidebar widget-form-tab" data-tab="advanced" style="display:none">
+                {{% if(typeof right_sidebar  != 'undefined') print(right_sidebar ); %}}
+            </div>
+            {{% if(typeof left_sidebar != 'undefined') { %}}
+                
+            {{% } %}}
+        </div>
+
+        <div class="cs-toolbar">
+            <div class="cs-status">{{% if(typeof status != 'undefined') print(status); %}}</div>
+            <div class="cs-buttons">
+                {{%= buttons %}}
+            </div>
+        </div>
+
+    </div>
+</script>
+
+<script>
+function searchElementFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("cs-search-element-panel");
+    filter = input.value.toUpperCase();
+    ul = document.querySelectorAll(".layout-type-list, .widget-type-list, .element-type-list");
+    for (k = 0; k < ul.length; k++) {
+        li = ul[k].getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("h3")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+}
+</script>
+
+<script type="text/template" id="cleversoft-panels-dialog-builder">
+    <div class="dialog-data">
+
+        <h3 class="title"><?php echo __('Page Builder') ?></h3>
+
+        <div class="content">
+            <div class="cleversoft-panels-builder">
+
+            </div>
+        </div>
+
+        <div class="buttons">
+            <input type="button" class="button-primary cs-close" value="<?php echo __('Apply') ?>" />
+        </div>
+
+    </div>
+</script>
+
+
+<script type="text/template" id="cleversoft-panels-dialog-tab">
+    <li><a href="{{% if(typeof tab != 'undefined') { print ( '#' + tab ); } %}}">{{%= title %}}</a></li>
+</script>
+
+<script type="text/template" id="cleversoft-panels-dialog-widgets">
+    <div class="dialog-data">
+
+        <h3 class="title"><?php printf( __('Add New %s'), '<span class="current-tab-title"></span>' ) ?></h3>
+
+        <!--        <div class="left-sidebar">-->
+        <!---->
+        <!--            <input type="text" class="cs-sidebar-search" placeholder="--><?php //echo __('Search Widgets') ?><!--" />-->
+        <!---->
+        <!--            <ul class="cs-sidebar-tabs">-->
+        <!--            </ul>-->
+        <!---->
+        <!--        </div>-->
+        <!--        <div class="left-sidebar">-->
+
+        <!--            <input type="text" class="cs-sidebar-search" placeholder="--><?php //echo __('Search Widgets') ?><!--" />-->
+
+        <!--            <ul class="cs-sidebar-tabs">-->
+        <!--            </ul>-->
+
+        <!--        </div>-->
+
+        <div class="content">
+            <p></p>
+            <h4 class="title"><?php echo __('Layout') ?></h4>
+            <ul class="layout-type-list"></ul>
+            <hr/>
+            <h4 class="title"><?php echo __('Content') ?></h4>
+            <ul class="widget-type-list"></ul>
+            <hr/>
+            <h4 class="title"><?php echo __('Shop') ?></h4>
+            <ul class="element-type-list"></ul>
+        </div>
+
+        <div class="buttons">
+            <input type="button" class="button-primary cs-close" value="<?php echo __('Close') ?>" />
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-dialog-widgets-widget">
+    <li class="widget-type {{%= code %}}">
+        <div class="widget-type-wrapper">
+            <h3>{{%= title %}}</h3>
+            <input type="hidden" name="widget-type" value="{{%= type %}}">
+            <input type="hidden" name="widget-code" value="{{%= code %}}">
+        </div>
+    </li>
+</script>
+
+
+<script type="text/template" id="cleversoft-panels-dialog-widget">
+    <div class="dialog-data">
+
+        <h3 class="title"><span class="widget-name"></span></h3>
+
+        <div class="right-sidebar"></div>
+
+        <div class="content">
+
+            <div class="widget-form tab-control-element">
+                <div class="tab-control tab-control-content active" data-tab="content">
+                    <a href="#">Content</a>
+                </div>
+            
+                <div class="tab-control tab-control-style" data-tab="style">
+                    <a href="#">Style</a>
+                </div>
+            
+                <div class="tab-control tab-control-advanced" data-tab="advanced">
+                    <a href="#">Advanced</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+            <div class="action-buttons">
+                <a class="cs-delete"><?php echo __('Delete') ?></a>
+                <a class="cs-duplicate"><?php echo __('Duplicate') ?></a>
+            </div>
+
+            <button class="button-primary cs-update">Update</button>
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-dialog-widget-sidebar-widget">
+    <div class="cs-widget">
+        <h3>{{%= title %}}</h3>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-dialog-row">
+    <div class="dialog-data">
+
+        <h3 class="title">
+            {{%= title %}}
+        </h3>
+
+        <div class="right-sidebar"></div>
+
+        <div class="content">
+
+            <div class="row-set-form">
+                <strong>Fullpage:</strong>
+                <select name="fullpage" class="cs-row-field">
+                    <option value="0">Off</option>
+                    <option value="1">On</option>
+                </select>
+                <?php
+                $cells_field = '<input type="number" min="1" max="12" name="cells" class="cs-row-field" value="2" />';
+                $ratios = array(
+                    'Even' => 1,
+                    'Golden' => 0.61803398,
+                    'Halves' => 0.5,
+                    'Thirds' => 0.33333333,
+                    'Diagon' => 0.41421356,
+                    'Hecton' => 0.73205080,
+                    'Hemidiagon' => 0.11803398,
+                    'Penton' => 0.27201964,
+                    'Trion' => 0.15470053,
+                    'Quadriagon' => 0.207,
+                    'Biauron' => 0.30901699,
+                    'Bipenton' => 0.46,
+                );
+                $ratio_field = '<select name="ratio" class="cs-row-field">';
+                foreach( $ratios as $name => $value ) {
+                    $ratio_field .= '<option value="' . __($value) .  '">' . __($name . ' (' . round($value, 3) . ')') . '</option>';
+                }
+                $ratio_field .= '</select>';
+
+                $direction_field = '<select name="ratio_direction" class="cs-row-field">';
+                $direction_field .= '<option value="right">' . __('Left to Right') . '</option>';
+                $direction_field .= '<option value="left">' . __('Right to Left') . '</option>';
+                $direction_field .= '</select>';
+
+                printf(
+                    preg_replace(
+                        array(
+                            '/1\{ *(.*?) *\}/',
+                        ),
+                        array(
+                            '<strong>$1</strong>',
+                        ),
+                        __('1{Set row layout}: %1$s columns with a ratio of %2$s going from %3$s')
+                    ),
+                    $cells_field,
+                    $ratio_field,
+                    $direction_field
+                );
+                echo '<button class="button-secondary set-row">' . __('Set') . '</button>';
+                ?>
+            </div>
+
+            <div class="row-preview">
+
+            </div>
+
+        </div>
+
+        <div class="buttons">
+            {{% if( dialogType == 'edit' ) { %}}
+            <div class="action-buttons">
+                <a class="cs-delete"><?php echo __('Delete') ?></a>
+                <a class="cs-duplicate"><?php echo __('Duplicate') ?></a>
+            </div>
+            {{% } %}}
+
+            {{% if( dialogType == 'create' ) { %}}
+            <input type="button" class="button-primary cs-insert" value="<?php echo __('Insert') ?>" />
+            {{% } else { %}}
+            <input type="button" class="button-primary cs-save" value="<?php echo __('Update') ?>" />
+            {{% } %}}
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-dialog-row-cell-preview">
+    <div class="preview-cell" style="width: {{%- weight*100 %}}%">
+        <div class="preview-cell-in">
+            <div class="preview-cell-weight">{{% print(Math.round(weight * 1000) / 10) %}}</div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-dialog-prebuilt">
+    <div class="dialog-data">
+
+        <h3 class="title"><?php echo __('Page Builder Layouts') ?></h3>
+
+        <div class="left-sidebar">
+
+            <input type="text" class="cs-sidebar-search" placeholder="<?php echo __('Search') ?>" />
+
+            <ul class="cs-sidebar-tabs">
+            </ul>
+
+        </div>
+
+        <div class="content">
+            <div class="widget-form tab-control-element">
+                <div class="tab-control tab-control-page active" data-tab="pages">
+                    <a href="#">Pages</a>
+                </div>
+            
+                <div class="tab-control tab-control-template" data-tab="template">
+                    <a href="#">My Templates</a>
+                </div>
+            </div>
+            <div class="widget-form-tab clever-prebuilt layout-group" data-tab="pages">
+                <div class="add-shortcode-presets">
+                    <ul>
+                        <?php for ($i = 1 ; $i < 23 ; $i++) { ?>
+                            <li class="<?php echo $i == 1 ? 'active' : ''?>" style="">
+                                <button type="button" title="Blank" class="layout-id with-thumbnail" data-layout="<?php echo $i?>">
+                                    <img data-layout="<?php echo $i?>" alt="Blank" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/prebuilt_layouts/'.$i.'.jpg');?>">
+                                    <span class="title">Layout <?php echo $i?></span>
+                                </button>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="widget-form-tab clever-prebuilt layout-group" data-tab="template">
+                <div class="add-shortcode-presets">
+                    <ul>
+                        <?php if(count($prebuiltTemplate)):?>
+                            <?php $counter = 0; ?>
+                            <?php foreach($prebuiltTemplate as $template):?>
+                                <?php $id = $template->getId()?>
+                                <li class="<?php echo $counter == 0 ? 'active' : ''?>" style="">
+                                    <button type="button" title="Blank" class="layout-id with-thumbnail" data-template="true" data-layout="<?php echo $id?>">
+                                        <img data-layout="<?php echo $i?>" alt="Blank" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/blank.svg');?>">
+                                        <span class="title"><?php echo $template->getTitle()?></span>
+                                    </button>
+                                </li>
+                                <?php $counter++; ?>
+                            <?php endforeach;?>
+                        <?php endif;?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <span class="cs-dropdown-wrapper">
+                <input type="button" class="button-primary cs-dropdown-button cs-import-layout disabled" value="<?php echo __('Insert') ?>"/>
+                <input type="button" style="display:none" class="button-primary cs-dropdown-button cs-remove-layout disabled" value="<?php echo __('Remove') ?>"/>
+            </span>
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-directory-enable">
+    <div class="cs-enable-prebuilt">
+        <?php echo __('Do you want to browse the Prebuilt Layouts directory?') ?>
+        <button class="button-primary cs-panels-enable-directory"><?php echo __('Enable') ?></button>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-tabs-item">
+    <div class="dialog-data-item">
+
+        <h3 class="title"><?php printf( __('Edit Tab %s'), '<span class="current-tab-title"></span>' ) ?></h3>
+
+        <div class="content">
+            <div class="panels-tab-editor">
+
+            </div>
+        </div>
+
+        <div class="buttons">
+            <div class="action-buttons">
+                <a class="cs-delete"><?php echo __('Delete') ?></a>
+            </div>
+            <input type="button" class="button-primary cs-insert" value="<?php echo __('Insert') ?>" />
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-rows-item">
+    <div class="dialog-data-item">
+
+        <h3 class="title"><?php printf( __('Edit Column %s'), '<span class="current-row-title"></span>' ) ?></h3>
+
+        <div class="content">
+            <div class="panels-row-editor">
+
+            </div>
+        </div>
+
+        <div class="buttons">
+            <div class="action-buttons">
+                <a class="cs-delete"><?php echo __('Delete') ?></a>
+            </div>
+            <input type="button" class="button-primary cs-insert" value="<?php echo __('Insert') ?>" />
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-scrolltos-item">
+    <div class="dialog-data-item">
+
+        <h3 class="title"><?php printf( __('Edit ScrollTo'), '<span class="current-scrollto-title"></span>' ) ?></h3>
+
+        <div class="content">
+            <div class="panels-scrollto-editor">
+
+            </div>
+        </div>
+
+        <div class="buttons">
+            <div class="action-buttons">
+                <a class="cs-delete"><?php echo __('Delete') ?></a>
+            </div>
+            <input type="button" class="button-primary cs-insert" value="<?php echo __('Insert') ?>" />
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-innerrow-item">
+    <div class="dialog-data-item">
+
+        <h3 class="title"><?php printf( __('Edit Innerrow')) ?></h3>
+
+        <div class="content">
+            <div class="panels-innerrow-editor">
+
+            </div>
+        </div>
+
+        <div class="buttons">
+            <div class="action-buttons">
+                <a class="cs-delete"><?php echo __('Delete') ?></a>
+            </div>
+            <input type="button" class="button-primary cs-insert" value="<?php echo __('Insert') ?>" />
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-innerrow-layouts-items">
+    <div class="dialog-data-item">
+
+        <h3 class="title"><?php printf( __('PRESETS')) ?></h3>
+
+        <div class="content">
+            <div class="panels-innerrow-layout_editor">
+
+            </div>
+        </div>
+
+        <div class="buttons">
+            <input type="button" class="button-primary cs-apply" value="<?php echo __('Apply') ?>" />
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-row-item">
+    <div class="dialog-data-item">
+
+        <h3 class="title"><?php printf( __('Edit Column')) ?></h3>
+
+        <div class="content">
+            <div class="panels-row-editor">
+
+            </div>
+        </div>
+
+        <div class="buttons">
+            <div class="action-buttons">
+                <a class="cs-delete"><?php echo __('Delete') ?></a>
+            </div>
+            <input type="button" class="button-primary cs-insert" value="<?php echo __('Insert') ?>" />
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-row-layouts-items">
+    <div class="dialog-data-item">
+
+        <h3 class="title"><?php printf( __('PRESETS')) ?></h3>
+
+        <div class="content">
+            <div class="panels-row-layout_editor">
+
+            </div>
+        </div>
+
+        <div class="buttons">
+            <input type="button" class="button-primary cs-apply" value="<?php echo __('Apply') ?>" />
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-tabs-item-child">
+    <div class="cs-element-item-child-wrapper cs-tab-item-child-wrapper" data-widget-id="{{%= widget_id %}}" data-id="{{%= itemId %}}">
+        {{% if(_.size(widget) > 0) { %}}
+        <div class="panel-info">{{%= widget.title %}}</div>
+        {{% } %}}
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-textboxs-item-child">
+    <div class="cs-widget cs-element-item-child-wrapper cs-textbox-item-child-wrapper {{%= innerClass %}}" data-widget-id="{{%= widget_id %}}" data-id="{{%= itemId %}}">
+        {{% if(_.size(widget) > 0) { %}}
+        <div class="cs-widget-wrapper">
+            <div class="title">
+                <h4>{{%= widget.title %}}</h4>
+                {{% if(!_.isUndefined(widget.cap)) { %}}
+                <span class="widget-info">{{%= widget.cap %}}</span>
+                {{% } %}}
+            </div>
+        </div>
+        {{% } %}}
+    </div>
+</script>
+<script type="text/template" id="cleversoft-panels-builder-innerrows-item-child">
+    <div class="cs-element-item-child-wrapper cs-innerrow-item-child-wrapper" data-widget-id="{{%= widget_id %}}" data-id="{{%= itemId %}}">
+        {{% if(_.size(widget) > 0) { %}}
+        <div class="panel-info">{{%= widget.title %}}</div>
+        {{% } %}}
+    </div>
+</script>
+<script type="text/template" id="cleversoft-panels-builder-rows-item-child">
+    <div class="cs-element-item-child-wrapper cs-row-item-child-wrapper" data-widget-id="{{%= widget_id %}}" data-id="{{%= itemId %}}">
+        {{% if(_.size(widget) > 0) { %}}
+        <div class="panel-info">{{%= widget.title %}}</div>
+        {{% } %}}
+    </div>
+</script>
+<script type="text/template" id="cleversoft-panels-builder-testimonials-item-child">
+    <div class="cs-element-item-child-wrapper cs-testimonial-item-child-wrapper" data-widget-id="{{%= widget_id %}}" data-id="{{%= itemId %}}">
+        {{% if(_.size(widget) > 0) { %}}
+        <div class="panel-info">{{%= widget.title %}}</div>
+        {{% } %}}
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-sliders-item-child">
+    <div class="cs-widget cs-element-item-child-wrapper cs-slider-item-child-wrapper {{%= innerClass %}}" data-widget-id="{{%= widget_id %}}" data-id="{{%= itemId %}}">
+        {{% if(_.size(widget) > 0) { %}}
+        <div class="cs-widget-wrapper">
+            <div class="title">
+                <h4>{{%= widget.title %}}</h4>
+                {{% if(!_.isUndefined(widget.cap)) { %}}
+                <span class="widget-info">{{%= widget.cap %}}</span>
+                {{% } %}}
+            </div>
+        </div>
+        {{% if(!_.isUndefined(widget.has_child)) { %}}
+        <div class="cs-element-item-button">
+                    <span idx="{{%= itemId %}}" class="label cs-element-insert" data-key-filter="{{%= widget.has_child %}}">
+                        <span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span>
+                        <span class="text-title">Add To&nbsp;{{%= widget.title %}}</span>
+                    </span>
+        </div>
+        {{% } %}}
+        {{% } %}}
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-banners-item-child">
+    <div class="cs-widget cs-element-item-child-wrapper cs-banner-item-child-wrapper {{%= innerClass %}}" data-widget-id="{{%= widget_id %}}" data-id="{{%= itemId %}}">
+        {{% if(_.size(widget) > 0) { %}}
+        <div class="cs-widget-wrapper">
+            <div class="title">
+                <h4>{{%= widget.title %}}</h4>
+                {{% if(!_.isUndefined(widget.cap)) { %}}
+                <span class="widget-info">{{%= widget.cap %}}</span>
+                {{% } %}}
+            </div>
+        </div>
+        {{% if(!_.isUndefined(widget.has_child)) { %}}
+        <div class="cs-element-item-button">
+                    <span idx="{{%= itemId %}}" class="label cs-element-insert" data-key-filter="{{%= widget.has_child %}}">
+                        <span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span>
+                        <span class="text-title">Add To&nbsp;{{%= widget.title %}}</span>
+                    </span>
+        </div>
+        {{% } %}}
+        {{% } %}}
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-banners-item-inner-child">
+    <div class="cs-banner-item-inner-child-wrapper" data-widget-id="{{%= widget_id %}}"">
+    {{% if(_.size(widget) > 0) { %}}
+    <div class="panel-info">{{%= widget.title %}}
+        {{% if(!_.isUndefined(widget.cap)) { %}}
+        <span class="widget-info">{{%= widget.cap %}}</span>
+        {{% } %}}
+    </div>
+    {{% } %}}
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-tabs-item-editor">
+    <div class="cs-tab-item-wrapper" id="{{%= id %}}">
+        <div class="cs-tab-item-title"><label><?php echo __('Title'); ?></label><input class="tab-item-title" type="text" name="tab{{%= id %}}" value="{{%= value %}}"></div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-rows-item-editor">
+    <div class="cs-row-item-wrapper" id="{{%= id %}}">
+        <form>
+            <div class="form-group column-width">
+                <label class="control-label"><?php echo __('Width') ?></label>
+                <table class="col-slider-table">
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input type="range" min="1" max="12" value="{{%= width %}}" name="width">
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-scrolltos-item-editor">
+    <div class="cs-scrollto-item-wrapper" id="{{%= id %}}">
+        <form>
+            <div class="form-group scroll-title">
+                <label class="control-label"><?php echo __('Title') ?></label>
+                <input type="text" class="form-control" name="title" value="{{%= title %}}">
+            </div>
+            <div class="form-group scroll-link">
+                <label class="control-label"><?php echo __('Link') ?></label>
+                <input type="text" class="form-control" name="link" value="{{%= link %}}">
+            </div>
+            <div class="form-group scroll-style">
+                <label class="control-label"><?php echo __('Style') ?></label>
+                {{% if(style == 'clever-icon-heart-1') { %}}
+                    <input type="radio" checked class="form-control cs-font clever-icon-heart-1" name="style" value="clever-icon-heart-1">
+                {{% } else { %}}
+                    <input type="radio" class="form-control cs-font clever-icon-heart-1" name="style" value="clever-icon-heart-1">
+                {{% } %}}
+                {{% if(style == 'clever-icon-heart-2') { %}}
+                    <input type="radio" checked class="form-control cs-font clever-icon-heart-2" name="style" value="clever-icon-heart-2">
+                {{% } else { %}}
+                     <input type="radio" class="form-control cs-font clever-icon-heart-2" name="style" value="clever-icon-heart-2">
+                {{% } %}}
+                {{% if(style == 'clever-icon-heart-3') { %}}
+                    <input type="radio" checked class="form-control cs-font clever-icon-heart-3" name="style" value="clever-icon-heart-3">
+                {{% } else { %}}
+                     <input type="radio" class="form-control cs-font clever-icon-heart-3" name="style" value="clever-icon-heart-3">
+                {{% } %}}
+                {{% if(style == 'clever-icon-compare-1') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-compare-1" name="style" value="clever-icon-compare-1">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-compare-1" name="style" value="clever-icon-compare-1">
+                {{% } %}}
+                {{% if(style == 'clever-icon-compare-2') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-compare-2" name="style" value="clever-icon-compare-2">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-compare-2" name="style" value="clever-icon-compare-2">
+                {{% } %}}
+                {{% if(style == 'clever-icon-compare-3') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-compare-3" name="style" value="clever-icon-compare-3">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-compare-3" name="style" value="clever-icon-compare-3">
+                {{% } %}}
+                {{% if(style == 'clever-icon-cart-1') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-cart-1" name="style" value="clever-icon-cart-1">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-cart-1" name="style" value="clever-icon-cart-1">
+                {{% } %}}
+                {{% if(style == 'clever-icon-cart-18') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-cart-18" name="style" value="clever-icon-cart-18">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-cart-18" name="style" value="clever-icon-cart-18">
+                {{% } %}}
+                {{% if(style == 'clever-icon-cart-3') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-cart-3" name="style" value="clever-icon-cart-3">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-cart-3" name="style" value="clever-icon-cart-3">
+                {{% } %}}
+                {{% if(style == 'clever-icon-dress-woman') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-dress-woman" name="style" value="clever-icon-dress-woman">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-dress-woman" name="style" value="clever-icon-dress-woman">
+                {{% } %}}
+                {{% if(style == 'clever-icon-shirt') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-shirt" name="style" value="clever-icon-shirt">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-shirt" name="style" value="clever-icon-shirt">
+                {{% } %}}
+                {{% if(style == 'clever-icon-small-diamond') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-small-diamond" name="style" value="clever-icon-small-diamond">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-small-diamond" name="style" value="clever-icon-small-diamond">
+                {{% } %}}
+                {{% if(style == 'clever-icon-baby-toy-1') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-baby-toy-1" name="style" value="clever-icon-baby-toy-1">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-baby-toy-1" name="style" value="clever-icon-baby-toy-1">
+                {{% } %}}
+                {{% if(style == 'clever-icon-watch-1') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-watch-1" name="style" value="clever-icon-watch-1">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-watch-1" name="style" value="clever-icon-watch-1">
+                {{% } %}}
+                {{% if(style == 'clever-icon-ball') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-ball" name="style" value="clever-icon-ball">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-ball" name="style" value="clever-icon-ball">
+                {{% } %}}
+                {{% if(style == 'clever-icon-horse') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-horse" name="style" value="clever-icon-horse">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-horse" name="style" value="clever-icon-horse">
+                {{% } %}}
+                {{% if(style == 'clever-icon-search-4') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-search-4" name="style" value="clever-icon-search-4">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-search-4" name="style" value="clever-icon-search-4">
+                {{% } %}}
+                {{% if(style == 'clever-icon-mail-2') { %}}
+                <input type="radio" checked class="form-control cs-font clever-icon-mail-2" name="style" value="clever-icon-mail-2">
+                {{% } else { %}}
+                <input type="radio" class="form-control cs-font clever-icon-mail-2" name="style" value="clever-icon-mail-2">
+                {{% } %}}
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-textboxs-item-editor">
+    <div class="cs-textbox-item-wrapper" id="{{%= id %}}">
+        <div class="cs-textbox-item-title"><label><?php echo __('Title'); ?></label><input class="textbox-item-title" type="text" name="textbox{{%= id %}}" value="{{%= value %}}"></div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-innerrow-layouts">
+    <div class="clever-row layout-group">
+        <div class="add-shortcode-presets">
+            <ul>
+                <li class="active" style="">
+                    <button type="button" title="Blank" class="with-thumbnail" data-layout="0">
+                        <img data-layout="0" alt="Blank" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/row/row-1-col.svg');?>">
+                        <span class="title">One Column</span>
+                    </button>
+                </li><li class="" style="">
+                    <button type="button" title="Simple Center" class="with-thumbnail" data-layout="1">
+                        <img data-layout="1" alt="Simple Center" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/row/row-2-col.svg');?>">
+                        <span class="title">2 Columns</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Left" class="with-thumbnail" data-layout="2">
+                        <img data-layout="2" alt="Left" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/row/row-3-col.svg');?>">
+                        <span class="title">3 Columns</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Right" class="with-thumbnail" data-layout="3">
+                        <img data-layout="3" alt="Right" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/row/row-4-col.svg');?>">
+                        <span class="title">4 Columns</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Buttons Left" class="with-thumbnail" data-layout="4">
+                        <img data-layout="4" alt="Buttons Left" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/row/row-1-3-col.svg');?>">
+                        <span class="title">Large Right</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Buttons Right" class="with-thumbnail" data-layout="5">
+                        <img data-layout="5" alt="Buttons Right" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/row/row-2-3-col.svg');?>">
+                        <span class="title">Large Left</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/template" id="cleversoft-panels-innerrow-item-editor">
+    <div class="cs-innerrow-item-wrapper" id="{{%= widget_id %}}-{{%= id %}}" data-id="{{%= widget_id %}}">
+        <form>
+            <div class="form-group innerrow-size">
+                <label class="control-label"><?php echo __('Column Width') ?></label>
+                <div id="column-{{%= widget_id %}}" class="slider-ui" data-mage-init='{"CleverSoft_CleverBuilder/js/slider-ui":{
+                    "min": 1,
+                    "max": 12,
+                    "refresh": false,
+                    "elementId":"innerrow_item_width",
+                    "value":"{{%= width %}}"
+                    }}'>
+                </div>
+                <input type="text" name="innerrow_item_width" id="innerrow_item_width" class="innerrow_item_width" value="{{%= width %}}" />
+            </div>
+            <div class="form-group innerrow-animate">
+                <label class="control-label"><?php echo __('Animate') ?></label>
+                <select class="form-control" name="innerrow_item_animate">
+                    <option value="none" {{% if(animate === "none") { %}} selected  {{% } %}}><?php echo __('None'); ?></option>
+                    <option value="fadeInLeft" {{% if(animate === "fadeInLeft") { %}} selected  {{% } %}} ><?php echo __('Fade In Left'); ?></option>
+                    <option value="fadeInRight" {{% if(animate === "fadeInRight") { %}} selected  {{% } %}}><?php echo __('Fade In Right'); ?></option>
+                    <option value="fadeInUp" {{% if(animate === "fadeInUp") { %}} selected  {{% } %}}><?php echo __('Fade In Up'); ?></option>
+                    <option value="fadeInDown" {{% if(animate === "fadeInDown") { %}} selected  {{% } %}}><?php echo __('Fade In Bottom'); ?></option>
+                    <option value="bounceIn" {{% if(animate === "bounceIn") { %}} selected  {{% } %}}><?php echo __('Bounce In'); ?></option>
+                    <option value="bounceInUp" {{% if(animate === "bounceInUp") { %}} selected  {{% } %}}><?php echo __('Bounce In Up'); ?></option>
+                    <option value="bounceInDown" {{% if(animate === "bounceInDown") { %}} selected  {{% } %}}><?php echo __('Bounce In Bottom'); ?></option>
+                    <option value="bounceInLeft" {{% if(animate === "bounceInLeft") { %}} selected  {{% } %}}><?php echo __('Bounce In Left'); ?></option>
+                    <option value="bounceInRight" {{% if(animate === "bounceInRight") { %}} selected  {{% } %}}><?php echo __('Bounce In Right'); ?></option>
+                    <option value="blurIn" {{% if(animate === "blurIn") { %}} selected  {{% } %}}><?php echo __('Blur In'); ?></option>
+                    <option value="flipInX" {{% if(animate === "flipInX") { %}} selected  {{% } %}}><?php echo __('Flip In X'); ?></option>
+                    <option value="flipInY" {{% if(animate === "flipInY") { %}} selected  {{% } %}}><?php echo __('Flip In Y'); ?></option>
+                </select>
+            </div>
+            <div class="form-group innerrow-class">
+                <label class="control-label"><?php echo __('Class') ?></label>
+                <input type="text" class="form-control" name="innerrow_item_class" value="{{%= classes %}}">
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-row-layouts">
+    <div class="clever-row layout-group">
+        <div class="add-shortcode-presets">
+            <ul>
+                <li class="active" style="">
+                    <button type="button" title="Blank" class="with-thumbnail" data-layout="0">
+                        <img data-layout="0" alt="Blank" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/row/row-1-col.svg');?>">
+                        <span class="title">One Column</span>
+                    </button>
+                </li><li class="" style="">
+                    <button type="button" title="Simple Center" class="with-thumbnail" data-layout="1">
+                        <img data-layout="1" alt="Simple Center" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/row/row-2-col.svg');?>">
+                        <span class="title">2 Columns</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Left" class="with-thumbnail" data-layout="2">
+                        <img data-layout="2" alt="Left" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/row/row-3-col.svg');?>">
+                        <span class="title">3 Columns</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Right" class="with-thumbnail" data-layout="3">
+                        <img data-layout="3" alt="Right" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/row/row-4-col.svg');?>">
+                        <span class="title">4 Columns</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Buttons Left" class="with-thumbnail" data-layout="4">
+                        <img data-layout="4" alt="Buttons Left" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/row/row-1-3-col.svg');?>">
+                        <span class="title">Large Right</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Buttons Right" class="with-thumbnail" data-layout="5">
+                        <img data-layout="5" alt="Buttons Right" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/row/row-2-3-col.svg');?>">
+                        <span class="title">Large Left</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/template" id="cleversoft-panels-row-item-editor">
+    <div class="cs-row-item-wrapper" id="{{%= widget_id %}}-{{%= id %}}" data-id="{{%= widget_id %}}">
+        <form>
+            <div class="form-group row-size">
+                <label class="control-label"><?php echo __('Column Width') ?></label>
+                <div id="column-{{%= widget_id %}}" class="slider-ui" data-mage-init='{"CleverSoft_CleverBuilder/js/slider-ui":{
+                    "min": 1,
+                    "max": 12,
+                    "refresh": false,
+                    "elementId":"row_item_width",
+                    "value":"{{%= width %}}"
+                    }}'>
+                </div>
+                <input type="text" name="row_item_width" id="row_item_width" class="row_item_width" value="{{%= width %}}" />
+            </div>
+            
+            <div class="form-group row-animate">
+                <label class="control-label"><?php echo __('Animate') ?></label>
+                <select class="form-control" name="row_item_animate">
+                    <option value="none" {{% if(animate === "none") { %}} selected  {{% } %}}><?php echo __('None'); ?></option>
+                    <option value="fadeInLeft" {{% if(animate === "fadeInLeft") { %}} selected  {{% } %}} ><?php echo __('Fade In Left'); ?></option>
+                    <option value="fadeInRight" {{% if(animate === "fadeInRight") { %}} selected  {{% } %}}><?php echo __('Fade In Right'); ?></option>
+                    <option value="fadeInUp" {{% if(animate === "fadeInUp") { %}} selected  {{% } %}}><?php echo __('Fade In Up'); ?></option>
+                    <option value="fadeInDown" {{% if(animate === "fadeInDown") { %}} selected  {{% } %}}><?php echo __('Fade In Bottom'); ?></option>
+                    <option value="bounceIn" {{% if(animate === "bounceIn") { %}} selected  {{% } %}}><?php echo __('Bounce In'); ?></option>
+                    <option value="bounceInUp" {{% if(animate === "bounceInUp") { %}} selected  {{% } %}}><?php echo __('Bounce In Up'); ?></option>
+                    <option value="bounceInDown" {{% if(animate === "bounceInDown") { %}} selected  {{% } %}}><?php echo __('Bounce In Bottom'); ?></option>
+                    <option value="bounceInLeft" {{% if(animate === "bounceInLeft") { %}} selected  {{% } %}}><?php echo __('Bounce In Left'); ?></option>
+                    <option value="bounceInRight" {{% if(animate === "bounceInRight") { %}} selected  {{% } %}}><?php echo __('Bounce In Right'); ?></option>
+                    <option value="blurIn" {{% if(animate === "blurIn") { %}} selected  {{% } %}}><?php echo __('Blur In'); ?></option>
+                    <option value="flipInX" {{% if(animate === "flipInX") { %}} selected  {{% } %}}><?php echo __('Flip In X'); ?></option>
+                    <option value="flipInY" {{% if(animate === "flipInY") { %}} selected  {{% } %}}><?php echo __('Flip In Y'); ?></option>
+                </select>
+            </div>
+            <div class="form-group row-class">
+                <label class="control-label"><?php echo __('Class') ?></label>
+                <input type="text" class="form-control" name="row_item_class" value="{{%= classes %}}">
+            </div>
+        </form>
+    </div>
+</script>
+
+<!-- <script type="text/template" id="cleversoft-panels-directory-items">
+    <div class="cs-directory-items">
+
+        <div class="cs-directory-browse">
+        </div>
+
+        <div class="cs-directory-items-wrapper">
+            {{% if(items.length === 0) { %}}
+            <div class="cs-no-results">
+                <?php //echo __( "Your search didn't return any results"); ?>
+            </div>
+            {{% } else { %}}
+            {{% _.each(items, function(item) { %}}
+            <div class="cs-directory-item" data-layout-id="{{%- item.id %}}" data-layout-type="{{%- item.type %}}">
+                <div class="cs-directory-item-wrapper">
+                    <div class="cs-screenshot" data-src="{{%- item.screenshot %}}">
+                        <div class="cs-panels-loading cs-screenshot-wrapper"></div>
+                    </div>
+                    <div class="cs-description">{{%- item.description %}}</div>
+
+                    <div class="cs-bottom">
+                        <h4 class="cs-title">{{%= item.title %}}</h4>
+                        {{% if( item.preview ) { %}}
+                        <div class="cs-buttons">
+                            <a href="{{%- item.preview %}}" class="button-secondary cs-button-preview" target="_blank" rel="noopener noreferrer">Preview</a>
+                        </div>
+                        {{% } %}}
+                    </div>
+                </div>
+            </div>
+            {{% }); %}}
+            {{% } %}}
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="cs-directory-pages">
+            <a class="cs-previous button-secondary" data-direction="prev"><?php //echo __('Previous') ?></a>
+            <a class="cs-next button-secondary" data-direction="next"><?php //echo __('Next') ?></a>
+        </div>
+    </div>
+</script> -->
+
+<!-- <script type="text/template" id="cleversoft-panels-dialog-prebuilt-importexport">
+    <div class="import-export">
+        <div class="import-upload-ui hide-if-no-js">
+            <div class="drag-upload-area">
+
+                <h2 class="drag-drop-message"><?php //echo __('Drop import file here'); ?></h2>
+                <p class="drag-drop-message"><?php //echo __('Or') ?></p>
+
+                <p class="drag-drop-buttons">
+                    <input type="button" value="<?php //echo __('Select Import File'); ?>" class="file-browse-button button" />
+                </p>
+
+                <p class="drag-drop-message js-cs-selected-file"></p>
+
+                <div class="progress-bar">
+                    <div class="progress-percent"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="export-file-ui">
+            <iframe id="cleversoft-panels-export-iframe" style="display: none;" name="cleversoft-panels-export-iframe"></iframe>
+            <form action="#" target="cleversoft-panels-export-iframe" class="cs-export" method="post">
+                <input type="submit" value="<?php //echo __('Download Layout') ?>" class="button-primary" />
+                <input type="hidden" name="panels_export_data" value="" />
+            </form>
+        </div>
+    </div>
+</script> -->
+
+<script type="text/template" id="cleversoft-panels-dialog-history">
+    <div class="dialog-data">
+
+        <h3 class="title"><?php echo __('Page Builder Change History') ?></h3>
+
+        <div class="left-sidebar">
+            <div class="history-entries"></div>
+        </div>
+
+        <div class="content">
+            <form method="post" action="<?php echo $panelHelper->previewUrl(); ?>" target="cleversoft-panels-history-iframe-{{%= cid %}}" class="history-form">
+                <input type="hidden" name="live_editor_panels_data" value="">
+                <input type="hidden" name="live_editor_post_ID" value="">
+            </form>
+            <iframe class="cleversoft-panels-history-iframe" name="cleversoft-panels-history-iframe-{{%= cid %}}" src=""></iframe>
+        </div>
+
+        <div class="buttons">
+            <input type="button" class="button-primary cs-restore" value="<?php echo __('Restore Version') ?>" />
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-dialog-history-entry">
+    <div class="history-entry">
+        <h3>{{%= title %}}{{% if( count > 1 ) { %}} <span class="count">({{%= count %}})</span>{{% } %}}</h3>
+        <div class="timesince"></div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-live-editor">
+    <div class="cs-panels-live-editor">
+
+        <div class="live-editor-collapse">
+            <div class="collapse-icon"></div>
+        </div>
+
+        <div class="cs-panel-footer-sub-menu-wrapper">
+            <div class="cs-panel-footer-sub-menu">
+                <div id="cs-panel-saver-menu-save-template" class="cs-panel-footer-sub-menu-item">
+                    <i class="cs-icon fa fa-folder" aria-hidden="true"></i>
+                    <span class="cs-title">Save as Template</span>
+                </div>
+                <div class="save_template__inner">
+                        <a class="save_template__btn-close"><i class="cs-font clever-icon-close"></i></a>
+                        <div class="save_template__content">
+                            <div id="cs-template-library-save-template">
+                                <div class="cs-template-library-blank-icon">
+                                    <i class="fa fa-save" aria-hidden="true"></i>
+                                </div>
+                                <div class="cs-template-library-blank-title">Save Your Page to Library</div>
+                                <div class="cs-template-library-blank-message">Your designs will be available for export and reuse on any page or website</div>
+                                <form id="cs-template-library-save-template-form">
+                                    <input id="cs-template-library-save-template-name" name="title" placeholder="Enter Template Name" required>
+                                    <button id="cs-template-library-save-template-submit" class="cs-button cs-button-success">Save</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="cs-sidebar-tools">
+            <div class="ft1">
+                <button class="live-editor-logout button-primary"><?php echo __('Exit Builder') ?></button>
+            </div>
+            <div class="ft2">
+                <a class="live-editor-mode live-editor-desktop cs-active" title="<?php echo __( 'Toggle desktop mode') ?>" data-mode="desktop">
+                    <span class="dashicons dashicons-desktop"></span>
+                </a>
+                <a class="live-editor-mode live-editor-tablet" title="<?php echo __( 'Toggle tablet mode') ?>" data-mode="tablet">
+                    <span class="dashicons dashicons-tablet"></span>
+                </a>
+                <a class="live-editor-mode live-editor-mobile" title="<?php echo __( 'Toggle mobile mode') ?>" data-mode="mobile">
+                    <span class="dashicons dashicons-smartphone"></span>
+                </a>
+            </div>
+            <div class="ft3">
+                <button class="live-editor-close button-primary"><?php echo __('Apply') ?></button>
+                <button class="live-editor-save-options button-primary" title="Save Options">
+                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div class="cs-sidebar">
+            <div class="cs-live-editor-builder"></div>
+        </div>
+
+        <div class="cs-preview"></div>
+
+        <div class="cs-preview-overlay">
+            <div class="cs-loading-container"><div class="cs-loading-bar"></div></div>
+        </div>
+
+        <div>
+
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-context-menu">
+    <div class="cs-panels-contextual-menu"></div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-context-menu-section">
+    <div class="cs-section">
+        <h5>{{%- settings.sectionTitle %}}</h5>
+
+        {{% if( settings.search ) { %}}
+        <div class="cs-search-wrapper">
+            <input type="text" placeholder="{{%- settings.searchPlaceholder %}}" />
+        </div>
+        {{% } %}}
+        <ul class="cs-items">
+            {{% for( var k in items ) { %}}
+            <li data-key="{{%- k %}}" class="cs-item {{% if( !_.isUndefined( items[k].confirm ) && items[k].confirm ) { print( 'cs-confirm' ); } %}}">{{%= items[k][settings.titleKey] %}}</li>
+            {{% } %}}
+        </ul>
+        {{% if( settings.search ) { %}}
+        <div class="cs-no-results">
+            <?php echo __('No Results') ?>
+        </div>
+        {{% } %}}
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-banner">
+    <div class="clever-banner layout-group">
+        <div class="add-shortcode-presets">
+            <ul>
+                <li class="" style="">
+                    <button type="button" title="Blank" class="with-thumbnail" data-layout="1">
+                        <img data-layout="1" alt="Blank" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/blank.svg');?>">
+                        <span class="title">Blank</span>
+                    </button>
+                </li><li class="" style="">
+                    <button type="button" title="Simple Center" class="with-thumbnail" data-layout="2">
+                        <img data-layout="2" alt="Simple Center" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/simple-center.svg');?>">
+                        <span class="title">Simple Center</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Left" class="with-thumbnail" data-layout="3">
+                        <img data-layout="3" alt="Left" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/simple-left.svg');?>">
+                        <span class="title">Left</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Right" class="with-thumbnail" data-layout="4">
+                        <img data-layout="4" alt="Right" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/simple-right.svg');?>">
+                        <span class="title">Right</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Buttons Left" class="with-thumbnail" data-layout="5">
+                        <img data-layout="5" alt="Buttons Left" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/simple-buttons.svg');?>">
+                        <span class="title">Buttons Left</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Buttons Right" class="with-thumbnail" data-layout="6">
+                        <img data-layout="6" alt="Buttons Right" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/simple-buttons-right.svg');?>">
+                        <span class="title">Buttons Right</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Left Light" class="with-thumbnail" data-layout="7">
+                        <img data-layout="7" alt="Left Light" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/simple-left-light.svg');?>">
+                        <span class="title">Left Light</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Right Light" class="with-thumbnail" data-layout="8">
+                        <img data-layout="8" alt="Right Light" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/simple-right-light.svg');?>">
+                        <span class="title">Right Light</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Box Left" class="with-thumbnail" data-layout="9">
+                        <img data-layout="9" alt="Box Left" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/box-left.svg');?>">
+                        <span class="title">Box Left</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Box Right" class="with-thumbnail" data-layout="10">
+                        <img data-layout="10" alt="Box Right" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/box-right.svg');?>">
+                        <span class="title">Box Right</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Dark Box Left" class="with-thumbnail" data-layout="11">
+                        <img data-layout="11" alt="Dark Box Left" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/dark-box-left.svg');?>">
+                        <span class="title">Dark Box Left</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Circle Right" class="with-thumbnail" data-layout="12">
+                        <img data-layout="12" alt="Circle Right" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/circle-right.svg');?>">
+                        <span class="title">Circle Right</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Huge Sale" class="with-thumbnail" data-layout="13">
+                        <img data-layout="13" alt="Huge Sale" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/huge-sale.svg');?>">
+                        <span class="title">Huge Sale</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Badge" class="with-thumbnail" data-layout="14">
+                        <img data-layout="14" alt="Badge" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/badge.svg');?>">
+                        <span class="title">Badge</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Badge Bubble" class="with-thumbnail" data-layout="15">
+                        <img data-layout="15" alt="Badge Bubble" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/badge-bubble.svg');?>">
+                        <span class="title">Badge Bubble</span>
+                    </button>
+                </li><li class="">
+                    <button type="button" title="Badge Simple" class="with-thumbnail" data-layout="16">
+                        <img data-layout="16" alt="Badge Simple" src="<?php  echo $this->_assetRepo->getUrl('CleverSoft_CleverBuilder::images/banner/badge-simple.svg');?>">
+                        <span class="title">Badge Simple</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-testimonial-items">
+    <div class="dialog-data-item">
+
+        <h3 class="title"><?php printf( __('PRESETS')) ?></h3>
+
+        <div class="content">
+            <div class="panels-testimonial_editor">
+
+            </div>
+        </div>
+
+        <div class="buttons">
+            <input type="button" class="button-primary cs-apply" value="<?php echo __('Apply') ?>" />
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-banner-items">
+    <div class="dialog-data-item">
+
+        <h3 class="title"><?php printf( __('PRESETS')) ?></h3>
+
+        <div class="content">
+            <div class="panels-banner_editor">
+
+            </div>
+        </div>
+
+        <div class="buttons">
+            <input type="button" class="button-primary cs-apply" value="<?php echo __('Apply') ?>" />
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-global-item-template">
+    <div class="cs-widget sub-widget {{%= innerClass %}}" data-widget-id="{{%= widget_id %}}">
+        <div class="cs-widget-wrapper">
+            <div class="title">
+                <h4>{{%= widget.title %}}</h4>
+            </div>
+        </div>
+        {{% if(!_.isUndefined(widget.has_child)) { %}}
+        <div class="cs-element-item-button">
+                <span idx="{{%= itemId %}}" class="label cs-element-insert" data-key-filter="{{%= widget.has_child %}}">
+                    <span style="cursor: pointer" class="dashicons dashicons-plus-alt"></span>
+                    <span class="text-title">Add To&nbsp;{{%= widget.title %}}</span>
+                </span>
+        </div>
+        {{% } %}}
+    </div>
+</script>
+
+<script type="text/template" id="cleversoft-panels-builder-global-child-items-template">
+    <div class="clever-{{%= has_child %}}-wrap-identify" id="{{%= widget_id %}} ">
+        <div class="{{%= has_child %}}-items-wrapper">
+            <div class="{{%= has_child %}}-item-wrapper">
+                {{% _.each(items, function(item,key) { %}}
+                <div data-widget-id="{{%= widget_id %}}" data-id="#{{%= has_child %}}{{%= key %}}" class="{{%= has_child %}}-item"></div>
+                {{% }); %}}
+            </div>
+        </div>
+    </div>
+</script>
+
+<script>
+    require(['jquery', 'jquery/ui'], function($){
+        $(document).on("click",".tab-control", function (e) {    
+            e.preventDefault();
+            e.stopPropagation();
+            var tab = $(e.currentTarget);
+            $('.tab-control').not(tab).removeClass('active');
+            tab.addClass('active');
+
+            $('.widget-form-tab').hide();
+            $('.widget-form-tab[data-tab="'+tab.data('tab')+'"]').show();
+            if (tab.data('tab') == 'template') {
+                $('.cs-remove-layout').show();
+            } else {
+                $('.cs-remove-layout').hide();
+            }
+        });
+    });
+</script>

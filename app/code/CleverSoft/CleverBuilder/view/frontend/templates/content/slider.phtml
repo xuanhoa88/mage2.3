@@ -1,0 +1,254 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverSlider
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+$bgColor = $this->getData('bg_color');
+$panelHelper = $this->helper('CleverSoft\CleverBuilder\Helper\Panels\PanelsRenderer');
+$items = $this->getData('items');
+$slide_type = $this->getData('type');
+$width_carousel_content = $this->getData('width-carousel-content');
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+$dataStyle = $helper->widget_style($block->getData('widget_id'));
+?>
+
+<?php if(isset($slide_type) && $slide_type == "carousel"):?>
+    <?php if (count($items)): ?>
+        <div class="slider-<?= $block->getData('widget_id')?> slider-carousel <?php echo $this->getData('width-carousel')?> global-element <?php if($isPreview) echo "cs-live-preview"?>" style="position: relative">
+            <div class="zoo-loading" style="opacity: 1; visibility: visible;"></div>
+            <?php if(isset($width_carousel_content) && $width_carousel_content == "no"): ?>
+            <div class="container">
+                <?php endif?>
+                <div class="slider-carousel__lists owl-carousel">
+                    <?php foreach ($items as $i => $item):?>
+                        <div class="items">
+                            <?php
+                            if (isset($item['html'])) {
+                                echo $item['html'];
+                            } elseif(count($item)){
+                                foreach ($item as $value) {
+                                    echo isset($value['html']) ? $value['html'] : '';
+                                }
+                            }
+                            ?>
+                        </div>
+                    <?php endforeach;?>
+                </div>
+                <?php if(isset($width_carousel_content) && $width_carousel_content == "no"): ?>
+            </div>
+            <?php if($isPreview) { ?>
+                <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+            <?php } ?>
+        <?php endif?>
+        </div>
+        <script>
+            require([
+                "jquery",
+                "jQueryLibMin"
+            ], function ($) {
+                var owl = $('.slider-<?= $block->getData('widget_id')?> .slider-carousel__lists');
+                owl.on('initialize.owl.carousel initialized.owl.carousel',
+                function(e) {
+                    $('.slider-<?= $block->getData('widget_id')?> .zoo-loading').remove();
+                });
+                $('.slider-<?= $block->getData('widget_id')?> .slider-carousel__lists').owlCarousel({
+                    loop:<?=$this->getData('enable_loop') == '1' ? 'true' : 'false'?>,
+                    margin:<?= (int)$this->getData('gutter')?>,
+                    nav:<?=$this->getData('enable_nav') == '1' ? 'true' : 'false'?>,
+                    dots: <?=$this->getData('enable_bullets') == '1' ? 'true' : 'false'?>,
+                    navText: ["<span class='cs-font clever-icon-prev'></span>", "<span class='cs-font clever-icon-next'></span>"],
+                    responsive:{
+                        0:{
+                            items:<?=$this->getData('col_480') ? $this->getData('col_480') : 1?>,
+                        },
+                        768:{
+                            items:<?=$this->getData('col_768') ? $this->getData('col_768') : 2?>,
+                        },
+                        992:{
+                            items:<?=$this->getData('col_992') ? $this->getData('col_992') : 3?>,
+                        },
+                        1200:{
+                            items:<?=$this->getData('column') ? $this->getData('column') : 4?>,
+                        }
+                    }
+                });                
+            });
+        </script>
+    <?php endif ?>
+<?php elseif(isset($slide_type) && $slide_type == "slide" || $slide_type == "fade"):?>
+    <?php if (count($items)): ?>
+        <?php
+        $layout = $this->getData('style_type');
+        $uniqueS = uniqid('clever-slider-');
+        ?>
+        <div class="slider-<?= $block->getData('widget_id')?> clever-slider-container global-element <?php if($isPreview) echo "cs-live-preview"?>"
+             style="position: relative; <?= $bgColor ? "background-color:$bgColor" : "" ?>">
+            <div class="clever-slider flexslider" id="<?php echo $uniqueS; ?>" style="min-height: 200px">
+                <div class="zoo-loading"  style="opacity: 1; visibility: visible;"></div>
+                <ul class="slides">
+                    <?php foreach ($items as $i => $item):?>
+                        <?php $unique = uniqid('clever-slideshow-' . $i . '-');?>
+                        <li id="clever-left-slide-<?php echo $i ?>-slideshow" data-video="<?php echo $unique; ?>"
+                            style="width: 100%; height: 100%;" <?php echo $i == 0 || $i == '0' ? 'class="flex-active-slide"' : '' ?>>
+                            <?php
+                            if (isset($item['html'])) {
+                                echo $item['html'];
+                            } elseif(count($item)){
+                                foreach ($item as $value) {
+                                    echo isset($value['html']) ? $value['html'] : '';
+                                }
+                            }
+                            ?>
+                        </li>
+                    <?php endforeach;?>
+                </ul>
+            </div>
+            <?php if($isPreview) { ?>
+                <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+            <?php } ?>
+        </div>
+        <script>
+            require([
+                "jquery",
+                "flexsliderJS",
+                "bgLoaderJS",
+                "froogaLoop"
+            ], function ($) {
+                function viewLayout($layout, flexslider) {
+                    var $left = $('#<?php  echo $uniqueS;  ?>').offset().left;
+                    var $top = $('#<?php  echo $uniqueS;  ?>').offset().top;
+                    var $window_h = $(window).height();
+                    if ($layout == 0 || $layout == '0' || $layout == 1 || $layout == '1') {
+                        $('#<?php  echo $uniqueS;  ?>').css({
+                            width: '100vw',
+                            position: 'relative',
+                            left: '50%',
+                            right: '50%',
+                            'margin-left': '-50vw',
+                            'margin-right': '-50vw'
+                        });
+                        $('#<?php  echo $uniqueS;  ?>').css({'border-width': '0'});
+                    }
+                    $('#<?php  echo $uniqueS;  ?> .flex-viewport').css('width', '100%');
+                    //give height
+                    if ($layout == 0 || $layout == '0' || $layout == 2 || $layout == '2') {
+                        <?php
+                        $height = $this->getData('style_height');
+                        if (empty($height)) $height = '600';
+                        if (!empty($height)) {
+                        ?>
+                        var $height = '<?php echo $height ?>';
+                        $('#<?php  echo $uniqueS;  ?>').height($height);
+                        <?php } ?>
+                    } else {
+                        var $height = $window_h - $top;
+                        $('#<?php  echo $uniqueS;  ?>').height($height);
+                    }
+
+                    $('#<?php  echo $uniqueS;  ?>').closest('.clever-slider-container').height($height);
+                    //
+                    // if ($height) {
+                    //     $('#<?php  //echo $uniqueS;  ?>').find('img').css({'width': '100%', 'height': $height});
+                    // }
+                    if ($layout == 0 || $layout == '0' || $layout == 2 || $layout == '2') {
+                        $('.background-video').css('height', $height);
+                    }
+                    window.size = 1;
+
+                }
+
+                function doLazyLoadBg() {
+                    $('.icon_img').bgLoaded({
+                        afterLoaded: function () {
+                            this.addClass('bg-loaded');
+                            this.parent('li').find('.zoo-loading').css('display', 'none');
+                        }
+                    });
+                }
+
+                function doSliderFlex() {
+                    var $_i_m = (size > 1) ? 1 : 0;
+                    var $_i_w = ($('#<?php  echo $uniqueS;  ?>').width()) / size - $_i_m;
+                    $('#<?php  echo $uniqueS;  ?>').flexslider({
+                        animation: "<?= $this->getData('type');?>",
+                        controlNav: "<?= $this->getData('bullets');?>",
+                        directionNav: "<?= $this->getData('arrows');?>",
+                        touch: true,
+                        drag: "<?= $this->getData('draggable');?>",
+                        simulateTouch: true,
+                        animationLoop: "<?= $this->getData('infinitive');?>",
+                        slideshow: "<?= $this->getData('auto_slide');?>",
+                        slideshowSpeed: "<?= $this->getData('timer');?>",
+                        pauseOnHover: "<?= $this->getData('pause_on_hover');?>",
+                        itemWidth: $_i_w,
+                        itemMargin: $_i_m,
+                        start: function (slider) {
+                            doLazyLoadBg();
+                            flexslider = slider;
+                        },
+                        init: function (slider) {
+                            window.initVideo = false;
+                            $('.slider-<?= $block->getData('widget_id')?>').find('.zoo-loading').remove();
+                        },
+                        before: function (slider) {
+                            var slide = slider.currentSlide;
+                            var _from = slide * slider.visible;
+                            var _to = _from + (slider.visible - 1);
+                            for (var i = _from; i <= _to; i++) {
+                                $('#clever-left-slide-' + i + '-slideshow').removeClass('flex-active-slide');
+                            }
+                            $('#clever-left-slide-' + slide + '-slideshow').find('[data-animate]').attr('data-animated','false');
+                            window.action_slide = false;
+                        },
+                        after: function (slider) {
+                            <?php if($layout):?>
+                            $('#<?php  echo $uniqueS;  ?>').find('img').css({'height': $('#<?php  echo $uniqueS;  ?> ul.slides').height()});
+                            <?php endif;?>
+                            if (!window.action_slide) {
+                                window.action_slide = true;
+                            }
+                            $('#clever-left-slide-' + slider.currentSlide + '-slideshow').addClass('flex-active-slide');
+                            $('#clever-left-slide-' + slider.currentSlide + '-slideshow').find('[data-animate]').attr('data-animated','true');
+                        }
+                    });
+
+                }
+
+                $(function () {
+                    window.flexslider = {vars: {}};
+                    var $layout = "<?php echo $layout ?>";
+                    viewLayout($layout, false);
+                    $(window).on('resize', function () {
+                        viewLayout($layout, flexslider);
+                    });
+                    if ($layout == 1 || $layout == '1') {
+                        $('.clever-slider-container').css('height', $(window).height());
+                        $('.background-video').css('height', $(window).height());
+                    }
+                    $(".background-video").attr("data-video-volume", "0");
+                    doSliderFlex();
+                })
+
+                function addStyle() {
+                    $(document).ready(function () {
+                        <?php if($this->getData('always_visible')):?>
+                        $(".flexslider .flex-direction-nav .flex-next").addClass('flex-next-visible');
+                        $(".flexslider .flex-direction-nav .flex-prev").addClass('flex-prev-visible');
+                        <?php endif;?>
+                        $(".flexslider .flex-direction-nav li").addClass('flex-<?php echo $this->getData('position')?>');
+                        $(".clever-slider .flex-direction-nav a").addClass('<?php echo $this->getData('arrow_style')?>');
+                        $(".clever-slider .flex-control-nav").addClass('<?php echo $this->getData('bullet_style')?>');
+                        $(".clever-slider .flex-control-nav").addClass('flex-<?php echo $this->getData('position')?>');
+                        $(".clever-slider .flex-control-paging li").addClass('<?php echo $this->getData('bullet_style')?>');
+                    });
+                }
+
+                addStyle();
+            });
+        </script>
+    <?php endif ?>
+<?php endif ?>

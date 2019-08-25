@@ -1,0 +1,56 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<ol class="items cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode();?>">
+    <li>
+        <select class="cleversoft_shopby_filter_<?php echo $filterSetting->getFilterCode(); ?>">
+            <option value="<?php echo $block->escapeUrl($this->getClearUrl()) ?>"><?php echo __('Please Select'); ?></option>
+            <?php foreach ($filterItems as $filterItem):
+                $disabled = ($filterItem->getCount() == 0) ? ' disabled' : "";
+                $selected = ($this->checkedFilter($filterItem)) ? ' selected' : "";
+                $url = $block->escapeUrl($filterItem->getUrl());
+                $label = $filterItem->getLabel();
+                if ($filterSetting->isShowProductQuantities()) {
+                    $label .= ' <span class="count">(' . $filterItem->getCount() . ')</span>';
+                }
+                ?>
+                <option value="<?php echo $url ?>" <?php echo $disabled . $selected ?>><?php echo $label ?></option>
+                <?php
+                if($filterItem->getChild()) {
+                    $block->resetHtml();
+                    echo $block->getChildCategoriesTemplate($filterItem->getChild(),$filterSetting,true);
+                }
+                ?>
+            <?php endforeach ?>
+            <script type="text/x-magento-init">
+            {
+                ".cleversoft_shopby_filter_<?php echo $filterSetting->getFilterCode(); ?>": {
+                    "cleverLayeredNavigationFilterDropdown": {"currentValue":<?php echo 1 ?>}
+                }
+            }
+            </script>
+        </select>
+    </li>
+</ol>
+
+<?php if($filterSetting->isShowTooltip()): ?>
+    <?php
+    $tooltipTemplate = '<span class="tooltip clevershopby-filter-tooltip" style="float:right" title="{content}"><img src="'.$tooltipUrl.'"/></span>';
+    ?>
+    <script type="text/x-magento-init">
+            {
+                ".cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode()?>": {
+                    "cleverLayeredNavigationFilterAddTooltip": {
+                        "content": <?php echo json_encode($filterSetting->getTooltip())?>,
+                        "tooltipTemplate": <?php echo json_encode($tooltipTemplate)?>
+                    }
+                }
+            }
+    </script>
+<?php endif; ?>

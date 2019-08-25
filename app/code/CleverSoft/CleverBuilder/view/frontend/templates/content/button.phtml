@@ -1,0 +1,24 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+$button_text = $this->getData('button_text');
+$style = $this->getData('style');
+$size = $this->getData('size');
+$target = $this->getData('target');
+$letter_case = $this->getData('letter_case');
+$icon_checkmark = $this->getData('icon-checkmark');
+$position = $this->getData('position');
+$expand = $this->getData('expand');
+$opacity = $this->getData('opacity');
+$depth = $this->getData('depth');
+$depth_hover = $this->getData('depth_hover');
+?>
+<a <?php echo $this->getData('animate') ? 'data-animate="'.$this->getData('animate').'"': ''?> href="<?= $this->getData('link')?>" <?php if($target) echo 'target="<?=$target ?>"' ?> class="button button-element global-element <?=$letter_case?> <?=$style?> <?=$size?> <?= $expand ? "$expand" : ""?> <?= $this->getData('visibility') ? 'reveal-icon' : ''?> <?=$position?> button__opacity-<?=$opacity?> box-shadow-<?=$depth?> box-shadow-hover-<?=$depth_hover?> <?php if($isPreview) echo "cs-live-preview"?>">
+	<?php if($icon_checkmark):?>
+    <i class="cs-font <?=$icon_checkmark?>"></i>
+	<?php endif ?>
+    <span class="button-element__content"><?=$button_text ? $button_text : "Click here"?></span>
+	<?php if($isPreview):?>
+	    <span class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></span>
+	<?php endif ?>
+</a>

@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <clevershopby>
+            <general>
+                <ajax_enabled>1</ajax_enabled>
+                <handle_filter_collapsing>1</handle_filter_collapsing>
+                <enabled>1</enabled>
+                <url>all-products</url>
+            </general>
+            <stock_filter>
+                <enabled>0</enabled>
+                <placed_block>1</placed_block>
+                <position>0</position>
+                <label>Stock</label>
+                <is_expanded>0</is_expanded>
+                <display_mode>0</display_mode>
+            </stock_filter>
+            <rating_filter>
+                <enabled>0</enabled>
+                <placed_block>1</placed_block>
+                <position>0</position>
+                <label>Rating</label>
+                <is_expanded>0</is_expanded>
+                <display_mode>0</display_mode>
+            </rating_filter>
+            <new_filter>
+                <enabled>0</enabled>
+                <placed_block>1</placed_block>
+                <position>0</position>
+                <label>New</label>
+                <is_expanded>0</is_expanded>
+                <display_mode>0</display_mode>
+            </new_filter>
+            <on_sale_filter>
+                <enabled>0</enabled>
+                <placed_block>1</placed_block>
+                <position>0</position>
+                <label>On Sale</label>
+                <is_expanded>0</is_expanded>
+                <display_mode>0</display_mode>
+            </on_sale_filter>
+            <tooltips>
+                <enabled>1</enabled>
+                <image>cleversoft/shopby/images/tooltip.png</image>
+            </tooltips>
+            <url>
+                <mode>1</mode>
+            </url>
+            <robots>
+                <control_robots>1</control_robots>
+            </robots>
+        </clevershopby>
+    </default>
+</config>

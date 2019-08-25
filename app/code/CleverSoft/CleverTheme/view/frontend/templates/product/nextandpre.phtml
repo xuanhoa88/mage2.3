@@ -1,0 +1,56 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+
+$theme = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$product_view = $theme->getCfg('product_page/prev_next');
+$product_prev_text = $theme->getCfg('product_page/prev_text');
+$product_next_text = $theme->getCfg('product_page/next_text');
+$imageHelper = $this->helper('\Magento\Catalog\Helper\Image');
+$_prev = $theme->getPreviousProduct();
+$_next = $theme->getNextProduct();
+if($product_view) {
+    ?>
+
+    <?php if($_prev || $_next): ?>
+        <div class="product-prev-next nav-wrapper d-flex">
+            <?php if($_prev): ?>
+                <?php $productImage_prev = $imageHelper->init($_prev, 'category_page_list')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(80)->getUrl();  ?>
+                <div class="prev-product">
+                    <a rel="prev" href="<?php echo $_prev->getProductUrl(); ?>"><?php echo $product_prev_text; ?></a>
+                    <div class="preview-product">
+                        <img src="<?php echo $productImage_prev; ?>" />
+                        <div class="preview-details">
+                            <h3><a rel="prev" href="<?php echo $_prev->getProductUrl(); ?>">
+                                    <?php echo $block->stripTags($_prev->getName(), null, true) ?>
+                                </a></h3>
+                            <span class="preview-price"><?php echo $theme->formatCurrency($_prev->getFinalPrice());; ?></span>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if($_next): ?>
+                <?php $productImage_next = $imageHelper->init($_next, 'category_page_list')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(80)->getUrl();  ?>
+                <div class="next-product"><a rel="next" href="<?php echo $_next->getProductUrl(); ?>"> <?php echo $product_next_text; ?></a>
+                    <div class="preview-product">
+                        <img src="<?php echo $productImage_next; ?>" />
+                        <div class="preview-details">
+                            <h3>
+                                <a rel="next" href="<?php echo $_next->getProductUrl(); ?>">
+                                <?php echo $block->stripTags($_next->getName(), null, true) ?></h3>
+                            </a>
+                            <span class="preview-price"><?php echo $theme->formatCurrency($_next->getFinalPrice()); ?></span>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+<?php
+}
+?>

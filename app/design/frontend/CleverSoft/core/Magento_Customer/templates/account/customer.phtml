@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+$_customerHelper = $this->helper('CleverSoft\CleverSocialLogin\Helper\Data');
+?>
+<?php if($block->customerLoggedIn()): ?>
+    <li class="customer-welcome">
+        <span class="customer-name"
+              data-bind="scope: 'customer'">
+            <span><?php /* @escapeNotVerified */ echo __('Hello, ')?></span><?php if($_customerHelper): ?><a href="<?php echo $_customerHelper->getUrlCustomer(); ?>"><?php endif; ?> <span data-bind="text: customer().fullname"></span><?php if($_customerHelper): ?></a><?php endif; ?>
+
+        </span>
+        <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "customer": {
+                            "component": "Magento_Customer/js/view/customer"
+                        }
+                    }
+                }
+            }
+        }
+        </script>
+    </li>
+<?php endif; ?>

@@ -1,0 +1,26 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+/** @var $block \CleverSoft\CleverLayeredNavigation\Block\Adminhtml\Page\Selection */
+?>
+<script>
+    require([
+        'CleverSoft_CleverLayeredNavigation/js/selection'
+    ], function (selection) {
+        selection.init('<?php
+            echo $block->getSelectionUrl()
+        ?>', '<?php
+            echo $block->getAddSelectionUrl()
+        ?>', '<?php
+            echo $block->getCounter()
+        ?>')
+        window.cleversoftLayeredNavigationSelection = selection;
+    })
+</script>

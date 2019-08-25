@@ -1,0 +1,72 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Login $block */
+?>
+<?php
+/**
+ * Customer login form template
+ *
+ * @see \Magento\Customer\Block\Form\Login
+ * @var $block \Magento\Customer\Block\Form\Login
+ */
+?>
+<?php
+$_helper = $this->helper('CleverSoft\CleverCookieLaw\Helper\Data');
+?>
+
+<div class="block-customer-login">
+    <div class="block-content">
+        <form class="form form-login"
+              action="<?php /* @escapeNotVerified */ echo $block->getPostActionUrl() ?>"
+              method="post"
+              id="login-form"
+              data-mage-init='{"validation":{}}'>
+            <?php echo $block->getBlockHtml('formkey'); ?>
+            <div class="login" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
+                <div class="email required">
+                    <div class="control">
+                        <input name="login[username]" value="<?php echo $block->escapeHtml($block->getUsername()) ?>" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> id="email" type="email" class="input-text" placeholder="<?php /* @escapeNotVerified */ echo __('Email *') ?>" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" data-validate="{required:true, 'validate-email':true}">
+                    </div>
+                </div>
+                <div class="password required">
+                    <div class="control">
+                        <input name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> class="input-text" placeholder="<?php /* @escapeNotVerified */ echo __('Password *') ?>" id="pass" title="<?php /* @escapeNotVerified */ echo __('Password') ?>" data-validate="{required:true, 'validate-password':true}">
+                    </div>
+                </div>
+                <?php echo $block->getChildHtml('form_additional_info'); ?>
+                <?php if($_helper->getSystemConfig('integration', 'login')):?>
+                    <input style="float:left;margin: 0 10px 0 0;width:inherit;height:inherit" data-validate="{required:true}" type="checkbox" name="integration[login]"><?php echo $_helper->getSystemConfig('integration', 'login_text')?><br>
+                    <div id="login_integration_error" class="message info empty" style="display:none">
+                        <div><?php echo $_helper->getSystemConfig('integration', 'login_error')?></div>
+                    </div>
+                <?php endif;?>
+                <p class="required"><?php /* @escapeNotVerified */ echo __('* Required Fields'); ?></p>
+                <a class="action remind forgot-pass" href="<?php /* @escapeNotVerified */ echo $block->getForgotPasswordUrl() ?>"><span><?php /* @escapeNotVerified */ echo __('Forgot Your Password?') ?></span></a>
+
+                    <button type="submit" class="btn action login" name="send" id="send2"><span><?php /* @escapeNotVerified */ echo __('Login') ?></span></button>
+
+            </div>
+        </form>
+    </div>
+</div>
+<?php if($_helper->getSystemConfig('integration', 'login')):?>
+    <script>
+        require(['jquery'], function($){ 
+            $(document).ready(function() {
+                $("#login-form").submit(function() {
+                    if($('input[name="integration[login]"]').is(":checked")) {
+                        $('#login_integration_error').hide();
+                    } else {
+                        $('#login_integration_error').show();
+                    }
+                });
+            });
+        });
+    </script>
+<?php endif;?>

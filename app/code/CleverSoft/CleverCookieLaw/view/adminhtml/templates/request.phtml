@@ -1,0 +1,197 @@
+<?php
+$requestDelete = $this->getRequestDelete();
+$requestRectify = $this->getRequestRectify();
+$requestComplaint = $this->getRequestComplaint();
+?>
+<div id="gdpr-tabs" class="zoo-cookielaw__tab">
+  <ul>
+    <li><a href="#rectify">Rectify Data</a></li>
+    <li><a href="#complaint">Complaint</a></li>
+    <li><a href="#delete">Erasure</a></li>
+  </ul>
+  <div id="rectify">
+    <h2 class="title">Rectify Data</h2>
+    <table class="widefat gdpr-request-table">
+        <thead>
+            <tr>
+                <th class="zoo-cookielaw__title">Email</th>
+                <th class="zoo-cookielaw__title">Date of Request</th>
+                <th class="zoo-cookielaw__title">Information</th>
+                <th class="zoo-cookielaw__title">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if(count($requestRectify)):?>
+                <?php foreach($requestRectify as $request):?>
+                    <tr>
+                        <td class="row-title"><?=$request->getEmail();?></td>
+                        <td class="text-center"><?=$request->getCreatedAt();?></td>
+                        <td class="text-center"><?=$request->getInformation();?></td>
+                        <td class="text-center">
+                            <?php if($request->getStatus() == 'canceled'):?>
+                                <span><?= __("Canceled")?></span>
+                            <?php elseif($request->getStatus() == 'resolved'):?>
+                                <span><?= __("Resolved")?></span>
+                            <?php else:?>
+                                <form class="frm-process-user-deletion" action="<?php echo $this->getUrl('cookielaw/request/cancel', ['_secure' => $this->getRequest()->isSecure()]) ?>" method="post">
+                                    <input name="form_key" type="hidden" value=<?=$this->getFormKey();?>>
+                                    <input type="hidden" name="action" value="rectify">
+                                    <input type="hidden" name="id" value="<?=$request->getId();?>">
+                                    <input type="hidden" name="email" value="<?=$request->getEmail();?>">
+                                    <input type="submit" class="button delete" value="Cancel Request"> </form>
+                                <form class="frm-process-user-deletion" action="<?php echo $this->getUrl('cookielaw/request/resolve', ['_secure' => $this->getRequest()->isSecure()]) ?>" method="post">
+                                    <input name="form_key" type="hidden" value=<?=$this->getFormKey();?>>
+                                    <input type="hidden" name="action" value="rectify">
+                                    <input type="hidden" name="id" value="<?=$request->getId();?>">
+                                    <input type="hidden" name="email" value="<?=$request->getEmail();?>">
+                                    <input type="submit" class="button button-primary" value="Mark as Resolved"> </form>
+                            <?php endif;?>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+            <?php else:?>
+                <td colspan="4" class="text-center">
+                No pending requests </td>
+            <?php endif;?>
+        </tbody>
+        <tfoot>
+            <form class="frm-process-user-deletion" action="<?php echo $this->getUrl('cookielaw/request/clear', ['_secure' => $this->getRequest()->isSecure()]) ?>" method="post">
+                                    <input name="form_key" type="hidden" value=<?=$this->getFormKey();?>>
+                                    <input name="action" type="hidden" value="rectify">
+                                    <select name="type">
+                                        <option value="all">All Requests</option>
+                                        <option value="resolved">Only resolved and canceled requests</option>
+                                    </select>
+                                    <input type="submit" class="button delete" value="Clear Requests"> </form>
+        </tfoot>
+    </table>
+  </div>
+  <div id="complaint">
+    <h2 class="title">Complaints</h2>
+    <table class="widefat gdpr-request-table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th class="zoo-cookielaw__title">Date of Complaint</th>
+                <th class="zoo-cookielaw__title">Information</th>
+                <th class="zoo-cookielaw__title">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if(count($requestComplaint)):?>
+                <?php foreach($requestComplaint as $request):?>
+                    <tr>
+                        <td class="row-title"><?=$request->getEmail();?></td>
+                        <td class="text-center"><?=$request->getCreatedAt();?></td>
+                        <td class="text-center"><?=$request->getInformation();?></td>
+                        <td class="text-center">
+                            <?php if($request->getStatus() == 'canceled'):?>
+                                <span><?= __("Canceled")?></span>
+                            <?php elseif($request->getStatus() == 'resolved'):?>
+                                <span><?= __("Resolved")?></span>
+                            <?php else:?>
+                                <form class="frm-process-user-deletion" action="<?php echo $this->getUrl('cookielaw/request/cancel', ['_secure' => $this->getRequest()->isSecure()]) ?>" method="post">
+                                    <input name="form_key" type="hidden" value=<?=$this->getFormKey();?>>
+                                    <input type="hidden" name="action" value="complaint">
+                                    <input type="hidden" name="id" value="<?=$request->getId();?>">
+                                    <input type="hidden" name="email" value="<?=$request->getEmail();?>">
+                                    <input type="submit" class="button delete" value="Cancel Request"> </form>
+                                <form class="frm-process-user-deletion" action="<?php echo $this->getUrl('cookielaw/request/resolve', ['_secure' => $this->getRequest()->isSecure()]) ?>" method="post">
+                                    <input name="form_key" type="hidden" value=<?=$this->getFormKey();?>>
+                                    <input type="hidden" name="action" value="complaint">
+                                    <input type="hidden" name="id" value="<?=$request->getId();?>">
+                                    <input type="hidden" name="email" value="<?=$request->getEmail();?>">
+                                    <input type="submit" class="button button-primary" value="Mark as Resolved"> </form>
+                            <?php endif;?>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+            <?php else:?>
+                <td colspan="4" class="text-center">
+                No pending requests </td>
+            <?php endif;?>
+        </tbody>
+        <tfoot>
+            <form class="frm-process-user-deletion" action="<?php echo $this->getUrl('cookielaw/request/clear', ['_secure' => $this->getRequest()->isSecure()]) ?>" method="post">
+                                    <input name="form_key" type="hidden" value=<?=$this->getFormKey();?>>
+                                    <input name="action" type="hidden" value="complaint">
+                                    <select name="type">
+                                        <option value="all">All Requests</option>
+                                        <option value="resolved">Only resolved and canceled requests</option>
+                                    </select>
+                                    <input type="submit" class="button delete" value="Clear Requests"> </form>
+        </tfoot>
+    </table>
+  </div>
+  <div id="delete">
+    <h2 class="title">Right to erasure</h2>
+    <table class="widefat gdpr-request-table">
+        <thead>
+            <tr>
+                <th class="zoo-cookielaw__title">Email</th>
+                <th class="zoo-cookielaw__title">Date of Request</th>
+                <th class="zoo-cookielaw__title">Review</th>
+                <th class="zoo-cookielaw__title">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if(count($requestDelete)):?>
+                <?php foreach($requestDelete as $request):?>
+                    <tr>
+                        <td class="row-title"><?=$request->getEmail();?></td>
+                        <td class="text-center"><?=$request->getCreatedAt();?></td>
+                        <td class="text-center"><?=$request->getInformation();?></td>
+                        <td class="text-center">
+                            <?php if($request->getStatus() == 'canceled'):?>
+                                <span><?= __("Canceled")?></span>
+                            <?php else:?>    
+                            <form class="frm-process-user-deletion" action="<?php echo $this->getUrl('cookielaw/request/cancel', ['_secure' => $this->getRequest()->isSecure()]) ?>" method="post">
+                                <input name="form_key" type="hidden" value=<?=$this->getFormKey();?>>
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="id" value="<?=$request->getId();?>">
+                                <input type="hidden" name="email" value="<?=$request->getEmail();?>">
+                                <input type="submit" class="button delete" value="Cancel Request"> </form>
+                            <form class="frm-process-user-deletion" action="<?php echo $this->getUrl('cookielaw/request/resolve', ['_secure' => $this->getRequest()->isSecure()]) ?>" method="post">
+                                <input name="form_key" type="hidden" value=<?=$this->getFormKey();?>>
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="id" value="<?=$request->getId();?>">
+                                <input type="hidden" name="email" value="<?=$request->getEmail();?>">
+                                <input type="submit" class="button button-primary" value="Delete User"> </form>
+                            <?php endif;?>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+            <?php else:?>
+                <td colspan="4" class="text-center">
+                No pending requests </td>
+            <?php endif;?>
+        </tbody>
+        <tfoot>
+            <form class="frm-process-user-deletion" action="<?php echo $this->getUrl('cookielaw/request/clear', ['_secure' => $this->getRequest()->isSecure()]) ?>" method="post">
+                                    <input name="form_key" type="hidden" value=<?=$this->getFormKey();?>>
+                                    <input name="action" type="hidden" value="delete">
+                                    <select name="type">
+                                        <option value="all">All Requests</option>
+                                        <option value="resolved">Only resolved and canceled requests</option>
+                                    </select>
+                                    <input type="submit" class="button delete" value="Clear Requests"> </form>
+        </tfoot>
+    </table>
+  </div>
+</div>
+
+<script>
+    require(['jquery', 'jquery/ui', 'fancyTable'], function($){ 
+        $( function() {
+            $( "#gdpr-tabs" ).tabs();
+        });
+
+        $(".gdpr-request-table").fancyTable({
+            sortColumn:0,
+            pagination: true,
+            perPage:5,
+            globalSearch:true,
+            paginationClass: "btn btn-info"
+        });
+    });
+</script>

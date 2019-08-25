@@ -1,0 +1,81 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverSocialProof
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author        ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$products = $this->getProducts();
+$delayTime = $this->getDelayTime();
+$displayTime = $this->getDisplayTime();
+
+$helper = $this->helper('CleverSoft\CleverSocialProof\Helper\Data');
+$enable = $helper->getConfig("socialproof/general/enable");
+?>
+<div id="socialproof-popup" class="socialproof-modal" style="display: none"><span class="title-box"></span>
+    <span class="socialproof-close"><i class="cs-font clever-icon-close"></i></span><br><img
+            src="<?php echo $this->getViewFileUrl('CleverSoft_CleverTheme::images/transparent.gif');?>" alt="">
+    <p class="product-info"><a href=""></a><span class="timeline"></span></p>
+</div>
+<script>
+    require(["jquery"], function ($) {
+        $(document).ready(function () {
+            var self = this;
+            var $data = <?php echo $products?>;
+            var index = 0;
+            var delayTime = <?php echo $delayTime;?>;
+            var displayTime = <?php echo $displayTime;?>;
+            if ($("#socialproof-popup-checkoutpage").length) {
+                var waitTime = delayTime + displayTime;
+                setTimeout(function () {
+                    $("#socialproof-popup-checkoutpage").fadeIn();
+                }, 2000);
+                setTimeout(function () {
+                    $("#socialproof-popup-checkoutpage").fadeOut();
+                }, (delayTime + 2) * 1000);
+            } else {
+                var waitTime = 2;
+            }
+            $(".socialproof-close").click(function () {
+                $("#socialproof-popup").fadeToggle("slow", "linear");
+                $("#socialproof-popup-checkoutpage").fadeToggle("slow", "linear");
+                waitTime = displayTime;
+            });
+
+            function loopData() {
+                $.each($data, function (key, value) {
+                    var data = this;
+                    setTimeout(function () {
+                        effectNoti(data);
+                        waitTime = delayTime + displayTime;
+                        if (index + 1 === $data.length) {
+                            index = 0;
+                            loopData();
+                        } else {
+                            index++;
+                        }
+                    }, (key + 1) * 1000 * waitTime);
+                    waitTime = delayTime + displayTime;
+                });
+            }
+
+            function effectNoti(data) {
+                $("#socialproof-popup img").attr("src", data.image);
+                $("#socialproof-popup .title-box").html(data.name);
+                $("#socialproof-popup .product-info a").html(data.product_name);
+                $("#socialproof-popup .product-info a").attr("href", data.product_url);
+                $("#socialproof-popup .timeline").html(data.time);
+                $("#socialproof-popup").fadeIn();
+
+                setTimeout(function () {
+                    $("#socialproof-popup").fadeOut();
+                }, 1000 * delayTime);
+            }
+
+            loopData();
+        });
+    });
+</script>

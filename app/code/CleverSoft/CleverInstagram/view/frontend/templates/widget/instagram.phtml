@@ -1,0 +1,245 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverInstagram
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$optionImage = $block->getAllOptionImage();
+$template = '';
+$lazyhelper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$min_height_img_lazyload = $block->getData('height_image') ? $block->getData('height_image') : 150;
+$lazyload = $this->getData('lazyload') == '1' ? 'true' : 'false';
+$icon = $lazyhelper->getCfg('responsive/iconlazyload');
+$_matoHelper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$rtl_language = $_matoHelper->getCfg('responsive/rtl_language');
+if (!empty($icon)) {
+    $image = $icon;
+    $om = \Magento\Framework\App\ObjectManager::getInstance();
+    $storeManager = $om->create('Magento\Store\Model\StoreManagerInterface');
+    $image_url = $storeManager->getStore()
+            ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'lazyload/' . $image;
+} else {
+    $image_url = $block->getViewFileUrl('CleverSoft_CleverTheme::images/transparent.gif');
+}
+?>
+<div class="<?php echo $optionImage['customclass'] ?>" id="instagram-carousel">
+    <?php if($optionImage['layoutwg'] == 'carousel'): ?>
+        <ul class="owl-instagram owl-carousel" id="img-instagram" style="list-style-type: none;"></ul>
+    <?php else: ?>
+        <div class="grid-instagram" id="img-instagram">
+        </div>
+        <button type="button" id="load-more">Load More...</button>
+    <?php endif; ?>
+</div>
+<div id="demo"></div>
+<?php
+if($optionImage['openimg'] == 'lightbox'){
+    if($lazyload == 'true'){
+        $template = '<li style="min-height: '.$min_height_img_lazyload.'px;"><img src="'.$image_url.'" data-src="{{image}}" style="min-height: '.$min_height_img_lazyload.'px;" class="clazyload img-instagram"/></li>';
+    }else{
+        $template = '<li><img src="{{image}}" class="img-instagram"/></li>';
+    }
+}else{
+    if($lazyload == 'true'){
+        $template = '<a href="{{link}}" target="_blank" style="min-height: '.$min_height_img_lazyload.'px;"><img src="'.$image_url.'" data-src="{{image}}" class="clazyload img-instagram" style="min-height: '.$min_height_img_lazyload.'px;" /></a>';
+    }else{
+        $template = '<a href="{{link}}" target="_blank"><img src="{{image}}" class="img-instagram"/></a>';
+    }
+}
+?>
+<div id="myModel">
+    <div class="clever-modal-content"></div>
+</div>
+<script>
+    require(["jquery" ,
+        "CleverSoft_CleverInstagram/js/instafeed.min",
+        "Magento_Ui/js/modal/modal" ,
+        "jQueryLibMin"
+    ],function($, Instafeed,modal) {
+        function __fcCarousel(){
+            if('<?php echo $optionImage['layoutwg']; ?>' == 'carousel') {
+                var $container = $(".owl-instagram");
+                (function($) {
+                    $(document).ready(function() {
+                        $container.owlCarousel({
+                            nav:true,
+                            loop:true,
+                            autoplay: <?php echo $optionImage['autoplay']; ?>,
+                            autoplayTimeout: <?php echo $optionImage['autoplaytime']; ?>,
+                            autoplayHoverPause: <?php echo $optionImage['hoverpause']; ?>,
+                            dots: <?php echo $optionImage['bullet']; ?>,
+                            navText: [ "<?php echo $optionImage['navigation_prev']; ?>", "<?php echo $optionImage['navigation_next']; ?>" ],
+                            responsive:{
+                                0:{
+                                    items:1,
+                                    nav:true
+                                },
+                                480:{
+                                    items:<?php echo $optionImage['nbi480'] ?>,
+                                    nav:true
+                                },
+                                768:{
+                                    items:<?php echo $optionImage['nbi768'] ?>,
+                                    nav:true
+                                },
+                                990:{
+                                    items:<?php echo $optionImage['nbi990'] ?>,
+                                    nav:true
+                                },
+                                1200:{
+                                    items:<?php echo $optionImage['nbi1200'] ?>,
+                                    nav:true
+                                }
+                            }
+                        });
+                    });
+                }) (jQuery);
+                <?php if($lazyload == 'true') : ?>
+                $(".owl-instagram .clazyload").lazyload({
+                    data_attribute: "src",
+                    failure_limit: 10
+                });
+                <?php endif; ?>
+                <?php if ($lazyload == 'true') {  ?>
+                $container.on('changed.owl.carousel', function(event) {
+                    setTimeout(function(){
+                        $(this).find(".owl-item .clazyload").lazyload({
+                            effect: "fadeIn",
+                            data_attribute: "src",
+                            failure_limit : 10
+                        });
+                    }, 100);
+                });
+                <?php } ?>
+            }
+            var $imgmodal = $('#myModel');
+            var imgModal = $imgmodal.modal({
+                innerScroll: true,
+                responsive: true,
+                buttons: [],
+                opened: function(){
+                    $imgmodal.children('.clever-modal-content').html(window.imghtml);
+                },
+                closed: function(){
+                    $imgmodal.find('.clever-modal-content').html('');
+                }
+            });
+            $('ul li img.img-instagram').each(function () {
+                var seft = $(this);
+                seft.on('click', function () {
+                    window.imghtml = $(this).closest('li').html();
+                    imgModal.modal('openModal');
+                });
+            });
+        };
+        <?php if($optionImage['mode'] == 'location'): ?>
+        var getlocationId;
+        $.ajax({
+            type: "POST",
+            dataType: 'jsonp',
+            url: "https://api.instagram.com/v1/locations/search?lat=<?php echo $optionImage['lat'] ?>&lng=<?php echo $optionImage['long'] ?>&access_token=<?php echo $optionImage['accessToken'] ?>",
+            success: function(result){
+                for(i=0; i< result.data.length; i++){
+                    if(result.data[i].id != 0){
+                        getlocationId = result.data[i].id;
+                        console.log(result.data[i].id);
+                        break;
+                    }
+                }
+                <?php endif; ?>
+                /* Begin load Instagram */
+                var loadButton = document.getElementById('load-more');
+                var feed = new Instafeed({
+                    <?php if($optionImage['mode'] == 'liked'): ?>
+                    get: 'liked',
+                    <?php endif; ?>
+                    <?php if($optionImage['mode'] == 'userid'): ?>
+                    get: 'user',
+                    userId: '<?php echo $optionImage['userid']; ?>',
+                    <?php elseif($optionImage['mode'] == 'hashtag'): ?>
+                    get: 'tagged',
+                    tagName: '<?php echo $optionImage['hash_tag']; ?>',
+                    <?php elseif($optionImage['mode'] == 'location'): ?>
+                    get: 'location',
+                    locationId: getlocationId,
+                    <?php endif; ?>
+                    target: 'img-instagram',
+                    accessToken: '<?php echo $optionImage['accessToken']; ?>',
+                    limit: <?php echo $optionImage['numberimage']; ?>,
+                    sortBy: '<?php echo $optionImage['sortby']; ?>',
+                    resolution: '<?php echo $optionImage['img_resolution']; ?>',
+                    template: '<?php echo $template ?>',
+                    after: function () {
+                        // disable button if no more results to load
+                        <?php if($optionImage['layoutwg'] == 'grid'): ?>
+                        if (!this.hasNext()) {
+                            loadButton.setAttribute('disabled', 'disabled');
+                        }
+                        var imgwidth = 0;
+                        if('<?php echo $optionImage['layoutwg']; ?>' == 'grid') {
+                            imgwidth = <?php echo $optionImage['imgwidth']; ?>;
+                            if(imgwidth > 0){
+                                $(".grid-instagram img.img-instagram").width(imgwidth);
+                            }
+                        }
+                        <?php endif; ?>
+                       <?php if ($optionImage['layoutwg'] == 'carousel') : ?>
+                        __fcCarousel();
+                        <?php endif;?>
+                    }
+
+                });
+                if('<?php echo $optionImage['layoutwg']; ?>' == 'grid') {
+                    // bind the load more button
+                    loadButton.addEventListener('click', function () {
+                        feed.next();
+                    });
+                }
+                feed.run();
+                /* End load Instagram */
+                /* Begin Load Owl Carousel */
+                <?php
+                if($optionImage['layoutwg'] == 'carousel'):
+                ?>
+                <?php if($optionImage['enable_fullwidth']) { ?>
+                var $left =  $('#instagram-carousel').offset().left;
+                $('#instagram-carousel').css({
+                    'position':'relative',
+                    'width':$(window).width()+'px'
+                });
+                <?php if($rtl_language) : ?>
+                $('#instagram-carousel').css({'right':'-'+$left+'px' });
+                <?php else : ?>
+                $('#instagram-carousel').css({'left':'-'+$left+'px' });
+                <?php endif; ?>
+                $('#instagram-carousel .owl-instagram').css('width','100%');
+                <?php } ?>
+                /* End Load Owl Carousel */
+
+                /* Begin Load Grid */
+                <?php else: ?>
+                <?php if($optionImage['enable_fullwidth']) { ?>
+                var $left =  $('#instagram-carousel').offset().left;
+                $('#instagram-carousel').css({
+                    'position':'relative',
+                    'width':$(window).width()+'px'
+                });
+                $('#instagram-carousel .owl-instagram').css('width','100%');
+                <?php if($rtl_language) : ?>
+                $('#instagram-carousel').css({'right':'-'+$left+'px' });
+                <?php else : ?>
+                $('#instagram-carousel').css({'left':'-'+$left+'px' });
+                <?php endif; ?>
+                <?php } ?>
+                <?php endif; ?>
+                /* End Load Grid */
+                <?php if($optionImage['mode'] == 'location'): ?>
+            }
+        });
+        <?php endif; ?>
+    });
+</script>

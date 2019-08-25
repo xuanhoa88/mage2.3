@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="clevershopby" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <resource>CleverSoft_CleverLayeredNavigation::config_cleversinstagram</resource>
+            <class>separator-top</class>
+            <label>CleverLayeredNavigation</label>
+            <tab>cleverextensions</tab>
+            <!-- SECTION GENERAL -->
+            <group id="info_layerednavigation" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <attribute type="expanded">1</attribute>
+                <frontend_model>CleverSoft\CleverLayeredNavigation\Block\System\Config\Form\Field\Information</frontend_model>
+            </group>
+            <group id="general" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="ajax_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Ajax</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="apply_enabled" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Apply Button</label>
+                    <depends>
+                        <field id="ajax_enabled">1</field>
+                    </depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="handle_filter_collapsing" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Handle Filters Collapsing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="enabled" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable All Products Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="url" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>All Products Page URL</label>
+                </field>
+                <field id="horizontal_enabled" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Horizontal Layout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="stock_filter" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Stock Filter</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If you want to show out of stock products, please configure it here: Stores->Configuration->Catalog->Inventory->Stock Options->Display Out of Stock Products</comment>
+                </field>
+
+
+                <field id="position" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Position</label>
+                </field>
+                <field id="label" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Label</label>
+                </field>
+                <field id="tooltip" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tooltip</label>
+                </field>
+                <field id="is_expanded" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Expand</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_mode" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Mode</label>
+                    <source_model>CleverSoft\CleverLayeredNavigation\Model\Source\DisplayMode</source_model>
+                </field>
+            </group>
+            <group id="category_title_des" translate="label" type="select" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Category Title and Description</label>
+                <comment>Please open Stores -> Attributes -> Product -> [open attribute] -> Properties -> [open attribute option settings] in order to define Title, Description, Image and CMS block for your filter options.</comment>
+            </group>
+
+            <group id="category_meta_tag" translate="label" type="select" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Category Meta Tags</label>
+                <comment>Please open Stores -> Attributes -> Product -> [open attribute] -> Properties -> [open attribute option settings] in order to define Meta-Title, Meta-Description and Meta-Keywords for your filter options.</comment>
+            </group>
+
+            <group id="rating_filter" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Rating Filter</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="position" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Position</label>
+                </field>
+                <field id="label" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Label</label>
+                </field>
+                <field id="tooltip" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tooltip</label>
+                </field>
+                <field id="is_expanded" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Expand</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_mode" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Mode</label>
+                    <source_model>CleverSoft\CleverLayeredNavigation\Model\Source\DisplayMode</source_model>
+                </field>
+            </group>
+
+            <group id="categoryFilterSettingsBtn" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Category Filter</label>
+                <field id="clevershopby_category_filter" translate="label comment" type="button" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <frontend_model>CleverSoft\CleverLayeredNavigation\Block\System\Config\BtCatFilter</frontend_model>
+                </field>
+            </group>
+
+            <group id="tooltips" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Tooltips</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="image" translate="label" type="image" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tooltip Image</label>
+                    <backend_model>CleverSoft\CleverLayeredNavigation\Model\Config\Backend\Image\Tooltip</backend_model>
+                </field>
+            </group>
+            <!-- END SECTION GENERAL -->
+
+            <!-- SECTION SHOP BY SEO -->
+            <group id="url" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>SEO URLs</label>
+                <field id="mode" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>URL will look "category/autumn.html" instead of "category.html?season=114". See per-attribute settings for fine-tuning.</comment>
+                </field>
+            </group>
+            <group id="robots" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>Robots Tag Control</label>
+                <field id="control_robots" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Allow the Module to Modify Robots Meta Tag</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Use "No" for compatibility with other SEO extensions.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

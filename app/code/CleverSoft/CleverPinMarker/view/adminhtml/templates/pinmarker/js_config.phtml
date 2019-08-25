@@ -1,0 +1,16 @@
+<?php
+$mediaUrl = $this->helper('CleverSoft\CleverPinMarker\Helper\Wysiwyg\Images')->getBaseUrl();
+?>
+<script>
+require(['jquery', 'CleverSoft_CleverPinMarker/js/browser'], function($) {
+    window.mediaUrl = '<?php echo $mediaUrl; ?>';
+    window.changePreviewImage = function(obj) {
+        var $_input = $(obj);
+        $image = $(".pin-maker").find('.edit__wrap img');
+        if ($image.length > 0) {
+            var $_img = $image.first();
+            $_img.attr('src', window.mediaUrl + $_input.val());
+        }
+    };
+});
+</script>

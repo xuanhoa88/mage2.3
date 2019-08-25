@@ -1,0 +1,38 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+?>
+<div class="global-element banner-layer x<?php echo $this->getData('horizontal')?> md-x<?php echo $this->getData('horizontal')?> lg-x<?php echo $this->getData('horizontal')?> y<?php echo $this->getData('vertical')?> md-y<?php echo $this->getData('vertical')?> lg-y<?php echo $this->getData('vertical')?> <?php if($isPreview) echo "cs-live-preview"?>" style="width:<?php echo $this->getData('width') ? $this->getData('width') : '60'?>%;">
+  <div class="textbox container">
+    <?php if($this->getData('hover')):?>
+      <div class="text-box-<?php echo $this->getData('widget_id')?> <?php echo $this->getData('hover')?>" <?php echo $this->getData('animate') ? 'data-animate="'.$this->getData('animate').'"': ''?>>
+    <?php endif;?>
+      <div class="text-box-<?php echo $this->getData('widget_id')?>" <?php echo $this->getData('animate') ? 'data-animate="'.$this->getData('animate').'"': ''?>>
+        <div class="text-box-global box-shadow-<?php echo $this->getData('depth')?> box-shadow-<?php echo $this->getData('depth_hover')?>-hover" style="transform:rotate(<?php echo $this->getData('rotate') ? $this->getData('rotate') : '0'?>deg);font-size: <?php echo $this->getData('scale') ? $this->getData('scale') : 100;?>%">
+          <div class="textbox-child-element text-inner <?= $this->getData('color')?> text-shadow-<?= $this->getData('shadow')?> <?php echo $this->getData('align')?>" style="padding:<?php echo $this->getData('padding') ? $this->getData('padding') : '0'?>">
+          <?php
+          $items = $this->getData('items');
+            if (!empty($items)) {
+                foreach ($items as $item) {
+                    echo isset($item['html']) ? $item['html'] : '';
+                }
+            }
+          ?>   
+          </div>
+        </div>
+      </div>  
+    <?php if($this->getData('hover')):?>
+      </div>
+    <?php endif;?>
+  </div>
+  <?php if($isPreview) { ?>
+    <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+  <?php } ?>
+</div>
+<script type="text/x-magento-init">
+{
+    ".text-box-<?php echo $this->getData('widget_id')?>":{
+        "cleverElementAnimate":{}
+    }
+}
+</script>

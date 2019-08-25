@@ -1,0 +1,30 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+/**
+ * @var $block \CleverSoft\CleverLayeredNavigation\Block\Navigation\FilterCollapsing
+ */
+
+if(!$block->canShowBlock()) {
+    return;
+}
+?>
+
+<script type="text/x-magento-init">
+            {
+                "#narrow-by-list": {
+                    "accordion": {
+                        "multipleCollapsible": true,
+                        "active": [<?php echo implode(",", $block->getFiltersExpanded())?>],
+                        "openedState": "active",
+                        "collapsible":true,
+                        "openOnFocus":true
+                    }
+                }
+            }
+</script>

@@ -1,0 +1,58 @@
+<?php
+/**
+ * Copyright © 2015 Ihor Vansach (ihor@magefan.com). All rights reserved.
+ * See LICENSE.txt for license details (http://opensource.org/licenses/osl-3.0.php).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post list item template
+ *
+ * @var $block \Magefan\Blog\Block\Post\AbstractPost
+ */
+?>
+<?php
+$_post = $this->getPost();
+$imageWidth = $block->getConfigImage('mfblog/post_list/image_width') ? $block->getConfigImage('mfblog/post_list/image_width') : 500;
+$imageHeight = $block->getConfigImage('mfblog/post_list/image_height') ? $block->getConfigImage('mfblog/post_list/image_height') : 300;
+$_postUrl = $_post->getPostUrl();
+$_postName = $block->escapeHtml($_post->getTitle(), null, true);
+?>
+<li class="post-holder post-holder-<?php echo $_post->getId() ?>">
+    <div class="post-header">
+        <h3 class="post-title-holder clearfix">
+            <a class="post-item-link"
+               href="<?php echo $_postUrl ?>">
+                <?php echo $_postName; ?>
+            </a>
+        </h3>
+        <?php echo $this->getInfoHtml() ?>
+
+        <?php if ($featuredImage = $_post->getData('featured_img')) { ?>
+            <div class="post-ftimg-hld">
+                <a href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>">
+                    <img src="<?php echo $this->helper('Magefan\Blog\Helper\Image')->init($featuredImage)->resize($imageWidth, $imageHeight); ?>" alt="<?php echo $_postName ?>" />
+                </a>
+            </div>
+        <?php } ?>
+
+    </div>
+
+    <div class="post-content">
+        <div class="post-description clearfix">
+            <div class="post-text-hld clearfix">
+                <?php echo $block->getShorContent() ?>
+            </div>
+            <div class="text-center">
+                <a class="post-read-more" href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>" >
+                    <?php echo __('CONTINUE READING <i class="fa fa-long-arrow-right" aria-hidden="true"></i>') ?>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="post-footer">
+
+    </div>
+</li>

@@ -1,0 +1,342 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverBuilder
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author        ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+use Magento\Framework\App\Action\Action;
+/* @var $this CleverSoft CleverProduct_Block_Widget */
+$dataHelpder = $this->helper('CleverSoft\CleverBuilder\Helper\Product\Data');
+$_id = $this->getData('identify') ? $this->getData('identify') : $this->getData('id');
+$full_w = $this->getConfig('enable_fullwidth') ? $this->getConfig('enable_fullwidth') : $this->getData('enable_fullwidth');
+$t = microtime();
+$tab = $this->getData('tab');
+//get configurations for countdown area
+$countdown_label = $this->getData('countdown_label');
+$countdown_position = $this->getData('countdown_position'); /// over feature image or in product metadata.
+$enable_progress_bar = $this->getData('enable_progress_bar');
+$link_page_sales = $this->getData('link_page_sales');
+$lazyload = $this->getData('lazyload');
+if (is_null($lazyload)) $lazyload = false;
+$min_height_img_lazyload = $this->getData('height_image');
+$image_url = $this->getViewFileUrl('CleverSoft_CleverBuilder::images/transparent.gif');
+$image_alt_url = $this->getViewFileUrl('CleverSoft_CleverBuilder::images/transparent.gif');
+?>
+<div class="zoo-product-carousel zoo-product-collection01 <?php echo $this->getData('classes') ?> <?php if(isset($full_w) && $full_w) echo 'product-style__full-width';?>"  id="<?=$_id?>">
+    <?php if ($exist = ($this->getData('collection') && $this->getData('collection')->getSize())): ?>
+        <?php
+        $type = 'widget-product-grid';
+        $viewMode = 'grid';
+        $count = $this->getData('collection') ? $this->getData('collection')->count() : 0;
+        $carousel = 1;
+//
+        $row = 1;
+        $column = $carousel == 1 && $row == 1 ? $count : ($carousel == 1 && $row > 1 ? $row : $this->getData('column'));
+        $image = 'new_products_content_widget_grid';
+        $items = $this->getData('collection')->getItems();
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+        $description = false;
+        $_imageHelper = $this->helper('CleverSoft\CleverBuilder\Helper\Product\Image');
+        $_helper = $this->helper('Magento\Catalog\Helper\Output');
+        $imgWidth = $this->getData('image_width');
+        $imgHeight = $this->getData('image_height');
+        // new config
+        $showQuickview = $this->getData('display_quickview');
+        $showWishlist = $this->getData('display_addtowishlist');
+        $showCompare = $this->getData('display_addtocompare');
+        $showCart = $this->getData('display_addtocart');
+        $showSwatchAttributes = $this->getData('display_swatch_attributes');
+        $showPrice = $this->getData('display_price');
+        $showRating = $this->getData('display_rating');
+        $showProductName = $this->getData('display_productname');
+        $containerClasses = "{$viewMode} products-{$viewMode} products-grid-partitioned category-products-grid";
+        $itemgridClasses = 'itemgrid zoo-itemgrid-adaptive';
+        if ($block->getData('enable_border_boxshadow'))
+            $containerClasses .= ' enable_border_boxshadow';
+        //Image aspect ratio settings
+        $keepAspectRatio = $this->getData('aspect_ratio');
+        if ($keepAspectRatio == 'true' || $keepAspectRatio == '1') {
+            $imgHeight = 0; //Height will be calculated automatically (based on width) to keep the aspect ratio
+            $catViewKeepFrame = FALSE;
+        } else {
+            $catViewKeepFrame = TRUE;
+        }
+        $tooltip = 'tooltip';
+        ?>
+        <div class="block widget zoo-block-products-list <?php /* @escapeNotVerified */ echo $viewMode; ?>">
+            <div class="block-content">
+                <?php $i = 0;
+                foreach ($items as $_item): ?>
+                    <?php
+                    //this is how we get the data for showing progress bar
+                    $stock = $dataHelpder->getStockQty($_item->getID()); /// available amount
+                    $order = $dataHelpder->getOrderedQuantity($_item->getID());//sold amount
+                    $isSalable = $_item->getIsSalable();
+                    $currentStock = $stock - $isSalable;
+                    ?>
+                    <?php if ($carousel == 1 && $row > 1 && $i == 0): ?>
+                        <div class="owl-carousel">
+                    <?php endif ?>
+                    <?php /* @escapeNotVerified */
+                    echo '<!-- ' . $image . '-->' ?>
+                    <?php if ($i % $column == 0 || ($row > 1 && $i % $row == 0)): ?>
+                    <div class="<?php /* @escapeNotVerified */
+                    echo $containerClasses; ?>">
+                    <div class="product-items  <?php /* @escapeNotVerified */
+                    echo $type; ?> <?php if ($itemgridClasses) echo $itemgridClasses; ?> <?php echo $carousel && $row == 1 ? ' owl-carousel' : '' ?>">
+                <?php endif ?>
+                    <?php $i++ ?>
+                    <?php /* @escapeNotVerified */
+                    if ($_item->getIsSalable()) $product_stock = 'product-instock'; else $product_stock = 'product-oustock';
+                    echo ($i == 1) ? '<div class="product_hover ' . $product_stock . '">' : '</div><div class="product_hover ' . $product_stock . '">';
+                    ?>
+                    <div  class="product-item-info <?php if ($alternative_img = $dataHelpder->getAltImgHtml($_item, $imgWidth, $imgHeight, $image)): ?> have-alternative-image <?php endif; ?>">
+                        <div class="zoo-inner-product-item-info">
+                            <div class="zoo-product-image">
+                                <div class="add-to-link">
+                                        <?php if ($showQuickview ) : ?>
+                                            <div class="zoo-quickview zoo_icon">
+                                                <div class="effect-tooltip">
+                                                    <span class="tooltip"><?php /* @escapeNotVerified */ echo __('Quick View') ?></span>
+                                                    <i class="cs-font clever-icon-eye-5" rel="<?php echo $tooltip; ?>" data-original-title="<?php echo __('Quick View') ?>"></i>
+                                                 </div>
+                                                <a class="product-quickview"  href="<?php echo $block->getUrl('cleversofttheme/product/view/id/' . $_item->getId()); ?>" data-id='quickview-<?php echo $_item->getId() ?>' style='display:none'><?php echo __('Quick View') ?>
+                                                </a>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $showWishlist): ?>
+                                        <div class="zoo-wishlist zoo_icon" data-role="add-to-links">
+                                            <a class="zoo_icon__link" href="#" data-post='<?php /* @escapeNotVerified */ echo $block->getAddToWishlistParams($_item); ?>' data-action="add-to-wishlist" title="">
+                                                <div class="effect-tooltip">
+                                                    <span class="tooltip"><?php /* @escapeNotVerified */ echo __('Add to Wishlist') ?></span>
+                                                    <i class="cs-font clever-icon-heart-1" rel="<?php echo $tooltip; ?>" data-original-title="<?php echo __('Add to Wishlist') ?>"></i>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if ($this->getAddToCompareUrl() && $showCompare): ?>
+                                        <div class="zoo-compare zoo_icon" data-role="add-to-links">
+                                            <?php $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare'); ?>
+                                            <a class="zoo_icon__link action tocompare" href="#" data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($_item); ?>'>
+                                                <div class="effect-tooltip">
+                                                <span class="tooltip"><?php /* @escapeNotVerified */
+                                                    echo __('Add to Compare') ?></span>
+                                                    <i class="cs-font clever-icon-law-1" rel="<?php echo $tooltip; ?>" data-original-title="<?php echo __('Add to Compare') ?>"></i>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <?php if ($_item->getIsSalable()): echo $dataHelpder->getLabel($_item); ?>
+                                <?php else : ?>
+                                    <div class="stock unavailable"><span><?php /* @escapeNotVerified */
+                                            echo __('Out of stock') ?></span></div>
+                                <?php endif; ?>
+                                <a href="<?php /* @escapeNotVerified */
+                                echo $this->getProductUrl($_item) ?>"
+                                   class="product-item-photo" <?php if ($lazyload) echo 'style="min-height: ' . $min_height_img_lazyload . 'px"' ?> >
+                                    <?php if (!$imgWidth) : ?>
+                                        <?php echo $this->getImage($_item, $image)->toHtml(); ?>
+                                    <?php else: ?>
+                                        <?php if(!$keepAspectRatio):?>
+                                            <img data-src="<?php echo $_imageHelper->getImg($_item, $imgWidth, $imgHeight, 'category_page_grid'); ?>" src="<?php echo (!$lazyload) ? $_imageHelper->getImg($_item, $imgWidth, $imgHeight, 'category_page_grid') : $image_url; ?>"
+                                             class="<?php if ($lazyload) echo "clazyload"; ?> product-image-photo"
+                                             alt="<?php echo $this->stripTags($_item->getName(), null, true) ?>" width="<?php echo $imgWidth ?>"/>
+                                        <?php else:?>
+                                            <img data-src="<?php echo $_imageHelper->getImg($_item, $imgWidth, $imgHeight, 'category_page_grid'); ?>" src="<?php echo (!$lazyload) ? $_imageHelper->getImg($_item, $imgWidth, $imgHeight, 'category_page_grid') : $image_url; ?>"
+                                             class="<?php if ($lazyload) echo "clazyload"; ?> product-image-photo"
+                                             alt="<?php echo $this->stripTags($_item->getName(), null, true) ?>" width="<?php echo $imgWidth ?>"/>
+                                        <?php endif;?>
+                                    <?php endif; ?>
+                                    <?php if ($block->getData('alt_image') && $dataHelpder->getAltImgHtml($_item, $imgWidth, $imgHeight, $image)): ?>
+                                        <?php if(!$keepAspectRatio):?>
+                                            <span class="product-img-additional alt-image">
+                                                <?php echo $dataHelpder->getAltImgHtml($_item, $imgWidth, $imgHeight, $image); ?>
+                                            </span>
+                                        <?php else:?>
+                                            <span class="product-img-additional alt-image">
+                                                <?php echo $dataHelpder->getAltImgHtml($_item, $imgWidth, $imgHeight, $image); ?>
+                                            </span>
+                                        <?php endif;?>
+                                    <?php endif; ?>
+                                </a>
+                                <?php if ($showCart): ?>
+                                    <div class="add_to_cart">
+                                        <?php $postParams = $block->getAddToCartPostParams($_item); ?>
+                                        <form data-role="tocart-form" action="<?php /* @escapeNotVerified */
+                                        echo $postParams['action']; ?>" method="post">
+                                            <input type="hidden" name="product"
+                                                   value="<?php /* @escapeNotVerified */
+                                                   echo $postParams['data']['product']; ?>">
+                                            <input type="hidden" name="<?php /* @escapeNotVerified */
+                                            echo Action::PARAM_NAME_URL_ENCODED; ?>"
+                                                   value="<?php /* @escapeNotVerified */
+                                                   echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+                                            <?php echo $block->getBlockHtml('formkey') ?>
+                                            <button type="submit" class="action tocart btn-addcart">
+                                                <i class="cs-font clever-icon-cart-6" rel="<?php echo $tooltip; ?>" data-original-title="<?php echo __('Add to Cart') ?>"></i>
+                                                <span class="btn-addcart__title"><?php echo __('Add to Cart') ?></span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if($this->getData('enable_countdown')) : ?>
+                                    <?php if($countdown_position == 'over_feature_img' ) : ?>
+                                        <div class="clever-countdown <?php echo $countdown_position; ?>">
+                                            <?php if(!empty($countdown_label)) {  ?>
+                                                <div class="clever-countdown-label d-flex">
+                                                    <div class="mr-auto">
+                                                        <?php echo 'Avaiable:'; ?>
+                                                        <span><?php echo $stock; ?></span>
+                                                    </div>
+                                                    <div>
+                                                        <?php echo $countdown_label; ?>
+                                                        <span><?php echo $order; ?></span>
+                                                    </div>
+                                                </div>
+                                            <?php } ?>
+                                            <?php if($enable_progress_bar) : ?>
+                                                <div class="clever-countdown-progress-bar" >
+                                                    <div class="available-sold" style="width: <?php echo (100 - ($order/($order+$stock))*100) ?>%"></div>
+                                                </div>
+                                            <?php endif; ?>
+                                                <?php if($this->getData('countdown_inner')) : ?>
+                                                    <p class="clever-countdown__title"><?php echo __('Hurry! Sales end in: ')?></p>
+                                                    <div class="detail_countdown">
+                                                        <div class="detail_countdown__content">
+                                                            <div class="detail_countdown__times">
+                                                                <div id="detail_countdown" class="detail_countdown__times-content">
+                                                                    <p class="detail_countdown--time d-flex align-items-center justify-content-center"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php endif; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
+                            <div class="product details product-item-details">
+                                <div class="hover-area product_shop_loop">
+                                    <?php if ($showProductName): ?>
+                                        <h5 class="product-item-name">
+                                            <a title="<?php echo $block->escapeHtml($_item->getName()) ?>"
+                                               href="<?php /* @escapeNotVerified */
+                                               echo $block->getProductUrl($_item) ?>"
+                                               class="product-item-link">
+                                                <?php echo $block->escapeHtml($_item->getName()) ?>
+                                            </a>
+                                        </h5>
+                                    <?php endif; ?>
+                                    <?php if ($templateType && $showRating): ?>
+                                        <?php echo $this->getReviewsSummaryHtml($_item, $templateType, true) ?>
+                                    <?php endif; ?>
+                                    <?php if ($showPrice): ?>
+                                        <?php echo $this->getProductPriceHtml($_item, \Magento\Catalog\Pricing\Price\FinalPrice::PRICE_CODE); ?>
+                                    <?php endif; ?>
+                                    <?php if ($showSwatchAttributes): ?>
+                                        <?php echo $this->getColorSwatchDetailsHtml($_item); ?>
+                                    <?php endif; ?>
+                                </div>
+                                <?php if($this->getData('enable_countdown')) : ?>
+                                    <?php if($countdown_position == 'product_metadata' ) : ?>
+                                        <div class="clever-countdown <?php echo $countdown_position; ?>">
+                                            <?php if(!empty($countdown_label)) {  ?>
+                                                <div class="clever-countdown-label d-flex">
+                                                    <div class="mr-auto">
+                                                        <?php echo 'Avaiable:'; ?>
+                                                        <span><?php echo $stock; ?></span>
+                                                    </div>
+                                                    <div>
+                                                        <?php echo $countdown_label; ?>
+                                                        <span><?php echo $order; ?></span>
+                                                    </div>
+                                                </div>
+                                            <?php } ?>
+                                            <?php if($enable_progress_bar) : ?>
+                                                <div class="clever-countdown-progress-bar" >
+                                                    <div class="available-sold" style="width: <?php echo (100 - ($order/($order+$stock))*100) ?>%"></div>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if($this->getData('countdown_inner')) : ?>
+                                                <p class="clever-countdown__title"><?php echo __('Hurry! Sales end in: ')?></p>
+                                                <div class="detail_countdown">
+                                                    <div class="detail_countdown__content">
+                                                        <div class="detail_countdown__times">
+                                                            <div id="detail_countdown" class="detail_countdown__times-content">
+                                                                <p class="detail_countdown--time d-flex align-items-center justify-content-center"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php echo ($i == count($items)) ? '</div>' : '' ?>
+                    <?php if ($i == $count || $i % $column == 0 || ($row > 1 && $i % $row == 0)): ?>
+                    </div>
+                    </div>
+                <?php endif ?>
+                    <?php if ($carousel == 1 && $row > 1 && $i == $count): ?>
+                        </div>
+                    <?php endif ?>
+                <?php endforeach ?>
+            </div>
+        </div>
+    <?php endif; ?>
+    <?php if (!$this->isRedirectToCartEnabled()) : ?>
+        <script type="text/x-magento-init">
+        {
+            "[data-role=tocart-form], .form.map.checkout": {
+                "catalogAddToCart": {}
+            }
+        }
+    </script>
+    <?php endif; ?>
+</div>
+<?php
+?>
+<script>
+    require([
+        "jquery",
+        "cleverProductMage"
+    ], function ($, cleverProductMage) {
+        $(function () {
+            $(document).on({
+                mouseenter: function () {
+                    var imgage_additional = $(this).find('.imgage-additional');
+                    var zoo_image = $(this).find('.zoo-product-image');
+                    zoo_image.addClass('hover-image-loading');
+                    imgage_additional.attr('src', imgage_additional.attr('data-src'));
+                    zoo_image.addClass('hover-image-loaded');
+                    zoo_image.removeClass('hover-image-loading');
+                },
+                mouseleave: function () {
+                }
+            }, ".product-item-info");
+            <?php if($full_w == "true") { ?>
+            var $left = $('#<?php echo $_id; ?>').offset().left;
+            $('#<?php echo $_id; ?>').css({
+                'left': '-' + $left + 'px',
+                'position': 'relative',
+                'width': $(window).width() + 'px'
+            });
+            $('#<?php  echo $_id;  ?>').css({'right': '0', 'left': '-' + $left + 'px'});
+            <?php } ?>
+            $('#<?php echo $_id ?>').cleverProductMage({
+                animation: <?php echo $this->getData('animation') ? 'true' : 'false' ?>,
+                parallax: <?php echo $this->getData('parallax') ? 'true' : 'false'?>,
+                carousel: <?php echo $this->getData('carousel') ?>,
+                carouselConfig: {
+                },
+                lazyload:<?php echo $lazyload ? 'true' : 'false'; ?>
+          }); 
+        });
+    });
+</script>

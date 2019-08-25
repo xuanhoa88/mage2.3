@@ -1,0 +1,6 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="CleverSoft_CleverSocialProof::socialproof" title="CleverSocialProof" module="CleverSoft_CleverSocialProof" sortOrder="80" parent="CleverSoft_Base::cl_all" resource="CleverSoft_CleverTheme::all" />
+        <add id="CleverSoft_CleverSocialProof::socialproofsettings" title="Configuration" module="CleverSoft_CleverSocialProof" sortOrder="0" parent="CleverSoft_CleverSocialProof::socialproof" action="adminhtml/system_config/edit/section/socialproof" resource="CleverSoft_CleverTheme::config_socialproof" />
+    </menu>
+</config>

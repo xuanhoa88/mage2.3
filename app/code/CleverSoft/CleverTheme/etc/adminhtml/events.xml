@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_postdispatch_adminhtml_system_config_save">
+        <observer name="theme_design_setting" instance="CleverSoft\CleverTheme\Observer\ThemeDesignObserver" />
+    </event>
+    <event name="store_edit">
+        <observer name="theme_design_setting" instance="CleverSoft\CleverTheme\Observer\StoreEditObserver" />
+    </event>
+</config>

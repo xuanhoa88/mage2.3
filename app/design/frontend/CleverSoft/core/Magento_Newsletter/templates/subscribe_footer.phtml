@@ -1,0 +1,42 @@
+<?php
+$footerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\FooterData');
+$settingData = $footerBuilderHelper->getSettingData();
+$title_subscribe = $settingData->{'_customize-input-newsletter_title'};
+$sub_subscribe = $settingData->{'_customize-input-newsletter_subtitle'};
+?>
+<div class="newsletters-builder <?php echo
+isset($settingData->{'_customize-input-newsletter_custom-class'}) && $settingData->{'_customize-input-newsletter_custom-class'} ? $settingData->{'_customize-input-newsletter_custom-class'} : ''
+?>">
+    <span class="cs-font"></span>
+    <?php if(isset($title_subscribe) && $title_subscribe): ?>
+    <h3><?=$title_subscribe?></h3>
+    <?php endif?>
+        <form class="form subscribe"
+              novalidate
+              action="<?php /* @escapeNotVerified */
+              echo $block->getFormActionUrl() ?>"
+              method="post"
+              data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+              id="newsletter-validate-detail">
+            <div class="d-flex">
+                <div class="field newsletter">
+                    <input name="email" type="email" id="newsletter" class="form-control" placeholder="<?php echo
+                    isset($settingData->{'_customize-input-newsletter_placeholder'}) && $settingData->{'_customize-input-newsletter_placeholder'} ? $settingData->{'_customize-input-newsletter_placeholder'} : __('Email Address')
+                    ?>"
+                           data-validate="{required:true, 'validate-email':true}"/>
+                </div>
+                <div class="actions">
+                    <button class="action subscribe "
+                            type="submit">
+                        <?php echo
+                        isset($settingData->{'_customize-input-newsletter_buttontext'}) && $settingData->{'_customize-input-newsletter_buttontext'} ? $settingData->{'_customize-input-newsletter_buttontext'} : __('Subscribe')
+                        ?>
+                    </button>
+                </div>
+            </div>
+        </form>
+    <?php if(isset($sub_subscribe) && $sub_subscribe): ?>
+    <p><?=$sub_subscribe?></p>
+    <?php endif?>
+</div>
+

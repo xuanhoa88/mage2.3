@@ -1,0 +1,17 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverSocialLogin
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php $helper = $this->helper('CleverSoft\CleverSocialLogin\Helper\Data'); ?>
+<?php if ($helper->photoEnabled()): ?>
+    <li class="pslogin-welcome-msg" data-bind="scope: 'pslogin-photo'" data-mage-init='{"Magento_Ui/js/core/app":<?php echo $block->getJsLayout();?>}'>
+        <!-- ko if: pslogin().photo -->
+        <a href="<?php echo $helper->getUrlCustomer(); ?>"><img data-bind="attr: {'src' : pslogin().photo, 'alt': customer().fullname }" src="#" alt="" /></a>
+        <!-- /ko -->
+    </li>
+<?php endif; ?>

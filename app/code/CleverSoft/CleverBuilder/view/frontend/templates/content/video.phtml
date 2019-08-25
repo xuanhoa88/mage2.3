@@ -1,0 +1,42 @@
+<?php 
+$video_mp4 = $this->getData('video_mp4');
+$video_webm = $this->getData('video_webm');
+$video_ogg = $this->getData('video_ogg');
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+?>
+<?php if ( $video_mp4 || $video_webm || $video_ogg ) { ?>
+    <div class="video-overlay no-click hide-for-small"></div>
+    <video class="video-bg hide-for-small" <?php echo $this->getData('parallax') ? 'style="object-fit:cover;width:100%"' : ''?> preload playsinline
+        <?php echo $this->getData('auto_play') ? 'autoplay' : ''; ?>
+        <?php echo $this->getData('volume') ? '' : 'muted'; ?>
+        <?php echo $this->getData('auto_loop') ? 'loop' : ''; ?>>
+        <?php
+        echo $video_mp4 ? '<source src="' . $video_mp4 . '" type="video/mp4">' : '';
+        echo $video_ogg ? '<source src="' . $video_ogg . '" type="video/ogg">' : '';
+        echo $video_webm ? '<source src="' . $video_webm . '" type="video/webm">' : '';
+        ?>
+    </video>
+    
+<?php } ?>
+<?php if($this->getData('youtube_id')):?>
+    <?php if($this->getData('parallax')):?>
+        <div class="jarallax background-video global-element <?php if($isPreview) echo "cs-live-preview"?>" data-jarallax-video="https://www.youtube.com/watch?v=<?= $this->getData('youtube_id')?>" data-auto-play="<?= $this->getData('auto_play')?>" data-video-loop="<?= $this->getData('auto_loop')?>" data-video-volume="<?= $this->getData('volume')?>">
+            <?php if($isPreview) { ?>
+                <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+            <?php } ?>
+        </div>
+        <script type="text/x-magento-init">
+            {
+                "*": {
+                    "jarallax" : {},
+                    "jarallaxVideo" : {}
+                }
+            }
+        </script>
+    <?php else:?>
+        <iframe class="jarallax" width="100%"
+            src='https://www.youtube.com/embed/<?= $this->getData("youtube_id")?>?autoplay=<?= $this->getData('auto_play')?>&loop=<?= $this->getData('auto_loop')?>&rel=0&mute=<?= $this->getData('volume') ? "0" : "1"?>'>
+        </iframe>
+    <?php endif;?>
+<?php endif;?>

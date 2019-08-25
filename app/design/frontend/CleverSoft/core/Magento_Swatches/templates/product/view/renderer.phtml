@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+//"swatchRenderer": {
+?>
+<?php /** @var $block \Magento\Swatches\Block\Product\Renderer\Configurable */ ?>
+<?php $product_id = $block->getProduct()->getId();?>
+<?php $random = rand(1000,10000);?>
+<div class="swatch-opt-<?php echo($product_id.'-'.$random);?>" data-role="swatch-options"></div>
+<?php $detail_page_layout = $this->helper('CleverSoft\CleverTheme\Helper\Data')->getConfig('cleversofttheme/product_page/page_layout'); ?>
+<?php if ($detail_page_layout == 'sticky_2') $isStickyLayout = 'true'; else $isStickyLayout = 'false';?>
+
+<script type="text/x-magento-init">
+    {
+        ".swatch-opt-<?php echo($product_id.'-'.$random);?>": {
+            "cleverSwatchRendererProductDetails": {
+                "isStickyLayout": <?php echo ($isStickyLayout)?>,
+                "galleryStickyDiv": ".gallery-sticky2 .gallery-sticky2-image-col",
+                "stickyClass":"nav-title-cart",
+                "jsonConfig": <?php /* @escapeNotVerified */ echo $swatchOptions = $block->getJsonConfig(); ?>,
+                "jsonSwatchConfig": <?php /* @escapeNotVerified */
+    echo $swatchOptions = $block->getJsonSwatchConfig(); ?>,
+                "mediaCallback": "<?php /* @escapeNotVerified */ echo $block->getMediaCallback() ?>",
+                "gallerySwitchStrategy": "<?php /* @escapeNotVerified */ echo $block->getVar('gallery_switch_strategy',
+        'Magento_ConfigurableProduct') ?: 'replace'; ?>"
+            }
+        }
+    }
+</script>

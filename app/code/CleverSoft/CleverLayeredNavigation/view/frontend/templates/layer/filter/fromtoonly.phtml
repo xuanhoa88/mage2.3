@@ -1,0 +1,34 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$fromto = $this->checkedFilterFromTo();
+if ($fromto) {
+}
+?>
+<ol class="items cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode();?>" id="clevershopby-filter-<?php echo $filterSetting->getFilterCode();?>"">
+    <li id="cleversoft_shopby_filter_<?php echo $filterSetting->getFilterCode(); ?>">
+        <form data-clevershopby-filter="attr_price" novalidate="novalidate">
+            <div class="range">
+                <input id="clevershopby-filter-<?php echo $filterSetting->getFilterCode(); ?>-from" clevershopby-fromto-id="from" data-validate="{ 'validate-number':true}" type="text" placeholder="From" value="">
+                <input id="clevershopby-filter-<?php echo $filterSetting->getFilterCode(); ?>-to" clevershopby-fromto-id="to" data-validate="{ 'validate-number':true}" type="text" placeholder="To" value="">
+                <button id="clevershopby-filter-<?php echo $filterSetting->getFilterCode(); ?>-go" clevershopby-fromto-id="go"><?php echo __('Go'); ?></button>
+            </div>
+        </form>
+    </li>
+</ol>
+<script type="text/x-magento-init">
+{
+    "#clevershopby-filter-<?php echo $filterSetting->getFilterCode(); ?>": {
+        "cleverLayeredNavigationFilterFromToOnly": {
+            "url": "<?php echo $block->getSliderUrlTemplate(); ?>"
+        }
+    }
+}
+</script>

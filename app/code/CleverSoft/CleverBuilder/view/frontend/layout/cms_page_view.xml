@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="clever.css.header" as="clevercssheader" template="CleverSoft_CleverBuilder::css-header.phtml" />
+        </referenceBlock>
+        <referenceContainer name="after.body.start">
+            <block class="Magento\Framework\View\Element\Template" name="clever.cms.page" as="cleverswitch" template="CleverSoft_CleverBuilder::switch.phtml" before="-" />
+            <block class="CleverSoft\CleverBuilder\Block\Builder\Content" name="clever.page.js.template" as="jstemplate" template="CleverSoft_CleverBuilder::js-templates.phtml" before="-" />
+            <block class="Magento\Framework\View\Element\Template" name="clever.page.meta.box" as="clevermetabox" template="CleverSoft_CleverBuilder::metabox-panels.phtml" before="-" />
+            <block class="Magento\Framework\View\Element\Template" name="cleversoft.lazyload"
+                   template="CleverSoft_CleverBuilder::effect/lazyload.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,1019 @@
+{
+  "name": "Banner",
+  "title": "Banner",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "widget",
+  "icon" : "",
+  "has_child": "banner",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Banner",
+  "code": "clever-banner",
+  "layouts":[
+    [
+      {
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "horizontal":50,
+          "vertical":50,
+          "align":"text-center"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h3 class=\"uppercase\"><strong>This is a simple banner</strong></h3> <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>",
+              "text_selected_editor":"tinymce"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "color":"light",
+          "horizontal":50,
+          "vertical":50,
+          "align":"text-center"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h3 class=\"uppercase\">Change this to anything</h3><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Click Me",
+              "style":"outline"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "color":"light",
+          "width":40,
+          "scale":100,
+          "horizontal":10,
+          "vertical":50,
+          "align":"text-center"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h3 class=\"uppercase\">Change this to anything</h3><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Click Me",
+              "style":"outline"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "color":"light",
+          "width":40,
+          "scale":100,
+          "horizontal":90,
+          "vertical":50,
+          "align":"text-center"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h3 class=\"uppercase\">Change this to anything</h3><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Click Me",
+              "values": {
+                "button_text":"Click Me",
+                "color":"white",
+                "style":"outline"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "color":"light",
+          "width":40,
+          "scale":100,
+          "horizontal":5,
+          "vertical":50,
+          "align":"left"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h2 class=\"uppercase\"><strong>Main Headline</strong></h2><h3>Smaller Headline</h3><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Primary",
+              "color":"primary"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Secondary",
+              "color":"white",
+              "style":"outline"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "color":"light",
+          "width":40,
+          "scale":100,
+          "horizontal":95,
+          "vertical":50,
+          "align":"right"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h2 class=\"uppercase\"><strong>Main Headline</strong></h2><h3>Smaller Headline</h3><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Primary",
+              "color":"primary"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Secondary",
+              "color":"white",
+              "style":"outline"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "defaults": {
+          "bg_color":"rgb(255, 255, 255)",
+          "overlay_color":"rgba(190, 190, 190, 0.2)"
+        },
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "color":"light",
+          "width":40,
+          "scale":100,
+          "horizontal":5,
+          "vertical":50,
+          "align":"left"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h2 class=\"uppercase\"><strong>Main Headline</strong></h2><h3>Smaller Headline</h3><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Primary",
+              "color":"primary"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Secondary",
+              "color":"primary",
+              "style":"outline"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "defaults": {
+          "bg_color":"rgb(255, 255, 255)",
+          "overlay_color":"rgba(190, 190, 190, 0.2)"
+        },
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "color":"light",
+          "width":40,
+          "scale":100,
+          "horizontal":95,
+          "vertical":50,
+          "align":"right"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h2 class=\"uppercase\"><strong>Main Headline</strong></h2><h3>Smaller Headline</h3><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Primary",
+              "color":"primary"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Secondary",
+              "color":"primary",
+              "style":"outline"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "defaults": {
+          "bg_color":"rgb(255, 255, 255)",
+          "overlay_color":"rgba(190, 190, 190, 0.2)"
+        },
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "width":40,
+          "scale":100,
+          "padding":"30px",
+          "horizontal":5,
+          "vertical":50,
+          "align":"left",
+          "bg_color":"rgb(255, 255, 255)",
+          "depth":3
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h2 class=\"uppercase\"><strong>Main Headline</strong></h2><h3>Smaller Headline</h3><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Primary",
+              "color":"primary"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Secondary",
+              "color":"primary",
+              "style":"outline"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "defaults": {
+          "overlay_color":"rgba(0, 0, 0, 0.2)"
+        },
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "color":"light",
+          "width":40,
+          "scale":100,
+          "padding":"30px",
+          "horizontal":95,
+          "vertical":50,
+          "align":"text-center",
+          "bg_color":"rgba(255, 255, 255, 0.86)",
+          "depth":3
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h2 class=\"uppercase\"><strong>Main Headline</strong></h2><h3>Smaller Headline</h3><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Primary",
+              "color":"primary"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Secondary",
+              "color":"primary",
+              "style":"outline"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "defaults": {
+          "overlay_color":"rgba(0, 0, 0, 0.2)"
+        },
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "color":"light",
+          "width":40,
+          "scale":100,
+          "padding":"30px",
+          "horizontal":5,
+          "vertical":50,
+          "align":"text-center",
+          "bg_color":"rgba(0, 0, 0, 0.86)",
+          "depth":3,
+          "style":"square"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h2 class=\"uppercase\"><strong>Main Headline</strong></h2><h3>Smaller Headline</h3><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Primary",
+              "color":"primary"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Secondary",
+              "color":"white",
+              "style":"outline"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "defaults": {
+          "overlay_color":"rgba(0, 0, 0, 0.2)"
+        },
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "style":"circle",
+          "color":"light",
+          "width":40,
+          "scale":100,
+          "padding":"30px",
+          "horizontal":90,
+          "vertical":50,
+          "align":"text-center",
+          "bg_color":"rgba(0, 0, 0, 0.86)",
+          "depth":3
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h2 class=\"uppercase\"><strong>Main Headline</strong></h2><h3>Smaller Headline</h3><p>Lorem ipsum dolor sit amet, conse.</p>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Secondary",
+              "color":"white",
+              "style":"outline"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "defaults": {
+          "height":"600"
+        },
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "color":"light",
+          "width":67,
+          "scale":100,
+          "animate":"flipInY",
+          "horizontal":50,
+          "vertical":50,
+          "align":"text-center"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h3 class=\"alt-font\">It has Finally started...</h3>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Divider"
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h1 class=\"h-large uppercase\"><strong><span style=\"font-size: 180%;\">HUGE SALE</span></strong></h1><h1 class=\"uppercase\">UP TO 70% OFF</strong></h1>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Divider"
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Shop Men!",
+              "color":"white",
+              "style":"outline"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Shop Women!",
+              "color":"white",
+              "style":"outline"
+            }
+          },{
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Shop All!",
+              "color":"white",
+              "style":"outline"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "defaults": {
+          "height":"400",
+          "overlay_color":"rgba(0, 0, 0, 0.2)"
+        },
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "color":"dark",
+          "style":"underline",
+          "button_class":"primary",
+          "width":100,
+          "scale":100,
+          "padding":"5px 30px 10px 30px",
+          "horizontal":50,
+          "vertical":90,
+          "align":"text-center",
+          "bg_color":"rgba(255, 255, 255, 0.94)"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h4 class=\"uppercase\">Summer 2017</h4><h3 class=\"uppercase\"><strong>NEW Summer Trends</strong></h3>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"Shop Now"
+            }
+          }
+        ]
+      },
+      {
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "style":"circle",
+          "color":"light",
+          "width":26,
+          "scale":100,
+          "padding":"0 -5px 0 0",
+          "horizontal":100,
+          "vertical":5,
+          "align":"text-center"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<p><span style=\"font-size: 250%;\"><strong>SALE</strong></span></p>",
+              "text_selected_editor":"tinymce"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "defaults": {
+          "height":"400",
+          "overlay_color":"rgba(0, 0, 0, 0.2)"
+        },
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "color":"light",
+          "width":80,
+          "scale":100,
+          "horizontal":50,
+          "vertical":90,
+          "align":"left",
+          "style":"outline"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h4 class=\"uppercase\">Summer 2017</h4><h2 class=\"uppercase\"><strong>NEW Summer Trends</strong></h2>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"SHOP NOW"
+            }
+          }
+        ]
+      },
+      {
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "style":"circle",
+          "color":"light",
+          "width":26,
+          "scale":100,
+          "padding":"0 -5px 0 0",
+          "horizontal":90,
+          "vertical":10,
+          "align":"text-center",
+          "bg_color":"rgba(0, 0, 0, 0.46)"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<p><span style=\"font-size: 250%;\"><strong>-50%</strong></span></p>",
+              "text_selected_editor":"tinymce"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "defaults": {
+          "height":"400",
+          "overlay_color":"rgba(0, 0, 0, 0.2)"
+        },
+        "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+        "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+        "has_button": true,
+        "values": {
+          "color":"light",
+          "width":80,
+          "scale":100,
+          "horizontal":50,
+          "vertical":90,
+          "align":"text-center",
+          "style":"outline"
+        },
+        "childs":[
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Widget\\TextAreaEditor",
+            "values": {
+              "text" : "<h4 class=\"uppercase\">Summer 2017</h4><h2 class=\"uppercase\"><strong>NEW Summer Trends</strong></h2>",
+              "text_selected_editor":"tinymce"
+            }
+          },
+          {
+            "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+            "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Button",
+            "values": {
+              "button_text":"SHOP NOW"
+            }
+          }
+        ]
+      }
+    ]
+  ],
+  "content_fields": [
+    {
+      "type": "label",
+      "name": "layout",
+      "required": false,
+      "visible": true,
+      "label": "Layout"
+    },
+    {
+      "type": "select",
+      "name": "banner_width",
+      "attribute_type": "class",
+      "values": [
+        {
+          "value": "",
+          "label": "Normal"
+        },
+        {
+          "value": "full-width",
+          "label": "Full Width"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Width"
+    },
+    {
+      "type": "select",
+      "name": "effect",
+      "attribute_type": "class",
+      "element_class": "bg-effect",
+      "values": [
+        {
+          "value": "",
+          "label": "No effect"
+        },
+        {
+          "value": "effect-snow",
+          "label": "Snow"
+        },
+        {
+          "value": "effect-confetti",
+          "label": "Confetti"
+        },
+        {
+          "value": "effect-sliding-glass",
+          "label": "Sliding Glass"
+        },
+        {
+          "value": "effect-sparkle",
+          "label": "Sparkle"
+        },
+        {
+          "value": "effect-rain",
+          "label": "Rain"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Style"
+    },
+    {
+      "type": "select",
+      "name": "animate",
+      "attribute_type": "class",
+      "values": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "fadeInLeft",
+          "label": "Fade In Left"
+        },
+        {
+          "value": "fadeInRight",
+          "label": "Fade In Right"
+        },
+        {
+          "value": "fadeInUp",
+          "label": "Fade In Up"
+        },
+        {
+          "value": "fadeInDown",
+          "label": "Fade In Down"
+        },
+        {
+          "value": "bounceIn",
+          "label": "Bounce In"
+        },
+        {
+          "value": "bounceInUp",
+          "label": "Bounce In Up"
+        },
+        {
+          "value": "bounceInDown",
+          "label": "Bounce In Down"
+        },
+        {
+          "value": "bounceInLeft",
+          "label": "Bounce In Left"
+        },
+        {
+          "value": "bounceInRight",
+          "label": "Bounce In Right"
+        },
+        {
+          "value": "blurIn",
+          "label": "Blur In"
+        },
+        {
+          "value": "flipInX",
+          "label": "Flip In X"
+        },
+        {
+          "value": "flipInY",
+          "label": "Flip In Y"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Animate"
+    },
+    {
+      "type": "label",
+      "name": "image_banner",
+      "required": false,
+      "visible": true,
+      "label": "Image For Banner"
+    },
+    {
+      "type": "media",
+      "name": "image",
+      "attribute_type":"attribute",
+      "code":"src",
+      "element_class": "image",
+      "required": false,
+      "visible": true,
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "name": "lazyload",
+      "required": false,
+      "visible": true,
+      "default": 0,
+      "source_model": "Magento\\Config\\Model\\Config\\Source\\Yesno",
+      "label": "Lazy load Image"
+    },
+    {
+      "type": "text",
+      "name": "height_image",
+      "required": false,
+      "visible": true,
+      "label": "Image lazy load height(px)",
+      "depends" : {"lazyload" : 1}
+    },
+    {
+      "type": "label",
+      "name": "link_label",
+      "required": false,
+      "visible": true,
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "name": "link",
+      "required": false,
+      "visible": true,
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "name": "target",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "",
+          "label": "Same window"
+        },
+        {
+          "value": "_blank",
+          "label": "New window"
+        }
+      ],
+      "label": "Target"
+    },
+    {
+      "type": "label",
+      "name": "video",
+      "attribute_type": "attribute",
+      "element_class": "background-video",
+      "required": false,
+      "visible": true,
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "name": "youtube_id",
+      "required": false,
+      "visible": true,
+      "label": "Youtube Video ID"
+    },
+    {
+      "type": "text",
+      "name": "video_mp4",
+      "required": false,
+      "visible": true,
+      "label": "Video Mp4"
+    },
+    {
+      "type": "text",
+      "name": "video_ogg",
+      "required": false,
+      "visible": true,
+      "label": "Video Ogg"
+    },
+    {
+      "type": "text",
+      "name": "video_webm",
+      "required": false,
+      "visible": true,
+      "label": "Video Webm"
+    },
+    {
+      "type": "toggle",
+      "name": "auto_play",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Auto Play"
+    },
+    {
+      "type": "toggle",
+      "name": "auto_loop",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Loop"
+    },
+    {
+      "type": "slider",
+      "name": "volume",
+      "required": false,
+      "min":0,
+      "max":100,
+      "visible": true,
+      "label": "Volume(Not effect with Slider)"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "text",
+      "name": "height",
+      "attribute_type": "style",
+      "code": "padding-top",
+      "unit": "px",
+      "required": false,
+      "visible": true,
+      "default": 500,
+      "label": "Height(px)"
+    },
+    {
+      "type": "color",
+      "name": "overlay_color",
+      "attribute_type": "style",
+      "code": "background-color",
+      "element_class": "overlay",
+      "required": false,
+      "visible": true,
+      "label": "Overlay"
+    }
+  ]
+}

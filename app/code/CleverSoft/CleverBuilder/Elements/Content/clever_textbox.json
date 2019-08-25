@@ -1,0 +1,313 @@
+{
+  "name": "Text Box",
+  "title": "Text Box",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "widget",
+  "icon" : "",
+  "default_items": [],
+  "has_child": "textbox",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Textbox",
+  "code": "clever-textbox",
+  "layouts":[
+  ],
+  "content_fields": [
+    {
+      "type": "label",
+      "name": "layout",
+      "required": false,
+      "visible": true,
+      "label": "Layout"
+    },
+    {
+      "type": "select",
+      "name": "hover",
+      "values": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "fade-out",
+          "label": "Fade Out"
+        },
+        {
+          "value": "slide",
+          "label": "Slide In"
+        },
+        {
+          "value": "zoom",
+          "label": "Zoom Out"
+        },
+        {
+          "value": "zoom-in",
+          "label": "Zoom In"
+        },
+        {
+          "value": "blur",
+          "label": "Blur In"
+        },
+        {
+          "value": "bounce",
+          "label": "Bounce"
+        },
+        {
+          "value": "invert",
+          "label": "Invert"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Hover"
+    },
+    {
+      "type": "select",
+      "name": "animate",
+      "values": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "fadeInLeft",
+          "label": "Fade In Left"
+        },
+        {
+          "value": "fadeInRight",
+          "label": "Fade In Right"
+        },
+        {
+          "value": "fadeInUp",
+          "label": "Fade In Up"
+        },
+        {
+          "value": "fadeInDown",
+          "label": "Fade In Down"
+        },
+        {
+          "value": "bounceIn",
+          "label": "Bounce In"
+        },
+        {
+          "value": "bounceInUp",
+          "label": "Bounce In Up"
+        },
+        {
+          "value": "bounceInDown",
+          "label": "Bounce In Down"
+        },
+        {
+          "value": "bounceInLeft",
+          "label": "Bounce In Left"
+        },
+        {
+          "value": "bounceInRight",
+          "label": "Bounce In Right"
+        },
+        {
+          "value": "blurIn",
+          "label": "Blur In"
+        },
+        {
+          "value": "flipInX",
+          "label": "Flip In X"
+        },
+        {
+          "value": "flipInY",
+          "label": "Flip In Y"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Animate"
+    },
+    {
+      "type": "toggle",
+      "name": "parallax",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Parallax"
+    }
+  ],
+  "style_fields":[
+    {
+      "type": "label",
+      "name": "layout",
+      "required": false,
+      "visible": true,
+      "label": "Layout"
+    },
+    {
+      "type": "select",
+      "name": "color",
+      "element_class": "textbox-child-element",
+      "attribute_type": "class",
+      "values": [
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Color"
+    },
+    {
+      "type": "slider",
+      "name": "width",
+      "attribute_type": "style",
+      "code": "width",
+      "unit": "%",
+      "required": false,
+      "min":0,
+      "value":60,
+      "max":100,
+      "visible": true,
+      "label": "Width(%)"
+    },
+    {
+      "type": "slider",
+      "name": "scale",
+      "attribute_type": "style",
+      "code": "font-size",
+      "element_class": "text-box-global",
+      "unit": "%",
+      "required": false,
+      "min":0,
+      "value":100,
+      "max":500,
+      "visible": true,
+      "label": "Scale(%)"
+    },
+    {
+      "type": "slider",
+      "name": "rotate",
+      "attribute_type": "style",
+      "code": "transform",
+      "element_class": "text-box-global",
+      "prefix":"rotate(",
+      "unit": "deg)",
+      "required": false,
+      "min":-180,
+      "value":0,
+      "max":180,
+      "visible": true,
+      "label": "Rotate"
+    },
+    {
+      "type": "label",
+      "name": "position",
+      "required": false,
+      "visible": true,
+      "label": "Position"
+    },
+    {
+      "type": "slider",
+      "name": "horizontal",
+      "attribute_type": "class",
+      "prefix": "lg-x",
+      "required": false,
+      "min":0,
+      "value":50,
+      "max":100,
+      "visible": true,
+      "label": "Horizontal"
+    },
+    {
+      "type": "slider",
+      "name": "vertical",
+      "attribute_type": "class",
+      "prefix": "lg-y",
+      "required": false,
+      "min":0,
+      "max":100,
+      "visible": true,
+      "label": "Vertical"
+    },
+    {
+      "type": "label",
+      "name": "text",
+      "required": false,
+      "visible": true,
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "name": "align",
+      "attribute_type": "class",
+      "element_class": "textbox-child-element",
+      "values": [
+        {
+          "value": "text-left",
+          "label": "Left"
+        },
+        {
+          "value": "text-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-right",
+          "label": "Right"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Align"
+    },
+    {
+      "type": "slider",
+      "name": "shadow",
+      "attribute_type": "class",
+      "element_class": "textbox-child-element",
+      "prefix": "text-shadow-",
+      "required": false,
+      "min":0,
+      "max":5,
+      "visible": true,
+      "label": "Shadow"
+    },
+    {
+      "type": "label",
+      "name": "background",
+      "required": false,
+      "visible": true,
+      "label": "Background"
+    },
+    {
+      "type": "slider",
+      "name": "depth",
+      "attribute_type": "class",
+      "element_class": "text-box-global",
+      "prefix": "box-shadow-",
+      "required": false,
+      "min":0,
+      "max":5,
+      "visible": true,
+      "label": "Depth"
+    },
+    {
+      "type": "slider",
+      "name": "depth_hover",
+      "attribute_type": "class",
+      "element_class": "text-box-global",
+      "prefix": "box-shadow-",
+      "unit": "-hover",
+      "required": false,
+      "min":0,
+      "max":5,
+      "visible": true,
+      "label": "Depth Hover"
+    }
+  ]
+}

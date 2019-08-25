@@ -1,0 +1,79 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverSocialLogin
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+/**
+ * Customer login form template
+ * @see \Magento\Customer\Block\Form\Login
+ * @var $block \Magento\Customer\Block\Form\Login
+ */
+?>
+<?php
+$_helper = $this->helper('CleverSoft\CleverCookieLaw\Helper\Data');
+?>
+
+<div class="block-customer-login">
+    <div class="block-content">
+        <form class="form form-login"
+              action="<?php /* @escapeNotVerified */ echo $block->getPostActionUrl() ?>"
+              method="post"
+              id="social-login-form"
+              data-mage-init='{"validation":{}}'>
+            <?php echo $block->getBlockHtml('formkey'); ?>
+            <div class="login" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
+                <div class="email required">
+                    <div class="control">
+                        <input name="login[username]" value="<?php echo $block->escapeHtml($block->getUsername()) ?>" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> id="social-email" type="email" class="input-text" placeholder="<?php /* @escapeNotVerified */ echo __('Email *') ?>" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" data-validate="{required:true, 'validate-email':true}">
+                    </div>
+                </div>
+                <div class="password required">
+                    <div class="control">
+                        <input name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> class="input-text" placeholder="<?php /* @escapeNotVerified */ echo __('Password *') ?>" id="social-pass" title="<?php /* @escapeNotVerified */ echo __('Password') ?>" data-validate="{required:true, 'validate-password':true}">
+                    </div>
+                </div>
+                <?php echo $block->getChildHtml('form_additional_info'); ?>
+                <?php echo $block->getChildHtml('login.captcha'); ?>
+                <?php if($_helper->getSystemConfig('integration', 'login')):?>
+                    <input style="float:left;margin: 7px 10px 0 0;width:inherit;height:inherit" data-validate="{required:true}" type="checkbox" name="integration[sociallogin]"><?php echo $_helper->getSystemConfig('integration', 'login_text')?><br>
+                    <div id="social_login_integration_error" class="message info empty" style="display:none">
+                        <div><?php echo $_helper->getSystemConfig('integration', 'login_error')?></div>
+                    </div>
+                <?php endif;?>
+                <p class="required"><?php /* @escapeNotVerified */ echo __('* Required Fields') ?></p>
+                <a class="action remind forgot-pass" href="<?php /* @escapeNotVerified */ echo $block->getForgotPasswordUrl() ?>"><span><?php /* @escapeNotVerified */ echo __('Forgot Your Password?') ?></span></a>
+
+                    <button type="submit" class="btn action login" name="send" id="social-send2"><span><?php /* @escapeNotVerified */ echo __('Login') ?></span></button>
+
+            </div>
+        </form>
+    </div>
+</div>
+<?php
+	$openPopup = $this->helper('CleverSoft\CleverSocialLogin\Helper\Data'); 
+?>
+<script>
+	require(["jquery"], function ($) {
+		$(document).ready(function () {  
+			  
+			<?php if($openPopup->positionButtonsLogin() == 'top'): ?> 
+			$('#zoo-main-content .pslogin-login-form ').append('<p class="hr-login"><span><?php /* @escapeNotVerified */ echo __('Or'); ?></span></p>');
+			<?php endif; ?>
+            <?php if($_helper->getSystemConfig('integration', 'login')):?>
+                $("#social-login-form").submit(function() {
+                    if($('input[name="integration[sociallogin]"]').is(":checked")) {
+                        $('#social_login_integration_error').hide();
+                    } else {
+                        $('#social_login_integration_error').show();
+                    }
+                });
+            <?php endif;?>
+		})
+	});
+</script>
+

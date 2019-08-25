@@ -1,0 +1,36 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverBuilder
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?> 
+ 
+    <div id="clever-categories-navigation">
+        <div class="clever-categories-navigation">
+        <h3 class="clever-categories-title">
+            <?php echo $this->getData('category_title'); ?>
+        </h3>
+        	<ul class="clever-categories">
+            	<?php echo $this->renderCategory();?>
+            </ul>
+        </div>
+    </div> 
+
+<script>
+    require(["jquery","jQueryLibMin"], function ($) {
+        <?php if($block->getData('enable_fullwidth')) { ?>
+        var $left = $('#clever-categories-navigation').offset().left;
+        $('#clever-categories-navigation').css({
+            'left': '-' + $left + 'px',
+            'position': 'relative',
+            'right': '0',
+            'width': $(window).width() + 'px'
+        });
+        $('#clever-categories-navigation .clever-categories-navigation').css('width', '100%');
+        <?php } ?>
+
+    });
+</script>

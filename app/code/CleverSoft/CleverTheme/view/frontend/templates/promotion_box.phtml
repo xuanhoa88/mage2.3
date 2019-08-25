@@ -1,0 +1,27 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$theme = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+
+$pro_box = $theme->getCfg('responsive/promo_box_enable');
+$pro_text = $theme->getCfg('responsive/promo_box_text');
+$pro_link = $theme->getCfg('responsive/promo_box_link');
+?>
+<?php if($pro_box == 1): ?>
+
+
+    <div class="zoo-notification">
+        <div class="zoo-notification-inner">
+            <a href="<?php echo $pro_link ? $pro_link : '#' ?>" class="zoo-notification-text"><span><?php echo $pro_text ? $pro_text : '' ?></span></a>
+            <a href="#" class="notification-dismiss" data-notification-dismiss=""><i class="clever-icon-close"></i></a>
+        </div>
+    </div>
+
+<?php endif; ?>

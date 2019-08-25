@@ -1,0 +1,523 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+if ($objectManager->create('CleverSoft\CleverTheme\Model\FooterBlock')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getId()) {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\FooterBlock')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getFooterStyle());
+} else {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\FooterBlock')->getCollection()->addFieldToFilter('store_id',0)->getFirstItem()->getFooterStyle());
+}
+if($settings){
+    $data = isset($settings->footer) ? $settings->footer : '{}';
+}
+?>
+<!-- Modal content -->
+<div class="footerbuilder-modal-content">
+    <div class="footerbuilder-modal-footer">
+        <span class="footerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="footerbuilder-modal-body">
+        <strong>Payment Icon</strong>
+        <div class="modal-inner" id="footer_desktop_payment-icon" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open"
+                id="sub-accordion-section-footer_payment">
+                <li id="customize-control-payment-icon_margin" class="customize-control customize-control-payment-icon-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-payment-icon_margin]" value="<?= isset($data->{'_customize-input-payment-icon_margin'}) && $data->{'_customize-input-payment-icon_margin'} ? $data->{'_customize-input-payment-icon_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-payment-icon_align" class="customize-control customize-control-payment-icon_align"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Align items</span>
+                    </label>
+                    <select name="settings[footer][_customize-input-payment-icon_align]">
+                        <option value="0" <?= isset($data->{'_customize-input-payment-icon_align'}) && $data->{'_customize-input-payment-icon_align'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="left" <?= isset($data->{'_customize-input-payment-icon_align'}) && $data->{'_customize-input-payment-icon_align'} == 'left' ? 'selected' : '' ?>>
+                            Left
+                        </option>
+                        </option>
+                        <option value="right" <?= isset($data->{'_customize-input-payment-icon_align'}) && $data->{'_customize-input-payment-icon_align'} == 'right' ? 'selected' : '' ?>>
+                            Right
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-footer_payment-icon_merge_item" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[footer][_customize_footer_payment-icon_merge_item]">
+                        <option value="0" <?= isset($data->{'_customize_footer_payment-icon_merge_item'}) && $data->{'_customize_footer_payment-icon_merge_item'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_footer_payment-icon_merge_item'}) && $data->{'_customize_footer_payment-icon_merge_item'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_footer_payment-icon_merge_item'}) && $data->{'_customize_footer_payment-icon_merge_item'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-payment_icon" class="customize-control customize-control-kirki-checkbox-image"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Payment Icons</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_payment_icon" class="image image_payment">
+                        <ul>
+                            <li>
+                                <input type="checkbox" value="visa" name="settings[footer][_customize_footer_payment-icon_visa]" <?= isset($data->{'_customize_footer_payment-icon_visa'}) && $data->{'_customize_footer_payment-icon_visa'} ? 'checked' : '' ?> />
+                                <label for="cb2">Visa</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="paypal" name="settings[footer][_customize_footer_payment-icon_paypal]" <?= isset($data->{'_customize_footer_payment-icon_paypal'}) && $data->{'_customize_footer_payment-icon_paypal'} ? 'checked' : '' ?> />
+                                <label for="cb1">Paypal</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="stripe" name="settings[footer][_customize_footer_payment-icon_stripe]" <?= isset($data->{'_customize_footer_payment-icon_stripe'}) && $data->{'_customize_footer_payment-icon_stripe'} ? 'checked' : '' ?> />
+                                <label for="cb1">Stripe</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="mastercard" name="settings[footer][_customize_footer_payment-icon_mastercard]" <?= isset($data->{'_customize_footer_payment-icon_mastercard'}) && $data->{'_customize_footer_payment-icon_mastercard'} ? 'checked' : '' ?> />
+                                <label for="cb1">MasterCard</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="cashondelivery" name="settings[footer][_customize_footer_payment-icon_cashondelivery]" <?= isset($data->{'_customize_footer_payment-icon_cashondelivery'}) && $data->{'_customize_footer_payment-icon_cashondelivery'} ? 'checked' : '' ?> />
+                                <label for="cb1">Cash On DeliveryCard</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="amazon" name="settings[footer][_customize_footer_payment-icon_amazon]" <?= isset($data->{'_customize_footer_payment-icon_amazon'}) && $data->{'_customize_footer_payment-icon_amazon'} ? 'checked' : '' ?> />
+                                <label for="cb1">Amazon</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="americanexpress" name="settings[footer][_customize_footer_payment-icon_americanexpress]" <?= isset($data->{'_customize_footer_payment-icon_americanexpress'}) && $data->{'_customize_footer_payment-icon_americanexpress'} ? 'checked' : '' ?> />
+                                <label for="cb1">American Express</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="applepay" name="settings[footer][_customize_footer_payment-icon_applepay]" <?= isset($data->{'_customize_footer_payment-icon_applepay'}) && $data->{'_customize_footer_payment-icon_applepay'} ? 'checked' : '' ?> />
+                                <label for="cb1">Apple Pay</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="afterpay" name="settings[footer][_customize_footer_payment-icon_afterpay]" <?= isset($data->{'_customize_footer_payment-icon_afterpay'}) && $data->{'_customize_footer_payment-icon_afterpay'} ? 'checked' : '' ?> />
+                                <label for="cb1">AfterPay</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="atm" name="settings[footer][_customize_footer_payment-icon_atm]" <?= isset($data->{'_customize_footer_payment-icon_atm'}) && $data->{'_customize_footer_payment-icon_atm'} ? 'checked' : '' ?> />
+                                <label for="cb1">Atm</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="bancontact" name="settings[footer][_customize_footer_payment-icon_bancontact]" <?= isset($data->{'_customize_footer_payment-icon_bancontact'}) && $data->{'_customize_footer_payment-icon_bancontact'} ? 'checked' : '' ?> />
+                                <label for="cb1">Bancontact</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="bankomat" name="settings[footer][_customize_footer_payment-icon_bankomat]" <?= isset($data->{'_customize_footer_payment-icon_bankomat'}) && $data->{'_customize_footer_payment-icon_bankomat'} ? 'checked' : '' ?> />
+                                <label for="cb1">Bankomat</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="banktransfer" name="settings[footer][_customize_footer_payment-icon_banktransfer]" <?= isset($data->{'_customize_footer_payment-icon_banktransfer'}) && $data->{'_customize_footer_payment-icon_banktransfer'} ? 'checked' : '' ?> />
+                                <label for="cb1">Bank transfer</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="bitcoin" name="settings[footer][_customize_footer_payment-icon_bitcoin]" <?= isset($data->{'_customize_footer_payment-icon_bitcoin'}) && $data->{'_customize_footer_payment-icon_bitcoin'} ? 'checked' : '' ?> />
+                                <label for="cb1">Bitcoin</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="braintree" name="settings[footer][_customize_footer_payment-icon_braintree]" <?= isset($data->{'_customize_footer_payment-icon_braintree'}) && $data->{'_customize_footer_payment-icon_braintree'} ? 'checked' : '' ?> />
+                                <label for="cb1">Braintree</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="cartasi" name="settings[footer][_customize_footer_payment-icon_cartasi]" <?= isset($data->{'_customize_footer_payment-icon_cartasi'}) && $data->{'_customize_footer_payment-icon_cartasi'} ? 'checked' : '' ?> />
+                                <label for="cb1">CartaSi</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="cashcloud" name="settings[footer][_customize_footer_payment-icon_cashcloud]" <?= isset($data->{'_customize_footer_payment-icon_cashcloud'}) && $data->{'_customize_footer_payment-icon_cashcloud'} ? 'checked' : '' ?> />
+                                <label for="cb1">Ripple</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="cashonpickup" name="settings[footer][_customize_footer_payment-icon_cashonpickup]" <?= isset($data->{'_customize_footer_payment-icon_cashonpickup'}) && $data->{'_customize_footer_payment-icon_cashonpickup'} ? 'checked' : '' ?> />
+                                <label for="cb1">Cash on Pickup</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="cirrus" name="settings[footer][_customize_footer_payment-icon_cirrus]" <?= isset($data->{'_customize_footer_payment-icon_cirrus'}) && $data->{'_customize_footer_payment-icon_cirrus'} ? 'checked' : '' ?> />
+                                <label for="cb1">Cirrus</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="clickandbuy" name="settings[footer][_customize_footer_payment-icon_clickandbuy]" <?= isset($data->{'_customize_footer_payment-icon_clickandbuy'}) && $data->{'_customize_footer_payment-icon_clickandbuy'} ? 'checked' : '' ?> />
+                                <label for="cb1">Click and Buy</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="creditcard" name="settings[footer][_customize_footer_payment-icon_creditcard]" <?= isset($data->{'_customize_footer_payment-icon_creditcard'}) && $data->{'_customize_footer_payment-icon_creditcard'} ? 'checked' : '' ?> />
+                                <label for="cb1">Credit Card</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="creditcard2" name="settings[footer][_customize_footer_payment-icon_creditcard2]" <?= isset($data->{'_customize_footer_payment-icon_creditcard2'}) && $data->{'_customize_footer_payment-icon_creditcard2'} ? 'checked' : '' ?> />
+                                <label for="cb1">Credit Card 2</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="dancard" name="settings[footer][_customize_footer_payment-icon_dancard]" <?= isset($data->{'_customize_footer_payment-icon_dancard'}) && $data->{'_customize_footer_payment-icon_dancard'} ? 'checked' : '' ?> />
+                                <label for="cb1">DanKort</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="dinnersclub" name="settings[footer][_customize_footer_payment-icon_dinnersclub]" <?= isset($data->{'_customize_footer_payment-icon_dinnersclub'}) && $data->{'_customize_footer_payment-icon_dinnersclub'} ? 'checked' : '' ?> />
+                                <label for="cb1">Dinners Club</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="discover" name="settings[footer][_customize_footer_payment-icon_discover]" <?= isset($data->{'_customize_footer_payment-icon_discover'}) && $data->{'_customize_footer_payment-icon_discover'} ? 'checked' : '' ?> />
+                                <label for="cb1">Discover</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="elo" name="settings[footer][_customize_footer_payment-icon_elo]" <?= isset($data->{'_customize_footer_payment-icon_elo'}) && $data->{'_customize_footer_payment-icon_elo'} ? 'checked' : '' ?> />
+                                <label for="cb1">Elo</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="eps" name="settings[footer][_customize_footer_payment-icon_eps]" <?= isset($data->{'_customize_footer_payment-icon_eps'}) && $data->{'_customize_footer_payment-icon_eps'} ? 'checked' : '' ?> />
+                                <label for="cb1">Eps</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="facture" name="settings[footer][_customize_footer_payment-icon_facture]" <?= isset($data->{'_customize_footer_payment-icon_facture'}) && $data->{'_customize_footer_payment-icon_facture'} ? 'checked' : '' ?> />
+                                <label for="cb1">Facture</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="fattura" name="settings[footer][_customize_footer_payment-icon_fattura]" <?= isset($data->{'_customize_footer_payment-icon_fattura'}) && $data->{'_customize_footer_payment-icon_fattura'} ? 'checked' : '' ?> />
+                                <label for="cb1">Fattura</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="flattr" name="settings[footer][_customize_footer_payment-icon_flattr]" <?= isset($data->{'_customize_footer_payment-icon_flattr'}) && $data->{'_customize_footer_payment-icon_flattr'} ? 'checked' : '' ?> />
+                                <label for="cb1">Flattr</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="giropay" name="settings[footer][_customize_footer_payment-icon_giropay]" <?= isset($data->{'_customize_footer_payment-icon_giropay'}) && $data->{'_customize_footer_payment-icon_giropay'} ? 'checked' : '' ?> />
+                                <label for="cb1">Giropay</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="googlewallet" name="settings[footer][_customize_footer_payment-icon_googlewallet]" <?= isset($data->{'_customize_footer_payment-icon_googlewallet'}) && $data->{'_customize_footer_payment-icon_googlewallet'} ? 'checked' : '' ?> />
+                                <label for="cb1">Google Wallet</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="swish" name="settings[footer][_customize_footer_payment-icon_swish]" <?= isset($data->{'_customize_footer_payment-icon_swish'}) && $data->{'_customize_footer_payment-icon_swish'} ? 'checked' : '' ?> />
+                                <label for="cb1">Swish (SE)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="truste" name="settings[footer][_customize_footer_payment-icon_truste]" <?= isset($data->{'_customize_footer_payment-icon_truste'}) && $data->{'_customize_footer_payment-icon_truste'} ? 'checked' : '' ?> />
+                                <label for="cb1">Truste</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="unionpay" name="settings[footer][_customize_footer_payment-icon_unionpay]" <?= isset($data->{'_customize_footer_payment-icon_unionpay'}) && $data->{'_customize_footer_payment-icon_unionpay'} ? 'checked' : '' ?> />
+                                <label for="cb1">unionpay</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="verisign" name="settings[footer][_customize_footer_payment-icon_verisign]" <?= isset($data->{'_customize_footer_payment-icon_verisign'}) && $data->{'_customize_footer_payment-icon_verisign'} ? 'checked' : '' ?> />
+                                <label for="cb1">VeriSign</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="visa1" name="settings[footer][_customize_footer_payment-icon_visa1]" <?= isset($data->{'_customize_footer_payment-icon_visa1'}) && $data->{'_customize_footer_payment-icon_visa1'} ? 'checked' : '' ?> />
+                                <label for="cb1">Visa 2</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="visaelectron" name="settings[footer][_customize_footer_payment-icon_visaelectron]" <?= isset($data->{'_customize_footer_payment-icon_visaelectron'}) && $data->{'_customize_footer_payment-icon_visaelectron'} ? 'checked' : '' ?> />
+                                <label for="cb1">Visa Electron</label>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li id="customize-control-payment-icon_size" class="customize-control customize-control-payment-icon_size"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Icon Size (px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-payment-icon_size]" value="<?= isset($data->{'_customize-input-payment-icon_size'}) && $data->{'_customize-input-payment-icon_size'} ? $data->{'_customize-input-payment-icon_size'} : '' ?>">
+                </li>
+                <li id="customize-control-footer_payment-icon_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Color</span>
+                    <input id="input_footer_payment-icon_color" name="settings[footer][_customize-radio-payment-icon_color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-payment-icon_color'}) ? $data->{'_customize-radio-payment-icon_color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_footer_payment-icon_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-inner" id="footer_mobile_payment-icon" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open" id="sub-accordion-section-footer_payment_mobile">
+                <li id="customize-control-mobile_payment-icon_margin" class="customize-control customize-control-payment-icon-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin (px)</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-mobile_payment-icon_margin]" value="<?= isset($data->{'_customize-input-mobile_payment-icon_margin'}) && $data->{'_customize-input-mobile_payment-icon_margin'} ? $data->{'_customize-input-mobile_payment-icon_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-payment-icon_align-mobile" class="customize-control customize-control-payment-icon_align-mobile"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Align items</span>
+                    </label>
+                    <select name="settings[footer][_customize-input-payment-icon_align-mobile]">
+                        <option value="0" <?= isset($data->{'_customize-input-payment-icon_align-mobile'}) && $data->{'_customize-input-payment-icon_align-mobile'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="left" <?= isset($data->{'_customize-input-payment-icon_align-mobile'}) && $data->{'_customize-input-payment-icon_align-mobile'} == 'left' ? 'selected' : '' ?>>
+                            Left
+                        </option>
+                        </option>
+                        <option value="right" <?= isset($data->{'_customize-input-payment-icon_align-mobile'}) && $data->{'_customize-input-payment-icon_align-mobile'} == 'right' ? 'selected' : '' ?>>
+                            Right
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-footer_payment-icon_merge_item_mobile" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[footer][_customize_footer_payment-icon_merge_item_mobile]">
+                        <option value="0" <?= isset($data->{'_customize_footer_payment-icon_merge_item_mobile'}) && $data->{'_customize_footer_payment-icon_merge_item_mobile'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_footer_payment-icon_merge_item_mobile'}) && $data->{'_customize_footer_payment-icon_merge_item_mobile'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_footer_payment-icon_merge_item_mobile'}) && $data->{'_customize_footer_payment-icon_merge_item_mobile'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+                <li id="customize-control-payment_icon_mobile" class="customize-control customize-control-kirki-checkbox-image"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Payment Icons</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <div id="input_payment_icon_mobile" class="image image_payment">
+                        <ul>
+                            <li>
+                                <input type="checkbox" value="visa" name="settings[footer][_customize_footer_payment-icon-mobile_visa]" <?= isset($data->{'_customize_footer_payment-icon-mobile_visa'}) && $data->{'_customize_footer_payment-icon-mobile_visa'} ? 'checked' : '' ?> />
+                                <label for="cb2">Visa</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="paypal" name="settings[footer][_customize_footer_payment-icon-mobile_paypal]" <?= isset($data->{'_customize_footer_payment-icon-mobile_paypal'}) && $data->{'_customize_footer_payment-icon-mobile_paypal'} ? 'checked' : '' ?> />
+                                <label for="cb1">Paypal</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="stripe" name="settings[footer][_customize_footer_payment-icon-mobile_stripe]" <?= isset($data->{'_customize_footer_payment-icon-mobile_stripe'}) && $data->{'_customize_footer_payment-icon-mobile_stripe'} ? 'checked' : '' ?> />
+                                <label for="cb1">Stripe</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="mastercard" name="settings[footer][_customize_footer_payment-icon-mobile_mastercard]" <?= isset($data->{'_customize_footer_payment-icon-mobile_mastercard'}) && $data->{'_customize_footer_payment-icon-mobile_mastercard'} ? 'checked' : '' ?> />
+                                <label for="cb1">MasterCard</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="cashondelivery" name="settings[footer][_customize_footer_payment-icon-mobile_cashondelivery]" <?= isset($data->{'_customize_footer_payment-icon-mobile_cashondelivery'}) && $data->{'_customize_footer_payment-icon-mobile_cashondelivery'} ? 'checked' : '' ?> />
+                                <label for="cb1">Cash On DeliveryCard</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="amazon" name="settings[footer][_customize_footer_payment-icon-mobile_amazon]" <?= isset($data->{'_customize_footer_payment-icon-mobile_amazon'}) && $data->{'_customize_footer_payment-icon-mobile_amazon'} ? 'checked' : '' ?> />
+                                <label for="cb1">Amazon</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="americanexpress" name="settings[footer][_customize_footer_payment-icon-mobile_americanexpress]" <?= isset($data->{'_customize_footer_payment-icon-mobile_americanexpress'}) && $data->{'_customize_footer_payment-icon-mobile_americanexpress'} ? 'checked' : '' ?> />
+                                <label for="cb1">American Express</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="applepay" name="settings[footer][_customize_footer_payment-icon-mobile_applepay]" <?= isset($data->{'_customize_footer_payment-icon-mobile_applepay'}) && $data->{'_customize_footer_payment-icon-mobile_applepay'} ? 'checked' : '' ?> />
+                                <label for="cb1">Apple Pay</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="afterpay" name="settings[footer][_customize_footer_payment-icon-mobile_afterpay]" <?= isset($data->{'_customize_footer_payment-icon-mobile_afterpay'}) && $data->{'_customize_footer_payment-icon-mobile_afterpay'} ? 'checked' : '' ?> />
+                                <label for="cb1">AfterPay</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="atm" name="settings[footer][_customize_footer_payment-icon-mobile_atm]" <?= isset($data->{'_customize_footer_payment-icon-mobile_atm'}) && $data->{'_customize_footer_payment-icon-mobile_atm'} ? 'checked' : '' ?> />
+                                <label for="cb1">Atm</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="bancontact" name="settings[footer][_customize_footer_payment-icon-mobile_bancontact]" <?= isset($data->{'_customize_footer_payment-icon-mobile_bancontact'}) && $data->{'_customize_footer_payment-icon-mobile_bancontact'} ? 'checked' : '' ?> />
+                                <label for="cb1">Bancontact</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="bankomat" name="settings[footer][_customize_footer_payment-icon-mobile_bankomat]" <?= isset($data->{'_customize_footer_payment-icon-mobile_bankomat'}) && $data->{'_customize_footer_payment-icon-mobile_bankomat'} ? 'checked' : '' ?> />
+                                <label for="cb1">Bankomat</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="banktransfer" name="settings[footer][_customize_footer_payment-icon-mobile_banktransfer]" <?= isset($data->{'_customize_footer_payment-icon-mobile_banktransfer'}) && $data->{'_customize_footer_payment-icon-mobile_banktransfer'} ? 'checked' : '' ?> />
+                                <label for="cb1">Bank transfer</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="bitcoin" name="settings[footer][_customize_footer_payment-icon-mobile_bitcoin]" <?= isset($data->{'_customize_footer_payment-icon-mobile_bitcoin'}) && $data->{'_customize_footer_payment-icon-mobile_bitcoin'} ? 'checked' : '' ?> />
+                                <label for="cb1">Bitcoin</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="braintree" name="settings[footer][_customize_footer_payment-icon-mobile_braintree]" <?= isset($data->{'_customize_footer_payment-icon-mobile_braintree'}) && $data->{'_customize_footer_payment-icon-mobile_braintree'} ? 'checked' : '' ?> />
+                                <label for="cb1">Braintree</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="cartasi" name="settings[footer][_customize_footer_payment-icon-mobile_cartasi]" <?= isset($data->{'_customize_footer_payment-icon-mobile_cartasi'}) && $data->{'_customize_footer_payment-icon-mobile_cartasi'} ? 'checked' : '' ?> />
+                                <label for="cb1">CartaSi</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="cashcloud" name="settings[footer][_customize_footer_payment-icon-mobile_cashcloud]" <?= isset($data->{'_customize_footer_payment-icon-mobile_cashcloud'}) && $data->{'_customize_footer_payment-icon-mobile_cashcloud'} ? 'checked' : '' ?> />
+                                <label for="cb1">Ripple</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="cashonpickup" name="settings[footer][_customize_footer_payment-icon-mobile_cashonpickup]" <?= isset($data->{'_customize_footer_payment-icon-mobile_cashonpickup'}) && $data->{'_customize_footer_payment-icon-mobile_cashonpickup'} ? 'checked' : '' ?> />
+                                <label for="cb1">Cash on Pickup</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="cirrus" name="settings[footer][_customize_footer_payment-icon-mobile_cirrus]" <?= isset($data->{'_customize_footer_payment-icon-mobile_cirrus'}) && $data->{'_customize_footer_payment-icon-mobile_cirrus'} ? 'checked' : '' ?> />
+                                <label for="cb1">Cirrus</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="clickandbuy" name="settings[footer][_customize_footer_payment-icon-mobile_clickandbuy]" <?= isset($data->{'_customize_footer_payment-icon-mobile_clickandbuy'}) && $data->{'_customize_footer_payment-icon-mobile_clickandbuy'} ? 'checked' : '' ?> />
+                                <label for="cb1">Click and Buy</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="creditcard" name="settings[footer][_customize_footer_payment-icon-mobile_creditcard]" <?= isset($data->{'_customize_footer_payment-icon-mobile_creditcard'}) && $data->{'_customize_footer_payment-icon-mobile_creditcard'} ? 'checked' : '' ?> />
+                                <label for="cb1">Credit Card</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="creditcard2" name="settings[footer][_customize_footer_payment-icon-mobile_creditcard2]" <?= isset($data->{'_customize_footer_payment-icon-mobile_creditcard2'}) && $data->{'_customize_footer_payment-icon-mobile_creditcard2'} ? 'checked' : '' ?> />
+                                <label for="cb1">Credit Card 2</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="dancard" name="settings[footer][_customize_footer_payment-icon-mobile_dancard]" <?= isset($data->{'_customize_footer_payment-icon-mobile_dancard'}) && $data->{'_customize_footer_payment-icon-mobile_dancard'} ? 'checked' : '' ?> />
+                                <label for="cb1">DanKort</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="dinnersclub" name="settings[footer][_customize_footer_payment-icon-mobile_dinnersclub]" <?= isset($data->{'_customize_footer_payment-icon-mobile_dinnersclub'}) && $data->{'_customize_footer_payment-icon-mobile_dinnersclub'} ? 'checked' : '' ?> />
+                                <label for="cb1">Dinners Club</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="discover" name="settings[footer][_customize_footer_payment-icon-mobile_discover]" <?= isset($data->{'_customize_footer_payment-icon-mobile_discover'}) && $data->{'_customize_footer_payment-icon-mobile_discover'} ? 'checked' : '' ?> />
+                                <label for="cb1">Discover</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="elo" name="settings[footer][_customize_footer_payment-icon-mobile_elo]" <?= isset($data->{'_customize_footer_payment-icon-mobile_elo'}) && $data->{'_customize_footer_payment-icon-mobile_elo'} ? 'checked' : '' ?> />
+                                <label for="cb1">Elo</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="eps" name="settings[footer][_customize_footer_payment-icon-mobile_eps]" <?= isset($data->{'_customize_footer_payment-icon-mobile_eps'}) && $data->{'_customize_footer_payment-icon-mobile_eps'} ? 'checked' : '' ?> />
+                                <label for="cb1">Eps</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="facture" name="settings[footer][_customize_footer_payment-icon-mobile_facture]" <?= isset($data->{'_customize_footer_payment-icon-mobile_facture'}) && $data->{'_customize_footer_payment-icon-mobile_facture'} ? 'checked' : '' ?> />
+                                <label for="cb1">Facture</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="fattura" name="settings[footer][_customize_footer_payment-icon-mobile_fattura]" <?= isset($data->{'_customize_footer_payment-icon-mobile_fattura'}) && $data->{'_customize_footer_payment-icon-mobile_fattura'} ? 'checked' : '' ?> />
+                                <label for="cb1">Fattura</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="flattr" name="settings[footer][_customize_footer_payment-icon-mobile_flattr]" <?= isset($data->{'_customize_footer_payment-icon-mobile_flattr'}) && $data->{'_customize_footer_payment-icon-mobile_flattr'} ? 'checked' : '' ?> />
+                                <label for="cb1">Flattr</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="giropay" name="settings[footer][_customize_footer_payment-icon-mobile_giropay]" <?= isset($data->{'_customize_footer_payment-icon-mobile_giropay'}) && $data->{'_customize_footer_payment-icon-mobile_giropay'} ? 'checked' : '' ?> />
+                                <label for="cb1">Giropay</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="googlewallet" name="settings[footer][_customize_footer_payment-icon-mobile_googlewallet]" <?= isset($data->{'_customize_footer_payment-icon-mobile_googlewallet'}) && $data->{'_customize_footer_payment-icon-mobile_googlewallet'} ? 'checked' : '' ?> />
+                                <label for="cb1">Google Wallet</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="swish" name="settings[footer][_customize_footer_payment-icon-mobile_swish]" <?= isset($data->{'_customize_footer_payment-icon-mobile_swish'}) && $data->{'_customize_footer_payment-icon-mobile_swish'} ? 'checked' : '' ?> />
+                                <label for="cb1">Swish (SE)</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="truste" name="settings[footer][_customize_footer_payment-icon-mobile_truste]" <?= isset($data->{'_customize_footer_payment-icon-mobile_truste'}) && $data->{'_customize_footer_payment-icon-mobile_truste'} ? 'checked' : '' ?> />
+                                <label for="cb1">Truste</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="unionpay" name="settings[footer][_customize_footer_payment-icon-mobile_unionpay]" <?= isset($data->{'_customize_footer_payment-icon-mobile_unionpay'}) && $data->{'_customize_footer_payment-icon-mobile_unionpay'} ? 'checked' : '' ?> />
+                                <label for="cb1">unionpay</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="verisign" name="settings[footer][_customize_footer_payment-icon-mobile_verisign]" <?= isset($data->{'_customize_footer_payment-icon-mobile_verisign'}) && $data->{'_customize_footer_payment-icon-mobile_verisign'} ? 'checked' : '' ?> />
+                                <label for="cb1">VeriSign</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="visa1" name="settings[footer][_customize_footer_payment-icon-mobile_visa1]" <?= isset($data->{'_customize_footer_payment-icon-mobile_visa1'}) && $data->{'_customize_footer_payment-icon-mobile_visa1'} ? 'checked' : '' ?> />
+                                <label for="cb1">Visa 2</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" value="visaelectron" name="settings[footer][_customize_footer_payment-icon-mobile_visaelectron]" <?= isset($data->{'_customize_footer_payment-icon-mobile_visaelectron'}) && $data->{'_customize_footer_payment-icon-mobile_visaelectron'} ? 'checked' : '' ?> />
+                                <label for="cb1">Visa Electron</label>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li id="customize-control-payment-icon_mobile_size" class="customize-control customize-control-payment-icon-mobile-icon_size"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Icon Size (px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[footer][_customize-input-payment-icon_mobile_size]" value="<?= isset($data->{'_customize-input-payment-icon_mobile_size'}) && $data->{'_customize-input-payment-icon_mobile_size'} ? $data->{'_customize-input-payment-icon_mobile_size'} : '' ?>">
+                </li>
+                <li id="customize-control-footer_payment-icon_mobile_color"
+                    class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Color</span>
+                    <input id="input_footer_payment-icon_mobile_color" name="settings[footer][_customize-radio-payment-icon_mobile_color]"
+                           data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-footer-fields-link-color-value"
+                           value="<?= isset($data->{'_customize-radio-payment-icon_mobile_color'}) ? $data->{'_customize-radio-payment-icon_mobile_color'} : '' ?>"
+                           class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ], function () {
+                            jQuery(document).ready(function () {
+                                jQuery("#input_footer_payment-icon_mobile_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder: "<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    require(['jquery', 'jquery/ui'], function ($) {
+        $('input[name="settings_data_paymenticon"]').change(function (e) {
+            var fileName = e.target.files[0].name;
+            $('input[name="settings[footer][paymenticon][value]"]').val(fileName);
+        });
+        $('input[name="settings_data_payment_mobileicon"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            $('input[name="settings[footer][payment_mobileicon][value]"]').val(fileName);
+        });
+    });
+</script>

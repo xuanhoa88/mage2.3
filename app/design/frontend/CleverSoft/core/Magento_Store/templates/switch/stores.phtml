@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Store switcher template
+ *
+ * @see \Magento\Store\Block\Store\Switcher
+ */
+?>
+<?php if (count($block->getGroups())>1): ?>
+        <ul class="level0 switcher-dropdown">
+			
+            <?php foreach ($block->getGroups() as $_group): ?>
+
+                <li <?php if ($_group->getId() == $block->getCurrentGroupId()) echo ' class="active"' ?>>
+                    <a href="#" data-post='<?php /* @escapeNotVerified */ echo $block->getTargetStorePostData($_group->getDefaultStore()); ?>'>
+                        <?php echo $block->escapeHtml($_group->getName()) ?>
+                    </a>
+                </li>
+         
+            <?php endforeach; ?>
+        </ul>
+
+<?php endif; ?>

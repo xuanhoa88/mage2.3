@@ -1,0 +1,546 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/* @var $block \Magento\Backend\Block\Widget\Form\Renderer\Fieldset\Element */
+$element = $block->getElement();
+$note = $element->getNote() ? '<div class="note">' . $element->getNote() . '</div>' : '';
+$elementBeforeLabel = $element->getExtType() == 'checkbox' || $element->getExtType() == 'radio';
+$addOn = $element->getBeforeElementHtml() || $element->getAfterElementHtml();
+$entity = $element->getEntityAttribute();
+$fieldId = ($element->getHtmlContainerId()) ? ' id="' . $element->getHtmlContainerId() . '"' : '';
+$fieldClass = "admin__field field field-{$element->getId()} {$element->getCssClass()}";
+$fieldClass .= ($elementBeforeLabel) ? ' choice' : '';
+$fieldClass .= ($addOn) ? ' with-addon' : '';
+$fieldClass .= ($element->getRequired()) ? ' _required' : '';
+$fieldClass .= ($note) ? ' with-note' : '';
+$fieldClass .= ($entity && $entity->getIsUserDefined()) ? ' user-defined type-' . $entity->getFrontendInput() : '';
+
+$fieldAttributes = $fieldId . ' class="' . $fieldClass . '" '
+	. $block->getUiId('form-field', $element->getId());
+	
+$pins = $block->getPins();
+if ($block->getPinId()) {
+	$pinId = $block->getPinId();
+} else {
+	$pinId = count($block->getAllPins()) + 1;
+}
+	
+?>
+
+<?php $block->checkFieldDisable() ?>
+<?php
+    $elementToggleCode = $element->getToggleCode() ? $element->getToggleCode()
+        : 'toggleValueElements(this, this.parentNode.parentNode.parentNode)';
+?>
+
+<?php if (!$element->getNoDisplay()): ?>
+    <div <?php /* @escapeNotVerified */ echo $fieldAttributes ?>>
+        <?php if ($elementBeforeLabel): ?>
+            <?php echo $element->getElementHtml() ?>
+            <?php echo $element->getLabelHtml() ?>
+            <?php /* @escapeNotVerified */ echo $note ?>
+        <?php else: ?>
+            <?php echo $element->getLabelHtml('',$block->getScopeLabel()) ?>
+            <div class="admin__field-control control">
+                <?php /* @escapeNotVerified */ echo($addOn) ? '<div class="addon">' . $element->getElementHtml() . '</div>' : $element->getElementHtml(); ?>
+                <?php echo $block->getHintHtml() ?>
+                <?php /* @escapeNotVerified */ echo $note ?>
+            </div>
+        <?php endif; ?>
+        <?php if ($element->getScopeLabel()): ?>
+            <div class="field-service" value-scope="<?php /* @escapeNotVerified */ echo $element->getScopeLabel()?>">
+            </div>
+        <?php endif;?>
+		
+		<div class="field-service">
+            <?php if ($block->canDisplayUseDefault()): ?>
+                <label for="<?php echo $element->getHtmlId() ?>_default" class="choice use-default">
+                    <input <?php if ($element->getReadonly()):?> disabled="disabled"<?php endif; ?>
+                            type="checkbox"
+                            name="use_default[]"
+                            class="use-default-control"
+                            id="<?php echo $element->getHtmlId() ?>_default"
+                            <?php if ($block->usedDefault()): ?> checked="checked"<?php endif; ?>
+                            onclick="<?php /* @escapeNotVerified */ echo $elementToggleCode; ?>"
+                            value="<?php /* @escapeNotVerified */ echo $block->getAttributeCode() ?>"/>
+                    <span class="use-default-label"><?php /* @escapeNotVerified */ echo __('Use Default Value') ?></span>
+                </label>
+            <?php endif; ?>
+        </div>
+		
+    </div>
+<?php endif; ?>
+<?php
+$helper = $this->helper('CleverSoft\CleverPinMarker\Helper\Data');
+?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "pmAdmin" : {}
+        }
+    }
+</script>
+
+<script>
+/* <![CDATA[ */
+var wpColorPickerL10n = {"clear":"Clear","clearAriaLabel":"Clear color","defaultString":"Default","defaultAriaLabel":"Select default color","pick":"","defaultLabel":""};
+/* ]]> */
+</script>
+
+<script>
+/* <![CDATA[ */
+var wpa_pin_maker = {"text":{"button_label":"Select","modal_title":"Select or upload an image","ask_for_saving_changes":"Your changes on this page are not saved!","confirm_removing_pin":"Are you sure you want to remove this pin?","please_input_a_title":"Please input a title for this pin"},"product_selector":{"url":"","security":"ff887c5794"}};
+/* ]]> */
+</script>
+
+<div class="pin-maker">
+	<div class="pm-editor bg--w p--r">
+		<div class="edit">
+			<div class="edit__wrap">
+				<?php if($block->getImage()):?>
+					<img src="<?=$block->getImage()?>">
+				<?php else:?>
+					<img>
+					<div class="field-upload-overlay">
+						Add your image here
+					</div>
+				<?php endif;?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/html" id="wpa_pin_maker_render_editor">
+	<div class="pin__action">
+		<i class="pin__action--edit pin__icon--add flex--alone flex--middle flex--center"></i>
+		<div class="pin__action--edit pin__area flex--alone flex--middle flex--center hide"></div>
+		<img class="pin__action--edit pin__image hide" src="<?php echo $helper->getMediaUrl().'cleversoft/pinmarker/placeholder.png';?>">
+		<a class="pin-action--delete p--a" href="#"><i class="pin__icon--bin"></i></a>
+		<a class="pin-action--clone p--a" href="#"><i class="pin__icon--clone"></i></a>
+	</div>
+
+	<div class="pin__settings box br--5 mt--5 bg--w p--a">
+		<div class="box__bar flex--alone flex--between">
+			<i class="box__bar--close br--50 p--r"></i>
+		</div>
+
+		<ul class="box__nav flex--alone flex--center mg--0">
+			<li data-nav="pins" class="box__nav--item box__nav--active">Pin Style</li>
+			<li data-nav="popup" class="box__nav--item">Pin Type</li>
+			<li data-nav="style" class="box__nav--item">Popup Style</li>
+		</ul>
+
+		<div class="box__content">
+			<div data-tab="pins" class="box__content--item">
+				<div class="flex--alone mb--30">
+					<div class="boolean p--r">
+						<input type="radio" class="p--a" data-option="settings[pin-type]" value="pin-icon" checked="checked">
+						<label class="p--r">Icon</label>
+					</div>
+					<div class="boolean p--r ml--20">
+						<input type="radio" class="p--a" data-option="settings[pin-type]" value="pin-area">
+						<label class="p--r">Area</label>
+					</div>
+					<div class="boolean p--r ml--20">
+						<input type="radio" class="p--a" data-option="settings[pin-type]" value="pin-image">
+						<label class="p--r">Image</label>
+					</div>
+				</div>
+
+				<div data-pin-type="pin-icon">
+					<div class="flex mb--20">
+						<div class="flex--4">
+							<label class="d--b mb--5">Size</label>
+							<select data-option="settings[icon-size]" class="w--100">
+								<option value="pin__size--small">Small</option>
+								<option value="pin__size--medium" selected>Medium</option>
+								<option value="pin__size--large">Large</option>
+							</select>
+						</div>
+						<div class="flex--4">
+							<label class="d--b mb--5">Border Width</label>
+							<div class="input input--number p--r">
+								<input type="number" data-option="settings[icon-border-width]" class="input--large" value="0">
+							</div>
+						</div>
+						<div class="flex--4">
+							<label class="d--b mb--5">Border Radius</label>
+							<div class="input input--number p--r">
+								<input type="number" data-option="settings[icon-border-radius]" class="input--large" value="50">
+							</div>
+						</div>
+					</div>
+					<div class="flex mb--20">
+						<div class="flex--4">
+							<label class="d--b mb--5">Color</label>
+							<div class="pm-color-picker p--r">
+								<input type="text" data-option="settings[icon-color]" class="color-picker" data-default-color="#fff" value="#fff">
+							</div>
+						</div>
+						<div class="flex--4">
+							<label class="d--b mb--5">Border Color</label>
+							<div class="pm-color-picker p--r">
+								<input type="text" data-option="settings[icon-border-color]" class="color-picker" data-default-color="rgba(255, 255, 255, .8)" value="rgba(255, 255, 255, .8)">
+							</div>
+						</div>
+						<div class="flex--4">
+							<label class="d--b mb--5">Background</label>
+							<div class="pm-color-picker p--r">
+								<input type="text" data-option="settings[icon-bg-color]" class="color-picker" data-default-color="#65affa" value="#65affa">
+							</div>
+						</div>
+					</div>
+					<div class="flex mb--20">
+						<div class="flex--4">
+							<label class="d--b mb--5">Color Hover</label>
+							<div class="pm-color-picker p--r">
+								<input type="text" data-option="settings[icon-hover-color]" class="color-picker" data-default-color="#fff" value="#fff">
+							</div>
+						</div>
+						<div class="flex--4">
+							<label class="d--b mb--5">Border Hover Color</label>
+							<div class="pm-color-picker p--r">
+								<input type="text" data-option="settings[icon-border-hover-color]" class="color-picker" data-default-color="rgba(255, 255, 255, .95)" value="rgba(255, 255, 255, .95)">
+							</div>
+						</div>
+						<div class="flex--4">
+							<label class="d--b mb--5">Background Hover</label>
+							<div class="pm-color-picker p--r">
+								<input type="text" data-option="settings[icon-bg-hover-color]" class="color-picker" data-default-color="#3881ca" value="#3881ca">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div data-pin-type="pin-area">
+					<div class="flex mb--20">
+						<div class="flex--3">
+							<label class="d--b mb--5">Custom Text</label>
+							<input type="text" data-option="settings[area-text]" class="w--100" value="">
+						</div>
+						<div class="flex--3">
+							<label class="d--b mb--5">Font Size</label>
+							<div class="input input--number p--r">
+								<input type="number" data-option="settings[area-text-size]" class="input--large" value="13">
+							</div>
+						</div>
+						<div class="flex--3">
+							<label class="d--b mb--5">Text Color</label>
+							<div class="pm-color-picker p--r">
+								<input type="text" data-option="settings[area-text-color]" class="color-picker" data-default-color="#2091c9" value="#2091c9">
+							</div>
+						</div>
+						<div class="flex--3">
+							<label class="d--b mb--5">Text Hover Color</label>
+							<div class="pm-color-picker p--r">
+								<input type="text" data-option="settings[area-text-hover-color]" class="color-picker" data-default-color="#fff" value="#fff">
+							</div>
+						</div>
+					</div>
+					<div class="flex mb--20">
+						<div class="flex--3">
+							<label class="d--b mb--5">Width</label>
+							<div class="input input--number p--r">
+								<input type="number" data-option="settings[area-width]" class="input--large" value="32">
+							</div>
+						</div>
+						<div class="flex--3">
+							<label class="d--b mb--5">Height</label>
+							<div class="input input--number p--r">
+								<input type="number" data-option="settings[area-height]" class="input--large" value="32">
+							</div>
+						</div>
+						<div class="flex--3">
+							<label class="d--b mb--5">Border Width</label>
+							<div class="input input--number p--r">
+								<input type="number" data-option="settings[area-border-width]" class="input--large" value="0">
+							</div>
+						</div>
+						<div class="flex--3">
+							<label class="d--b mb--5">Border Radius</label>
+							<div class="input input--number p--r">
+								<input type="number" data-option="settings[area-border-radius]" class="input--large" value="50">
+							</div>
+						</div>
+					</div>
+					<div class="flex">
+						<div class="flex--3">
+							<label class="d--b mb--5">Background</label>
+							<div class="pm-color-picker p--r">
+								<input type="text" data-option="settings[area-bg-color]" class="color-picker" data-default-color="rgba(101, 175, 250, .5)" value="rgba(101, 175, 250, .5)">
+							</div>
+						</div>
+						<div class="flex--3">
+							<label class="d--b mb--5">Background Hover</label>
+							<div class="pm-color-picker p--r">
+								<input type="text" data-option="settings[area-bg-hover-color]" class="color-picker" data-default-color="rgba(101, 175, 250, .5)" value="rgba(101, 175, 250, .5)">
+							</div>
+						</div>
+						<div class="flex--3">
+							<label class="d--b mb--5">Border Color</label>
+							<div class="pm-color-picker p--r">
+								<input type="text" data-option="settings[area-border-color]" class="color-picker" data-default-color="rgba(0, 0, 0, .5)" value="rgba(0, 0, 0, .5)">
+							</div>
+						</div>
+						<div class="flex--3">
+							<label class="d--b mb--5">Border Hover Color</label>
+							<div class="pm-color-picker p--r">
+								<input type="text" data-option="settings[area-border-hover-color]" class="color-picker" data-default-color="rgba(0, 0, 0, .5)" value="rgba(0, 0, 0, .5)">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div data-pin-type="pin-image">
+					<div class="mb--20">
+						<label class="d--b mb--5">Upload Image</label>
+						<div class="p--r admin__field-control">
+							<input type="text" class="w--100 pr--50 input-image" data-option="settings[image-file]" value="">
+							<?php 
+								$uploadUrl = $this->getUrl('pinmarker/wysiwyg_images',['target_element_id' => 'default_target_element_id']);
+							?>
+							<a href="javascript:void(0);" class="p--a upload__image" onclick="MediabrowserUtility.openDialog(this, '<?= $uploadUrl?>', null, null,'Upload Images');">
+            				...
+							</a>
+						</div>
+					</div>
+					<div class="flex">
+						<div class="flex--4">
+							<label class="d--b mb--5">Width</label>
+							<div class="input input--number p--r">
+								<input type="number" data-option="settings[image-width]" class="input--large" value="32">
+							</div>
+						</div>
+						<div class="flex--4">
+							<label class="d--b mb--5">Height</label>
+							<div class="input input--number p--r">
+								<input type="number" data-option="settings[image-height]" class="input--large" value="32">
+							</div>
+						</div>
+						<div class="flex--4">
+							<label class="d--b mb--5">Border Radius</label>
+							<div class="input input--number p--r">
+								<input type="number" data-option="settings[image-border-radius]" class="input--large" value="50">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div data-tab="popup" class="box__content--item hide">
+				<div class="flex--alone mb--30">
+					<div class="boolean p--r">
+						<input type="radio" class="p--a" data-option="settings[popup-type]" value="text" checked="checked">
+						<label class="p--r">Text</label>
+					</div>
+					<div class="boolean p--r ml--20">
+						<input type="radio" class="p--a" data-option="settings[popup-type]" value="image">
+						<label class="p--r">Image</label>
+					</div>
+					<div class="boolean p--r ml--20">
+						<input type="radio" class="p--a" data-option="settings[popup-type]" value="link">
+						<label class="p--r">Link</label>
+					</div>
+					<div class="boolean p--r ml--20">
+						<input type="radio" class="p--a" data-option="settings[popup-type]" value="video">
+						<label class="p--r">Youtube</label>
+					</div>
+					<div class="boolean p--r ml--20">
+						<input type="radio" class="p--a" data-option="settings[popup-type]" value="product">
+						<label class="p--r">Product</label>
+					</div>
+				</div>
+
+				<div data-popup-type="image|text|video|link" class="mb--20">
+					<label class="d--b mb--5">Title</label>
+					<input type="text" data-option="settings[popup-title]" class="w--100" value="">
+				</div>
+
+				<div data-popup-type="text">
+					<label class="d--b mb--5">Content</label>
+					<textarea class="w--100" data-option="settings[text]" rows="6"></textarea>
+				</div>
+
+				<div data-popup-type="image" class="mb--20">
+					<label class="d--b mb--5">Upload Image</label>
+					<div class="p--r mb--20 admin__field-control">
+						<input type="text" class="w--100 pr--50 input-image" data-option="settings[image]" value="">
+						<a href="javascript:void(0);" class="p--a upload__image">...</a>
+					</div>
+					<div class="flex">
+						<div class="flex--8">
+							<label class="d--b mb--5">Link To</label>
+							<input type="text" data-option="settings[image-link-to]" class="w--100" value="">
+						</div>
+						<div class="flex--4">
+							<label class="d--b mb--5">Target</label>
+							<select data-option="settings[image-link-target]" class="w--100">
+								<option value="_self">Default</option>
+								<option value="_blank">New Window</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div data-popup-type="link">
+					<div class="flex">
+						<div class="flex--8">
+							<label class="d--b mb--5">Link To</label>
+							<input type="text" data-option="settings[link-link]" class="w--100" value="">
+						</div>
+						<div class="flex--4">
+							<label class="d--b mb--5">Target</label>
+							<select data-option="settings[link-link-target]" class="w--100">
+								<option value="_self">Default</option>
+								<option value="_blank">New Window</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div data-popup-type="video">
+					<div class="mb--20">
+						<label class="d--b mb--5">Link</label>
+						<input type="text" data-option="settings[video-link]" class="w--100" value="">
+					</div>
+					<div class="flex--alone">
+						<div class="boolean p--r">
+							<input type="hidden" data-option="settings[video-autoplay]" value="0">
+							<input type="checkbox" class="p--a" onchange="jQuery(this).prev().val(this.checked ? 1 : 0);" checked="checked">
+							<label class="p--r">Autoplay</label>
+						</div>
+						<div class="boolean p--r ml--20">
+							<input type="hidden" data-option="settings[video-control]" value="0">
+							<input type="checkbox" class="p--a" onchange="jQuery(this).prev().val(this.checked ? 1 : 0);" checked="checked">
+							<label class="p--r">Enable Control</label>
+						</div>
+					</div>
+				</div>
+
+				<div data-popup-type="product">
+						<div class="mb--20">
+							<label class="d--b mb--5">Select product</label>
+							<input type="text" data-option="settings[product]" placeholder="Product Id" class="w--100 product__selector" value="">
+						</div>
+						<div class="flex--alone">
+							<div class="boolean p--r">
+								<input type="hidden" data-option="settings[product-thumbnail]" value="1">
+								<input type="checkbox" class="p--a" onchange="jQuery(this).prev().val(this.checked ? 1 : 0);" checked="checked">
+								<label class="p--r">Enable Thumbnail</label>
+							</div>
+							<div class="boolean p--r ml--20">
+								<input type="hidden" data-option="settings[product-title]" value="1">
+								<input type="checkbox" class="p--a" onchange="jQuery(this).prev().val(this.checked ? 1 : 0);" checked="checked">
+								<label class="p--r">Enable Name</label>
+							</div>
+							<div class="boolean p--r ml--20">
+								<input type="hidden" data-option="settings[product-price]" value="1">
+								<input type="checkbox" class="p--a" onchange="jQuery(this).prev().val(this.checked ? 1 : 0);" checked="checked">
+								<label class="p--r">Enable Price</label>
+							</div>
+							<div class="boolean p--r ml--20">
+								<input type="hidden" data-option="settings[product-button]" value="1">
+								<input type="checkbox" class="p--a" onchange="jQuery(this).prev().val(this.checked ? 1 : 0);" checked="checked">
+								<label class="p--r">Enable Add To Cart</label>
+							</div>
+						</div>
+					</div>
+			</div>
+
+			<div data-tab="style" class="box__content--item hide">
+				<div class="flex mb--20">
+					<div class="flex--3">
+						<label class="d--b mb--5">Width</label>
+						<div class="input input--number p--r">
+							<input type="number" data-option="settings[popup-width]" class="input--large" value="260">
+						</div>
+					</div>
+					<div class="flex--3">
+						<label class="d--b mb--5">Position</label>
+						<select data-option="settings[popup-position]" class="w--100">
+							<option value="top">Top</option>
+							<option value="right">Right</option>
+							<option value="bottom">Bottom</option>
+							<option value="left">Left</option>
+						</select>
+					</div>
+					<div class="flex--3">
+						<label class="d--b mb--5">Animation</label>
+						<select data-option="settings[popup-anm]" class="w--100">
+							<option value="fade">Fade</option>
+							<option value="zoom">Zoom</option>
+							<option value="sup">Slide Up</option>
+							<option value="sdown">Slide Down</option>
+							<option value="sleft">Slide Left</option>
+							<option value="sright">Slide Right</option>
+							<option value="rotate">Rotate</option>
+						</select>
+					</div>
+					<div class="flex--3">
+						<label class="d--b mb--5">Border Radius</label>
+						<div class="input input--number p--r">
+							<input type="number" data-option="settings[popup-border-radius]" class="input--large" value="0">
+						</div>
+					</div>
+				</div>
+				<div class="flex">
+					<div class="flex--4">
+						<label class="d--b mb--5">Title Color</label>
+						<div class="pm-color-picker p--r">
+							<input type="text" data-option="settings[popup-title-color]" class="color-picker" data-default-color="#2b2b2b" value="#2b2b2b">
+						</div>
+					</div>
+					<div class="flex--4">
+						<label class="d--b mb--5">Content Color</label>
+						<div class="pm-color-picker p--r">
+							<input type="text" data-option="settings[popup-content-color]" class="color-picker" data-default-color="#878787" value="#878787">
+						</div>
+					</div>
+					<div class="flex--4">
+						<label class="d--b mb--5">Background</label>
+						<div class="pm-color-picker p--r">
+							<input type="text" data-option="settings[popup-bg-color]" class="color-picker" data-default-color="#fff" value="#fff">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<input type="hidden" data-option="top" value="<%= top %>">
+	<input type="hidden" data-option="left" value="<%= left %>">
+	<input type="hidden" data-option="settings[id]" value="">
+</script>
+<script>
+require(['jquery', 'jquery/ui'], function($){
+	$( document ).ready( function() {
+		var form = $( $( '#wpa_pin_maker_render' ).text() ).prepend( $( '#post-body-content' ).children( 'input[type="hidden"]' ) );
+
+		$('#screen-meta, #screen-meta-links, #post-status-info').remove();
+
+		$('#wp-content-wrap').replaceWith(form);
+
+		// Pass data to client-side.
+		window.wpa_pin_settings = {};
+		window.model_id = <?=$pinId?>;
+		<?php 
+		$default_settings = '[]';	
+		?>
+		window.wpa_pin = <?= $pins ? $pins : $default_settings?>;
+		$(".pm-editor").find('img').on('load', function () {
+		 	if($(".pm-editor").find('img').attr('src')) {
+				$(".field-upload-overlay").hide();
+			} else {
+				$(".field-upload-overlay").show();
+			}
+		});
+	});
+});
+</script>

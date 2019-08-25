@@ -1,0 +1,53 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Category layered navigation
+ *
+ * @var $block \Magento\LayeredNavigation\Block\Navigation
+ */
+?>
+
+<?php if ($block->canShowBlock()): ?>
+    <div class="transparent-bg"></div>
+    <div id="zoo-layer-navigation">
+    <div class="block filter" id="layered-filter-block">
+        <div class="block-title filter-title">
+            <strong><?php /* @escapeNotVerified */ echo __('Shop By') ?></strong>
+        </div>
+
+        <div class="block-content filter-content">
+            <?php echo $block->getChildHtml('state') ?>
+
+            <?php if ($block->getLayer()->getState()->getFilters()): ?>
+                <div class="block-actions filter-actions">
+                    <a href="<?php /* @escapeNotVerified */ echo $block->getClearUrl() ?>" class="action clear filter-clear"><span><?php /* @escapeNotVerified */ echo __('Clear All') ?></span></a>
+                </div>
+            <?php endif; ?>
+            <?php $wrapOptions = false; ?>
+            <?php foreach ($block->getFilters() as $filter): ?>
+        <?php if (!$wrapOptions): ?>
+
+            <div class="filter-options" id="narrow-by-list" data-role="content" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17", "multipleCollapsible": true, "openOnFocus": true}}'>
+                <?php $wrapOptions = true; endif; ?>
+                <?php if ($filter->getItemsCount()): ?>
+                <div  data-role="collapsible" class="<?php  /* @escapeNotVerified */  echo $filter->getRequestVar().'-listing-filter'; ?> zoo-filter-options-item active" >
+                    <div data-role="title" class="zoo-filter-options-title"><?php echo $block->escapeHtml(__($filter->getName())) ?></div>
+                    <div data-role="content" class="zoo-filter-options-content"><?php /* @escapeNotVerified */ echo $block->getChildBlock('renderer')->render($filter); ?></div>
+                </div>
+                <?php endif; ?>
+                <?php endforeach; ?>
+                <?php if ($wrapOptions): ?>
+            </div>
+        <?php endif; ?>
+        </div>
+    </div>
+    </div>
+<?php endif; ?>

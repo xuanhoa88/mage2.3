@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="head.additional.fonts" template="CleverSoft_CleverTheme::html/header/fonts.phtml" />
+        </referenceBlock>
+        <referenceContainer name="page.wrapper" htmlTag="div" htmlClass="page-wrapper">
+            <container htmlClass="zoo-breadcrumbs" htmlTag="div" name="main.breadcrumbs"
+                       before="main.top">
+                <container htmlTag="div" htmlClass="container" name="mt.breadcrumbs">
+                        <block class="Magento\Theme\Block\Html\Breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+                </container>
+            </container>
+			 <container htmlClass="after_main_slide" name="after.main.slide" htmlTag="div"
+                       after="main.slide.fullwidth">
+                <container name="content.after.main.slide" label="Content After Main Slide"/>
+            </container>
+
+		    <container htmlClass="main_slide_fullwidth" name="main.slide.fullwidth" htmlTag="div"
+                       before="main.top">
+                <container name="content.slide" label="Main Slide FullWidth"/>
+            </container>
+
+
+            <container name="main.top" htmlClass="main_top" htmlTag="div" before="main.content.pallarax">
+                <container htmlTag="div" htmlClass="container">
+                    <container htmlTag="div" htmlClass="row">
+                        <container name="content.top" label="Main Content Top"/>
+                    </container>
+                </container>
+            </container>
+			<container htmlClass="content_middle" htmlTag="div" after="main.top" name="content.middle">
+                <container htmlTag="div" htmlClass="container">
+					<container htmlTag="div" htmlClass="row">
+                        <container htmlTag="div" htmlClass="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+							<container name="content.middle.left" label="Content Middle Left"/>
+						</container>
+						<container htmlTag="div" htmlClass="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+							<container name="content.middle.right" label="Content Middle Right"/>
+						</container>
+					</container>
+               </container>
+            </container>
+            <container htmlClass="main_content_pallarax" name="main.content.pallarax" htmlTag="div"
+                       before="main.content">
+                <container name="content.parallax" label="Main Content Parallax"/>
+            </container>
+			 <container name="main.middle" htmlClass="main_middle" htmlTag="div" after="main.content.pallarax">
+                <container htmlTag="div" htmlClass="container">
+                    <container htmlTag="div" htmlClass="row">
+                        <container name="content.middle" label="Main Content Middle"/>
+                    </container>
+                </container>
+            </container>
+			<container after="main.middle" htmlClass="main_content_pallarax_bottom" name="main.content.pallarax.bottom" htmlTag="div">
+                <container name="content.parallax.bottom" label="Content Parallax Bottom"/>
+            </container>
+            <container htmlClass="product_detail" name="product.detail" htmlTag="div"  before="main.content">
+                <container htmlTag="div" htmlClass="container">
+                    <container name="product.detail.area1" label="Product Detail Area1"/>
+                </container>
+            </container>
+
+
+            <container htmlClass="main_aside" htmlTag="div" after="main.content" name="main.aside">
+                <container  name="content.aside" label="Main Content Aside"/>
+            </container>
+            <container htmlClass="main_aside_detail" htmlTag="div" after="main.aside" name="main.aside.detail">
+                <container htmlTag="div" htmlClass="container">
+                    <container htmlTag="div" htmlClass="row">
+                        <container name="content.aside.detail" label="Main Content Aside Detail"/>
+                    </container>
+                </container>
+            </container>
+			<container htmlClass="main_bottom_full_width" htmlTag="div" after="inner.bottom" name="main.bottom.full.width">
+                <container name="bottom.full.width" label="Main Bottom Full Width"/>
+            </container>
+			<container htmlClass="main_carousel" htmlTag="div" after="bottom.full.width" name="main.carousel.home">
+                <container name="carousel.home" label="Main Carousel Home Page"/>
+            </container>
+			<container htmlClass="footer_top_content" htmlTag="div" after="main.aside.detail" name="footer.top.content">
+                        <container htmlTag="div" htmlClass="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							<container name="footer.top.1" label="Footer Top 1"/>
+						</container>
+						<container htmlTag="div" htmlClass="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							<container name="footer.top.2" label="Footer Top 2"/>
+						</container>
+            </container>
+            <container htmlClass="main_bottom" htmlTag="div" before="main.aside">
+                <container htmlTag="div" htmlClass="container">
+                    <container htmlTag="div" htmlClass="row">
+                        <container name="content.bottom" label="Main Content Bottom"/>
+                    </container>
+                </container>
+            </container>
+            <container name="inner.bottom" label="Main Content Inner Bottom"
+                       before="main.aside.detail" htmlTag="div" htmlClass="main_innerbottom"/>
+            <container name="page.bottom.container" as="page_bottom_container" label="Before Page Footer Container"
+                       after="main.content" htmlTag="div" htmlClass="page-bottom"/>
+            <container name="inner.top" label="Main Content Inner Top"
+                       after="main.aside.detail" htmlTag="div" htmlClass="inner_top"/>
+        </referenceContainer>
+
+        <referenceContainer name="main">
+            <container htmlClass="zoo-main-content-area" htmlTag="div" name="main.content.wrapper">
+                        <container name="content" label="Main Content Area"/>
+            </container>
+        </referenceContainer>
+
+        <referenceContainer name="content">
+            <block name="customer.section.config" class="Magento\Customer\Block\SectionConfig"
+                   template="Magento_Customer::js/section-config.phtml"/>
+            <block name="customer.customer.data"
+                   class="Magento\Customer\Block\CustomerData"
+                   template="Magento_Customer::js/customer-data.phtml"/>
+        </referenceContainer>
+
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="design.css"
+                   template="CleverSoft_CleverTheme::designcss.phtml"/>
+        </referenceContainer>
+
+        <referenceContainer name="footer">
+            <referenceBlock name="footer_links" remove="true"/>
+            <referenceBlock name="form.subscribe" remove="true"/>
+            <block class="Magento\Store\Block\Switcher" name="store_switcher" as="store_switcher" after="footer_links"
+                   template="switch/stores.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="navigation.sections" remove="true"/>
+        <referenceBlock name="report.bugs" remove="true"/>
+        <referenceBlock name="store.links" remove="true"/>
+
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\FormKey" name="formkey"/>
+        </referenceContainer>
+
+        <referenceContainer name="footer-container">
+            <block class="Magento\Framework\View\Element\Template" name="back.to.top" template="CleverSoft_CleverTheme::backtotop.phtml"/>
+        </referenceContainer>
+        <move element="copyright" destination="footer-container" after="-" />
+    </body>
+</page>

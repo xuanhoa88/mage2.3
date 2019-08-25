@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <move element="catalog.leftnav" destination="sidebar.main" after="-"/>
+	<referenceContainer name="columns">
+        <container name="div.sidebar.main" htmlTag="div" htmlClass="sidebar-filter sidebar zoo-sidebar-main" before="main" htmlId="sidebar-without">
+            <container name="sidebar.main" as="sidebar_main" label="Sidebar Main"/>
+        </container>
+    </referenceContainer>
+</layout>

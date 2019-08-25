@@ -1,0 +1,1074 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+if ($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getId()) {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getHeaderStyle());
+} else {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',0)->getFirstItem()->getHeaderStyle());
+}
+if($settings){
+    $data = isset($settings->header) ? $settings->header : '{}';
+}
+?>
+<!-- Modal content -->
+<div class="headerbuilder-modal-content">
+    <div class="headerbuilder-modal-header">
+        <span class="headerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="headerbuilder-modal-body">
+        <strong>Header Main</strong>
+        <div class="modal-inner" id="header_desktop_main_bar" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open" id="sub-accordion-section-main_bar">
+                <li id="customize-control-custom_title_header_layout" class="customize-control customize-control-kirki-custom" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <label>
+
+                        <div class="options-title-divider">Layout</div>
+                    </label>
+                </li>
+                <li id="customize-control-header_width" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Header Width</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                    </label>
+                    <div id="input_header_width" class="image">
+
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-header_width]" id="header_widthcontainer" data-customize-setting-link="header_width" <?= isset($data->{'_customize-radio-header_width'}) && $data->{'_customize-radio-header_width'} ? '' : 'checked'?> data-alt="">
+                        <label for="header_widthcontainer" class="header_widthcontainer">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/container.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="full-width" name="settings[header][_customize-radio-header_width]" id="header_widthfull-width" data-customize-setting-link="header_width" <?= isset($data->{'_customize-radio-header_width'}) && $data->{'_customize-radio-header_width'} == 'full-width' ? 'checked' : ''?> data-alt="">
+                        <label for="header_widthfull-width" class="header_widthfull-width">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/full-width.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                    </div>
+                </li>
+                <li id="customize-control-header_height" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Height (Exp: 100px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                            <input value="<?=isset($data->{'_customize_headermain_height'}) ? $data->{'_customize_headermain_height'} : ''?>" name="settings[header][_customize_headermain_height]" type="text">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_padding_top" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Padding Top</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                        <input id="customize-input-header_main_padding_top" type="text" name="settings[header][customize-input-header_main_padding_top]" value="<?= isset($data->{'customize-input-header_main_padding_top'}) ? $data->{'customize-input-header_main_padding_top'} :''?>" data-customize-setting-link="header_main_padding_top">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_padding_bottom" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Padding Bottom</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                        <input id="customize-input-header_main_padding_bottom" type="text" name="settings[header][customize-input-header_main_padding_bottom]" value="<?= isset($data->{'customize-input-header_main_padding_bottom'}) ? $data->{'customize-input-header_main_padding_bottom'} :''?>" data-customize-setting-link="header_main_padding_bottom">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_link_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Link Color</span>
+                    <input id="input_header_main_link_color" name="settings[header][_customize-header_main_link_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_link_color'}) ? $data->{'_customize-header_main_link_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                                "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                            ],function(){
+                                jQuery(document).ready(function(){
+                                    jQuery("#input_header_main_link_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                                });
+
+                            });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_link_hover_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Link Hover Color</span>
+                    <input id="input_header_main_link_hover_color" name="settings[header][_customize-header_main_link_hover_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_link_hover_color'}) ? $data->{'_customize-header_main_link_hover_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                                "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                            ],function(){
+                                jQuery(document).ready(function(){
+                                    jQuery("#input_header_main_link_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                                });
+
+                            });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_text_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Text Color</span>
+                    <input id="input_header_main_text_color" name="settings[header][_customize-header_main_text_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_text_color'}) ? $data->{'_customize-header_main_text_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                                "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                            ],function(){
+                                jQuery(document).ready(function(){
+                                    jQuery("#input_header_main_text_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                                });
+
+                            });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_color" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Text color main background</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                    </label>
+                    <div id="input_header_main_color" class="image">
+
+                        <input class="image-select" type="radio" value="nav-dark" name="settings[header][_customize-radio-header_main_color]" id="header_main_colordark" data-customize-setting-link="header_main_color" <?= isset($data->{'_customize-radio-header_main_color'}) && $data->{'_customize-radio-header_main_color'} == 'nav-dark' ? 'checked' : ''?> data-alt="">
+                        <label for="header_main_colordark" class="header_main_colordark">
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/text-light.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-header_main_color]" id="header_main_colorlight" data-customize-setting-link="header_main_color" <?= isset($data->{'_customize-radio-header_main_color'}) && $data->{'_customize-radio-header_main_color'} ? '' : 'checked'?> data-alt="">
+                        <label for="header_main_colorlight" class="header_main_colorlight">
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/text-dark.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                    </div>
+                </li>
+                <li id="customize-control-header_main_bg_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Background Color</span>
+                    <input id="input_header_main_bg_color" name="settings[header][_customize-header_main_bg_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_bg_color'}) ? $data->{'_customize-header_main_bg_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_bg_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_bg_img" class="customize-control customize-control-kirki-image" style="display: list-item;">
+
+                    <label>
+                    <span class="customize-control-title">
+                        Background Image
+                    </span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                    </label>
+                    <div class="image-wrapper attachment-media-view image-upload">
+                        <?php if(isset($data->{'_customize-header_main_bg_image'}->value) && $data->{'_customize-header_main_bg_image'}->value):?>
+                            <a href="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/'.$data->{'_customize-header_main_bg_image'}->value?>" onclick="imagePreview('customize-control_header_logo_image'); return false;" >
+                                <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/'.$data->{'_customize-header_main_bg_image'}->value?>" id="customize-control_header_logo_image" height="22" width="22" class="small-image-preview v-middle" >
+                            </a>
+                        <?php endif;?>
+                        <input id="customize-control_header_main_bg_image" name="settings_data_header_main_bg_image" value="<?=isset($data->{'_customize-header_main_bg_image'}->value) ? $data->{'_customize-header_main_bg_image'}->value : ''?>" class="input-file" type="file">
+                        <?php if(isset($data->{'_customize-header_main_bg_image'}->value) && $data->{'_customize-header_main_bg_image'}->value):?>
+                            <span class="delete-image">
+                            <input type="checkbox" name="settings[header][_customize-header_main_bg_image][delete]" value="1" class="checkbox" id="customize-control_header_logo_delete">
+                            <label for="customize-control_header__customize-header_main_bg_image_delete">Delete Image</label>
+                        </span>
+                        <?php endif;?>
+                        <input type="hidden" name="settings[header][_customize-header_main_bg_image][value]" value="<?=isset($data->{'_customize-header_main_bg_image'}->value) ? $data->{'_customize-header_main_bg_image'}->value : ''?>">
+                    </div>
+                </li>
+                <li id="customize-control-header_bg_img_repeat" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Background Repeat</span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+
+                    <div id="input_header_bg_img_repeat" class="buttonset">
+
+                        <input class="switch-input screen-reader-text" type="radio" value="" name="settings[header][_customize-radio-header_bg_img_repeat]" id="header_bg_img_repeatrepeat" data-customize-setting-link="header_bg_img_repeat" <?= isset($data->{'_customize-radio-header_bg_img_repeat'}) && $data->{'_customize-radio-header_bg_img_repeat'} ? '' : 'checked'?>>
+                        <label class="switch-label switch-label-off" for="header_bg_img_repeatrepeat">Tiled</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="repeat-x" name="settings[header][_customize-radio-header_bg_img_repeat]" id="header_bg_img_repeatrepeat-x" data-customize-setting-link="header_bg_img_repeat" <?= isset($data->{'_customize-radio-header_bg_img_repeat'}) && $data->{'_customize-radio-header_bg_img_repeat'} == 'repeat-x' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-on " for="header_bg_img_repeatrepeat-x">Repeat X</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="repeat-y" name="settings[header][_customize-radio-header_bg_img_repeat]" id="header_bg_img_repeatrepeat-y" data-customize-setting-link="header_bg_img_repeat" <?= isset($data->{'_customize-radio-header_bg_img_repeat'}) && $data->{'_customize-radio-header_bg_img_repeat'} == 'repeat-y' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="header_bg_img_repeatrepeat-y">Repeat Y</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="no-repeat" name="settings[header][_customize-radio-header_bg_img_repeat]" id="header_bg_img_repeatno-repeat" data-customize-setting-link="header_bg_img_repeat" <?= isset($data->{'_customize-radio-header_bg_img_repeat'}) && $data->{'_customize-radio-header_bg_img_repeat'} == 'no-repeat' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="header_bg_img_repeatno-repeat">No Repeat</label>
+
+                    </div>
+                </li>
+                <li id="customize-control-box_shadow_header" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+                        <input id="_customize-input-box_shadow_header" name="settings[header][_customize-input-box_shadow_header]" type="checkbox" value="header-shadow" data-customize-setting-link="box_shadow_header" <?=isset($data->{'_customize-input-box_shadow_header'}) && $data->{'_customize-input-box_shadow_header'} ? 'checked' : ''?>>
+                        <label for="_customize-input-box_shadow_header">Add Shadow</label>
+                    </span>
+                </li>
+                <li id="customize-control-header_divider" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <span class="customize-inside-control-row">
+                        <input id="_customize-input-header_divider" name="settings[header][_customize-input-header_divider]" type="checkbox" value="1" data-customize-setting-link="header_divider" <?=isset($data->{'_customize-input-header_divider'}) && $data->{'_customize-input-header_divider'} ? 'checked' : ''?>>
+                        <label for="_customize-input-header_divider">Add Divider</label>
+                    </span>
+                </li>
+                <li id="customize-control-html_after_header" class="customize-control customize-control-kirki-generic" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">HTML after header</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="customize-control-content">
+
+                            <textarea name="settings[header][_customize-html_after_header]" data-customize-setting-link="html_after_header" element="textarea" rows="5"><?=isset($data->{'_customize-html_after_header'}) ? $data->{'_customize-html_after_header'} : ''?></textarea>
+
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-custom_title_nav" class="customize-control customize-control-kirki-custom" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <label>
+
+                        <div class="options-title-divider">Navigation</div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_nav_style" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Navigation Style</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                    </label>
+                    <div id="input_nav_style_header_main" class="image">
+
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-nav_style_header_main]" <?= isset($data->{'_customize-radio-nav_style_header_main'}) && $data->{'_customize-radio-nav_style_header_main'} ? '' : 'checked'?> id="nav_style_header_main" data-customize-setting-link="nav_style_header_main" data-alt="">
+                        <label for="nav_style_header_main" class="nav_style_header_main">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-default.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="divided" name="settings[header][_customize-radio-nav_style_header_main]" <?= isset($data->{'_customize-radio-nav_style_header_main'}) && $data->{'_customize-radio-nav_style_header_main'} == 'divided' ? 'checked' : ''?> id="nav_style_header_maindivided" data-customize-setting-link="nav_style_header_main" data-alt="">
+                        <label for="nav_style_header_maindivided" class="nav_style_header_maindivided">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-divided.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="line" name="settings[header][_customize-radio-nav_style_header_main]" <?= isset($data->{'_customize-radio-nav_style_header_main'}) && $data->{'_customize-radio-nav_style_header_main'} == 'line' ? 'checked' : ''?> id="nav_style_header_mainline" data-customize-setting-link="nav_style_header_main" data-alt="">
+                        <label for="nav_style_header_mainline" class="nav_style_header_mainline">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-line.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="line-grow" name="settings[header][_customize-radio-nav_style_header_main]" <?= isset($data->{'_customize-radio-nav_style_header_main'}) && $data->{'_customize-radio-nav_style_header_main'} == 'line-grow' ? 'checked' : ''?> id="nav_style_header_mainline-grow" data-customize-setting-link="nav_style_header_main" data-alt="">
+                        <label for="nav_style_header_mainline-grow" class="nav_style_header_mainline-grow">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-line-grow.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="line-bottom" name="settings[header][_customize-radio-nav_style_header_main]" <?= isset($data->{'_customize-radio-nav_style_header_main'}) && $data->{'_customize-radio-nav_style_header_main'} == 'line-bottom' ? 'checked' : ''?> id="nav_style_header_mainline-bottom" data-customize-setting-link="nav_style_header_main" data-alt="">
+                        <label for="nav_style_header_mainline-bottom" class="nav_style_header_mainline-bottom">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-line-bottom.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="box" name="settings[header][_customize-radio-nav_style_header_main]" <?= isset($data->{'_customize-radio-nav_style_header_main'}) && $data->{'_customize-radio-nav_style_header_main'} == 'box' ? 'checked' : ''?> id="nav_style_header_mainbox" data-customize-setting-link="nav_style_header_main" data-alt="">
+                        <label for="nav_style_header_mainbox" class="nav_style_header_mainbox">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-box.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="outline" name="settings[header][_customize-radio-nav_style_header_main]" <?= isset($data->{'_customize-radio-nav_style_header_main'}) && $data->{'_customize-radio-nav_style_header_main'} == 'outline' ? 'checked' : ''?> id="nav_style_header_mainoutline" data-customize-setting-link="nav_style_header_main" data-alt="">
+                        <label for="nav_style_header_mainoutline" class="nav_style_header_mainoutline">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-outline.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="pills" name="settings[header][_customize-radio-nav_style_header_main]" <?= isset($data->{'_customize-radio-nav_style_header_main'}) && $data->{'_customize-radio-nav_style_header_main'} == 'pills' ? 'checked' : ''?> id="nav_style_header_mainpills" data-customize-setting-link="nav_style_header_main" data-alt="">
+                        <label for="nav_style_header_mainpills" class="nav_style_header_mainpills">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-pills.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="tabs" name="settings[header][_customize-radio-nav_style_header_main]" <?= isset($data->{'_customize-radio-nav_style_header_main'}) && $data->{'_customize-radio-nav_style_header_main'} == 'tabs' ? 'checked' : ''?> id="nav_style_header_maintabs" data-customize-setting-link="nav_style_header_main" data-alt="">
+                        <label for="nav_style_header_maintabs" class="nav_style_header_maintabs">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-tabs.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                    </div>
+                </li>
+                <li id="customize-control-header_main_nav_size" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Nav Size</span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+
+                    <div id="input_header_main_nav_size" class="buttonset">
+
+                        <input class="switch-input screen-reader-text" type="radio" value="xsmall" name="settings[header][_customize-radio-header_main_nav_size]" id="nav_sizexsmall" data-customize-setting-link="nav_size" <?=isset($data->{'_customize-radio-header_main_nav_size'}) && $data->{'_customize-radio-header_main_nav_size'} == 'xsmall' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_sizexsmall">XS</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="small" name="settings[header][_customize-radio-header_main_nav_size]" id="nav_sizesmall" data-customize-setting-link="nav_size" <?=isset($data->{'_customize-radio-header_main_nav_size'}) && $data->{'_customize-radio-header_main_nav_size'} == 'small' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_sizesmall">S</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="" name="settings[header][_customize-radio-header_main_nav_size]" id="nav_size" data-customize-setting-link="nav_size" <?=isset($data->{'_customize-radio-header_main_nav_size'}) && $data->{'_customize-radio-header_main_nav_size'} ? '' : 'checked'?>>
+                        <label class="switch-label switch-label-on " for="nav_size">Default</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="medium" name="settings[header][_customize-radio-header_main_nav_size]" id="nav_sizemedium" data-customize-setting-link="nav_size" <?=isset($data->{'_customize-radio-header_main_nav_size'}) && $data->{'_customize-radio-header_main_nav_size'} == 'medium' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_sizemedium">M</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="large" name="settings[header][_customize-radio-header_main_nav_size]" id="nav_sizelarge" data-customize-setting-link="nav_size" <?=isset($data->{'_customize-radio-header_main_nav_size'}) && $data->{'_customize-radio-header_main_nav_size'} == 'large' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_sizelarge">L</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="xlarge" name="settings[header][_customize-radio-header_main_nav_size]" id="nav_sizexlarge" data-customize-setting-link="nav_size" <?=isset($data->{'_customize-radio-header_main_nav_size'}) && $data->{'_customize-radio-header_main_nav_size'} == 'xlarge' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_sizexlarge">XL</label>
+
+                    </div>
+                </li>
+                <li id="customize-control-nav_spacing" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Nav Spacing</span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+
+                    <div id="input_header_main_nav_spacing" class="buttonset">
+
+                        <input class="switch-input screen-reader-text" type="radio" value="xsmall" name="settings[header][_customize-radio-header_main_nav_spacing]" id="nav_spacingxsmall" data-customize-setting-link="nav_spacing" <?=isset($data->{'_customize-radio-header_main_nav_spacing'}) && $data->{'_customize-radio-header_main_nav_spacing'} == 'xsmall' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_spacingxsmall">XS</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="small" name="settings[header][_customize-radio-header_main_nav_spacing]" id="nav_spacingsmall" data-customize-setting-link="nav_spacing" <?=isset($data->{'_customize-radio-header_main_nav_spacing'}) && $data->{'_customize-radio-header_main_nav_spacing'} == 'small' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_spacingsmall">S</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="" name="settings[header][_customize-radio-header_main_nav_spacing]" id="nav_spacing" data-customize-setting-link="nav_spacing" <?=isset($data->{'_customize-radio-header_main_nav_spacing'}) && $data->{'_customize-radio-header_main_nav_spacing'} ? '' : 'checked'?>>
+                        <label class="switch-label switch-label-on " for="nav_spacing">Default</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="medium" name="settings[header][_customize-radio-header_main_nav_spacing]" id="nav_spacingmedium" data-customize-setting-link="nav_spacing" <?=isset($data->{'_customize-radio-header_main_nav_spacing'}) && $data->{'_customize-radio-header_main_nav_spacing'} == 'medium' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_spacingmedium">M</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="large" name="settings[header][_customize-radio-header_main_nav_spacing]" id="nav_spacinglarge" data-customize-setting-link="nav_spacing" <?=isset($data->{'_customize-radio-header_main_nav_spacing'}) && $data->{'_customize-radio-header_main_nav_spacing'} == 'large' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_spacinglarge">L</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="xlarge" name="settings[header][_customize-radio-header_main_nav_spacing]" id="nav_spacingxlarge" data-customize-setting-link="nav_spacing" <?=isset($data->{'_customize-radio-header_main_nav_spacing'}) && $data->{'_customize-radio-header_main_nav_spacing'} == 'xlarge' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_spacingxlarge">XL</label>
+
+                    </div>
+                </li>
+                <li id="customize-control-header_main_nav_uppercase" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div> <span class="customize-inside-control-row">
+                            <input name="settings[header][_customize-input-header_main_nav_uppercase]" id="_customize-input-header_main_nav_uppercase" type="checkbox" value="nav-uppercase" data-customize-setting-link="nav_uppercase" <?=isset($data->{'_customize-input-header_main_nav_uppercase'}) && $data->{'_customize-input-header_main_nav_uppercase'} ? 'checked' : ''?>>
+                            <label for="_customize-input-header_main_nav_uppercase">Uppercase</label>
+                                            </span>
+                </li>
+                <li id="customize-control-header_main_nav_height" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Nav Height</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                            <input value="<?=isset($data->{'_customize_header_main_nav_height'}) ? $data->{'_customize_header_main_nav_height'} : ''?>" name="settings[header][_customize_header_main_nav_height]" type="text">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_nav_push" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Nav Push</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                            <input value="<?=isset($data->{'_customize_header_main_nav_push'}) ? $data->{'_customize_header_main_nav_push'} : ''?>" name="settings[header][_customize_header_main_nav_push]" type="text">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_nav_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Nav Color</span>
+                    <input id="input_header_main_nav_color" name="settings[header][_customize-header_main_nav_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_nav_color'}) ? $data->{'_customize-header_main_nav_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_nav_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_nav_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Nav Color:hover</span>
+                    <input id="input_header_main_nav_hover_color" name="settings[header][_customize-header_main_nav_hover_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_nav_hover_color'}) ? $data->{'_customize-header_main_nav_hover_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_nav_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_icon_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Icons Color</span>
+                    <input id="input_header_main_icon_color" name="settings[header][_customize-header_main_icon_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_icon_color'}) ? $data->{'_customize-header_main_icon_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_icon_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_icon_hover_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Icons Color:hover</span>
+                    <input id="input_header_main_icon_hover_color" name="settings[header][_customize-header_main_icon_hover_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_icon_hover_color'}) ? $data->{'_customize-header_main_icon_hover_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_icon_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-custom_title_transparent" class="customize-control customize-control-kirki-custom" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <label>
+
+                        <div class="options-title-divider">Transparent Header</div>
+                    </label>
+                </li>
+                <li id="customize-control-header_height_transparent" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Height - Transparent Header</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                            <input value="<?=isset($data->{'_customize_header_main_height_transparent'}) ? $data->{'_customize_header_main_height_transparent'} : ''?>" name="settings[header][_customize_header_main_height_transparent]" type="text">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_icon_hover_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Transparent Header Background Color</span>
+                    <input id="input_header_main_transparent_bg_color" name="settings[header][_customize-header_main_transparent_bg_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_transparent_bg_color'}) ? $data->{'_customize-header_main_transparent_bg_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_transparent_bg_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_bg_transparent_shade" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div> <span class="customize-inside-control-row">
+                            <input name="settings[header][_customize-input-header_main_bg_transparent_shade]" id="_customize-input-header_main_bg_transparent_shade" type="checkbox" value="1" <?=isset($data->{'_customize-input-header_main_bg_transparent_shade'}) && $data->{'_customize-input-header_main_bg_transparent_shade'} ? 'checked' : ''?> data-customize-setting-link="header_main_bg_transparent_shade">
+                            <label for="_customize-input-header_main_bg_transparent_shade">Add Shade</label>
+                                            </span>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-inner" id="header_mobile_main_bar" style="display: none">
+            <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open" id="sub-accordion-section-main_bar">
+                <li id="customize-control-custom_title_header_mobile_layout" class="customize-control customize-control-kirki-custom" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <label>
+
+                        <div class="options-title-divider">Layout</div>
+                    </label>
+                </li>
+                <li id="customize-control-header_mobile_width" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Header Width</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                    </label>
+                    <div id="input_header_mobile_width" class="image">
+
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-header_mobile_width]" id="header_mobile_widthcontainer" data-customize-setting-link="header_mobile_width" <?= isset($data->{'_customize-radio-header_mobile_width'}) && $data->{'_customize-radio-header_mobile_width'} ? '' : 'checked'?> data-alt="">
+                        <label for="header_mobile_widthcontainer" class="header_mobile_widthcontainer">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/container.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="full-width" name="settings[header][_customize-radio-header_mobile_width]" id="header_mobile_widthfull-width" data-customize-setting-link="header_mobile_width" <?= isset($data->{'_customize-radio-header_mobile_width'}) && $data->{'_customize-radio-header_mobile_width'} == 'full-width' ? 'checked' : ''?> data-alt="">
+                        <label for="header_mobile_widthfull-width" class="header_mobile_widthfull-width">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/full-width.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                    </div>
+                </li>
+                <li id="customize-control-header_mobile_height" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Height (Exp: 100px)</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                            <input value="<?=isset($data->{'_customize_headermain_mobile_height'}) ? $data->{'_customize_headermain_mobile_height'} : ''?>" name="settings[header][_customize_headermain_mobile_height]" type="text">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_mobile_padding_top" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Padding Top</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                        <input id="customize-input-header_main_mobile_padding_top" type="text" name="settings[header][customize-input-header_main_mobile_padding_top]" value="<?= isset($data->{'customize-input-header_main_mobile_padding_top'}) ? $data->{'customize-input-header_main_mobile_padding_top'} :''?>" data-customize-setting-link="header_main_mobile_padding_top">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_mobile_padding_bottom" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Padding Bottom</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                        <input id="customize-input-header_main_mobile_padding_bottom" type="text" name="settings[header][customize-input-header_main_mobile_padding_bottom]" value="<?= isset($data->{'customize-input-header_main_mobile_padding_bottom'}) ? $data->{'customize-input-header_main_mobile_padding_bottom'} :''?>" data-customize-setting-link="header_main_mobile_padding_bottom">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_mobile_link_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Link Color</span>
+                    <input id="input_header_main_mobile_link_color" name="settings[header][_customize-header_main_mobile_link_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_mobile_link_color'}) ? $data->{'_customize-header_main_mobile_link_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                                "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                            ],function(){
+                                jQuery(document).ready(function(){
+                                    jQuery("#input_header_main_mobile_link_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                                });
+
+                            });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_mobile_link_hover_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Link Hover Color</span>
+                    <input id="input_header_main_mobile_link_hover_color" name="settings[header][_customize-header_main_mobile_link_hover_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_mobile_link_hover_color'}) ? $data->{'_customize-header_main_mobile_link_hover_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                                "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                            ],function(){
+                                jQuery(document).ready(function(){
+                                    jQuery("#input_header_main_mobile_link_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                                });
+
+                            });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_mobile_text_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Text Color</span>
+                    <input id="input_header_main_mobile_text_color" name="settings[header][_customize-header_main_mobile_text_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_mobile_text_color'}) ? $data->{'_customize-header_main_mobile_text_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                                "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                            ],function(){
+                                jQuery(document).ready(function(){
+                                    jQuery("#input_header_main_mobile_text_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                                });
+
+                            });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_mobile_color" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Text color main background</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                    </label>
+                    <div id="input_header_main_mobile_color" class="image">
+
+                        <input class="image-select" type="radio" value="nav-dark" name="settings[header][_customize-radio-header_main_mobile_color]" id="header_main_mobile_colordark" data-customize-setting-link="header_main_mobile_color" <?= isset($data->{'_customize-radio-header_main_mobile_color'}) && $data->{'_customize-radio-header_main_mobile_color'} == 'nav-dark' ? 'checked' : ''?> data-alt="">
+                        <label for="header_main_mobile_colordark" class="header_main_mobile_colordark">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/text-light.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-header_main_mobile_color]" id="header_main_mobile_colorlight" data-customize-setting-link="header_main_mobile_color" <?= isset($data->{'_customize-radio-header_main_mobile_color'}) && $data->{'_customize-radio-header_main_mobile_color'} ? '' : 'checked'?> data-alt="">
+                        <label for="header_main_mobile_colorlight" class="header_main_mobile_colorlight">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/text-dark.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                    </div>
+                </li>
+                <li id="customize-control-header_main_mobile_bg_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Background Color</span>
+                    <input id="input_header_main_mobile_bg_color" name="settings[header][_customize-header_main_mobile_bg_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_mobile_bg_color'}) ? $data->{'_customize-header_main_mobile_bg_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_mobile_bg_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_mobile_bg_img" class="customize-control customize-control-kirki-image" style="display: list-item;">
+
+                    <label>
+                    <span class="customize-control-title">
+                        Background Image
+                    </span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                    </label>
+                    <div class="image-wrapper attachment-media-view image-upload">
+                        <?php if(isset($data->{'_customize-header_main_mobile_bg_image'}->value) && $data->{'_customize-header_main_mobile_bg_image'}->value):?>
+                            <a href="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/'.$data->{'_customize-header_main_mobile_bg_image'}->value?>" onclick="imagePreview('customize-control_header_logo_image'); return false;" >
+                                <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/'.$data->{'_customize-header_main_mobile_bg_image'}->value?>" id="customize-control_header_logo_image" height="22" width="22" class="small-image-preview v-middle" >
+                            </a>
+                        <?php endif;?>
+                        <input id="customize-control_header_main_mobile_bg_image" name="settings_data_header_main_mobile_bg_image" value="<?=isset($data->{'_customize-header_main_mobile_bg_image'}->value) ? $data->{'_customize-header_main_mobile_bg_image'}->value : ''?>" class="input-file" type="file">
+                        <?php if(isset($data->{'_customize-header_main_mobile_bg_image'}->value) && $data->{'_customize-header_main_mobile_bg_image'}->value):?>
+                            <span class="delete-image">
+                            <input type="checkbox" name="settings[header][_customize-header_main_mobile_bg_image][delete]" value="1" class="checkbox" id="customize-control_header_logo_delete">
+                            <label for="customize-control_header__customize-header_main_mobile_bg_image_delete"> Delete Image</label>
+                        </span>
+                        <?php endif;?>
+                        <input type="hidden" name="settings[header][_customize-header_main_mobile_bg_image][value]" value="<?=isset($data->{'_customize-header_main_mobile_bg_image'}->value) ? $data->{'_customize-header_main_mobile_bg_image'}->value : ''?>">
+                    </div>
+                </li>
+                <li id="customize-control-header_mobile_bg_img_repeat" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Background Repeat</span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+
+                    <div id="input_header_mobile_bg_img_repeat" class="buttonset">
+
+                        <input class="switch-input screen-reader-text" type="radio" value="" name="settings[header][_customize-radio-header_mobile_bg_img_repeat]" id="header_mobile_bg_img_repeatrepeat" data-customize-setting-link="header_mobile_bg_img_repeat" <?= isset($data->{'_customize-radio-header_mobile_bg_img_repeat'}) && $data->{'_customize-radio-header_mobile_bg_img_repeat'} ? '' : 'checked'?>>
+                        <label class="switch-label switch-label-off" for="header_mobile_bg_img_repeatrepeat">Tiled</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="repeat-x" name="settings[header][_customize-radio-header_mobile_bg_img_repeat]" id="header_mobile_bg_img_repeatrepeat-x" data-customize-setting-link="header_mobile_bg_img_repeat" <?= isset($data->{'_customize-radio-header_mobile_bg_img_repeat'}) && $data->{'_customize-radio-header_mobile_bg_img_repeat'} == 'repeat-x' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-on " for="header_mobile_bg_img_repeatrepeat-x">Repeat X</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="repeat-y" name="settings[header][_customize-radio-header_mobile_bg_img_repeat]" id="header_mobile_bg_img_repeatrepeat-y" data-customize-setting-link="header_mobile_bg_img_repeat" <?= isset($data->{'_customize-radio-header_mobile_bg_img_repeat'}) && $data->{'_customize-radio-header_mobile_bg_img_repeat'} == 'repeat-y' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="header_mobile_bg_img_repeatrepeat-y">Repeat Y</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="no-repeat" name="settings[header][_customize-radio-header_mobile_bg_img_repeat]" id="header_mobile_bg_img_repeatno-repeat" data-customize-setting-link="header_mobile_bg_img_repeat" <?= isset($data->{'_customize-radio-header_mobile_bg_img_repeat'}) && $data->{'_customize-radio-header_mobile_bg_img_repeat'} == 'no-repeat' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="header_mobile_bg_img_repeatno-repeat">No Repeat</label>
+
+                    </div>
+                </li>
+                <li id="customize-control-box_shadow_header_mobile" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div> <span class="customize-inside-control-row">
+                            <input id="_customize-input-box_shadow_header_mobile" name="settings[header][_customize-input-box_shadow_header_mobile]" type="checkbox" value="1" data-customize-setting-link="box_shadow_header_mobile" <?=isset($data->{'_customize-input-box_shadow_header_mobile'}) && $data->{'_customize-input-box_shadow_header_mobile'} ? 'checked' : ''?>>
+                            <label for="_customize-input-box_shadow_header_mobile">Add Shadow</label>
+                                            </span>
+                </li>
+                <li id="customize-control-header_mobile_divider" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div> <span class="customize-inside-control-row">
+                            <input id="_customize-input-header_mobile_divider" name="settings[header][_customize-input-header_mobile_divider]" type="checkbox" value="1" data-customize-setting-link="header_mobile_divider" <?=isset($data->{'_customize-input-header_mobile_divider'}) && $data->{'_customize-input-header_mobile_divider'} ? 'checked' : ''?>>
+                            <label for="_customize-input-header_mobile_divider">Add Divider</label>
+                                            </span>
+                </li>
+                <li id="customize-control-html_after_header_mobile" class="customize-control customize-control-kirki-generic" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">HTML after header</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="customize-control-content">
+
+                            <textarea name="settings[header][_customize-html_after_header_mobile]" data-customize-setting-link="html_after_header_mobile" element="textarea" rows="5"><?=isset($data->{'_customize-html_after_header_mobile'}) ? $data->{'_customize-html_after_header_mobile'} : ''?></textarea>
+
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-custom_title_nav_mobile" class="customize-control customize-control-kirki-custom" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <label>
+
+                        <div class="options-title-divider">Navigation</div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_mobile_nav_style" class="customize-control customize-control-builder-radio-image" style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Navigation Style</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                    </label>
+                    <div id="input_nav_style_header_main_mobile" class="image">
+
+                        <input class="image-select" type="radio" value="" name="settings[header][_customize-radio-nav_style_header_main_mobile]" <?= isset($data->{'_customize-radio-nav_style_header_main_mobile'}) && $data->{'_customize-radio-nav_style_header_main_mobile'} ? '' : 'checked'?> id="nav_style_header_main_mobile" data-customize-setting-link="nav_style_header_main_mobile" data-alt="">
+                        <label for="nav_style_header_main_mobile" class="nav_style_header_main_mobile">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-default.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="divided" name="settings[header][_customize-radio-nav_style_header_main_mobile]" <?= isset($data->{'_customize-radio-nav_style_header_main_mobile'}) && $data->{'_customize-radio-nav_style_header_main_mobile'} == 'divided' ? 'checked' : ''?> id="nav_style_header_main_mobiledivided" data-customize-setting-link="nav_style_header_main_mobile" data-alt="">
+                        <label for="nav_style_header_main_mobiledivided" class="nav_style_header_main_mobiledivided">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-divided.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="line" name="settings[header][_customize-radio-nav_style_header_main_mobile]" <?= isset($data->{'_customize-radio-nav_style_header_main_mobile'}) && $data->{'_customize-radio-nav_style_header_main_mobile'} == 'line' ? 'checked' : ''?> id="nav_style_header_main_mobileline" data-customize-setting-link="nav_style_header_main_mobile" data-alt="">
+                        <label for="nav_style_header_main_mobileline" class="nav_style_header_main_mobileline">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-line.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="line-grow" name="settings[header][_customize-radio-nav_style_header_main_mobile]" <?= isset($data->{'_customize-radio-nav_style_header_main_mobile'}) && $data->{'_customize-radio-nav_style_header_main_mobile'} == 'line-grow' ? 'checked' : ''?> id="nav_style_header_main_mobileline-grow" data-customize-setting-link="nav_style_header_main_mobile" data-alt="">
+                        <label for="nav_style_header_main_mobileline-grow" class="nav_style_header_main_mobileline-grow">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-line-grow.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="line-bottom" name="settings[header][_customize-radio-nav_style_header_main_mobile]" <?= isset($data->{'_customize-radio-nav_style_header_main_mobile'}) && $data->{'_customize-radio-nav_style_header_main_mobile'} == 'line-bottom' ? 'checked' : ''?> id="nav_style_header_main_mobileline-bottom" data-customize-setting-link="nav_style_header_main_mobile" data-alt="">
+                        <label for="nav_style_header_main_mobileline-bottom" class="nav_style_header_main_mobileline-bottom">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-line-bottom.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="box" name="settings[header][_customize-radio-nav_style_header_main_mobile]" <?= isset($data->{'_customize-radio-nav_style_header_main_mobile'}) && $data->{'_customize-radio-nav_style_header_main_mobile'} == 'box' ? 'checked' : ''?> id="nav_style_header_main_mobilebox" data-customize-setting-link="nav_style_header_main_mobile" data-alt="">
+                        <label for="nav_style_header_main_mobilebox" class="nav_style_header_main_mobilebox">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-box.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="outline" name="settings[header][_customize-radio-nav_style_header_main_mobile]" <?= isset($data->{'_customize-radio-nav_style_header_main_mobile'}) && $data->{'_customize-radio-nav_style_header_main_mobile'} == 'outline' ? 'checked' : ''?> id="nav_style_header_main_mobileoutline" data-customize-setting-link="nav_style_header_main_mobile" data-alt="">
+                        <label for="nav_style_header_main_mobileoutline" class="nav_style_header_main_mobileoutline">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-outline.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="pills" name="settings[header][_customize-radio-nav_style_header_main_mobile]" <?= isset($data->{'_customize-radio-nav_style_header_main_mobile'}) && $data->{'_customize-radio-nav_style_header_main_mobile'} == 'pills' ? 'checked' : ''?> id="nav_style_header_main_mobilepills" data-customize-setting-link="nav_style_header_main_mobile" data-alt="">
+                        <label for="nav_style_header_main_mobilepills" class="nav_style_header_main_mobilepills">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-pills.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="tabs" name="settings[header][_customize-radio-nav_style_header_main_mobile]" <?= isset($data->{'_customize-radio-nav_style_header_main_mobile'}) && $data->{'_customize-radio-nav_style_header_main_mobile'} == 'tabs' ? 'checked' : ''?> id="nav_style_header_main_mobiletabs" data-customize-setting-link="nav_style_header_main_mobile" data-alt="">
+                        <label for="nav_style_header_main_mobiletabs" class="nav_style_header_main_mobiletabs">
+
+                            <img src="<?=$helper->getMediaUrl().'cleversoft/headerbuilder/img/nav-tabs.svg'?>">
+
+                            <span class="image-clickable"></span>
+                        </label>
+
+                    </div>
+                </li>
+                <li id="customize-control-header_main_mobile_nav_size" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Nav Size</span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+
+                    <div id="input_header_main_mobile_nav_size" class="buttonset">
+
+                        <input class="switch-input screen-reader-text" type="radio" value="xsmall" name="settings[header][_customize-radio-header_main_mobile_nav_size]" id="nav_sizexsmall" data-customize-setting-link="nav_size" <?=isset($data->{'_customize-radio-header_main_mobile_nav_size'}) && $data->{'_customize-radio-header_main_mobile_nav_size'} == 'xsmall' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_sizexsmall">XS</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="small" name="settings[header][_customize-radio-header_main_mobile_nav_size]" id="nav_sizesmall" data-customize-setting-link="nav_size" <?=isset($data->{'_customize-radio-header_main_mobile_nav_size'}) && $data->{'_customize-radio-header_main_mobile_nav_size'} == 'small' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_sizesmall">S</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="" name="settings[header][_customize-radio-header_main_mobile_nav_size]" id="nav_size" data-customize-setting-link="nav_size" <?=isset($data->{'_customize-radio-header_main_mobile_nav_size'}) && $data->{'_customize-radio-header_main_mobile_nav_size'} ? '' : 'checked'?>>
+                        <label class="switch-label switch-label-on " for="nav_size">Default</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="medium" name="settings[header][_customize-radio-header_main_mobile_nav_size]" id="nav_sizemedium" data-customize-setting-link="nav_size" <?=isset($data->{'_customize-radio-header_main_mobile_nav_size'}) && $data->{'_customize-radio-header_main_mobile_nav_size'} == 'medium' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_sizemedium">M</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="large" name="settings[header][_customize-radio-header_main_mobile_nav_size]" id="nav_sizelarge" data-customize-setting-link="nav_size" <?=isset($data->{'_customize-radio-header_main_mobile_nav_size'}) && $data->{'_customize-radio-header_main_mobile_nav_size'} == 'large' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_sizelarge">L</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="xlarge" name="settings[header][_customize-radio-header_main_mobile_nav_size]" id="nav_sizexlarge" data-customize-setting-link="nav_size" <?=isset($data->{'_customize-radio-header_main_mobile_nav_size'}) && $data->{'_customize-radio-header_main_mobile_nav_size'} == 'xlarge' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_sizexlarge">XL</label>
+
+                    </div>
+                </li>
+                <li id="customize-control-mobile_nav_spacing" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Nav Spacing</span>
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+
+                    <div id="input_header_main_mobile_nav_spacing" class="buttonset">
+
+                        <input class="switch-input screen-reader-text" type="radio" value="xsmall" name="settings[header][_customize-radio-header_main_mobile_nav_spacing]" id="nav_spacingxsmall" data-customize-setting-link="nav_spacing" <?=isset($data->{'_customize-radio-header_main_mobile_nav_spacing'}) && $data->{'_customize-radio-header_main_mobile_nav_spacing'} == 'xsmall' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_spacingxsmall">XS</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="small" name="settings[header][_customize-radio-header_main_mobile_nav_spacing]" id="nav_spacingsmall" data-customize-setting-link="nav_spacing" <?=isset($data->{'_customize-radio-header_main_mobile_nav_spacing'}) && $data->{'_customize-radio-header_main_mobile_nav_spacing'} == 'small' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_spacingsmall">S</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="" name="settings[header][_customize-radio-header_main_mobile_nav_spacing]" id="nav_spacing" data-customize-setting-link="nav_spacing" <?=isset($data->{'_customize-radio-header_main_mobile_nav_spacing'}) && $data->{'_customize-radio-header_main_mobile_nav_spacing'} ? '' : 'checked'?>>
+                        <label class="switch-label switch-label-on " for="nav_spacing">Default</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="medium" name="settings[header][_customize-radio-header_main_mobile_nav_spacing]" id="nav_spacingmedium" data-customize-setting-link="nav_spacing" <?=isset($data->{'_customize-radio-header_main_mobile_nav_spacing'}) && $data->{'_customize-radio-header_main_mobile_nav_spacing'} == 'medium' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_spacingmedium">M</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="large" name="settings[header][_customize-radio-header_main_mobile_nav_spacing]" id="nav_spacinglarge" data-customize-setting-link="nav_spacing" <?=isset($data->{'_customize-radio-header_main_mobile_nav_spacing'}) && $data->{'_customize-radio-header_main_mobile_nav_spacing'} == 'large' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_spacinglarge">L</label>
+
+                        <input class="switch-input screen-reader-text" type="radio" value="xlarge" name="settings[header][_customize-radio-header_main_mobile_nav_spacing]" id="nav_spacingxlarge" data-customize-setting-link="nav_spacing" <?=isset($data->{'_customize-radio-header_main_mobile_nav_spacing'}) && $data->{'_customize-radio-header_main_mobile_nav_spacing'} == 'xlarge' ? 'checked' : ''?>>
+                        <label class="switch-label switch-label-off" for="nav_spacingxlarge">XL</label>
+
+                    </div>
+                </li>
+                <li id="customize-control-header_main_mobile_nav_uppercase" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div> <span class="customize-inside-control-row">
+                            <input name="settings[header][_customize-input-header_main_mobile_nav_uppercase]" id="_customize-input-header_main_mobile_nav_uppercase" type="checkbox" value="nav-uppercase" data-customize-setting-link="nav_uppercase" <?=isset($data->{'_customize-input-header_main_mobile_nav_uppercase'}) && $data->{'_customize-input-header_main_mobile_nav_uppercase'} ? 'checked' : ''?>>
+                            <label for="_customize-input-header_main_mobile_nav_uppercase">Uppercase</label>
+                                            </span>
+                </li>
+                <li id="customize-control-header_main_mobile_nav_height" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Nav Height</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                            <input value="<?=isset($data->{'_customize_header_main_mobile_nav_height'}) ? $data->{'_customize_header_main_mobile_nav_height'} : ''?>" name="settings[header][_customize_header_main_mobile_nav_height]" type="text">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_mobile_nav_push" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Nav Push</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                            <input value="<?=isset($data->{'_customize_header_main_mobile_nav_push'}) ? $data->{'_customize_header_main_mobile_nav_push'} : ''?>" name="settings[header][_customize_header_main_mobile_nav_push]" type="text">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_mobile_nav_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Nav Color</span>
+                    <input id="input_header_main_mobile_nav_color" name="settings[header][_customize-header_main_mobile_nav_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_mobile_nav_color'}) ? $data->{'_customize-header_main_mobile_nav_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_mobile_nav_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_mobile_nav_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Nav Color:hover</span>
+                    <input id="input_header_main_mobile_nav_hover_color" name="settings[header][_customize-header_main_mobile_nav_hover_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_mobile_nav_hover_color'}) ? $data->{'_customize-header_main_mobile_nav_hover_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_mobile_nav_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_mobile_icon_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Icons Color</span>
+                    <input id="input_header_main_mobile_icon_color" name="settings[header][_customize-header_main_mobile_icon_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_mobile_icon_color'}) ? $data->{'_customize-header_main_mobile_icon_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_mobile_icon_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_mobile_icon_hover_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Icons Color:hover</span>
+                    <input id="input_header_main_mobile_icon_hover_color" name="settings[header][_customize-header_main_mobile_icon_hover_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_mobile_icon_hover_color'}) ? $data->{'_customize-header_main_mobile_icon_hover_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_mobile_icon_hover_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-mobile_custom_title_transparent" class="customize-control customize-control-kirki-custom" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div>
+                    <label>
+
+                        <div class="options-title-divider">Transparent Header</div>
+                    </label>
+                </li>
+                <li id="customize-control-header_mobile_height_transparent" class="customize-control customize-control-kirki-slider" style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Height - Transparent Header</span>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+
+                        <div class="wrapper">
+                            <input value="<?=isset($data->{'_customize_header_main_mobile_height_transparent'}) ? $data->{'_customize_header_main_mobile_height_transparent'} : ''?>" name="settings[header][_customize_header_main_mobile_height_transparent]" type="text">
+                        </div>
+                    </label>
+                </li>
+                <li id="customize-control-header_main_mobile_icon_hover_color" class="customize-control customize-control-kirki-radio-buttonset" style="display: list-item;">
+                    <span class="customize-control-title">Transparent Header Background Color</span>
+                    <input id="input_header_main_mobile_transparent_bg_color" name="settings[header][_customize-header_main_mobile_transparent_bg_color]" data-ui-id="adminhtml-system-config-form-field-color-0-text-groups-header-fields-link-color-value" value="<?= isset($data->{'_customize-header_main_mobile_transparent_bg_color'}) ? $data->{'_customize-header_main_mobile_transparent_bg_color'} : ''?>" class="mColorPicker" type="text">
+                    <script>
+                        require([
+                            "CleverSoft_CleverTheme/js/mcolorpicker/mcolorpicker"
+                        ],function(){
+                            jQuery(document).ready(function(){
+                                jQuery("#input_header_main_mobile_transparent_bg_color").attr("data-hex", true).width("250px").mColorPicker({imageFolder :"<?= $block->getViewFileUrl('CleverSoft_CleverTheme::js/mcolorpicker/images')?>/"});
+                            });
+
+                        });
+                    </script>
+                </li>
+                <li id="customize-control-header_main_mobile_bg_transparent_shade" class="customize-control customize-control-checkbox" style="display: list-item;">
+                    <div class="customize-control-notifications-container" style="display: none;">
+                        <ul></ul>
+                    </div> <span class="customize-inside-control-row">
+                            <input name="settings[header][_customize-input-header_main_mobile_bg_transparent_shade]" id="_customize-input-header_main_mobile_bg_transparent_shade" type="checkbox" value="1" <?=isset($data->{'_customize-input-header_main_mobile_bg_transparent_shade'}) && $data->{'_customize-input-header_main_mobile_bg_transparent_shade'} ? 'checked' : ''?> data-customize-setting-link="header_main_mobile_bg_transparent_shade">
+                            <label for="_customize-input-header_main_mobile_bg_transparent_shade">Add Shade</label>
+                                            </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+require(['jquery', 'jquery/ui'], function($){
+    $('input[name="settings_data_header_main_bg_image"]').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('input[name="settings[header][_customize-header_main_bg_image][value]"]').val(fileName);
+    });
+    $('input[name="settings_data_header_main_mobile_bg_image"]').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('input[name="settings[header][_customize-header_main_mobile_bg_image][value]"]').val(fileName);
+    });
+});
+</script>

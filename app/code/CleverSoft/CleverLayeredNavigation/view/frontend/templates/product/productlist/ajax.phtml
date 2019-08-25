@@ -1,0 +1,26 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+/**
+ * @var $block \CleverSoft\CleverLayeredNavigation\Block\Product\ProductList\Ajax
+ */
+if(!$block->canShowBlock()) {
+    return;
+}
+$theme = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$equalH = $theme ? $theme->getCfg('category_grid/equal_height') : 0;
+?>
+<script type="text/x-magento-init">
+{
+    "body.page-with-filter": {
+        "cleverLayeredNavigationAjax": {
+            "equalHeight": <?php echo $equalH ? 1 :0; ?>
+        }
+    }
+}
+</script>

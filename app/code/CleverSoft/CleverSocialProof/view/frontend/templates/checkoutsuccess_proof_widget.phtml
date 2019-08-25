@@ -1,0 +1,28 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$order = $objectManager->create('\Magento\Checkout\Model\Session')->getLastRealOrder();
+?>
+<?php if ($order->getId()):?>
+<?php
+    $country = $objectManager->create('\Magento\Directory\Model\CountryFactory')->create()->loadByCode($order->getBillingAddress()->getCountryId())->getName();
+    $name = $order->getCustomerName();
+    $productId = "";
+    foreach ($order->getAllItems() as $item) {
+        $productId = $item->getProductId();
+        break;
+    }
+    if ($productId) {
+        $product = $objectManager->create('\Magento\Catalog\Model\Product')
+            ->load($productId);
+        $productUrl = $product->getProductUrl();
+        $productName = $product->getName();
+        $productImage = $objectManager->get('\Magento\Catalog\Helper\Image')->init($product, 'product_page_image_small')->setImageFile($product->getFile())->resize(100, 100)->getUrl();
+    }
+?>
+<div id="socialproof-popup-checkoutpage" class="socialproof-modal"><span class="title-box"><?php echo $name?>  in  <?php echo $country;?> <?php echo __('just bought') ?></span>
+    <span class="socialproof-close"><i class="cs-font clever-icon-close"></i></span><br><img
+            src="<?php echo $productImage;?>" alt="">
+    <p class="product-info"><a href="<?php echo $productUrl?>"><?php echo $productName;?></a><span
+                class="timeline"> <?php echo __('a minutes ago') ?> </span></p>
+</div>
+<?php endif;?>

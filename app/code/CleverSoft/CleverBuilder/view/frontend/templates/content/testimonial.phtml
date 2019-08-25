@@ -1,0 +1,91 @@
+<?php
+$image = $this->getData('image');
+$image_enable = $this->getData('image_enable');
+$alignment = $this->getData('alignment');
+$image_position = $this->getData('image_position');
+$testimonial_content = $this->getData('testimonial_text');
+$name = $this->getData('name');
+$job = $this->getData('job');
+$color = $this->getData('color');
+$border_color = $this->getData('border_color');
+$name_color = $this->getData('name_color');
+$job_color = $this->getData('job_color');
+$img_size = $this->getData('img_size');
+$link = $this->getData('link');
+$link_option = $this->getData('link_option');
+$link_option_rel = $this->getData('link_option_rel');
+$img_border_type = $this->getData('img_border_type');
+$border_width = $this->getData('border_width');
+$border_color = $this->getData('border_color');
+$border_radius = $this->getData('border_radius');
+$img_placeholder = $this->getViewFileUrl("CleverSoft_CleverBuilder::images/placeholder.png");
+$quotation_left_enable = $this->getData('quotation_left_enable');
+$quotation_right_enable = $this->getData('quotation_right_enable');
+$set_position_quotation_left = $this->getData('set_position_quotation_left');
+$set_position_quotation_right = $this->getData('set_position_quotation_right');
+$position_icon_upper_top = $this->getData('position_icon_upper_top')."px";
+$position_icon_upper_right = $this->getData('position_icon_upper_right')."px";
+$position_icon_upper_bottom = $this->getData('position_icon_upper_bottom')."px";
+$position_icon_upper_left = $this->getData('position_icon_upper_left')."px";
+$position_icon_lower_top = $this->getData('position_icon_lower_top')."px";
+$position_icon_lower_right = $this->getData('position_icon_lower_right')."px";
+$position_icon_lower_bottom = $this->getData('position_icon_lower_bottom')."px";
+$position_icon_lower_left = $this->getData('position_icon_lower_left')."px";
+$quotation_color = $this->getData('quotation_color');
+$quotation_size = $this->getData('quotation_size');
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+?>
+<div class="global-element element-testimonial <?=$alignment ? $alignment : "text-center"?> <?php if($isPreview) echo "cs-live-preview"?>">
+    <?php if(isset($quotation_left_enable) && $quotation_left_enable == "yes"): ?>
+    <i class="fa fa-quote-left element-testimonial-quote element-testimonial-quote__upper" style="<?= $quotation_color ? "color:$quotation_color" : "color: #999" ?>;<?= $quotation_size ? "font-size:$quotation_size"."px" : "" ?>;<?php if(isset($set_position_quotation_left) && $set_position_quotation_left != "") { echo "position: absolute;top: $position_icon_upper_top;left: $position_icon_upper_left"; }?>"></i>
+    <?php endif?>
+    <div class="element-testimonial__wrapper">
+        <div class="element-testimonial__content" style="<?= $color ? "color:$color" : "" ?>"><?=$testimonial_content ? $testimonial_content : "Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."?></div>
+        <div class="element-testimonial__meta <?=$image_position ? $image_position : "img-position__aside"?>">
+            <div class="element-testimonial__inner">
+                <?php if(isset($image_enable) && $image_enable == "" || is_null($image_enable)): ?>
+                <div class="element-testimonial__inner-image">
+                    <?php if(isset($link) && $link != ""): ?>
+                    <a href="<?= $link ?>" <?php if(isset($link_option) && $link_option != "") { echo 'target="_blank"'; }?> <?php if(isset($link_option_rel) && $link_option_rel != "") { echo 'rel="nofollow"'; }?>>
+                    <?php endif?>
+                        <img class="element-testimonial__inner-img" src="<?= $image ? "$image" : "$img_placeholder" ?>" style="<?= $img_size ? "width:$img_size"."px".";"."height:$img_size"."px" : "" ?>;<?= $img_border_type ? "border-style:$img_border_type" : "" ?>;<?= $border_width ? "border-width:$border_width" : "" ?>;<?= $border_color ? "border-color:$border_color" : "" ?>;<?= $border_radius ? "border-radius:$border_radius" : "" ?>">
+                    <?php if(isset($link) && $link != ""): ?>
+                    </a>
+                    <?php endif?>
+                </div>
+                <?php endif?>
+                <div class="element-testimonial__inner-details">
+                    <?php if(isset($name) && $name != ""): ?>
+                    <div class="element-testimonial-name" style="<?= $name_color ? "color:$name_color" : "color: #0172ff" ?>">
+                        <?php if(isset($link) && $link != ""): ?>
+                        <a href="<?= $link ?>" <?php if(isset($link_option) && $link_option != "") { echo 'target="_blank"'; }?> <?php if(isset($link_option_rel) && $link_option_rel != "") { echo 'rel="nofollow"'; }?> style="<?= $name_color ? "color:$name_color" : "" ?>">
+                        <?php endif?>
+                        <?=$name ? $name : "David Berton"?>
+                        <?php if(isset($link) && $link != ""): ?>
+                        </a>
+                        <?php endif?>
+                    </div>
+                    <?php endif?>
+                    <?php if(isset($job) && $job != ""): ?>
+                    <div class="element-testimonial-job" style="<?= $job_color ? "color:$job_color" : "" ?>">
+                        <?php if(isset($link) && $link != ""): ?>
+                        <a href="<?= $link ?>" <?php if(isset($link_option) && $link_option != "") { echo 'target="_blank"'; }?> <?php if(isset($link_option_rel) && $link_option_rel != "") { echo 'rel="nofollow"'; }?> style="<?= $job_color ? "color:$job_color" : "" ?>">
+                        <?php endif?>
+                        <?=$job ? $job : "Designer"?>
+                        <?php if(isset($link) && $link != ""): ?>
+                        </a>
+                        <?php endif?> 
+                    </div>
+                    <?php endif?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php if(isset($quotation_right_enable) && $quotation_right_enable == "yes"): ?>
+    <i class="fa fa-quote-right element-testimonial-quote element-testimonial-quote__lower" style="<?= $quotation_color ? "color:$quotation_color" : "color: #999" ?>;<?= $quotation_size ? "font-size:$quotation_size"."px" : "" ?>;<?php if(isset($set_position_quotation_right) && $set_position_quotation_right != "") { echo "position: absolute;right: $position_icon_lower_right;bottom: $position_icon_lower_bottom"; }?>"></i>
+    <?php endif?>
+    <?php if($isPreview) { ?>
+        <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+    <?php } ?>
+</div>

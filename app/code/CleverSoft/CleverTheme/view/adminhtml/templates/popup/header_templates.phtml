@@ -1,0 +1,164 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$templates = $objectManager->create('CleverSoft\CleverTheme\Model\Template')->getCollection();
+
+?>
+<!-- Modal content -->
+<div class="headerbuilder-modal-content">
+    <div class="headerbuilder-modal-header">
+        <span class="headerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="headerbuilder-modal-body">
+        <strong>Templates</strong>
+        <ul class="customize-pane-child accordion-section-content accordion-section control-section control-section-kirki-default open"
+            id="sub-accordion-section-sidebar">
+            <li id="customize-control-header_templates_save" class="customize-control customize-control-zoo-custom_html"
+                style="display: list-item;">
+                <div class="zoo--settings-wrapper">
+                    <div data-control="header_templates_save" class="zoo-control-field-header zoo-field-heading">
+                        <label>
+                            <span class="customize-control-title">Save Template</span>
+                            <div class="customize-control-notifications-container">
+                                <div class="save-template-form"><p class="description customize-control-description">
+                                        Save
+                                        current header layout and use it later.</p>
+                                    <div class="zoo-flexbox"><input type="text"
+                                                                    name="settings[header][_customize-input-header_template_name]"
+                                                                    class="template-input-name">
+                                        <button type="submit">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </li>
+            <li id="customize-control-header_templates_saved"
+                class="customize-control customize-control-zoo-custom_html"
+                style="display: list-item;">
+                <div class="customize-control customize-control-builder-radio-image">
+                    <span class="customize-control-title">Saved Templates</span>
+                    <div class="customize-control-notifications-container"></div>
+                    <div id="input_header_template_saved" class="image">
+                        <?php if(count($templates)):?>
+                            <?php foreach ($templates as $item):?>
+                                <input class="image-select" type="radio" value="preset_<?php echo $item->getId()?>"
+                                       name="settings[header][_customize-radio-header_template_saved]"
+                                       id="header_template_saved<?php echo str_replace(' ','-', $item->getTemplateName());?>"
+                                       data-customize-setting-link="header_template_saved" data-alt="">
+                                <label for="header_template_saved<?php echo str_replace(' ','-', $item->getTemplateName());?>" class="header_template_saved<?php echo str_replace(' ','-', $item->getTemplateName());?>">
+
+                                    <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/header-1.svg' ?>">
+
+                                    <span class="header_template_saved image-clickable"><?php echo $item->getTemplateName();?></span>
+                                </label>
+                                <a href="#" class="header-delete-tpl" data-id="<?=$item->getId()?>" title="Delete Template"><i class="dashicons dashicons-trash"></i></a>
+                            <?php endforeach;?>
+                        <?php endif;?>
+                        <input id="preset_delete" name="settings[header][_customize-radio-header_template_deleted]" value="">
+                        <input class="image-select" type="radio" value="header-default"
+                               name="settings[header][_customize-radio-header_template_saved]"
+                               id="header_template_savedheader-default"
+                               data-customize-setting-link="header_template_saved" data-alt="">
+                        <label for="header_template_savedheader-default" class="header_template_savedheader-default">
+
+                            <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/header-1.svg' ?>">
+
+                            <span class="header_template_saved image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="header-default-center"
+                               name="settings[header][_customize-radio-header_template_saved]"
+                               id="header_template_savedheader-default-center"
+                               data-customize-setting-link="header_template_saved" data-alt="">
+                        <label for="header_template_savedheader-default-center"
+                               class="header_template_savedheader-default-center">
+
+                            <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/header-2.svg' ?>">
+
+                            <span class="header_template_saved image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="header-default-dark"
+                               name="settings[header][_customize-radio-header_template_saved]"
+                               id="header_template_savedheader-default-dark"
+                               data-customize-setting-link="header_template_saved" data-alt="">
+                        <label for="header_template_savedheader-default-dark"
+                               class="header_template_savedheader-default-dark">
+
+                            <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/header-3.svg' ?>">
+
+                            <span class="header_template_saved image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="header-wide-nav"
+                               name="settings[header][_customize-radio-header_template_saved]"
+                               id="header_template_savedheader-wide-nav"
+                               data-customize-setting-link="header_template_saved" data-alt="">
+                        <label for="header_template_savedheader-wide-nav" class="header_template_savedheader-wide-nav">
+
+                            <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/header-4.svg' ?>">
+
+                            <span class="header_template_saved image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="header-simple-signup"
+                               name="settings[header][_customize-radio-header_template_saved]"
+                               id="header_template_savedheader-simple-signup"
+                               data-customize-setting-link="header_template_saved" data-alt="">
+                        <label for="header_template_savedheader-simple-signup"
+                               class="header_template_savedheader-simple-signup">
+
+                            <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/header-5.svg' ?>">
+
+                            <span class="header_template_saved image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="header-simple-right-buttons"
+                               name="settings[header][_customize-radio-header_template_saved]"
+                               id="header_template_savedheader-simple-right-buttons"
+                               data-customize-setting-link="header_template_saved" data-alt="">
+                        <label for="header_template_savedheader-simple-right-buttons"
+                               class="header_template_savedheader-simple-right-buttons">
+
+                            <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/header-6.svg' ?>">
+
+                            <span class="header_template_saved image-clickable"></span>
+                        </label>
+
+                        <input class="image-select" type="radio" value="header-simple-cart-top"
+                               name="settings[header][_customize-radio-header_template_saved]"
+                               id="header_template_savedheader-simple-cart-top"
+                               data-customize-setting-link="header_template_saved" data-alt="">
+                        <label for="header_template_savedheader-simple-cart-top"
+                               class="header_template_savedheader-simple-cart-top">
+
+                            <img src="<?= $helper->getMediaUrl() . 'cleversoft/headerbuilder/img/header-7.svg' ?>">
+
+                            <span class="header_template_saved image-clickable"></span>
+                        </label>
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    require([
+        "jquery"
+    ], function ($) {
+        $(document).ready(function () {
+            $(".header-delete-tpl").click(function (e) {
+                var r = confirm("Are you sure want to delete this template?");
+                if (r == true) {
+                    $("input[name='settings[header][_customize-radio-header_template_deleted]']").val($(this).attr("data-id"));
+                    $("#config-edit-form").submit();
+                }
+            })
+        });
+
+    });
+</script>

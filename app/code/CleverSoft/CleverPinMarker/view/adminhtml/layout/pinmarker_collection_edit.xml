@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+		<referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="store_switcher">
+                <action method="setUseConfirm">
+                    <argument name="params" xsi:type="string">1</argument>
+                </action>
+            </block>
+        </referenceContainer>
+		<referenceContainer name="left">
+			<block class="CleverSoft\CleverPinMarker\Block\Adminhtml\Pincollection\Edit\Tabs" name="pincollection_edit_tabs">
+				<block class="CleverSoft\CleverPinMarker\Block\Adminhtml\Pincollection\Edit\Tab\Main" name="pincollection_edit_tab_main" />
+				<action method="addTab">
+					<argument name="name" xsi:type="string">main_section</argument>
+					<argument name="block" xsi:type="string">pincollection_edit_tab_main</argument>
+				</action>
+				<action method="addTab">
+                	<argument name="name" xsi:type="string">pin_section</argument>
+					<argument name="block" xsi:type="array">
+						<item name="label" xsi:type="string">Pins</item>
+						<item name="title" xsi:type="string">Pins</item>
+						<item name="url" xsi:type="helper" helper="CleverSoft\CleverPinMarker\Helper\Data::getCollectionPinUrl"></item>
+						<item name="class" xsi:type="string">ajax</item>
+					</argument>
+				</action>
+			</block>
+		</referenceContainer>
+		
+		<referenceContainer name="content">
+			<block class="CleverSoft\CleverPinMarker\Block\Adminhtml\Pincollection\Edit" name="pincollection_edit" />
+			<block class="Magento\Backend\Block\Template" name="pm_collection_js" template="CleverSoft_CleverPinMarker::collection/js_config.phtml"/>
+        </referenceContainer>
+		
+    </body>
+	<update handle="editor"/>
+</page>

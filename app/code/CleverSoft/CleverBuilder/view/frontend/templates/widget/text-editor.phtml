@@ -1,0 +1,54 @@
+<?php 
+$helper = $this->helper("CleverSoft\CleverBuilder\Helper\Data");
+$storeId = $helper->getStoreId();
+$panelId = '#panel-'.$storeId.'-'.$block->getData('widget_id');
+?>
+<button type="button" class="scalable action-show-hide" style="" id="togglecms_page_form_content_<?php echo $block->getData('id')?>"><span><span><span>Show / Hide Editor</span></span></span></button>
+<textarea id="<?php echo $block->getData('id') ?>" name="<?php echo $block->getData('name') ?>" class="textarea">
+    <?php echo $block->getData('content') ? $block->getData('content') : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.'?>
+</textarea>
+<script>
+    require([
+    "jquery", 
+    "mage/translate", 
+    "mage/adminhtml/events",
+    "tinyMceSetup",
+    "mage/adminhtml/wysiwyg/widget"
+    ], function($){
+        <?php if($block->getData('element_class')):?>
+            var previewEl = $(".cleversoft-panels-iframe-preview").contents().find("<?=$panelId?> .<?=$block->getData('element_class')?>").first();
+        <?php else:?>
+            var previewEl = $(".cleversoft-panels-iframe-preview").contents().find("<?=$panelId?> .cleversoft-widget-tinymce").first();
+        <?php endif;?>
+
+        tinymce.init({
+          selector: 'textarea#<?php echo $block->getData('id') ?>',
+          plugins: 'image',
+          toolbar: 'formatselect | fontsizeselect | fontselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist | removeformat","plugins":"advlist autolink lists image link charmap media noneditable table contextmenu paste help table code textcolor colorpicker textpattern insertdatetime wordcount',
+          init_instance_callback: function (editor) {
+            editor.on('change keyup keydown keypress', function (e) {
+                $content = tinyMCE.activeEditor.getContent();
+                $("#<?php echo $block->getData('id') ?>").html($content);
+                <?php if($block->getData('element_class')):?>
+                    $(".cleversoft-panels-iframe-preview").contents().find("<?=$panelId?> .<?=$block->getData('element_class')?>").first().html($content);
+                <?php else:?>
+                    $(".cleversoft-panels-iframe-preview").contents().find("<?=$panelId?> .cleversoft-widget-tinymce").first().html($content);
+                <?php endif;?>
+            });
+          }
+        });
+
+        $('#<?php echo $block->getData('id')?>').on('change keyup keydown keypress', function (e) {
+            $content = $(this).val();
+            <?php if($block->getData('element_class')):?>
+                $(".cleversoft-panels-iframe-preview").contents().find("<?=$panelId?> .<?=$block->getData('element_class')?>").first().html($content);
+            <?php else:?>
+                $(".cleversoft-panels-iframe-preview").contents().find("<?=$panelId?> .cleversoft-widget-tinymce").first().html($content);
+            <?php endif;?>
+        });
+
+        Event.observe("togglecms_page_form_content_<?php echo $block->getData('id')?>", "click", function(e) {
+            tinymce.EditorManager.execCommand('mceToggleEditor', true, '<?php echo $block->getData('id')?>');
+        });
+    });
+</script>

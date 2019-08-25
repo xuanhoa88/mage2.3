@@ -1,0 +1,38 @@
+<?php
+$dataHelper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$thisHelper = $block->getData('helper');
+
+?>
+    <?php echo $block->getData('input_field') ?>
+    <div id="category_<?php echo $block->getData('element_id') ?>" class="clever-trigger-content-update" data-mage-init='{"CleverSoft_CleverBuilder/js/categories-tree":{
+                "imageFolder":"<?php echo $this->getViewFileUrl('CleverSoft_CleverBuilder::images') ?>/",
+                "folderImage":"folder-open.gif",
+                "plusImage":"elbow-end-plus.gif",
+                "minusImage":"elbow-end-minus.gif",
+                "initExpandedNodes":"",
+                "timeoutEdit":"20",
+                "editCounter":"-1",
+                "editEl": "false",
+                "categoryIds": "",
+                "element_name": "<?php echo $block->getData('element_name') ?>",
+                "element_id" : "<?php echo $block->getData('element_id') ?>"
+                }}'
+    >
+            <div id="product-categories" class="tree x-tree">
+                <ul id="dhtmlgoodies_tree_<?php echo $block->getData('element_id') ?>">
+                    <?php echo $thisHelper->getTreeCategory($thisHelper->getRootCategory(), 0, [], $block->getData('value')) ?>
+                </ul>
+                <div id="expandCollapse">
+                    <a href="#" id="expand-all"><?php echo __('Expand all') ?></a>
+                    <a href="#" id="collapse-all"><?php echo __('Collapse all') ?></a>
+                </div>
+                <div id="ajaxMessage"></div>
+            </div>
+    </div>
+
+    <style>
+        div#product-categories ul {
+            list-style: none;
+        }
+        #dhtmlgoodies_tree_<?php echo $block->getData('element_id') ?> {padding-left: 0}
+    </style>

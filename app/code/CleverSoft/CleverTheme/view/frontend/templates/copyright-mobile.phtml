@@ -1,0 +1,23 @@
+<?php
+$footerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\FooterData');
+$settingData = $footerBuilderHelper->getSettingData();
+
+$tags = [
+    'current_year' => date("Y"),
+    'site_title'   => "Title",
+    'theme_author' => sprintf('<a href="zootemplate.com">%1$s</a>', 'zootemplate')
+];
+
+$staticBlock = isset($settingData->{'_customize-textarea-copyright-mobile'}) && $settingData->{'_customize-textarea-copyright-mobile'} ? $settingData->{'_customize-textarea-copyright-mobile'} : '';
+
+foreach ($tags as $k => $v) {
+    $staticBlock = str_replace('{' . $k . '}', $v, $staticBlock);
+}
+
+?>
+
+<?php if ($staticBlock): ?>
+    <div class="copyright-text text-<?php echo isset($settingData->{'_customize-input-copyright-icon-mobile_align'}) && $settingData->{'_customize-input-copyright-icon-mobile_align'} ? $settingData->{'_customize-input-copyright-icon-mobile_align'} : ''?>">
+        <?php echo $staticBlock?>
+    </div>
+<?php endif; ?>

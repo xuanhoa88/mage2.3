@@ -1,0 +1,38 @@
+.page-header .user_area i { font-size:16px; }
+.user_area { border-left-width:1px; }
+.user_area { border-color:#5d5d5d; }
+.user_area { border-style:solid; }
+.user_area { padding:0 0 0 10px; }
+.switcher-language { border-left-width:1px; }
+.switcher-language { border-color:#5d5d5d; }
+.switcher-language { border-style:solid; }
+.switcher-language { padding:0 0 0 10px; }
+.switcher-currency { border-left-width:1px; }
+.switcher-currency { border-color:#5d5d5d; }
+.switcher-currency { border-style:solid; }
+.switcher-currency { padding:0 0 0 10px; }
+.header-minimal-search a.icon i:before {
+  content:"\c013";
+  font-family:"cleversoft";
+}
+.page-header .header-compare i { font-size:24px; }
+.page-header .header-wishlist i { font-size:24px; }
+.minicart-wrapper i, .minicart-wrapper_dropdown i { font-size:24px; }
+.minicart-wrapper, .minicart-wrapper_dropdown { border-left-width:1px; }
+.minicart-wrapper, .minicart-wrapper_dropdown { border-color:#d9d9d9; }
+.minicart-wrapper, .minicart-wrapper_dropdown { border-style:solid; }
+.minicart-wrapper, .minicart-wrapper_dropdown { padding:0 0 0 10px; }
+.header-top .topbar-container .row { min-height:38px; }
+.header-top { background:#000000; }
+.header-top .header-panel .topbar-container a { color:#ffffff; }
+.header-top .header-panel .topbar-container p, .header-top .header-panel .topbar-container span, .header-top .header-panel .topbar-container div { color:#ffffff; }
+.header_main-top .row { min-height:100px !important; }
+.logo-container .logo img { max-height:100px; }
+.header_main-top .user_area a, .header_main-top .minicart-wrapper a, .header_main-top .block-search a, .header_main-top .header-wishlist a, .header_main-top .header-compare a, .header_main-top .header-minimal-search a { color:#000000; }
+.header_main-top .icon-menu .line, .header_main-top .icon-menu__canvas .line { background:#000000; }
+.header_main-top .icon-menu .line:before, .header_main-top .icon-menu .line:after, .header_main-top .icon-menu__canvas .line:before, .header_main-top .icon-menu__canvas .line:after { background:#000000; }
+.header_main-top p, .header_main-top span { color:#000000; }
+.page-header-mobile .minicart-wrapper, .page-header-mobile .minicart-wrapper_dropdown { border-style:none; }
+.header_main-mobile-top .row { min-height:60px; }
+.logo-container_mobile .logo img { max-height:60px; }
+.sticky-wrapper.is-sticky .header_main-top, .sticky-wrapper.is-sticky .header_main-mobile-top { background:#ffffff; }

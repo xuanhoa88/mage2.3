@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="category.product.type.details.renderers">
+            <block class="CleverSoft\CleverTheme\Block\Product\Renderer\Listing\Configurable" name="category.product.type.details.renderers.configurable.with.swap" as="configurable" template="Magento_Swatches::product/listing/renderer.phtml" ifconfig="catalog/frontend/show_swatches_in_product_list" />
+        </referenceBlock>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Newsletter\Block\Subscribe" name="clever.newsletter.category" template="CleverSoft_CleverTheme::newsletter/subscribe.phtml" ifconfig="clevernewsletter/selected_pages/showon_categorypage" after="-"/>
+        </referenceContainer>
+    </body>
+</page>

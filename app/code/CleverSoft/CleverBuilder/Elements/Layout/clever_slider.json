@@ -1,0 +1,513 @@
+{
+  "name": "Slider",
+  "title": "Slider",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "layout",
+  "icon" : "",
+  "has_child": "slider",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Slider",
+  "code": "clever-slider",
+  "layouts":[
+  ],
+  "content_fields": [
+    {
+      "type": "select",
+      "name": "type",
+      "values": [
+        {
+          "value": "slide",
+          "label": "Slide"
+        },
+        {
+          "value": "fade",
+          "label": "Fade"
+        },
+        {
+          "value": "carousel",
+          "label": "Carousel"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Type"
+    },
+    {
+      "type": "select",
+      "name": "width-carousel",
+      "attribute_type": "class",
+      "required": false,
+      "events": "select-add-class-into-widget-view-content",
+      "values": [
+        {
+          "value": "full-width",
+          "label": "Full Width"
+        },
+        {
+          "value": "",
+          "label": "Auto"
+        }
+      ],
+      "visible": true,
+      "label": "Slide Carousel Width",
+      "depends" : {"type" : "carousel"}
+    },
+    {
+      "type": "select",
+      "name": "width-carousel-content",
+      "required": false,
+      "events": "select-add-class-into-widget-view-content",
+      "values": [
+        {
+          "value": "no",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ],
+      "visible": true,
+      "label": "Set Width Of Content is Full width or not",
+      "depends" : {"type" : "carousel"}
+    },
+    {
+      "type": "toggle",
+      "name": "enable_loop",
+      "required": true,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Enable Loop",
+      "depends" : {"type" : "carousel"}
+    },
+    {
+      "type": "toggle",
+      "name": "enable_nav",
+      "required": true,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Show Navigation",
+      "depends" : {"type" : "carousel"}
+    },
+    {
+      "type": "toggle",
+      "name": "enable_bullets",
+      "required": true,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Show Bullets",
+      "depends" : {"type" : "carousel"}
+    },
+    {
+      "type": "text",
+      "required": false,
+      "default":10,
+      "visible": true,
+      "name": "gutter",
+      "label": "Gutter Width (px)",
+      "depends" : {"type" : "carousel"}
+    },
+    {
+      "type": "slider",
+      "name": "col_480",
+      "required": false,
+      "min":1,
+      "max":12,
+      "default": 1,
+      "visible": true,
+      "label": "Number Items (480px up)",
+      "depends" : {"type" : "carousel"}
+    },
+    {
+      "type": "slider",
+      "name": "col_768",
+      "required": false,
+      "min":1,
+      "max":12,
+      "default": 2,
+      "visible": true,
+      "label": "Number Items (768px wide)",
+      "depends" : {"type" : "carousel"}
+    },
+    {
+      "type": "slider",
+      "name": "col_992",
+      "required": false,
+      "min":1,
+      "max":12,
+      "default": 3,
+      "visible": true,
+      "label": "Number Items (992px up)",
+      "depends" : {"type" : "carousel"}
+    },
+    {
+      "type": "slider",
+      "name": "column",
+      "required": false,
+      "min":1,
+      "max":12,
+      "default": 4,
+      "visible": true,
+      "label": "Number Items (1200px up)",
+      "depends" : {"type" : "carousel"}
+    },
+    {
+      "type": "label",
+      "name": "auto_slide_label",
+      "required": false,
+      "visible": true,
+      "label": "Auto Slide"
+    },
+    {
+      "type": "toggle",
+      "name": "auto_slide",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Auto Slide"
+    },
+    {
+      "type": "text",
+      "name": "timer",
+      "required": false,
+      "visible": true,
+      "label": "Timer (MS)"
+    },
+    {
+      "type": "toggle",
+      "name": "pause_on_hover",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Pause on hover"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "label",
+      "name": "style_field",
+      "required": false,
+      "visible": true,
+      "label": "Style"
+    },
+    {
+      "type": "text",
+      "name": "style_height",
+      "attribute_type": "style",
+      "code": "height",
+      "element_class": "clever-slider",
+      "required": false,
+      "default":600,
+      "visible": true,
+      "label": "Section height (Auto and Full Width layout) px"
+    },
+    {
+      "type": "color",
+      "name": "bg_color",
+      "attribute_type": "style",
+      "code": "background-color",
+      "required": false,
+      "visible": true,
+      "label": "Bg Color"
+    },
+    {
+      "type": "label",
+      "name": "layout",
+      "required": false,
+      "visible": true,
+      "label": "Layout"
+    },
+    {
+      "type": "select",
+      "name": "style_type",
+      "values": [
+        {
+          "value": "0",
+          "label": "Full Width"
+        },
+        {
+          "value": "1",
+          "label": "Full Screen"
+        },
+        {
+          "value": "2",
+          "label": "Auto"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Style"
+    },
+    {
+      "type": "select",
+      "name": "visibility",
+      "values": [
+        {
+          "value": "",
+          "label": "Visible"
+        },
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "hide-for-medium",
+          "label": "Only for Desktop"
+        },
+        {
+          "value": "show-for-small",
+          "label": "Only for Mobile"
+        },
+        {
+          "value": "show-for-medium hide-for-small",
+          "label": "Only for Tablet"
+        },
+        {
+          "value": "show-for-medium",
+          "label": "Hide for Desktop"
+        },
+        {
+          "value": "hide-for-small",
+          "label": "Hide for Mobile"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Visibility"
+    },
+    {
+      "type": "toggle",
+      "name": "infinitive",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Infinitive"
+    },
+    {
+      "type": "toggle",
+      "name": "free_scroll",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Free Scroll"
+    },
+    {
+      "type": "toggle",
+      "name": "draggable",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Draggable"
+    },
+    {
+      "type": "slider",
+      "name": "parallax",
+      "required": false,
+      "min":0,
+      "max":10,
+      "visible": true,
+      "label": "Parallax"
+    },
+    {
+      "type": "toggle",
+      "name": "show_for_mobile",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Show For Mobile"
+    },
+    {
+      "type": "label",
+      "name": "navigation",
+      "required": false,
+      "visible": true,
+      "label": "Navigation"
+    },
+    {
+      "type": "toggle",
+      "name": "always_visible",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Always Visible"
+    },
+    {
+      "type": "select",
+      "name": "position",
+      "values": [
+        {
+          "value": "inside",
+          "label": "Inside"
+        },
+        {
+          "value": "outside",
+          "label": "Outside"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Position"
+    },
+    {
+      "type": "select",
+      "name": "size",
+      "values": [
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Size"
+    },
+    {
+      "type": "toggle",
+      "name": "arrows",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Arrows"
+    },
+    {
+      "type": "select",
+      "name": "arrow_style",
+      "values": [
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "simple",
+          "label": "Simple"
+        },
+        {
+          "value": "reveal",
+          "label": "Reveal"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Arrow Style"
+    },
+    {
+      "type": "buttonGroup",
+      "name": "arrow_color",
+      "required": false,
+      "values": [
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        }
+      ],
+      "visible": true,
+      "label": "Arrow Color"
+    },
+    {
+      "type": "toggle",
+      "name": "bullets",
+      "required": false,
+      "visible": true,
+      "values": [
+        {
+          "value": "1",
+          "label": "On"
+        }
+      ],
+      "label": "Bullets"
+    },
+    {
+      "type": "select",
+      "name": "bullet_style",
+      "values": [
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "dashes",
+          "label": "Dashes"
+        },
+        {
+          "value": "dashes_spaced",
+          "label": "Dashes (Spaced)"
+        },
+        {
+          "value": "simple",
+          "label": "Simple"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Bullet Style"
+    }
+  ]
+}

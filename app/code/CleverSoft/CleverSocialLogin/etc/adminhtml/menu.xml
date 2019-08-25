@@ -1,0 +1,6 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="CleverSoft_CleverSocialLogin::sociallogin" title="CleverSocialLogin" module="CleverSoft_CleverSocialLogin" sortOrder="55" parent="CleverSoft_Base::cl_all" resource="CleverSoft_CleverTheme::all" />
+        <add id="CleverSoft_CleverSocialLogin::socialloginsettings" title="Configuration" module="CleverSoft_CleverSocialLogin" sortOrder="0" parent="CleverSoft_CleverSocialLogin::sociallogin" action="adminhtml/system_config/edit/section/sociallogin" resource="CleverSoft_CleverTheme::config_cleversociallogin" />
+    </menu>
+</config>

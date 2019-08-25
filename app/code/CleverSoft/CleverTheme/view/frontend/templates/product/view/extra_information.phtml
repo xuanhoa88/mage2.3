@@ -1,0 +1,173 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$enableSizeGuide = $helper->getConfig('cleversofttheme/product_page/enable_size_guide');
+$enableDeliverReturn = $helper->getConfig('cleversofttheme/product_page/enable_delivery_return');
+$enableAskProduct = $helper->getConfig('cleversofttheme/product_page/enable_ask_product');
+
+$sizeGuideTitle = $helper->getConfig('cleversofttheme/product_page/size_guide_title');
+$deliveryReturnTitle = $helper->getConfig('cleversofttheme/product_page/delivery_and_return_title');
+$askProductTitle = $helper->getConfig('cleversofttheme/product_page/ask_product_title');
+
+$sizeGuideContent = $helper->getConfig('cleversofttheme/product_page/size_guide_content');
+$deliveryReturnContent = $helper->getConfig('cleversofttheme/product_page/delivery_and_return_content');
+$askProductTitleForm = $helper->getConfig('cleversofttheme/product_page/contact_title_form');
+
+$enableTimeSales = $helper->getConfig('cleversofttheme/product_page/enable_sale_end');
+$timeSales = $helper->getConfig('cleversofttheme/product_page/time_end_value');
+$dueDate = date("F j, Y h:i:s", strtotime($timeSales));
+?>
+<?php if($enableTimeSales && $timeSales):?>
+<p class="product-detail-countdown__title"><?= __("Hurry Up! Sales end in");?></p>
+<div id="product-detail-countdown" class="product-detail-countdown"></div>
+
+<script>
+    // Set the date we're counting down to
+    var countDownDate = new Date("<?=$dueDate?>").getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+
+    // Get todays date and time
+    var now = new Date().getTime();
+
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    if(days < 10) {
+        days = "0" + days;
+    }
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    if(hours < 10) {
+        hours = "0" + hours;
+    }
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    if(minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    if(seconds < 10) {
+        seconds = "0" + seconds;
+    }
+
+    // Display the result in the element with id="demo"
+    document.getElementById("product-detail-countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+    document.getElementById("product-detail-countdown").innerHTML = "<div class='day'><span class='no'><b>"+days+"</b></span><span class='text'>days</span></div><div class='hours'><span class='no'><b>"+hours+"</b></span><span class='text'>hours</span></div><div class='min'><span class='no'><b>"+minutes+"</b></span><span class='text'>min</span></div><div class='second'><span class='no'><b>"+seconds+"</b></span><span class='text'>sec</span></div>";
+
+    // If the count down is finished, write some text 
+    if (distance < 0) {
+        clearInterval(x);
+            document.getElementById("product-detail-countdown").remove();
+        }
+    }, 1000);
+</script>
+<?php endif;?>
+<?php if($helper->getConfig('cleversofttheme/product_page/enable_product_left_stock')):?>
+    <div class="product-in-stock">
+        <h3 class="progress-title">Hurry! Only <span></span> left in Stock.</h3>
+        <div class="progressbar"><div class="less-than-ten"></div></div>
+        <script>
+            require(['jquery', 'jquery/ui'], function($){ 
+                var minStock = "<?=$helper->getConfig('cleversofttheme/product_page/instock_min_value')?>";
+                var maxStock = "<?=$helper->getConfig('cleversofttheme/product_page/instock_max_value')?>";
+                var minPercent = "<?=$helper->getConfig('cleversofttheme/product_page/percent_min_value')?>";
+                var maxPercent = "<?=$helper->getConfig('cleversofttheme/product_page/percent_max_value')?>";
+                minStock = Math.ceil(minStock);
+                maxStock = Math.floor(maxStock);
+                minPercent = Math.ceil(minPercent);
+                maxPercent = Math.floor(maxPercent);
+
+                var stock = Math.floor(Math.random() * (maxStock - minStock + 1)) + minStock;
+                stock = parseInt(stock);
+                if(stock <= minStock){
+                  stock = minStock;
+                }
+                if(stock > maxStock){
+                  stock = maxStock;
+                }
+                $(".product-in-stock .progress-title span").html(stock);
+                
+                var percent = Math.floor(Math.random() * (maxPercent - minPercent + 1)) + minPercent;
+                percent = parseInt(percent);
+                if(percent <= minPercent){
+                  percent = minPercent;
+                }
+                if(percent > maxPercent){
+                  percent = maxPercent;
+                }
+                $(".product-in-stock .progressbar .less-than-ten").css('width',percent+'%');
+            });
+        </script>
+    </div>
+<?php endif;?>
+<?php if($enableSizeGuide || $enableDeliverReturn || $enableAskProduct):?>
+<div class="product-extra-information">
+    <?php if($enableSizeGuide):?>
+        <div class="product-extra-information__item size-guide">
+            <a class="size-guide-open"><?=$sizeGuideTitle?></a>
+            <div class="product-extra-information__inner size-guide-inner">
+                <a class="product-extra-information__btn-close"><i class="cs-font clever-icon-close"></i></a>
+                <div class="product-extra-information__popup product-extra-information__content">
+                    <?=$this->getCmsFilterContent($sizeGuideContent)?>
+                </div>
+            </div>
+            <div class="off-canvas-layer"></div>
+        </div>
+    <?php endif;?>
+    <?php if($enableDeliverReturn):?>
+        <div class="product-extra-information__item delivery-product">
+            <a class="delivery-product-open"><?=$deliveryReturnTitle?></a>
+            <div class="product-extra-information__inner delivery-product-inner">
+                <div class="product-extra-information__popup delivery-popup-contents"> 
+                    <a class="product-extra-information__btn-close"><i class="cs-font clever-icon-close"></i></a>
+                    <div class="product-extra-information__content delivery-content">
+                        <?=$this->getCmsFilterContent($deliveryReturnContent)?>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    <?php endif;?>
+    <?php if($enableAskProduct):?>
+        <div class="product-extra-information__item ask-product-label">
+            <a class="contact-product-open"><?=$askProductTitle?></a>
+            <div class="product-extra-information__inner contact-product-inner">
+                <div class="product-extra-information__popup contact-popup-contents"> 
+                    <a class="product-extra-information__btn-close"><i class="cs-font clever-icon-close"></i></a>
+                    <div class="product-extra-information__content contact-content">
+                        <div class="contact-title-form">
+                            <label><?=$askProductTitleForm?></label>
+                            <?php echo $this->getLayout()->createBlock('Magento\Contact\Block\ContactForm')->setTemplate("Magento_Contact::form.phtml")->toHtml()?>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    <?php endif;?>
+</div>
+<?php endif;?>
+<script>
+    require(['jquery', 'jquery/ui'], function($){
+        $(document).ready(function() {
+            $('.size-guide-open').click(function(){
+                $('body').addClass('open-size-guide');
+            });
+            $('.product-extra-information__btn-close').click(function(){
+                $('body').removeClass('open-size-guide');
+            });
+            $('.delivery-product-open').click(function(){
+                $('body').addClass('open-delivery-product');
+            });
+            $('.product-extra-information__btn-close').click(function(){
+                $('body').removeClass('open-delivery-product');
+            });
+            $('.contact-product-open').click(function(){
+                $('body').addClass('open-contact-product');
+            });
+            $('.product-extra-information__btn-close').click(function(){
+                $('body').removeClass('open-contact-product');
+            });
+        });
+    });
+</script>

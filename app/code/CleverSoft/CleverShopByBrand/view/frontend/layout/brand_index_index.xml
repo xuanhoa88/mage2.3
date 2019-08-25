@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="clever_brand"/>
+        <referenceContainer name="content">
+            <block class="CleverSoft\CleverShopByBrand\Block\Brands" name="all_brands" template="CleverSoft_CleverShopByBrand::brands.phtml" cacheable="false">
+                <block class="CleverSoft\CleverShopByBrand\Block\Brands" name="brand_search" template="CleverSoft_CleverShopByBrand::brands/brand_search.phtml" />
+                <block class="CleverSoft\CleverShopByBrand\Block\Brands\FeaturedBrands" name="featured_brands" template="CleverSoft_CleverShopByBrand::brands/featured_brands.phtml" />
+                <block class="CleverSoft\CleverShopByBrand\Block\Brands" name="brand_list" template="CleverSoft_CleverShopByBrand::brands/list.phtml"/>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Home</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Home</item>
+                    <item name="label" xsi:type="string">Home</item>
+                    <item name="link" xsi:type="string">/</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Brands</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Brands</item>
+                    <item name="label" xsi:type="string">Brands</item>
+                </argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

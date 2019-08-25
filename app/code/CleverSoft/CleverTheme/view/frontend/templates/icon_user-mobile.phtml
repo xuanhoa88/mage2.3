@@ -1,0 +1,43 @@
+<?php
+$_matoHelper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$headerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\HeaderData');
+$settingData = $headerBuilderHelper->getSettingData();
+
+?>
+
+<?php if($block->isLoggedIn()):?>
+<a href="<?= $this->getUrl('customer/account/', ['_secure' => $this->getRequest()->isSecure()]);?>" class="icon account-link account-login <?= isset($settingData->{'_customize-radio-account_mobile_icon_style'}) && $settingData->{'_customize-radio-account_mobile_icon_style'} ? $settingData->{'_customize-radio-account_mobile_icon_style'} : '';?>">
+	<i class="cs-font <?= isset($settingData->{'_customize-radio-account_mobile_icon'}) && $settingData->{'_customize-radio-account_mobile_icon'} ? $settingData->{'_customize-radio-account_mobile_icon'} : 'clever-icon-user-6';?>"></i>
+	<?php if(isset($settingData->{'_customize-input-header_account_mobile_title'}) && $settingData->{'_customize-input-header_account_mobile_title'}): ?>
+		<span class="customer-name my-account"
+              role="link"
+              tabindex="0"
+              data-mage-init='{"dropdown":{}}'
+              data-toggle="dropdown"
+              data-trigger-keypress-button="true"
+              data-bind="scope: 'customer'">
+            <span data-bind="text: customer().fullname"></span>
+        </span>
+        <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "customer": {
+                            "component": "Magento_Customer/js/view/customer"
+                        }
+                    }
+                }
+            }
+        }
+        </script>
+	<?php endif;?>
+</a>
+<?php else:?>
+	<a href="<?= $this->getUrl('customer/account/', ['_secure' => $this->getRequest()->isSecure()]);?>" class="icon account-link account-login <?= isset($settingData->{'_customize-radio-account_mobile_icon_style'}) && $settingData->{'_customize-radio-account_mobile_icon_style'} ? $settingData->{'_customize-radio-account_mobile_icon_style'} : '';?>">
+	<i class="cs-font <?= isset($settingData->{'_customize-radio-account_mobile_icon'}) && $settingData->{'_customize-radio-account_mobile_icon'} ? $settingData->{'_customize-radio-account_mobile_icon'} : 'clever-icon-user-6';?>"></i>
+	<?php if(isset($settingData->{'_customize-input-header_account_mobile_title'}) && $settingData->{'_customize-input-header_account_mobile_title'}): ?>
+		<span><?php echo __("Login")?></span>
+	<?php endif;?>
+</a>
+<?php endif;?>

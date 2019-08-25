@@ -1,0 +1,110 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+
+?>
+<?php
+$porto_helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$tab_style_config = $porto_helper->getCfg('product_page/tab_style');
+$tab_style = "";
+if(isset($tab_style_config) && $tab_style_config)
+    $tab_style = $tab_style_config;
+?>
+<?php if ($detailedInfoGroup = $block->getGroupChildNames('detailed_info', 'getChildHtml')):?>
+<div class="product-area2">
+    <div class="product info detailed <?php echo $tab_style; ?>">
+        <?php $layout = $block->getLayout(); ?>
+        <div class="product data items" data-mage-init='{"tabs":{"openedState":"active"}}'>
+            <?php foreach ($detailedInfoGroup as $name):?>
+                <?php
+                $html = $layout->renderElement($name);
+                if (!trim($html)) {
+                    continue;
+                }
+                $alias = $layout->getElementAlias($name);
+                $label = $block->getChildData($alias, 'title');
+                ?>
+                <div class="data item title"
+                     aria-labeledby="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>-title"
+                     data-role="collapsible" id="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>">
+                    <a class="data switch"
+                       tabindex="-1"
+                       data-toggle="switch"
+                       href="#<?php /* @escapeNotVerified */ echo $alias; ?>"
+                       id="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>-title">
+                        <?php /* @escapeNotVerified */ echo $label; ?>
+                    </a>
+                </div>
+                <div class="data item content" id="<?php /* @escapeNotVerified */ echo $alias; ?>" data-role="content">
+                    <?php /* @escapeNotVerified */ echo $html; ?>
+                </div>
+            <?php endforeach;?>
+        </div>
+        <?php if($tab_style && $tab_style == "vertical"): ?>
+            <script>
+                require([
+                    'jquery'
+                ], function ($) {
+                    $(document).ready(function(){
+                        $(".product.info.detailed.vertical .product.data.items .data.item.title").off("classadded").on("classadded",function(){
+                            $(this).parent().css("min-height",$(this).next().outerHeight()+"px");
+                        });
+                    });
+                });
+            </script>
+        <?php endif; ?>
+    </div>
+</div>
+<?php endif; ?>
+
+<?php if ($detailedInfoGroup = $block->getGroupChildNames('related_upsell', 'getChildHtml')):?>
+    <div class="product-area3">
+        <div class="product info detailed <?php echo $tab_style; ?>">
+            <?php $layout = $block->getLayout(); ?>
+            <div class="product data items" data-mage-init='{"tabs":{"openedState":"active"}}'>
+                <?php foreach ($detailedInfoGroup as $name):?>
+                    <?php
+                    $html = $layout->renderElement($name);
+                    if (!trim($html)) {
+                        continue;
+                    }
+                    $alias = $layout->getElementAlias($name);
+                    $label = $block->getChildData($alias, 'title');
+                    ?>
+                    <div class="data item title"
+                         aria-labeledby="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>-title"
+                         data-role="collapsible" id="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>">
+                        <a class="data switch"
+                           tabindex="-1"
+                           data-toggle="switch"
+                           href="#<?php /* @escapeNotVerified */ echo $alias; ?>"
+                           id="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>-title">
+                            <?php /* @escapeNotVerified */ echo $label; ?>
+                        </a>
+                    </div>
+                    <div class="data item content" id="<?php /* @escapeNotVerified */ echo $alias; ?>" data-role="content">
+                        <?php /* @escapeNotVerified */ echo $html; ?>
+                    </div>
+                <?php endforeach;?>
+            </div>
+            <?php if($tab_style && $tab_style == "vertical"): ?>
+                <script>
+                    require([
+                        'jquery'
+                    ], function ($) {
+                        $(document).ready(function(){
+                            $(".product.info.detailed.vertical .product.data.items .data.item.title").off("classadded").on("classadded",function(){
+                                $(this).parent().css("min-height",$(this).next().outerHeight()+"px");
+                            });
+                        });
+                    });
+                </script>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>

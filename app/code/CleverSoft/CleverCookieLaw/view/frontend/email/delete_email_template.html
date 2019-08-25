@@ -1,0 +1,19 @@
+<!--@subject {{trans "%templateSubject," templateSubject=$templateSubject}}  @-->
+{{template config_path="design/email/header_template"}}
+
+<p>Dear {{trans "%customer_name," customer_name=$customer_name}}</p>
+
+<p>{{trans "Someone placed a request for your information to be removed from our site." }}</p>
+<p>{{trans "By clicking confirm your account will be removed from our site and all data we collected
+over time will be erased from our database. It will be impossible for us to retrieve that
+information in the future." }}</p>
+
+<p>To confirm this request, click here: <a href='"{{trans "%link1" link1=$link1 }}"' rel="noreferrer" target="_blank">{{trans "%link1" link1=$link1 }}</a></p>
+
+
+
+
+<p>---------------------------------------------------------------------------------</p>
+<p>If that wasn't you, reset your password: <a href='"{{trans "%link_reset" link_reset=$link_reset }}"' rel="noreferrer" target="_blank">{{trans "%link_reset" link_reset=$link_reset }}</a></p>
+
+{{template config_path="design/email/footer_template"}}

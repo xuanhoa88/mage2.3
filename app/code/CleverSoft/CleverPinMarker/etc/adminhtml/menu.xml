@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="CleverSoft_CleverPinMarker::pinmarker" title="CleverPinMarker" module="CleverSoft_CleverPinMarker" sortOrder="11" parent="CleverSoft_Base::cl_all" resource="CleverSoft_CleverPinMarker::pinmarker" />
+		<add id="CleverSoft_CleverPinMarker::manage_pinmarkers" title="Pin Manager" module="CleverSoft_CleverPinMarker" sortOrder="0" parent="CleverSoft_CleverPinMarker::pinmarker" action="pinmarker/index" resource="CleverSoft_CleverPinMarker::index" />
+		<add id="CleverSoft_CleverPinMarker::manage_pincollection" title="Collection Manager" module="CleverSoft_CleverPinMarker" sortOrder="10" parent="CleverSoft_CleverPinMarker::pinmarker" action="pinmarker/collection" resource="CleverSoft_CleverPinMarker::collection" />
+	</menu>
+</config>

@@ -1,0 +1,546 @@
+<?php 
+$helper = $this->helper("CleverSoft\CleverBuilder\Helper\Data");
+$storeId = $helper->getStoreId();
+$panels_data = $this->getData('panels_data');
+$panels_data = $helper->convertData($panels_data);
+$data_widgets = array();
+$pageId = $this->getData('page_id');
+if ($panels_data) {
+    $data_widgets = $panels_data['widgets'];   
+}
+function getRowItems(array $items)
+{
+    static $row_styles = [];
+    if (count($items)) {
+        foreach ($items as $item) {
+            if (!empty($item['panels_info'])) {
+                foreach ($item['panels_info'] as $k => $v) {
+                    if ('widget_id' === $k && isset($item['panels_info']['type']) && $item['panels_info']['type'] == 'CleverSoft\CleverBuilder\Block\Builder\Content\Render\Content\Row') {
+                        if ($item['panels_info']['type'] == 'CleverSoft\CleverBuilder\Block\Builder\Content\Render\Content\Row') {
+                            $row_styles[][$v] = $item;
+                        }
+                    }
+                    if ('items' === $k) {
+                        getRowItems($v);
+                    }
+                }
+            } else {
+                getRowItems($item);
+            }
+        }
+    }
+    return $row_styles;
+}
+$row_styles = getRowItems($data_widgets);
+function getProductItems(array $items)
+{
+    static $product_styles = [];
+    if (count($items)) {
+        foreach ($items as $item) {
+            if (!empty($item['panels_info'])) {
+                foreach ($item['panels_info'] as $k => $v) {
+                    if ('widget_id' === $k && isset($item['panels_info']['type']) && $item['panels_info']['type'] == 'CleverSoft\CleverBuilder\Block\Builder\Element\Render\Products\CarouselProducts') {
+                        if ($item['panels_info']['type'] == 'CleverSoft\CleverBuilder\Block\Builder\Element\Render\Products\CarouselProducts') {
+                            $product_styles[][$v] = $item;
+                        }
+                    }
+                    if ('items' === $k) {
+                        getProductItems($v);
+                    }
+                }
+            } else {
+                getProductItems($item);
+            }
+        }
+    }
+    return $product_styles;
+}
+$product_styles = getProductItems($data_widgets);
+function getIconBoxFromItems(array $items)
+{
+    static $iconbox_styles = [];
+    if (count($items)) {
+        foreach ($items as $item) {
+            if (!empty($item['panels_info'])) {
+                foreach ($item['panels_info'] as $k => $v) {
+                    if ('widget_id' === $k && isset($item['panels_info']['type']) && $item['panels_info']['type'] == 'CleverSoft\CleverBuilder\Block\Builder\Content\Render\Content\IconBox') {
+                        if ($item['panels_info']['type'] == 'CleverSoft\CleverBuilder\Block\Builder\Content\Render\Content\IconBox') {
+                            $iconbox_styles[][$v] = $item;
+                        }
+                    }
+                    if ('items' === $k) {
+                        getIconBoxFromItems($v);
+                    }
+                }
+            } else {
+                getIconBoxFromItems($item);
+            }
+        }
+    }
+    return $iconbox_styles;
+}
+$iconbox_styles = getIconBoxFromItems($data_widgets);
+function getImageBoxFromItems(array $items)
+{
+    static $imagebox_styles = [];
+    if (count($items)) {
+        foreach ($items as $item) {
+            if (!empty($item['panels_info'])) {
+                foreach ($item['panels_info'] as $k => $v) {
+                    if ('widget_id' === $k && isset($item['panels_info']['type']) && $item['panels_info']['type'] == 'CleverSoft\CleverBuilder\Block\Builder\Content\Render\Content\ImageBox') {
+                        if ($item['panels_info']['type'] == 'CleverSoft\CleverBuilder\Block\Builder\Content\Render\Content\ImageBox') {
+                            $imagebox_styles[][$v] = $item;
+                        }
+                    }
+                    if ('items' === $k) {
+                        getImageBoxFromItems($v);
+                    }
+                }
+            } else {
+                getImageBoxFromItems($item);
+            }
+        }
+    }
+    return $imagebox_styles;
+}
+$imagebox_styles = getImageBoxFromItems($data_widgets);
+function getWidgetIdsFromItems(array $items)
+{
+    static $data_styles = [];
+    if (count($items)) {
+        foreach ($items as $item) {
+            if (!empty($item['panels_info'])) {
+                foreach ($item['panels_info'] as $k => $v) {
+                    if ('widget_id' === $k && isset($item['panels_info']['style'])) {
+                        if ($item['panels_info']['style']) {
+                            $data_styles[][$v] = $item['panels_info']['style'];
+                        }
+                    }
+                    if ('items' === $k) {
+                        getWidgetIdsFromItems($v);
+                    }
+                }
+            } else {
+                getWidgetIdsFromItems($item);
+            }
+        }
+    }
+    return $data_styles;
+}
+
+$data_styles = getWidgetIdsFromItems($data_widgets);
+
+$styleCode = '';
+foreach ($data_styles as $key => $value) {
+    foreach ($value as $j => $value_render) {
+        $styleCode .= "#panel-".$storeId."-".$j." {";
+        $styleCode .="> .cs-widget-sow-editor-base > .global-element {";
+        if (isset($value_render['desktop_css']) && $value_render['desktop_css']) {
+            $styleCode .= $value_render['desktop_css'].";";
+        }
+        if (isset($value_render['z-index']) && $value_render['z-index']) {
+            $styleCode .= "z-index:".$value_render['z-index'].";";
+        }
+        if (isset($value_render['desktop_margin']) && $value_render['desktop_margin']) {
+            $styleCode .= "margin:".$value_render['desktop_margin'].";";
+        }
+        if (isset($value_render['desktop_padding']) && $value_render['desktop_padding']) {
+            $styleCode .= "padding:".$value_render['desktop_padding'].";";
+        }
+        if (isset($value_render['color']) && $value_render['color']) {
+            $styleCode .= "color:".$value_render['color'].";";
+        }
+        if (isset($value_render['background']) && $value_render['background']) {
+            $styleCode .= "background:".$value_render['background'].";";
+        }
+        if (isset($value_render['background_image_attachment']) && $value_render['background_image_attachment']) {
+            $styleCode .= "background-image:"."url(".$value_render['background_image_attachment'].")".";";
+        }
+        if (isset($value_render['background_display']) && $value_render['background_display']) {
+            switch ( $value_render['background_display'] ) {
+                case 'parallax':
+                    $styleCode .= "background-attachment:"."fixed".";";
+                    $styleCode .= "background-position:"."center center".";";
+                    $styleCode .= "background-size:"."cover".";";
+                    break;
+                case 'parallax-original':
+                    $styleCode .= "background-position:"."center center".";";
+                    $styleCode .= "background-repeat:"."no-repeat".";";
+                    break;
+                case 'tile':
+                    $styleCode .= "background-repeat:"."repeat".";";
+                    break;
+                case 'cover':
+                    $styleCode .= "background-position:"."center center".";";
+                    $styleCode .= "background-size:"."cover".";";
+                    break;
+                case 'center':
+                    $styleCode .= "background-position:"."center center".";";
+                    $styleCode .= "background-repeat:"."no-repeat".";";
+                    break;
+                case 'fixed':
+                    $styleCode .= "background-attachment:"."fixed".";";
+                    $styleCode .= "background-position:"."center center".";";
+                    $styleCode .= "background-size:"."cover".";";
+                    break;
+            }
+        }
+        if (isset($value_render['border_type']) && $value_render['border_type']) {
+            $styleCode .= "border-style:".$value_render['border_type'].";";
+            if ($value_render['border_type'] != "none") {
+                if (isset($value_render['border_width']) && $value_render['border_width']) {
+                    $styleCode .= "border-width:".$value_render['border_width'].";";
+                }
+                if (isset($value_render['border_color']) && $value_render['border_color']) {
+                    $styleCode .= "border-color:".$value_render['border_color'].";";
+                }
+            }
+        }
+        if (isset($value_render['border_radius']) && $value_render['border_radius']) {
+            $styleCode .= "border-radius:".$value_render['border_radius'].";";
+        }
+        $styleCode .= "&:hover {";
+            if (isset($value_render['background_display_hover']) && $value_render['background_display_hover']) {
+                switch ( $value_render['background_display_hover'] ) {
+                    case 'parallax':
+                        $styleCode .= "background-attachment:"."fixed".";";
+                        $styleCode .= "background-position:"."center center".";";
+                        $styleCode .= "background-size:"."cover".";";
+                        break;
+                    case 'parallax-original':
+                        $styleCode .= "background-position:"."center center".";";
+                        $styleCode .= "background-repeat:"."no-repeat".";";
+                        break;
+                    case 'tile':
+                        $styleCode .= "background-repeat:"."repeat".";";
+                        break;
+                    case 'cover':
+                        $styleCode .= "background-position:"."center center".";";
+                        $styleCode .= "background-size:"."cover".";";
+                        break;
+                    case 'center':
+                        $styleCode .= "background-position:"."center center".";";
+                        $styleCode .= "background-repeat:"."no-repeat".";";
+                        break;
+                    case 'fixed':
+                        $styleCode .= "background-attachment:"."fixed".";";
+                        $styleCode .= "background-position:"."center center".";";
+                        $styleCode .= "background-size:"."cover".";";
+                        break;
+                }
+            }
+            if (isset($value_render['color_hover']) && $value_render['color_hover']) {
+                $styleCode .= "color:".$value_render['color_hover'].";";
+            }
+            if (isset($value_render['border_type_hover']) && $value_render['border_type_hover']) {
+                $styleCode .= "border-style:".$value_render['border_type_hover'].";";
+                if ($value_render['border_type_hover'] != "none") {
+                    if (isset($value_render['border_width_hover']) && $value_render['border_width_hover']) {
+                        $styleCode .= "border-width:".$value_render['border_width_hover'].";";
+                    }
+                    if (isset($value_render['border_color_hover']) && $value_render['border_color_hover']) {
+                        $styleCode .= "border-color:".$value_render['border_color_hover'].";";
+                    }
+                }
+            }
+            if (isset($value_render['border_radius_hover']) && $value_render['border_radius_hover']) {
+                $styleCode .= "border-radius:".$value_render['border_radius_hover'].";";
+            }
+            if (isset($value_render['background_hover']) && $value_render['background_hover']) {
+                $styleCode .= "background:".$value_render['background_hover'].";";
+            }
+            if (isset($value_render['background_image_attachment_hover']) && $value_render['background_image_attachment_hover'] != "" && $value_render['background_image_attachment_hover'] != "0") {
+                $styleCode .= "background-image:"."url(".$value_render['background_image_attachment_hover'].")".";";
+            }
+        $styleCode .= "}";
+
+        $styleCode .= "}";
+        $styleCode .= "}";
+    }
+}
+echo $styleCode;
+
+// Row Style
+$styleRow = '';
+foreach ($row_styles as $key => $value) {
+    foreach ($value as $j => $value_render) {
+        $styleRow .= "#panel-".$storeId."-".$j." {";
+        $styleRow .=".element-row {";
+            $styleRow .=".column-gap-default .row.row-stack > .column-wrap {";
+                $styleRow .= "padding: 10px;";
+            $styleRow .= "}";
+            $styleRow .=".column-gap-no .row.row-stack > .column-wrap {";
+                $styleRow .= "padding: 0;";
+            $styleRow .= "}";
+            $styleRow .=".column-gap-narrow .row.row-stack > .column-wrap {";
+                $styleRow .= "padding: 5px;";
+            $styleRow .= "}";
+            $styleRow .=".column-gap-extended .row.row-stack > .column-wrap {";
+                $styleRow .= "padding: 15px;";
+            $styleRow .= "}";
+            $styleRow .=".column-gap-wide .row.row-stack > .column-wrap {";
+                $styleRow .= "padding: 20px;";
+            $styleRow .= "}";
+            $styleRow .=".column-gap-wider .row.row-stack > .column-wrap {";
+                $styleRow .= "padding: 30px;";
+            $styleRow .= "}";
+            if(isset($value_render['width']) && $value_render['width']) {
+                $styleRow .="&.element-row-style-boxed .element-row__content.set-width-yes {";
+                    $styleRow .= "max-width: ".$value_render['width']."px;";
+                $styleRow .= "}";
+            }
+            if(isset($value_render['minimum_height']) && $value_render['minimum_height']) {
+                $styleRow .="&.element-row-height-min-height {";
+                    $styleRow .= "min-height: ".$value_render['minimum_height']."px;";
+                $styleRow .= "}";
+            }
+            if(isset($value_render['heading_color']) && $value_render['heading_color']) {
+                $styleRow .="&.element-row {";
+                    $styleRow .="h1, h2, h3 {";
+                        $styleRow .= "color: ".$value_render['heading_color'].";";
+                    $styleRow .= "}";
+                $styleRow .= "}";
+            }
+            if(isset($value_render['text_color']) && $value_render['text_color']) {
+                $styleRow .="&.element-row {";
+                    $styleRow .="span, p, strong {";
+                        $styleRow .= "color: ".$value_render['text_color'].";";
+                    $styleRow .= "}";
+                $styleRow .= "}";
+            }
+            if(isset($value_render['link_color']) && $value_render['link_color']) {
+                $styleRow .="&.element-row {";
+                    $styleRow .="a {";
+                        $styleRow .= "color: ".$value_render['link_color'].";";
+                    $styleRow .= "}";
+                $styleRow .= "}";
+            }
+            if(isset($value_render['link_hover_color']) && $value_render['link_hover_color']) {
+                $styleRow .="&.element-row {";
+                    $styleRow .="a:hover {";
+                        $styleRow .= "color: ".$value_render['link_hover_color'].";";
+                    $styleRow .= "}";
+                $styleRow .= "}";
+            }
+        $styleRow .= "}";
+        $styleRow .= "}";
+    }
+}
+echo $styleRow;
+
+// Product style
+$styleProduct = '';
+foreach ($product_styles as $key => $value) {
+    foreach ($value as $j => $value_render) {
+        $styleProduct .= "#panel-".$storeId."-".$j." {";
+        $styleProduct .="> .cs-widget-clever-element-editor {";
+            if(isset($value_render['one_image_height']) && $value_render['one_image_height']) {
+                if($value_render['scale_product_container']) {
+                    $styleProduct .=".zoo-product-image {";
+                        $styleProduct .= "height: ".$value_render['scale_product_container']."px;";
+                    $styleProduct .= "}";
+                }
+                if($value_render['scale_product']) {
+                    $styleProduct .=".product-items .product-item-info .zoo-product-image a img.product-image-photo {";
+                        $styleProduct .= "width: auto;";
+                        $styleProduct .= "max-height: ".$value_render['scale_product']."px;";
+                    $styleProduct .= "}";
+                }
+            }
+        $styleProduct .= "}";
+        $styleProduct .= "}";
+    }
+}
+echo $styleProduct;
+// IconBox Style
+$styleIconBox = '';
+foreach ($iconbox_styles as $key => $value) {
+    foreach ($value as $j => $value_render) {
+        $styleIconBox .= "#panel-".$storeId."-".$j." {";
+        $styleIconBox .="> .cs-widget-sow-editor-base > .global-element {";
+            $styleIconBox .="&.element-view-default .element-icon {";
+                if(isset($value_render['primary_color']) && $value_render['primary_color'] && $value_render['view'] == "default") {
+                    $styleIconBox .= "color: ".$value_render['primary_color'].";";
+                }
+                $styleIconBox .="&:hover {";
+                    if(isset($value_render['hover_primary_color']) && $value_render['hover_primary_color'] && $value_render['view'] == "default") {
+                        $styleIconBox .= "color: ".$value_render['hover_primary_color'].";";
+                    }
+                $styleIconBox .= "}";
+            $styleIconBox .= "}";
+            $styleIconBox .="&.element-view-stacked .element-icon {";
+                if(isset($value_render['secondary_color']) && $value_render['secondary_color'] && $value_render['view'] == "stacked") {
+                    $styleIconBox .= "color: ".$value_render['secondary_color'].";";
+                }
+                if(isset($value_render['primary_color']) && $value_render['primary_color'] && $value_render['view'] == "stacked") {
+                    $styleIconBox .= "background: ".$value_render['primary_color'].";";
+                }
+                $styleIconBox .="&:hover {";
+                    if(isset($value_render['hover_secondary_color']) && $value_render['hover_secondary_color'] && $value_render['view'] == "stacked") {
+                        $styleIconBox .= "color: ".$value_render['hover_secondary_color'].";";
+                    }
+                    if(isset($value_render['hover_primary_color']) && $value_render['hover_primary_color'] && $value_render['view'] == "stacked") {
+                        $styleIconBox .= "background: ".$value_render['hover_primary_color'].";";
+                    }
+                $styleIconBox .= "}";
+            $styleIconBox .= "}";
+            $styleIconBox .="&.element-view-framed .element-icon {";
+                if(isset($value_render['primary_color']) && $value_render['primary_color'] && $value_render['view'] == "framed") {
+                    $styleIconBox .= "border-color: ".$value_render['primary_color'].";";
+                }
+                if(isset($value_render['primary_color']) && $value_render['primary_color'] && $value_render['view'] == "framed") {
+                    $styleIconBox .= "color: ".$value_render['primary_color'].";";
+                }
+                if(isset($value_render['secondary_color']) && $value_render['secondary_color'] && $value_render['view'] == "framed") {
+                    $styleIconBox .= "background: ".$value_render['secondary_color'].";";
+                }
+                $styleIconBox .="&:hover {";
+                    if(isset($value_render['hover_primary_color']) && $value_render['hover_primary_color'] && $value_render['view'] == "framed") {
+                        $styleIconBox .= "border-color: ".$value_render['hover_primary_color'].";";
+                    }
+                    if(isset($value_render['hover_primary_color']) && $value_render['hover_primary_color'] && $value_render['view'] == "framed") {
+                        $styleIconBox .= "color: ".$value_render['hover_primary_color'].";";
+                    }
+                    if(isset($value_render['hover_secondary_color']) && $value_render['hover_secondary_color'] && $value_render['view'] == "framed") {
+                        $styleIconBox .= "background: ".$value_render['hover_secondary_color'].";";
+                    }
+                $styleIconBox .= "}";
+            $styleIconBox .= "}";
+            $styleIconBox .="&.icon-box__element.element-position-left .element-iconbox__icon {";
+                if(isset($value_render['spacing']) && $value_render['spacing'] && $value_render['alignment'] == "left") {
+                    $styleIconBox .= "margin-right: ".$value_render['spacing']."px;";
+                }
+            $styleIconBox .= "}";
+            $styleIconBox .="&.icon-box__element.element-position-top .element-iconbox__icon {";
+                if(isset($value_render['spacing']) && $value_render['spacing'] && $value_render['alignment'] == "top") {
+                    $styleIconBox .= "margin-bottom: ".$value_render['spacing']."px;";
+                }
+            $styleIconBox .= "}";
+            $styleIconBox .="&.icon-box__element.element-position-right .element-iconbox__icon {";
+                if(isset($value_render['spacing']) && $value_render['spacing'] && $value_render['alignment'] == "right") {
+                    $styleIconBox .= "margin-left: ".$value_render['spacing']."px;";
+                }
+            $styleIconBox .= "}";
+        $styleIconBox .= "}";
+        $styleIconBox .= "}";
+    }
+}
+echo $styleIconBox;
+// ImageBox Style
+$styleImageBox = '';
+foreach ($imagebox_styles as $key => $value) {
+    foreach ($value as $j => $value_render) {
+        $styleImageBox .= "#panel-".$storeId."-".$j." {";
+        $styleImageBox .="> .cs-widget-sow-editor-base > .global-element {";
+            $styleImageBox .="&.image-box__element .image-box__wrapper-img img {";
+                if($value_render['brightness'] != "0" || $value_render['contrast'] != "0" || $value_render['saturation'] != "0" || $value_render['blur'] != "0" || $value_render['hue'] != "0") {
+                    $styleImageBox .= "filter: "."brightness"."(".$value_render['brightness']."%".")" ."contrast"."(".$value_render['contrast']."%".")" ."saturate"."(".$value_render['saturation']."%".")" . "blur"."(".$value_render['blur']."px".")" ."hue-rotate"."(".$value_render['hue']."deg".")".";";
+                }
+                if(isset($value_render['transition']) && $value_render['transition']) {
+                    $transition = $value_render['transition']/10;
+                    $styleImageBox .= "transition-duration: ".$transition."s;";
+                }
+                if(isset($value_render['opacity']) && $value_render['opacity']) {
+                    $opacity = $value_render['opacity']/10;
+                    $styleImageBox .= "opacity: ".$opacity.";";
+                }
+                $styleImageBox .="&:hover {";
+                    if($value_render['brightness_hover'] != "0" || $value_render['contrast_hover'] != "0" || $value_render['saturation_hover'] != "0" || $value_render['blur_hover'] != "0" || $value_render['hue_hover'] != "0") {
+                        $styleImageBox .= "filter: "."brightness"."(".$value_render['brightness_hover']."%".")" ."contrast"."(".$value_render['contrast_hover']."%".")" ."saturate"."(".$value_render['saturation_hover']."%".")" . "blur"."(".$value_render['blur_hover']."px".")" ."hue-rotate"."(".$value_render['hue_hover']."deg".")".";";
+                    }
+                    if(isset($value_render['opacity_hover']) && $value_render['opacity_hover']) {
+                        $opacity_hover = $value_render['opacity_hover']/10;
+                        $styleImageBox .= "opacity: ".$opacity_hover.";";
+                    }
+                $styleImageBox .= "}";
+            $styleImageBox .= "}";
+            if(isset($value_render['spacing']) && $value_render['spacing'] && $value_render['alignment'] == "left") {
+                $styleImageBox .="&.image-box__element.element-position-left .image-box__wrapper-img {";
+                    $styleImageBox .= "margin-right: ".$value_render['spacing']."px;";
+                $styleImageBox .= "}";
+            }
+            if(isset($value_render['spacing']) && $value_render['spacing'] && $value_render['alignment'] == "top") {
+            $styleImageBox .="&.image-box__element.element-position-top .image-box__wrapper-img {";
+                    $styleImageBox .= "margin-bottom: ".$value_render['spacing']."px;";
+                $styleImageBox .= "}";
+            }
+            if(isset($value_render['spacing']) && $value_render['spacing'] && $value_render['alignment'] == "right") {
+                $styleImageBox .="&.image-box__element.element-position-right .image-box__wrapper-img {";
+                    $styleImageBox .= "margin-left: ".$value_render['spacing']."px;";
+                $styleImageBox .= "}";
+            }
+        $styleImageBox .= "}";
+        $styleImageBox .= "}";
+    }
+}
+echo $styleImageBox;
+?>
+@media (min-width: 768px) and (max-width: 1024px) {
+<?php
+    $styleCode_tablet = '';
+    foreach ($data_styles as $key => $value) {
+        foreach ($value as $j => $value_render) {
+            $styleCode_tablet .= "#panel-".$storeId."-".$j." {";
+                $styleCode_tablet .="> .cs-widget-sow-editor-base > .global-element {";
+                    if (isset($value_render['tablet_css']) && $value_render['tablet_css']) {
+                        $styleCode_tablet .= $value_render['tablet_css'].";";
+                    }
+                    if (isset($value_render['tablet_margin']) && $value_render['tablet_margin']) {
+                        $styleCode_tablet .= "margin:".$value_render['tablet_margin'].";";
+                    }
+                    if (isset($value_render['tablet_padding']) && $value_render['tablet_padding']) {
+                        $styleCode_tablet .= "padding:".$value_render['tablet_padding'].";";
+                    }
+                    if (isset($value_render['hide_on_tablet']) && $value_render['hide_on_tablet'] == "true") {
+                        $styleCode_tablet .= "display: none".";";
+                    }
+                $styleCode_tablet .= "}";
+            $styleCode_tablet .= "}";
+        }
+    }
+    echo $styleCode_tablet;
+?>
+}
+@media (max-width: 767px){
+<?php
+    $styleCode_mobile = '';
+    foreach ($data_styles as $key => $value) {
+        foreach ($value as $j => $value_render) {
+            $styleCode_mobile .= "#panel-".$storeId."-".$j." {";
+                $styleCode_mobile .="> .cs-widget-sow-editor-base > .global-element {";
+                    if (isset($value_render['mobile_css']) && $value_render['mobile_css']) {
+                        $styleCode_mobile .= $value_render['mobile_css'].";";
+                    }
+                    if (isset($value_render['mobile_margin']) && $value_render['mobile_margin']) {
+                        $styleCode_mobile .= "margin:".$value_render['mobile_margin'].";";
+                    } 
+                    if (isset($value_render['mobile_padding']) && $value_render['mobile_padding']) {
+                        $styleCode_mobile .= "padding:".$value_render['mobile_padding'].";";
+                    }
+                    if (isset($value_render['hide_on_mobile']) && $value_render['hide_on_mobile'] == "true") {
+                        $styleCode_mobile .= "display: none".";";
+                    }
+                $styleCode_mobile .= "}";
+            $styleCode_mobile .= "}";
+        }
+    }
+    echo $styleCode_mobile;
+?>
+}
+@media (min-width: 1025px){
+<?php
+    $styleCode = '';
+    foreach ($data_styles as $key => $value) {
+        foreach ($value as $j => $value_render) {
+            $styleCode .= "#panel-".$storeId."-".$j." {";
+                $styleCode .="> .cs-widget-sow-editor-base > .global-element {";
+                    if (isset($value_render['hide_on_desktop']) && $value_render['hide_on_desktop'] == "true") {
+                        $styleCode .= "display: none".";";
+                    }
+                $styleCode .= "}";
+            $styleCode .= "}";
+        }
+    }
+    echo $styleCode;
+?>
+}

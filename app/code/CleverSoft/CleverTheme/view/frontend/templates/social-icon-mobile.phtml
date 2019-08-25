@@ -1,0 +1,45 @@
+<?php
+$footerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\FooterData');
+$settingData = $footerBuilderHelper->getSettingData();
+
+
+?>
+
+<div style="margin: <?php echo isset($settingData->{'_customize-input-mobile_social-icon_margin'}) && $settingData->{'_customize-input-mobile_social-icon_margin'} ? $settingData->{'_customize-input-mobile_social-icon_margin'} : '0px' ?>;
+        text-align: <?php echo isset($settingData->{'_customize-input-social-icon_align-mobile'}) && $settingData->{'_customize-input-social-icon_align-mobile'} ? $settingData->{'_customize-input-social-icon_align-mobile'} : 'inherit' ?>">
+    <?php if (isset($settingData->{'_customize-input-social-mobile-title-mobile'}) && $settingData->{'_customize-input-social-mobile-title-mobile'}): ?>
+        <h2 class="zoo-footer-social-title"><?php echo $settingData->{'_customize-input-social-mobile-title-mobile'}; ?></h2>
+    <?php endif; ?>
+    <ul class="zoo-footer-social-links <?php echo isset($settingData->{'_customize-radio-social_icon_style_mobile'}) && $settingData->{'_customize-radio-social_icon_style_mobile'} ? $settingData->{'_customize-radio-social_icon_style_mobile'} : ''?>">
+        <?php if (isset($settingData->{'_customize-input-social-mobile-facebook'}) && $settingData->{'_customize-input-social-mobile-facebook'}): ?>
+            <li><a class="fa fa-facebook" href="<?php echo  $settingData->{'_customize-input-social-mobile-facebook'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-mobile-twitter'}) && $settingData->{'_customize-input-social-mobile-twitter'}): ?>
+            <li><a class="fa fa-twitter" href="<?php echo  $settingData->{'_customize-input-social-mobile-twitter'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-mobile-instagram'}) && $settingData->{'_customize-input-social-mobile-instagram'}): ?>
+            <li><a class="fa fa-instagram" href="<?php echo  $settingData->{'_customize-input-social-mobile-instagram'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-mobile-linkedin'}) && $settingData->{'_customize-input-social-mobile-linkedin'}): ?>
+            <li><a class="fa fa-linkedin" href="<?php echo  $settingData->{'_customize-input-social-mobile-linkedin'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-mobile-rss'}) && $settingData->{'_customize-input-social-mobile-rss'}): ?>
+            <li><a class="fa fa-rss" href="<?php echo  $settingData->{'_customize-input-social-mobile-rss'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-mobile-email'}) && $settingData->{'_customize-input-social-mobile-email'}): ?>
+            <li><a class="fa fa-envelope" href="<?php echo  $settingData->{'_customize-input-social-mobile-email'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-mobile-pinterest'}) && $settingData->{'_customize-input-social-mobile-pinterest'}): ?>
+            <li><a class="fa fa-pinterest" href="<?php echo  $settingData->{'_customize-input-social-mobile-pinterest'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-mobile-vk'}) && $settingData->{'_customize-input-social-mobile-vk'}): ?>
+            <li><a class="fa fa-vk" href="<?php echo  $settingData->{'_customize-input-social-mobile-vk'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-mobile-tumblr'}) && $settingData->{'_customize-input-social-mobile-tumblr'}): ?>
+            <li><a class="fa fa-tumblr" href="<?php echo  $settingData->{'_customize-input-social-mobile-tumblr'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-mobile-whatsapp'}) && $settingData->{'_customize-input-social-mobile-whatsapp'}): ?>
+            <li><a class="fa fa-whatsapp" href="<?php echo  $settingData->{'_customize-input-social-mobile-whatsapp'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+    </ul>
+</div>

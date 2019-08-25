@@ -1,0 +1,104 @@
+<?php
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$storeCode = $this->getRequest()->getParam('store');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$staticBlocks = $objectManager->create('\Magento\Cms\Model\Block')->getCollection()->addFieldToFilter('use_in_headerbuilder',1);
+if ($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getId()) {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',$storeCode)->getFirstItem()->getHeaderStyle());
+} else {
+    $settings = json_decode($objectManager->create('CleverSoft\CleverTheme\Model\Block')->getCollection()->addFieldToFilter('store_id',0)->getFirstItem()->getHeaderStyle());
+}
+if($settings){
+    $data = isset($settings->header) ? $settings->header : '{}';
+}
+?>
+<!-- Modal content -->
+<div class="headerbuilder-modal-content">
+    <div class="headerbuilder-modal-header">
+        <span class="headerbuilder-modal-close">&times;</span>
+    </div>
+    <div class="headerbuilder-modal-body">
+        <strong>HTML 4</strong>
+        <div class="modal-inner" id="header_desktop_html-4" style="display: none">
+            <ul>
+                <li>
+                    <select name="settings[header][_customize-select-html-4]">
+                        <option value="">Select Static Block</option>
+                        <?php foreach ($staticBlocks as $block):?>
+                            <option value="<?php echo $block->getData('identifier');?>" <?php echo isset($data->{'_customize-select-html-4'}) && $data->{'_customize-select-html-4'} == $block->getData('identifier') ? 'selected' : ''?>><?php echo $block->getData('title');?></option>
+                        <?php endforeach;?>
+                    </select>
+                </li>
+                <li id="customize-control-html-4_margin" class="customize-control customize-control-html-4-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-html-4_margin]" value="<?= isset($data->{'_customize-input-html-4_margin'}) && $data->{'_customize-input-html-4_margin'} ? $data->{'_customize-input-html-4_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-header_html-4_merge_item" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[header][_customize_header_html-4_merge_item]">
+                        <option value="0" <?= isset($data->{'_customize_header_html-4_merge_item'}) && $data->{'_customize_header_html-4_merge_item'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_header_html-4_merge_item'}) && $data->{'_customize_header_html-4_merge_item'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_header_html-4_merge_item'}) && $data->{'_customize_header_html-4_merge_item'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-inner" id="header_mobile_html-4" style="display: none">
+            <ul>
+                <li>
+                    <select name="settings[header][_customize-select-html-4-mobile]">
+                        <?php foreach ($staticBlocks as $block):?>
+                            <option value="<?php echo $block->getData('identifier');?>" <?php echo isset($data->{'_customize-select-html-4-mobile'}) && $data->{'_customize-select-html-4-mobile'} == $block->getData('identifier') ? 'selected' : ''?>><?php echo $block->getData('title');?></option>
+                        <?php endforeach;?>
+                    </select>
+                </li>
+                <li id="customize-control-html-4-mobile_margin" class="customize-control customize-control-html-4-mobile-margin"
+                    style="display: list-item;">
+                    <label class="customizer-text">
+                        <span class="customize-control-title">Margin</span>
+                        <small class="customize-control-description">Ex: 5px 5px 5px 5px</small>
+                        <div class="customize-control-notifications-container" style="display: none;">
+                            <ul></ul>
+                        </div>
+                    </label>
+                    <input type="text" name="settings[header][_customize-input-html-4-mobile_margin]" value="<?= isset($data->{'_customize-input-html-4-mobile_margin'}) && $data->{'_customize-input-html-4-mobile_margin'} ? $data->{'_customize-input-html-4-mobile_margin'} : '' ?>">
+                </li>
+                <li id="customize-control-header_html-4_merge_item_mobile" class="customize-control customize-control-kirki-select"
+                    style="display: list-item;">
+                    <label>
+                        <span class="customize-control-title">Merge Item</span>
+                        <small class="customize-control-description">If you choose to merge this item, the alignment setting will inherit from the item you are merging.</small>
+                    </label>
+                    <select name="settings[header][_customize_header_html-4_merge_item_mobile]">
+                        <option value="0" <?= isset($data->{'_customize_header_html-4_merge_item_mobile'}) && $data->{'_customize_header_html-4_merge_item_mobile'} == '0' ? 'selected' : '' ?>>
+                            No
+                        </option>
+                        <option value="prev" <?= isset($data->{'_customize_header_html-4_merge_item_mobile'}) && $data->{'_customize_header_html-4_merge_item_mobile'} == 'prev' ? 'selected' : '' ?>>
+                            Merge with previous item
+                        </option>
+                        <option value="next" <?= isset($data->{'_customize_header_html-4_merge_item_mobile'}) && $data->{'_customize_header_html-4_merge_item_mobile'} == 'next' ? 'selected' : '' ?>>
+                            Merge with next item
+                        </option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

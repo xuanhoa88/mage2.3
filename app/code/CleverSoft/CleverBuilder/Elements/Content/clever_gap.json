@@ -1,0 +1,27 @@
+{
+  "name": "Gap",
+  "title": "Gap",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "widget",
+  "icon" : "",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Gap",
+  "code": "clever-gap",
+  "layouts":[
+  ],
+  "content_fields": [
+    {
+      "type": "text",
+      "name": "height",
+      "attribute_type": "style",
+      "element_class": "gap",
+      "code": "height",
+      "required": false,
+      "visible": true,
+      "label": "Height (px)"
+    }
+  ],
+  "style_fields": [
+  ]
+}

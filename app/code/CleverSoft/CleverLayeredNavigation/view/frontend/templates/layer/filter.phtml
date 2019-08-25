@@ -1,0 +1,35 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+/**
+ * Template for filter items block
+ *
+ * @var $block \Magento\LayeredNavigation\Block\Navigation\FilterRenderer
+ */
+?>
+
+<ol class="items">
+    <?php foreach ($filterItems as $filterItem): ?>
+        <li class="item checkbox-filter <?php if($filterItem->getCount() == 0):?> class=disabled <?php endif;?>">
+            <?php $checked =  $this->checkedFilter($filterItem) ? ' checked' : ''; ?>
+            <label>
+                <input type="checkbox" class="filter_item_<?php echo $filterItem->getValue()?> <?php echo $checked ?>" <?php if($filterItem->getCount() == 0):?> disabled="true" <?php endif;?> />
+                <span class="checkbox-material"><span class="check <?php echo $checked ?>"></span></span> <?php echo $filterItem->getLabel() ?>
+            </label>
+            <a href="<?php echo $block->escapeUrl($filterItem->getUrl()) ?>" class="<?php echo $checked ?>">
+
+
+
+            </a>
+
+            <?php if ($this->helper('\Magento\Catalog\Helper\Data')->shouldDisplayProductCountOnLayer()): ?>
+                    <span class="count pull-right" <?php if($filterItem->getCount() == 0):?> disabled="true" <?php endif;?>><?php echo $filterItem->getCount()?></span>
+                <?php endif; ?>
+        </li>
+    <?php endforeach ?>
+</ol>

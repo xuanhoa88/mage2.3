@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+		<section id="cleversoft_shopbybrand" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>CleverShopByBrand</label>
+            <tab>cleverextensions</tab>
+			<resource>CleverSoft_CleverShopByBrand::settings</resource>
+            <group id="info_shopbybrand" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <attribute type="expanded">1</attribute>
+                <frontend_model>CleverSoft\CleverShopByBrand\Block\System\Config\Form\Field\Information</frontend_model>
+            </group>
+			<group id="all_brand_page" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="general" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="attribute_code" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Attribute Used as Brand</label>
+                    <source_model>CleverSoft\CleverShopByBrand\Model\Config\Source\AttributeCode</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Page Title</label>
+                </field>
+                <field id="description" translate="label" type="editor" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Description</label>
+                    <frontend_model>CleverSoft\CleverShopByBrand\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+                <field id="meta_title" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Meta Title</label>
+                </field>
+                <field id="meta_keywords" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Meta Keywords</label>
+                </field>
+                <field id="meta_description" translate="label" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Meta Description</label>
+                </field>
+                <field id="display_featured_brands" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display featured brands slider</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_brand_search" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display brand search box</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+			<group id="product_view_page" translate="label" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Product view page</label>
+				<field id="display_brand_logo" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display brand logo</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+			</group>
+		</section>
+	</system>
+</config>

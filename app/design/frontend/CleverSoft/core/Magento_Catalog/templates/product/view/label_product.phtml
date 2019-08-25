@@ -1,0 +1,25 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');
+$price = $product->getPrice();
+$specialprice = $product->getSpecialPrice();
+$price_discount = $price - $specialprice;
+$specialPriceFromDate = $product->getSpecialFromDate();
+$specialPriceToDate = $product->getSpecialToDate();    
+$newsFromDate = $product->getNewsFromDate();
+$newsToDate = $product->getNewsToDate();
+?>
+<?php if ($newsFromDate && $newsToDate): ?>
+<div class="product-label new">
+	<span>
+		<?=__("New");?>
+	</span>
+</div>
+<?php endif ?>
+<?php if ($specialPriceFromDate && $specialPriceToDate && ($price_discount > 0)): ?>
+<div class="product-label sales">
+	<span>
+		<?=__("Sale!");?>
+	</span>
+</div>
+<?php endif ?>

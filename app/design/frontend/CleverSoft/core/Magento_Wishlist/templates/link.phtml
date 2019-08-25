@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © 2017 CleverSoft., JSC. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Magento\Wishlist\Block\Link */
+$headerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\HeaderData');
+$settingData = $headerBuilderHelper->getSettingData();
+
+$isMobile = $headerBuilderHelper->isMobile();
+?>
+
+    <div class="header-wishlist link wishlist" data-bind="scope: 'wishlist'">
+        <a class="icon" <?php /* @escapeNotVerified */ echo $block->getLinkAttributes() ?>>
+            <i class="cs-font <?= isset($settingData->{'_customize-radio-wishlist_icon'}) && $settingData->{'_customize-radio-wishlist_icon'} ? $settingData->{'_customize-radio-wishlist_icon'} : 'clever-icon-heart-4';?>" aria-hidden="true"></i>
+            <!-- ko if: wishlist().counter -->
+            <span data-bind="text: wishlist().counter" class="counter-number counter qty"></span>
+            <!-- /ko -->
+            <?php if(isset($settingData->{'_customize_header_wishlist_title'}) && $settingData->{'_customize_header_wishlist_title'} == '1'):?>
+                <span class="wishlist-text">My Wishlist</span>
+            <?php endif?>
+        </a>
+    </div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "wishlist": {
+                        "component": "Magento_Wishlist/js/view/wishlist"
+                    }
+                }
+            }
+        }
+    }
+
+</script>

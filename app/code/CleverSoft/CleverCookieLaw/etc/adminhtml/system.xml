@@ -1,0 +1,269 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverCookieLaw
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="cookielaw" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>CleverCookieLaw</label>
+            <tab>cleverextensions</tab>
+            <resource>CleverSoft_CleverTheme::config_clevercookielaw</resource>
+            <class>v-cookielaw-section</class>
+            <group id="info_cookielaw" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <attribute type="expanded">1</attribute>
+                <frontend_model>CleverSoft\CleverCookieLaw\Block\System\Config\Form\Field\Information</frontend_model>
+            </group>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <attribute type="expanded">1</attribute>
+                <field id="enablecookie" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <comment>Turn on or turn off cookie law</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="type" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Type</label>
+                    <source_model>CleverSoft\CleverCookieLaw\Model\Config\Type</source_model>
+                </field>
+                <field id="bar_position" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Bar position</label>
+                    <comment>[Top] does not cover the content, [Bottom] is fixed.</comment>
+                    <depends><field id="type">v-bar</field></depends>
+                    <source_model>CleverSoft\CleverCookieLaw\Model\Config\Bar\Position</source_model>
+                </field>
+                <field id="box_position" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Box position</label>
+                    <depends><field id="type">v-box</field></depends>
+                    <source_model>CleverSoft\CleverCookieLaw\Model\Config\Box\Position</source_model>
+                </field>
+                <field id="skin" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Skin</label>
+                    <source_model>CleverSoft\CleverCookieLaw\Model\Config\Skin</source_model>
+                </field>
+                <field id="behaviour" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>When visitor closes the notice</label>
+                    <source_model>CleverSoft\CleverCookieLaw\Model\Config\Behaviour</source_model>
+                </field>
+                <field id="autohide" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Autohide (seconds)</label>
+                    <comment>If [0] then the notice won't close automatically.</comment>
+                </field>
+                <field id="load_after" translate="label comment" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delay Loading Popup (seconds)</label>
+                </field>
+                <field id="delete_email_template" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delete Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="rectify_email_template" translate="label comment" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Rectify Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="complaint_email_template" translate="label comment" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Complaint Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="data_email_template" translate="label comment" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Download Data Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="confirm_email_template" translate="label comment" type="select" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Confirm Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="cancel_email_template" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cancel Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+            <group id="content" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cookie Info Bar Settings</label>
+                <attribute type="expanded">1</attribute>
+                <field id="custom_message" translate="label" type="editor" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Infobar Content</label>
+                </field>
+                <field id="custom_accept" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Accept Button - Label</label>
+                </field>
+
+                <field id="custom_more_info" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>More information text</label>
+                </field>
+                <field id="cms_page" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Privacy Policy Page</label>
+                    <comment>CMS page with information about cookies and how to manage them.</comment>
+                    <source_model>Magento\Cms\Model\Config\Source\Page</source_model>
+                </field>
+            </group>
+            <group id="privacy" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Privacy Overview</label>
+                <field id="tab_title" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Title</label>
+                </field>
+                <field id="tab_content" translate="label" type="editor" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Content</label>
+                </field>
+            </group>
+            <group id="strictly" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Strictly Necessary Cookies</label>
+                <field id="tab_title" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Title</label>
+                </field>
+                <field id="tab_content" translate="label" type="editor" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Content</label>
+                </field>
+                <field id="tab_warning" translate="label" type="editor" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Warning Message</label>
+                </field>
+                <field id="cookie_used" translate="label" type="editor" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cookies Used</label>
+                </field>
+            </group>
+            <group id="third_party" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>3rd Party Cookies</label>
+                <field id="is_active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Action</label>
+                    <source_model>CleverSoft\CleverTheme\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="tab_title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Title</label>
+                    <depends><field id="is_active">1</field></depends>
+                </field>
+                <field id="tab_content" translate="label" type="editor" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Content</label>
+                    <depends><field id="is_active">1</field></depends>
+                </field>
+                <field id="cookie_used" translate="label" type="editor" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cookies Used</label>
+                    <depends><field id="is_active">1</field></depends>
+                    <comment>Cookies that are set by a third party, like Google Analytic, Facebook Pixel</comment>
+                </field>
+            </group>
+            <group id="additional" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Additional Cookies</label>
+                <field id="is_active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Action</label>
+                    <source_model>CleverSoft\CleverTheme\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="tab_title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Title</label>
+                    <depends><field id="is_active">1</field></depends>
+                </field>
+                <field id="tab_content" translate="label" type="editor" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>How we use</label>
+                    <depends><field id="is_active">1</field></depends>
+                </field>
+                <field id="cookie_used" translate="label" type="editor" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cookies Used</label>
+                    <depends><field id="is_active">1</field></depends>
+                    <comment>Cookies that are set by a third party, like Google Analytic, Facebook Pixel</comment>
+                </field>
+            </group>
+            <group id="policy" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cookie Policy</label>
+                <field id="tab_title" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Title</label>
+                    <depends><field id="is_active">1</field></depends>
+                </field>
+                <field id="tab_content" translate="label" type="editor" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Content</label>
+                    <depends><field id="is_active">1</field></depends>
+                </field>
+            </group>
+            <group id="integration" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Integration</label>
+                <field id="contact" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Contact Form</label>
+                    <source_model>CleverSoft\CleverTheme\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="contact_text" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Checkbox text</label>
+                    <depends><field id="contact">1</field></depends>
+                </field>
+                <field id="contact_error" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Error message</label>
+                    <depends><field id="contact">1</field></depends>
+                </field>
+                <field id="login" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Login Form</label>
+                    <source_model>CleverSoft\CleverTheme\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="login_text" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Checkbox text</label>
+                    <depends><field id="login">1</field></depends>
+                </field>
+                <field id="login_error" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Error message</label>
+                    <depends><field id="login">1</field></depends>
+                </field>
+                <field id="register" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Register Form</label>
+                    <source_model>CleverSoft\CleverTheme\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="register_text" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Checkbox text</label>
+                    <depends><field id="register">1</field></depends>
+                </field>
+                <field id="register_error" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Error message</label>
+                    <depends><field id="register">1</field></depends>
+                </field>
+                <field id="newsletter" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Newsletter Form</label>
+                    <source_model>CleverSoft\CleverTheme\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="newsletter_text" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Checkbox text</label>
+                    <depends><field id="newsletter">1</field></depends>
+                </field>
+                <field id="newsletter_error" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Error message</label>
+                    <depends><field id="newsletter">1</field></depends>
+                </field>
+                <field id="comment" translate="label" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Megafan blog comment form</label>
+                    <source_model>CleverSoft\CleverTheme\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="comment_text" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Checkbox text</label>
+                    <depends><field id="comment">1</field></depends>
+                </field>
+                <field id="comment_error" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Error message</label>
+                    <depends><field id="comment">1</field></depends>
+                </field>
+                <field id="review" translate="label" type="select" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Review in Product</label>
+                    <source_model>CleverSoft\CleverTheme\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="review_text" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Checkbox text</label>
+                    <depends><field id="review">1</field></depends>
+                </field>
+                <field id="review_error" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Error message</label>
+                    <depends><field id="review">1</field></depends>
+                </field>
+                <field id="checkout" translate="label" type="select" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Checkout Register Form</label>
+                    <source_model>CleverSoft\CleverTheme\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="checkout_text" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Checkbox text</label>
+                    <depends><field id="checkout">1</field></depends>
+                </field>
+                <field id="checkout_error" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Error message</label>
+                    <depends><field id="checkout">1</field></depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,163 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverMegaMenus
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author        ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+$_current = $this->getCurrentMenu();
+$_menuItems = json_decode($_current->getMenucontent());
+$_menuTypes = $this->getMenuTypes();
+$_configMenuTypes = $this->createConfigFieldType();
+?>
+<div style="min-height: 20px"></div>
+<div class="row zoo-menu-content">
+    <div class="col-m-3 col-left">
+        <div class="menu-item-types">
+            <div class="type-items" id="type-items">
+                <?php
+                foreach($_menuTypes as $muts) {
+                    ?>
+                    <div class="menu-item menu-item-depth-0 menu-item-edit-inactive type-<?php echo $muts; ?>" data-itemtype="<?php echo $muts; ?>">
+                        <div class="menu-item-bar">
+                            <div class="menu-item-handle">
+                                <span></span>
+                                <span class="item-title"><span class="menu-item-title" data-original="<?php echo $_configMenuTypes['fieldsLabel'][$muts] ?>"><?php echo $_configMenuTypes['fieldsLabel'][$muts] ?></span></span>
+                                <span class="preview-icon"><?php echo $_configMenuTypes['previewIcon'][$muts] ?></span>
+                                <span class="link-title"></span>
+                            </div>
+                        </div>
+                        <div class="menu-item-heading-control">
+                            <a class="item-edit menu-btn" href="javascript:void(0)"><i></i></a>
+                        </div>
+                        <div class="menu-item-settings">
+                            <div class="menu-item-fields">
+                                <?php echo $this->getLeftContentByType($muts); ?>
+                            </div>
+                            <div class="menu-item-actions">
+                                <a href="javascript:void(0)" class="add-to-menu menu-btn"><?php echo __('Add to menu') ?></a>
+                                <a href="javascript:void(0)" class="item-delete menu-btn"><?php echo __('Remove Menu Item') ?></a>
+                            </div>
+                        </div>
+                        <div class="menu-item-transport"></div>
+                    </div>
+                <?php
+                }
+                ?>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-m-9 col-main">
+        <div class="menu-item-wrapper">
+            <h2 class="title"><?php echo __('MegaMenus Tree') ?></h2>
+            <span id="text_change_edit"></span>
+
+            <div class="menu" id="menu-to-edit">
+                <?php
+                if (!empty($_menuItems)) {
+                    foreach ($_menuItems as $_mts) {
+                        if (!in_array($_mts->item_type, $_menuTypes)) continue;
+                        $label = isset($_mts->content->label) ? $_mts->content->label : '';
+                        $url = isset($_mts->content->url) ? $_mts->content->url : '';
+                        $class = isset($_mts->content->class) ? $_mts->content->class : '';
+                        $previewHeaderIcon = $this->getPreviewHeaderIcon($_mts->content);
+                        if($_mts->item_type == 'text') $previewHeaderIcon = $_configMenuTypes['previewIcon'][$_mts->item_type]
+                        ?>
+                        <div class="menu-item menu-item-depth-<?php echo $_mts->depth; ?> menu-item-edit-inactive type-<?php echo $_mts->item_type ?>"
+                             data-itemtype="<?php echo $_mts->item_type ?>" data-depth="<?php echo $_mts->depth; ?>">
+                            <div class="menu-item-bar">
+                                <div class="menu-item-handle">
+                                    <span></span>
+                                    <span class="item-title">
+                                        <span class="menu-item-title"><?php echo $_configMenuTypes['fieldsLabel'][$_mts->item_type] ?></span></span>
+                                    <span class="preview-icon"><?php echo $previewHeaderIcon; ?></span>
+                                    <span class="link-title"><?php echo $label ?></span>
+                                </div>
+                            </div>
+                            <div class="menu-item-heading-control">
+                                <a class="item-edit menu-btn" href="javascript:void(0)"><i></i></a>
+                            </div>
+                            <div class="menu-item-settings">
+                                <div class="menu-item-fields">
+                                    <?php
+                                    echo $this->getContentByType($_mts);
+                                    ?>
+                                </div>
+                                <div class="menu-item-actions">
+                                    <a href="javascript:void(0)" class="item-delete menu-btn"><?php echo __('Remove Menu Item') ?></a>
+                                </div>
+                            </div>
+                            <div class="menu-item-transport"></div>
+                        </div>
+                    <?php
+                    }
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+$colLyts = $this->getColumnLayouts();
+$colHtml = '<div class="sample-layout row">';
+foreach ($colLyts  as $key=>$ctls) {
+    $temp = $key.'-html';
+    $colHtml .='
+        <div class="html-sample-item col-m-2 col-xs-6">
+			<div class="block-content">
+				<p><a class="layout-img img-'.$key.'" onclick="Icons.insertSampleLayout(\''.$temp.'\')" href="javascript:void(0)"><img src="'.$ctls.'" /></a></p>
+                <a class="layout-name" onclick="Icons.insertSampleLayout(\''.$temp.'\')" href="javascript:void(0)"></a>
+            </div>
+        </div>
+    ';
+}
+$colHtml .='</div>';
+?>
+<script type="text/html" id="clever-col-layout-sample">
+    <?php echo $colHtml; ?>
+</script>
+<script type="text/html" id="clever-addition-fields-for-depth-0">
+    <?php echo $this->getContentTmplDepthZero(); ?>
+</script>
+<script type="text/html" id="clever-script-icons-html">
+    <?php echo $this->getIconHtml(); ?>
+</script>
+
+<script type="text/html" id="clever-script-clever_icons-html">
+    <?php echo $this->getCleverIconHtml(); ?>
+</script>
+
+<script>
+    require([
+        "jquery",
+        "cleverButtonElement",
+        "icons",
+        "createCategoryChooser",
+        "cleverMenuAdminhtml",
+        "domReady!"
+    ], function ($) {
+        $('#menu-to-edit').cleverMenuAdminhtml({
+            tabs: {
+                ids:'#editting-tabs' ///can be multi id, separate by comma.
+            },
+            categoryChser: {
+                url:'<?php echo $this->getUrl('catalog/category_widget/chooser') ?>uniq_id/',
+                open: '<?php echo __('Select Category...') ?>',
+                close: '<?php echo __('Close') ?>'
+            },
+            mediaPath: '<?php echo $this->getMediaPath() ?>',
+            noImage: '<?php echo $this->getImageUrl('menu/placeholder.jpg') ?>',
+            menuContainer: '.zoo-menu-content',
+            textChangeEdit: {
+                id:'#text_change_edit',
+                text : '<?php echo __('Drag each item into the order you prefer. Click the arrow on the right of the item to reveal additional configuration options.'); ?>',
+                textEmpty: '<?php echo __('Add menu items from the column on the left.') ; ?>'
+            },
+            loadingMask: '#clever-spinner',
+            htmlZeroDepth:'#clever-addition-fields-for-depth-0',
+            noPageSelected: '<?php echo __('You havent selected any page. Please try again.') ?>'
+        });
+    });
+</script>

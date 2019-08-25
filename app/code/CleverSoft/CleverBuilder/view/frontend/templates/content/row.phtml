@@ -1,0 +1,95 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverBuilder
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+$panelsItems = $this->getData('panelsItems');
+if (empty($panelsItems)) return;
+$items = $this->getData('items');
+$stretch = $this->getData('stretch');
+$height = $this->getData('height');
+$width = $this->getData('width');
+$content_width = $this->getData('content_width');
+$set_width = $this->getData('set_width');
+$minimum_height = $this->getData('minimum_height');
+$rowId = $this->getData('widget_id');
+$column_gap = $this->getData('column_gap');
+$column_position = $this->getData('column_position');
+$html_tag = $this->getData('html_tag');
+$text_align = $this->getData('text_align');
+$heading_color = $this->getData('heading_color');
+$text_color = $this->getData('text_color');
+$link_color = $this->getData('link_color');
+$link_hover_color = $this->getData('link_hover_color');
+$default_data = $this->getDefaultData();
+if(!$this->getData('height')) $this->setData('height',$default_data['height']);
+?>
+<<?=$html_tag ? $html_tag : "section"?> class="global-element element-row <?php if($stretch) {echo "full-width";} ?> element-row-height-<?=$height?> element-row-style-<?=$content_width?> element-row-<?=$rowId?> <?php if($isPreview) echo "cs-live-preview"?>">
+    <div class="element-row__content clever-content-grid set-width-<?=$set_width?> column-gap-<?=$column_gap ? $column_gap:"default"?> text-<?=$text_align?>">
+        <?php
+            for ($i=0; $i < count($panelsItems); $i++) { 
+                if (!isset($items[$i])) {
+                    $items[] = [];
+                }
+            }
+        ?>
+        <div data-id="<?php echo $block->getData('widget_id') ?>" id="row<?php echo $block->getData('widget_id') ?>" class="column-position-<?=$column_position?> row row-grid row-small row-box-shadow-<?php echo $this->getData('col_depth') ?  $this->getData('col_depth') : 0 ;  ?> row-box-shadow-<?php echo $this->getData('col_hover_depth')?>-hover" style="position: relative;">
+            <?php if(!empty($items)):?>
+            <?php foreach ($items as $key=>$item) : ?>
+                <div <?php echo isset($panelsItems[$key]['animate']) && $panelsItems[$key]['animate'] ? 'data-animate="'.$panelsItems[$key]['animate'].'"': ''?> class="column-wrap grid-<?php echo $key?>-<?php echo $this->getData('widget_id')?> <?php echo isset($panelsItems[$key]['class']) ? $panelsItems[$key]['class'] : '' ?>" data-id="<?=$block->getData('widget_id')?>" data-key="<?=$key?>"
+                     data-width="<?php echo $panelsItems[$key]['width'] ?>">
+                    <div  class="col-inner box-shadow-<?php echo $panelsItems[$key]['col_depth'] ?> box-shadow-<?php echo $panelsItems[$key]['col_hover_depth'] ?>-hover" >
+                        <?php
+                        if(!empty($item) and !is_null($item)) {
+                            foreach ($item as $k => $it) {
+                                ?>
+                                <div data-content="col_grid" data-shortcode="shortcode" class="col_grid">
+                                    <?php if (!isset($it['html'])) { ?>
+                                        <div class="col_grid-empty">
+                                            <div class="uxb-empty-message">
+                                                <?php echo __('Add elements from left sidebar'); ?>
+                                            </div>
+                                        </div>
+                                    <?php } else {
+                                        echo $it['html'];
+                                    } ?>
+                                </div>
+                            <?php
+                            }
+                        } else {
+                            ?>
+                                <div data-content="col_grid" data-shortcode="shortcode" class="col_grid">
+                                    <div class="col_grid-empty">
+                                            <div class="uxb-empty-message">
+                                                <?php echo __('Add elements from left sidebar'); ?>
+                                            </div>
+                                        </div>
+                                </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+                <script type="text/x-magento-init">
+                {
+                    ".grid-<?php echo $key?>-<?php echo $this->getData('widget_id')?>":{
+                        "cleverElementAnimate":{}
+                    }
+                }
+                </script>
+            <?php endforeach; ?>
+            <?php endif;?>
+        </div>
+        <?php
+        ?>
+        <?php if($isPreview) { ?>
+            <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+        <?php } ?>
+    </div>
+</<?=$html_tag ? $html_tag : "section"?>>

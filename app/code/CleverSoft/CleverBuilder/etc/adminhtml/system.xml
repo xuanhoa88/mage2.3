@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverBuilder
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="clevervisualpagebuilder" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>CleverBuilder</label>
+			<tab>cleverextensions</tab>
+            <resource>CleverSoft_CleverBuilder::config_setting</resource>
+            <group id="info_cleverbuilder" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <attribute type="expanded">1</attribute>
+                <frontend_model>CleverSoft\CleverBuilder\Block\System\Config\Form\Field\Information</frontend_model>
+            </group>
+			<group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General</label>
+				<field id="is_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Active CleverBuilder</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+			</group>
+			<group id="widget" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Widgets</label>
+				<field id="list_widget" translate="label comment" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>List widget used in pagebuilder</label>
+					<source_model>CleverSoft\CleverBuilder\Model\Config\Source\Widgets</source_model>
+					<comment>Select widgets from other extensions to use in pagebuilder.</comment>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

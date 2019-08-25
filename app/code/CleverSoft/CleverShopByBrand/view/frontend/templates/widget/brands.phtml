@@ -1,0 +1,252 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverShopByBrand
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$attributes = $this->getOptionBrands();
+$lazyhelper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$lazyload = $this->getData('lazyload') == '1' ? true : false;
+$min_height_img_lazyload = $block->getData('height_image');
+$class_random = uniqid('widget-');
+$icon = $lazyhelper->getCfg('responsive/iconlazyload');
+if (!empty($icon)) {
+    $image = $icon;
+    $om = \Magento\Framework\App\ObjectManager::getInstance();
+    $storeManager = $om->create('Magento\Store\Model\StoreManagerInterface');
+    $image_url = $storeManager->getStore()
+            ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'lazyload/' . $image;
+} else {
+    $image_url = $block->getViewFileUrl('CleverSoft_CleverTheme::images/transparent.gif');
+}
+?>
+<div class="<?php echo $this->getData('customclass') ? $this->getData('customclass') : 'owlcarousel'; ?>"
+     id="brands-carousel">
+    <?php if ($this->getData('layoutwg') == 'carousel'): ?>
+        <ul class="owlslider owl-carousel" style="list-style-type: none;">
+            <?php foreach ($attributes as $attribute): ?>
+
+                <li>
+                    <?php if (isset($attribute['linkto'])): ?>
+                    <a href="<?php echo $attribute['linkto'] ?>" title="<?php echo $attribute['label'] ?>" <?php if ($lazyload && $min_height_img_lazyload) echo 'style="min-height: '.$min_height_img_lazyload.'px"'?>>
+                        <?php endif ?>
+                        <?php if ($attribute['image']): ?>
+                            <img data-src="<?php echo $attribute['image'] ?>"
+                                 src="<?php if ($lazyload) echo $image_url; else echo $attribute['image']; ?>"
+                                 class="<?php if ($lazyload) echo "clazyload"; ?> img-brand"
+                                 alt="<?php echo $attribute['label'] ?>"/>
+                        <?php else: ?>
+                            <span><?php echo $attribute['label'] ?></span>
+                        <?php endif ?>
+
+                        <?php if (isset($attribute['linkto'])): ?>
+                    </a>
+                <?php endif ?>
+                </li>
+            <?php endforeach ?>
+        </ul>
+    <?php elseif ($this->getData('layoutwg') == 'grid'): ?>
+        <div class="grid-brands">
+            <?php foreach ($attributes as $attribute): ?>
+                <?php if (isset($attribute['linkto'])): ?>
+                    <a href="<?php echo $attribute['linkto'] ?>" title="<?php echo $attribute['label'] ?>" <?php if ($lazyload && $min_height_img_lazyload) echo 'style="min-height: '.$min_height_img_lazyload.'px"'?>>
+                <?php endif ?>
+
+                <?php if ($attribute['image']): ?>
+                    <img data-src="<?php echo $attribute['image'] ?>"
+                         src="<?php if ($lazyload) echo $image_url; else echo $attribute['image']; ?>"
+                         class="<?php if ($lazyload) echo "clazyload"; ?> img-brand"
+                         alt="<?php echo $attribute['label'] ?>"/>
+                <?php else: ?>
+                    <span><?php echo $attribute['label'] ?></span>
+                <?php endif ?>
+
+                <?php if (isset($attribute['linkto'])): ?>
+                    </a>
+                <?php endif ?>
+            <?php endforeach ?>
+        </div>
+    <?php else: ?>
+        <ul class="vertical-brands <?php echo $class_random ?>" style="list-style-type: none;">
+            <?php foreach ($attributes as $attribute): ?>
+                <li>
+                    <?php if (isset($attribute['linkto'])): ?>
+                    <a href="<?php echo $attribute['linkto'] ?>" title="<?php echo $attribute['label'] ?>" <?php if ($lazyload && $min_height_img_lazyload) echo 'style="min-height: '.$min_height_img_lazyload.'px"'?>>
+                        <?php endif ?>
+
+                        <?php if ($attribute['image']): ?>
+                            <img data-src="<?php echo $attribute['image'] ?>"
+                                 src="<?php if ($lazyload) echo $image_url; else echo $attribute['image']; ?>"
+                                 class="img-brand lazy img-lazyload"
+                                 alt="<?php echo $attribute['label'] ?>"/>
+                        <?php else: ?>
+                            <span><?php echo $attribute['label'] ?></span>
+                        <?php endif ?>
+
+                        <?php if (isset($attribute['linkto'])): ?>
+                    </a>
+                <?php endif ?>
+                </li>
+            <?php endforeach ?>
+        </ul>
+    <?php endif; ?>
+</div>
+
+<?php
+$autoplay = $this->getData('autoplay') == '1' ? 'true' : 'false';
+$autoplaytimeout = $this->getData('autoplaytime') ? (int)$this->getData('autoplaytime') * 1000 : 1000;
+$hoverPause = $this->getData('hoverpause') == '1' ? 'true' : 'false';
+$pagination = $this->getData('pagination') == '1' ? 'true' : 'false';
+$prev = $this->getData('navigation_prev') ? $this->getData('navigation_prev') : 'prev';
+$next = $this->getData('navigation_next') ? $this->getData('navigation_next') : 'next';
+
+$vautoplay = $this->getData('vautoplay') == '1' ? 'true' : 'false';
+$vautoplaytimeout = $this->getData('vautoplaytime') ? (int)$this->getData('vautoplaytime') * 1000 : 1000;
+$vhoverPause = $this->getData('vhoverpause') == '1' ? 'true' : 'false';
+$vpagination = $this->getData('vpagination') == '1' ? 'true' : 'false';
+$vprev = $this->getData('vnavigation_prev') ? $this->getData('vnavigation_prev') : '<';
+$vnext = $this->getData('vnavigation_next') ? $this->getData('vnavigation_next') : '>';
+$vnumber_item = $this->getData('vnumber_item') ? $this->getData('vnumber_item') : 2;
+$enable_nav = $this->getData('enable_nav') == '1' ? 'true' : 'false';
+
+
+$brandloop = $this->getData('brand_loop') == '1' ? 'true' : 'false';
+?>
+
+
+<script>
+    require(["jquery","jQueryLibMin", "CleverSoft_CleverShopByBrand/js/jquery.bxslider"], function ($) {
+        $(function () {
+        <?php
+        if($this->getData('layoutwg') == 'carousel'):
+        ?>
+        <?php if($block->getData('enable_fullwidth')) { ?>
+            var $left = $('#brands-carousel').offset().left;
+            $('#brands-carousel').css({
+                'left': '-' + $left + 'px',
+                'position': 'relative',
+                'right': '0',
+                'width': $(window).width() + 'px'
+            });
+            $('#cat-carousel .owlslider').css('width', '100%');
+        <?php } ?>
+        // $(function () {
+            if ('<?php echo $this->getData('layoutwg'); ?>' == 'carousel') {
+                var $container = $("#brands-carousel .owl-carousel");
+                (function($) {
+                    $(document).ready(function() {
+                        $container.owlCarousel({
+                            nav: <?php echo $enable_nav; ?>,
+                            loop: <?php echo $brandloop;?>,
+                            margin: 10,
+                            autoplay: <?php echo $autoplay; ?>,
+                            autoplayTimeout: <?php echo $autoplaytimeout; ?>,
+                            autoplayHoverPause: <?php echo $hoverPause; ?>,
+                            dots: <?php echo $this->getData('bullet') == '1' ? 'true' : 'false' ; ?>,
+                            navText: ["<?php echo $prev; ?>", "<?php echo $next; ?>"],
+
+                            responsive: {
+                                0: {
+                                    items: 2
+                                },
+                                480: {
+                                    items:<?php echo $this->getData('nbi480') ? $this->getData('nbi480') : 1; ?>
+                                },
+                                768: {
+                                    items:<?php echo $this->getData('nbi768') ? $this->getData('nbi768') : 2; ?>
+                                },
+                                990: {
+                                    items:<?php echo $this->getData('nbi990') ? $this->getData('nbi990') : 2; ?>
+                                },
+                                1200: {
+                                    items:<?php echo $this->getData('nbi1200') ? $this->getData('nbi1200') : 3; ?>
+                                }
+                            }
+                        });
+                    });
+                }) (jQuery);
+                <?php if ($lazyload) {  ?>
+                $container.on('changed.owl.carousel', function(event) {
+                    setTimeout(function(){
+                        $(this).find(".owl-item.active .clazyload").lazyload({
+                            data_attribute: "src",
+                            failure_limit : 10
+                        });
+                    }, 100);
+                });
+                <?php } ?>
+            }
+
+        // });
+        <?php elseif($this->getData('layoutwg') == 'grid'): ?>
+            <?php if($block->getData('enable_fullwidth')) { ?>
+                var $left = $('#brands-carousel').offset().left;
+                $('#brands-carousel').css({
+                    'left': '-' + $left + 'px',
+                    'position': 'relative',
+                    'right': '0',
+                    'width': $(window).width() + 'px'
+                });
+                $('#cat-carousel .owlslider').css('width', '100%');
+            <?php } ?>
+        // $(function () {
+            var imgwidth = 0;
+            if ('<?php echo $this->getData('layoutwg'); ?>' == 'grid') {
+                imgwidth = <?php echo $this->getData('imgwidth') ? $this->getData('imgwidth') : 0; ?>;
+                if (imgwidth > 0) {
+                    $(".grid-brands img.img-brand").width(imgwidth);
+                }
+            }
+        // });
+        <?php else: ?>
+        $("ul.vertical-brands > li").css("margin-bottom", "0rem");
+        // $(function () {
+            var page = 0;
+            var maxSlides = <?php echo $vnumber_item; ?>;
+            var slider = $('ul.<?php echo $class_random ?>').bxSlider({
+                mode: 'vertical',
+                minSlides:<?php echo $vnumber_item; ?>,
+                maxSlides: maxSlides,
+                auto: <?php echo $vautoplay; ?>,
+                pause: <?php echo $vautoplaytimeout; ?>,
+                startSlide: page,
+                autoHover: <?php echo $vhoverPause; ?>,
+                nextText: "<?php echo $vnext; ?>",
+                prevText: "<?php echo $vprev; ?>",
+                pager: <?php echo $this->getData('vbullet') == '1' ? 'true' : 'false'; ?>,
+                <?php if($lazyload): ?>
+                onSliderLoad: function () {
+                    var $sliderImgs = $(".vertical-brands img");
+                    var start = page * maxSlides + maxSlides;
+                    var stop = start + maxSlides;
+                    for (var i = start; i < stop; i++) {
+                        var selecter = '[data-src="' + $sliderImgs.eq(i).data('src') + '"]';
+                        $(selecter).attr('src', $(selecter).data('src')).one('load', function () {
+                            $(this).removeClass('lazy');
+                        });
+
+                    }
+                },
+                onSlideAfter: function () {
+                    page = slider.getCurrentSlide();
+                    var $sliderImgs = $(".vertical-brands img");
+                    var start = page * maxSlides + maxSlides;
+                    var stop = start + maxSlides;
+                    for (var i = start; i < stop; i++) {
+                        var selecter = '[data-src="' + $sliderImgs.eq(i).data('src') + '"]';
+                        $(selecter).attr('src', $(selecter).data('src')).one('load', function () {
+                            $(this).removeClass('lazy');
+                        });
+                    }
+                }
+                <?php endif; ?>
+            });
+        // });
+        <?php endif; ?>
+        });
+    });
+</script>

@@ -1,0 +1,45 @@
+<?php
+$footerBuilderHelper = $this->helper('CleverSoft\CleverTheme\Helper\FooterData');
+$settingData = $footerBuilderHelper->getSettingData();
+
+
+?>
+
+<div style="margin: <?php echo isset($settingData->{'_customize-input-social-icon_margin'}) && $settingData->{'_customize-input-social-icon_margin'} ? $settingData->{'_customize-input-social-icon_margin'} : '0px' ?>;
+        text-align: <?php echo isset($settingData->{'_customize-input-social-icon_align'}) && $settingData->{'_customize-input-social-icon_align'} ? $settingData->{'_customize-input-social-icon_align'} : 'inherit' ?>">
+    <?php if (isset($settingData->{'_customize-input-social-title'}) && $settingData->{'_customize-input-social-title'}): ?>
+        <h2 class="zoo-footer-social-title"><?php echo $settingData->{'_customize-input-social-title'}; ?></h2>
+    <?php endif; ?>
+    <ul class="zoo-footer-social-links <?php echo isset($settingData->{'_customize-radio-social_icon_style'}) && $settingData->{'_customize-radio-social_icon_style'} ? $settingData->{'_customize-radio-social_icon_style'} : ''?>">
+        <?php if (isset($settingData->{'_customize-input-social-facebook'}) && $settingData->{'_customize-input-social-facebook'}): ?>
+            <li><a class="fa fa-facebook" href="<?php echo  $settingData->{'_customize-input-social-facebook'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-twitter'}) && $settingData->{'_customize-input-social-twitter'}): ?>
+            <li><a class="fa fa-twitter" href="<?php echo  $settingData->{'_customize-input-social-twitter'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-instagram'}) && $settingData->{'_customize-input-social-instagram'}): ?>
+            <li><a class="fa fa-instagram" href="<?php echo  $settingData->{'_customize-input-social-instagram'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-linkedin'}) && $settingData->{'_customize-input-social-linkedin'}): ?>
+            <li><a class="fa fa-linkedin" href="<?php echo  $settingData->{'_customize-input-social-linkedin'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-rss'}) && $settingData->{'_customize-input-social-rss'}): ?>
+            <li><a class="fa fa-rss" href="<?php echo  $settingData->{'_customize-input-social-rss'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-email'}) && $settingData->{'_customize-input-social-email'}): ?>
+            <li><a class="fa fa-envelope" href="<?php echo  $settingData->{'_customize-input-social-email'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-pinterest'}) && $settingData->{'_customize-input-social-pinterest'}): ?>
+            <li><a class="fa fa-pinterest" href="<?php echo  $settingData->{'_customize-input-social-pinterest'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-vk'}) && $settingData->{'_customize-input-social-vk'}): ?>
+            <li><a class="fa fa-vk" href="<?php echo  $settingData->{'_customize-input-social-vk'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-tumblr'}) && $settingData->{'_customize-input-social-tumblr'}): ?>
+            <li><a class="fa fa-tumblr" href="<?php echo  $settingData->{'_customize-input-social-tumblr'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+        <?php if (isset($settingData->{'_customize-input-social-whatsapp'}) && $settingData->{'_customize-input-social-whatsapp'}): ?>
+            <li><a class="fa fa-whatsapp" href="<?php echo  $settingData->{'_customize-input-social-whatsapp'} ?>">&zwj;</a></li>
+        <?php endif; ?>
+     </ul>
+</div>

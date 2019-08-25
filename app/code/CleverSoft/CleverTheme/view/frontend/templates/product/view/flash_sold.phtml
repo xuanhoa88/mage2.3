@@ -1,0 +1,43 @@
+<?php 
+$helper = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+$enableSoldProduct = $helper->getConfig('cleversofttheme/product_page/enable_sold_product');
+?>
+<?php if($enableSoldProduct):?>
+<div class="total-sold-pr">
+    <i class="cs-font clever-icon-fire"></i>
+    <span class="number-solid"></span> sold in last <span class="add-hours-solid"></span> hours
+</div>
+<script>
+    require(['jquery', 'jquery/ui'], function($){ 
+        if ($('.number-solid').length) {
+            var minQty = "<?=$helper->getConfig('cleversofttheme/product_page/quantity_min_value')?>";
+            var maxQty = "<?=$helper->getConfig('cleversofttheme/product_page/quantity_max_value')?>";
+            var minTime = "<?=$helper->getConfig('cleversofttheme/product_page/time_min_value')?>";
+            var maxTime = "<?=$helper->getConfig('cleversofttheme/product_page/time_max_value')?>";
+            minQty = Math.ceil(minQty);
+            maxQty = Math.floor(maxQty);
+            minTime = Math.ceil(minTime);
+            maxTime = Math.floor(maxTime);
+
+            var qty = Math.floor(Math.random() * (maxQty - minQty + 1)) + minQty;
+            qty = parseInt(qty);
+            if(qty <= minQty){
+              qty = minQty;
+            }
+            if(qty > maxQty){
+              qty = maxQty;
+            }
+            $(".number-solid").html(qty);
+            var time = Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
+            time = parseInt(time);
+            if(time <= minTime){
+              time = minTime;
+            }
+            if(time > maxTime){
+              time = maxTime;
+            }
+            $(".add-hours-solid").html(time);
+        };
+    });
+</script>
+<?php endif?>

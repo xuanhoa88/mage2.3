@@ -1,0 +1,61 @@
+{
+  "name": "Scroll To",
+  "title": "Scroll To",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "layout",
+  "icon" : "",
+  "default_items": [[]],
+  "has_child": "scrollto",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\ScrollTo",
+  "code": "clever-scrollto",
+  "content_fields": [
+    {
+      "type": "text",
+      "name": "title",
+      "required": false,
+      "placeholder": "Title",
+      "visible": true,
+      "label": "Title"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "select",
+      "name": "type",
+      "values": [
+        {
+          "value": "bullet",
+          "label": "Bullet"
+        },
+        {
+          "value": "icon",
+          "label": "Icon"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Type"
+    },
+    {
+      "type": "select",
+      "name": "position",
+      "attribute_type": "class",
+      "element_class": "vertical-menu-one-page__list",
+      "values": [
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Position"
+    }
+  ]
+}

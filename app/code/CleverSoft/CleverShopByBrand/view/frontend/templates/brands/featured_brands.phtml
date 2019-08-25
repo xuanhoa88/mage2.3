@@ -1,0 +1,24 @@
+<?php
+$featureds = $this->getFeaturedBrands();
+$width = 100;
+$height = 100;
+
+$slideInit = [
+    'cleverBrands' => [
+        'brand.slider' => []
+    ]
+];
+?>
+<?php if(count($featureds)):?>
+<div class="featured-brand lazy-loading" data-mage-init='<?= json_encode($slideInit) ?>'>
+    <ul class="slides owl-carousel owl-theme">
+    <?php foreach($featureds as $brand):?>
+        <li class="brand-item">
+            <a class="brand-link abs-img" href="<?= $this->getBrandPageUrl($brand) ?>" title="<?= $brand->getBrandLabel(); ?>">
+                <img class="brand-img zoom-eff" alt="<?= $brand->getBrandLabel() ?>" data-src="<?= $this->getLogo($brand, ['width' => $width, 'height' => $height]) ?>" />
+            </a>
+        </li>
+    <?php endforeach;?>
+    </ul>
+</div>
+<?php endif;?>

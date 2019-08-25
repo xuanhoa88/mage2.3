@@ -1,0 +1,51 @@
+<?php
+$title = $this->getData('text');
+$color = $this->getData('color');
+$width = $this->getData('width');
+$responsive = $this->getData('responsive');
+$font_size = $this->getData('font_size');
+$font_weight = $this->getData('font_weight');
+$type = $this->getData('type');
+$tag = $this->getData('tag');
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$isPreview = $helper->getCustomerEnablePanel();
+?>
+<div class="global-element section-title-container <?=$responsive?> <?php if($isPreview) echo "cs-live-preview"?>" style="<?=$width ? "max-width:$width"."%" : "" ?>">
+    <?php if($tag == "p" || $tag == "strong"): ?>
+        <div class="section-title <?=$type?> <?php if ($this->getData('border-bottom') == "") echo "section-title--no-border"?>">
+            <?php if ($this->getData('border-bottom') == ""):?>
+            <div class="section-title-main">
+                <<?=$tag?> class="section-title__text" style="<?= $color ? "color:$color" : ""?>;<?=$font_size ? "font-size:$font_size"."px" : "font-size: 24px"?>;<?=$font_weight ? "font-weight:$font_weight" : "" ?>">
+                    <?=$title ? $title : "Add Your Heading Text Here"?>
+                </<?=$tag?>>
+            </div>
+            <?php else: ?>
+            <b></b>
+            <span class="section-title-main"><?=$title ? $title : "Add Your Heading Text Here"?></span>
+            <b></b>
+            <?php endif; ?>
+            <?php if($this->getData('link-text')): ?>
+                <a class="title__link" href="<?=$this->getData('link')?>"><?=$this->getData('link-text')?></a>
+            <?php endif; ?>
+            <?php if($isPreview) { ?>
+                <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+            <?php } ?>
+        </div>
+    <?php else:?>    
+        <div class="section-title <?=$type?> <?php if ($this->getData('border-bottom') == "") echo "section-title--no-border"?>">
+            <?php if ($this->getData('border-bottom') == ""):?>
+            <<?=$tag ? $tag : "h3"?> class="section-title__text section-title-main" style="<?= $color ? "color:$color" : ""?>;<?= $font_size ? "font-size:$font_size"."px" : "font-size: 24px"?>;<?= $font_weight ? "font-weight:$font_weight" : "" ?>"><?=$title ? $title : "Add Your Heading Text Here"?></<?=$tag ? $tag : "h3"?>>
+            <?php else: ?>
+            <b></b>
+            <span class="section-title-main"><?=$title ? $title : "Add Your Heading Text Here"?></span>
+            <b></b>
+            <?php endif; ?>
+            <?php if($this->getData('link-text')): ?>
+                <a class="title__link" href="<?=$this->getData('link')?>"><?=$this->getData('link-text')?></a>
+            <?php endif; ?>
+            <?php if($isPreview) { ?>
+                <div class="cs-edit-element-section" style="display:none"><i class="fa fa-edit" aria-hidden="true"></i></div>
+            <?php } ?>
+        </div>
+    <?php endif;?>
+</div>

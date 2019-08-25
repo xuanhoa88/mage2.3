@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © 2017 CleverSoft., JSC. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Magento\Wishlist\Block\Link */
+?>
+<div class="header-wishlist wishlist" data-bind="scope: 'wishlist'">
+    <a <?php /* @escapeNotVerified */ echo $block->getLinkAttributes() ?>>
+        <i class="clever-icon-heart-4" aria-hidden="true"></i>
+        <span class=""><?php /* @escapeNotVerified */ echo 'My Wishlist' ?> </span>
+        <span class="visible-xs  hidden-sm">
+        <!-- ko if: wishlist().counter -->
+        <span data-bind="text: wishlist().counter" class="counter-number counter qty"></span>
+        <!-- /ko -->
+        <!-- ko ifnot: wishlist().counter -->
+        <span class="counter-number counter qty">0</span>
+        <!-- /ko -->
+        </span>
+    </a>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "wishlist": {
+                        "component": "Magento_Wishlist/js/view/wishlist"
+                    }
+                }
+            }
+        }
+    }
+
+</script>

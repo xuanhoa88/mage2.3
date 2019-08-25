@@ -1,0 +1,15 @@
+.page-header .user_area i { font-size:24px; }
+.header-minimal-search a.icon i:before {
+  content:"\c013";
+  font-family:"cleversoft";
+}
+.page-header .main-menu_relative > [class*="col-"] > .header-minimal-search, .page-header .main-menu_relative > [class*="col-"] > .block.block-search { margin:0 0 0 -80px !important; }
+.page-header .header-compare i { font-size:24px; }
+.page-header .header-wishlist i { font-size:24px; }
+.minicart-wrapper i, .minicart-wrapper_dropdown i { font-size:24px; }
+.header_main-top .row { min-height:90px !important; }
+.logo-container .logo img { max-height:90px; }
+.page-header .page-header-mobile .main-menu_relative > [class*="col-"] > .header-minimal-search, .page-header .page-header-mobile .main-menu_relative > [class*="col-"] > .block.block-search { margin:0px !important; }
+.header_main-mobile-top .row { min-height:60px; }
+.logo-container_mobile .logo img { max-height:60px; }
+.sticky-wrapper.is-sticky .header_main-top, .sticky-wrapper.is-sticky .header_main-mobile-top { background:#ffffff; }

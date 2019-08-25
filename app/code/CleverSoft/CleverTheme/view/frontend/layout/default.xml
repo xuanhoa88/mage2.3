@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author      ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="mage/gallery/gallery.css"/>
+    </head>
+    <body>
+        <referenceContainer name="after.body.start">
+            <block class="Magento\Framework\View\Element\Template" name="cleversoft.lazyload"
+                   template="CleverSoft_CleverTheme::cleversoft/lazyload.phtml"/>
+            <block class="Magento\Framework\View\Element\Template" name="cleversoft.js.theme"
+                   template="CleverSoft_CleverTheme::cleversoft/js_theme.phtml"/>
+            <block class="Magento\Framework\View\Element\Template" name="promotion.box"
+                   template="CleverSoft_CleverTheme::promotion_box.phtml"/>
+        </referenceContainer>
+        <referenceContainer name="page.wrapper">
+            <block class="CleverSoft\CleverTheme\Block\Template" name="mt_header" template="CleverSoft_CleverTheme::html/header.phtml"
+                   before="-">
+                <block class="Magento\Cms\Block\Block" name="top.contact">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">top_contact</argument>
+                    </arguments>
+                </block>
+                <container name="user_area" htmlTag="div" htmlClass="user_area" >
+                    <block class="Magento\Customer\Block\Account\AuthorizationLink" template="CleverSoft_CleverTheme::icon_user.phtml" before="-"/>
+                    <container htmlTag="div" htmlClass="user_area_content" >
+                        <block class="Magento\Framework\View\Element\Template" name="builder.user.area" template="CleverSoft_CleverTheme::user_area.phtml" before="builder.header.links"/>
+                        <block class="Magento\Framework\View\Element\Html\Links" name="builder.header.links">
+                            <arguments>
+                                <argument name="css_class" xsi:type="string">header links user_area</argument>
+                            </arguments>
+                            <block class="Magento\Customer\Block\Account\AuthorizationLink" name="sidebar.main.account_nav" template="CleverSoft_CleverTheme::html/collapsible.phtml">
+                                <arguments>
+                                    <argument name="block_css" xsi:type="string">account-nav</argument>
+                                </arguments>
+                                <block class="Magento\Customer\Block\Account\Navigation" name="customer_account_navigation" before="-">
+                                    <arguments>
+                                        <argument name="css_class" xsi:type="string">nav items</argument>
+                                    </arguments>
+                                    <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-account-link">
+                                        <arguments>
+                                            <argument name="label" xsi:type="string" translate="true">My Account</argument>
+                                            <argument name="path" xsi:type="string">customer/account</argument>
+                                            <argument name="sortOrder" xsi:type="number">250</argument>
+                                        </arguments>
+                                    </block>
+                                    <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-address-link">
+                                        <arguments>
+                                            <argument name="label" xsi:type="string" translate="true">Address Book</argument>
+                                            <argument name="path" xsi:type="string">customer/address</argument>
+                                            <argument name="sortOrder" xsi:type="number">190</argument>
+                                        </arguments>
+                                    </block>
+                                    <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-account-edit-link">
+                                        <arguments>
+                                            <argument name="label" xsi:type="string" translate="true">Account Information</argument>
+                                            <argument name="path" xsi:type="string">customer/account/edit</argument>
+                                            <argument name="sortOrder" xsi:type="number">180</argument>
+                                        </arguments>
+                                    </block>
+                                    <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-logout-link">
+                                        <arguments>
+                                            <argument name="label" xsi:type="string" translate="true">Logout</argument>
+                                            <argument name="path" xsi:type="string">customer/account/logout</argument>
+                                            <argument name="sortOrder" xsi:type="number">10</argument>
+                                        </arguments>
+                                    </block>
+                                </block>
+                            </block>
+                        </block>
+                    </container>
+                </container>
+                <container name="user_area-mobile" htmlTag="div" htmlClass="user_area" >
+                    <block class="Magento\Customer\Block\Account\AuthorizationLink" template="CleverSoft_CleverTheme::icon_user-mobile.phtml" before="-"/>
+                </container>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="primary_menu" as="primary_menu" template="CleverSoft_CleverTheme::primary_menu.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="top_menu" as="top_menu" template="CleverSoft_CleverTheme::top_menu.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="top_menu-mobile" as="top_menu-mobile" template="CleverSoft_CleverTheme::top_menu-mobile.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="menu-mobile" as="menu-mobile" template="CleverSoft_CleverTheme::menu-mobile.phtml"/>
+                <block class="Magento\Store\Block\Switcher" name="store_language-mobile" as="store_language-mobile" template="Magento_Store::switch/store_language-mobile.phtml"/>
+                <block class="Magento\Directory\Block\Currency" name="currency-mobile" as="currency-mobile" template="Magento_Directory::currency-mobile.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="custom_block"
+                       template="html/header_custom_block.phtml" ifconfig="CleverSoft_CleverTheme/header/static_block"
+                       after="-"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="sidebar_icon" as="sidebar_icon" template="CleverSoft_CleverTheme::sidebar_icon.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="sidebar_icon-mobile" as="sidebar_icon-mobile" template="CleverSoft_CleverTheme::sidebar_icon-mobile.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="html-1" as="html-1" template="CleverSoft_CleverTheme::html-1.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="html-1-mobile" as="html-1-mobile" template="CleverSoft_CleverTheme::html-1-mobile.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="html-2" as="html-2" template="CleverSoft_CleverTheme::html-2.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="html-2-mobile" as="html-2-mobile" template="CleverSoft_CleverTheme::html-2-mobile.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="html-3" as="html-3" template="CleverSoft_CleverTheme::html-3.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="html-3-mobile" as="html-3-mobile" template="CleverSoft_CleverTheme::html-3-mobile.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="html-4" as="html-4" template="CleverSoft_CleverTheme::html-4.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="html-4-mobile" as="html-4-mobile" template="CleverSoft_CleverTheme::html-4-mobile.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="html-5" as="html-5" template="CleverSoft_CleverTheme::html-5.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\Template" name="html-5-mobile" as="html-5-mobile" template="CleverSoft_CleverTheme::html-5-mobile.phtml"/>
+                <block class="Magento\Framework\View\Element\Template" name="compare_link" before="-"
+                       template="Magento_Catalog::product/compare/link.phtml">
+                    <arguments>
+                        <argument name="jsLayout" xsi:type="array">
+                            <item name="components" xsi:type="array">
+                                <item name="compareProducts" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magento_Catalog/js/view/compare-products
+                                    </item>
+                                </item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Template" name="compare_link-mobile" as="compare_link-mobile"
+                       template="Magento_Catalog::product/compare/link-mobile.phtml">
+                    <arguments>
+                        <argument name="jsLayout" xsi:type="array">
+                            <item name="components" xsi:type="array">
+                                <item name="compareProducts" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magento_Catalog/js/view/compare-products
+                                    </item>
+                                </item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+
+                <block class="Magento\Wishlist\Block\Link" name="wishlist" as="wishlist"
+                       template="Magento_Wishlist::link.phtml"/>
+                <block class="Magento\Wishlist\Block\Link" name="wishlist.mobile" as="wishlist-mobile"
+                       template="Magento_Wishlist::link-mobile.phtml"/>
+                <block class="CleverSoft\CleverSearchAutoComplete\Block\Autocomplete" name="top.search.mobile" as="top.search-mobile" template="Magento_Search::form.mini-mobile.phtml"/>
+                <block class="Magento\Checkout\Block\Cart\Sidebar" name="minicart.mobile" as="minicart-mobile" template="Magento_Checkout::cart/minicart-mobile.phtml">
+                    <arguments>
+                        <argument name="jsLayout" xsi:type="array">
+                            <item name="types" xsi:type="array"/>
+                            <item name="components" xsi:type="array">
+                                <item name="minicart_content" xsi:type="array">
+                                    <item name="component" xsi:type="string">CleverSoft_CleverTheme/js/view/minicart-mobile</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="template" xsi:type="string">Magento_Checkout/minicart/content</item>
+                                    </item>
+                                    <item name="children" xsi:type="array">
+                                        <item name="subtotal.container" xsi:type="array">
+                                            <item name="component" xsi:type="string">uiComponent</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="displayArea" xsi:type="string">subtotalContainer</item>
+                                            </item>
+                                            <item name="children" xsi:type="array">
+                                                <item name="subtotal" xsi:type="array">
+                                                    <item name="component" xsi:type="string">uiComponent</item>
+                                                    <item name="config" xsi:type="array">
+                                                        <item name="template" xsi:type="string">Magento_Checkout/minicart/subtotal</item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                        <item name="extra_info" xsi:type="array">
+                                            <item name="component" xsi:type="string">uiComponent</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="displayArea" xsi:type="string">extraInfo</item>
+                                            </item>
+                                        </item>
+                                        <item name="promotion" xsi:type="array">
+                                            <item name="component" xsi:type="string">uiComponent</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="displayArea" xsi:type="string">promotion</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Theme\Block\Html\Header\Logo" name="logo.mobile" as="logo-mobile" template="Magento_Theme::html/header/logo-mobile.phtml"/>
+            </block>
+
+        </referenceContainer>
+        <referenceBlock name="header.links" remove="true"/>
+
+        <move element="top.search" destination="mt_header"/>
+        <move element="minicart" destination="mt_header"/>
+        <move element="currency" destination="mt_header"/>
+        <move element="store_language" destination="mt_header"/>
+        <move element="logo" destination="mt_header"/>
+        <move element="skip_to_content" destination="mt_header"/>
+
+
+        <move element="page.top" destination="page.wrapper" after="mt_header"/>
+
+        <referenceContainer name="header.container" remove="true"/>
+        <referenceContainer name="header-wrapper" remove="true"/>
+        <referenceContainer name="footer" remove="true"/>
+        <referenceContainer name="footer-container">
+            <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer_block" template="html/footer.phtml">
+                <block class="Magento\Newsletter\Block\Subscribe" name="newsletter" template="subscribe_footer.phtml"/>
+                <block class="Magento\Newsletter\Block\Subscribe" name="newsletter-mobile" template="subscribe_footer_mobile.phtml"/>
+
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-html-1" as="footer-html-1" template="CleverSoft_CleverTheme::footer-html-1.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-html-1-mobile" as="footer-html-1-mobile" template="CleverSoft_CleverTheme::footer-html-1-mobile.phtml"/>
+
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-html-2" as="footer-html-2" template="CleverSoft_CleverTheme::footer-html-2.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-html-2-mobile" as="footer-html-2-mobile" template="CleverSoft_CleverTheme::footer-html-2-mobile.phtml"/>
+
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-1" as="footer-widget-1" template="CleverSoft_CleverTheme::footer-widget-1.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-1-mobile" as="footer-widget-1-mobile" template="CleverSoft_CleverTheme::footer-widget-1-mobile.phtml"/>
+
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-2" as="footer-widget-2" template="CleverSoft_CleverTheme::footer-widget-2.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-2-mobile" as="footer-widget-2-mobile" template="CleverSoft_CleverTheme::footer-widget-2-mobile.phtml"/>
+
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-3" as="footer-widget-3" template="CleverSoft_CleverTheme::footer-widget-3.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-3-mobile" as="footer-widget-3-mobile" template="CleverSoft_CleverTheme::footer-widget-3-mobile.phtml"/>
+
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-4" as="footer-widget-4" template="CleverSoft_CleverTheme::footer-widget-4.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-4-mobile" as="footer-widget-4-mobile" template="CleverSoft_CleverTheme::footer-widget-4-mobile.phtml"/>
+
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-5" as="footer-widget-5" template="CleverSoft_CleverTheme::footer-widget-5.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-5-mobile" as="footer-widget-5-mobile" template="CleverSoft_CleverTheme::footer-widget-5-mobile.phtml"/>
+
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-6" as="footer-widget-6" template="CleverSoft_CleverTheme::footer-widget-6.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-6-mobile" as="footer-widget-6-mobile" template="CleverSoft_CleverTheme::footer-widget-6-mobile.phtml"/>
+
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-7" as="footer-widget-7" template="CleverSoft_CleverTheme::footer-widget-7.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-7-mobile" as="footer-widget-7-mobile" template="CleverSoft_CleverTheme::footer-widget-7-mobile.phtml"/>
+
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-8" as="footer-widget-8" template="CleverSoft_CleverTheme::footer-widget-8.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-widget-8-mobile" as="footer-widget-8-mobile" template="CleverSoft_CleverTheme::footer-widget-8-mobile.phtml"/>
+
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-copyright" as="footer-copyright" template="CleverSoft_CleverTheme::copyright.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="footer-copyright-mobile" as="footer-copyright-mobile" template="CleverSoft_CleverTheme::copyright-mobile.phtml"/>
+
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="payment-icon" as="payment-icon" template="CleverSoft_CleverTheme::payment-icon.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="payment-icon-mobile" as="payment-icon-mobile" template="CleverSoft_CleverTheme::payment-icon-mobile.phtml"/>
+
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="social-icon" as="social-icon" template="CleverSoft_CleverTheme::social-icon.phtml"/>
+                <block class="CleverSoft\CleverTheme\Block\FooterTemplate" name="social-icon-mobile" as="social-icon-mobile" template="CleverSoft_CleverTheme::social-icon-mobile.phtml"/>
+
+            </block>
+        </referenceContainer>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="quickview.theme.scripts" template="CleverSoft_CleverTheme::quickview/footer_theme_scripts.phtml" before="-" />
+            <block class="Magento\Newsletter\Block\Subscribe" name="clever.newsletter" template="CleverSoft_CleverTheme::newsletter/other_subscribe.phtml" after="-"/>
+        </referenceContainer>
+    </body>
+</page>

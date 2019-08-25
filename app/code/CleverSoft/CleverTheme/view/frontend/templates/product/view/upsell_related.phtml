@@ -1,0 +1,110 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverTheme
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+$theme = $this->helper('CleverSoft\CleverTheme\Helper\Data');
+
+$showTabs = $theme->getCfg('product_page/tabs');
+
+$containerClasses = '';
+$tabsClasses = '';
+if ($showTabs)
+{
+    $containerClasses .= ' collateral-tabs';
+    $tabsClasses .= ' ' . $theme->getCfg('product_page/tabs_style');
+}
+else
+{
+    $containerClasses .= ' collateral-stacked';
+}
+
+$tab_style_config = $theme->getCfg('product_page/tab_related_upsell_style');
+$tab_style = "";
+if(isset($tab_style_config) && $tab_style_config)
+    $tab_style = $tab_style_config;
+?>
+<?php if ($detailedInfoGroup = $block->getGroupChildNames('related_upsell', 'getChildHtml')):?>
+    <div class="catalog-product-tab product-tab-related-upsell">
+        <div class="product info detailed <?php echo $tab_style; ?>">
+            <?php $layout = $block->getLayout(); ?>
+            <div class="product data items clever-related-upsell-tabs" data-mage-init='{"tabs":{"openedState":"active"}}'>
+                <?php foreach ($detailedInfoGroup as $key=>$name):?>
+                    <?php
+                    $html = $layout->renderElement($name);
+                    $isset = '';
+                    if (!trim($html)) {
+                        continue;
+                    }
+                    if (isset($html)) {
+                        $isset = 'isset';
+                    }
+                    $alias = $layout->getElementAlias($name);
+                    if (!$alias) continue;
+                    $label = $block->getChildData($alias, 'title');
+                    ?>
+                    <script>
+                        require([
+                            'jquery'
+                        ], function ($) {
+                            $(document).ready(function(){
+                                $('.product-tab-detail').addClass('<?php echo $isset; ?>');
+                            });
+                        });
+                    </script>
+                    <div class="data item title"
+                         aria-labeledby="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>-title"
+                         data-role="collapsible" id="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>">
+                        <a class="data switch"
+                           tabindex="-1"
+                           data-toggle="switch"
+                           href="#<?php /* @escapeNotVerified */ echo $alias; ?>"
+                           id="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>-title">
+                            <?php /* @escapeNotVerified */ echo $label; ?>
+                        </a>
+                    </div>
+                    <div class="data item content <?php echo $key == 0 ? 'first' : '';?>" id="<?php /* @escapeNotVerified */ echo $alias; ?>" data-role="content">
+                        <?php /* @escapeNotVerified */ echo $html; ?>
+                    </div>
+                    <script>
+                        require([
+                            'jquery'
+                        ], function ($) {
+                            $('.product-tab-related-upsell').addClass('<?php echo $isset; ?>');
+                            $('.product-tab-related-upsell').find('.price-box[data-role="priceBox"]').removeAttr('data-role');
+                        });
+                    </script>
+                <?php endforeach;?>
+                <?php foreach ($detailedInfoGroup as $name):?>
+                    <?php
+                    $html = $layout->renderElement($name);
+                    $alias = $layout->getElementAlias($name);
+                    if (!$alias) continue;
+                    ?>
+                <?php endforeach;?>
+            </div>
+            <?php if($tab_style && $tab_style == "vertical"): ?>
+                <script>
+                    require([
+                        'jquery'
+                    ], function ($) {
+                        $(document).ready(function(){
+                            setTimeout(function () {
+                                $('.product.data.items').tabs().tabs('option', 'openOnFocus', true);
+                            }, 700);
+                            $(".product.info.detailed.vertical .clever-related-upsell-tabs .data.item.title").off("classadded").on("classadded",function(){
+                                $(this).parent().css("min-height",$(this).next().outerHeight()+"px!important");
+                            });
+                            $(".product-tab-related-upsell.isset .product.info.detailed.vertical .clever-related-upsell-tabs").css("min-height","580px");
+                        });
+                    });
+                </script>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>

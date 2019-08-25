@@ -1,0 +1,26 @@
+<script>
+require(['jquery'], function($) {
+	$( document ).ready(function() {
+        if($( "#pincollection_display_type" ).val() == 'slider') {
+	  		$(".admin__field.field.field-auto_play").show();
+	  		$(".admin__field.field.field-arrow").show();
+	  		$(".admin__field.field.field-dot").show();
+	  	} else {
+	  		$(".admin__field.field.field-auto_play").hide();
+	  		$(".admin__field.field.field-arrow").hide();
+	  		$(".admin__field.field.field-dot").hide();
+	  	}
+    });
+    $( "#pincollection_display_type" ).change(function() {
+	  	if($(this).val() == 'slider') {
+	  		$(".admin__field.field.field-auto_play").show();
+	  		$(".admin__field.field.field-arrow").show();
+	  		$(".admin__field.field.field-dot").show();
+	  	} else {
+	  		$(".admin__field.field.field-auto_play").hide();
+	  		$(".admin__field.field.field-arrow").hide();
+	  		$(".admin__field.field.field-dot").hide();
+	  	}
+	});
+});
+</script>

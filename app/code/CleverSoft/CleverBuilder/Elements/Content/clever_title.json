@@ -1,0 +1,236 @@
+{
+  "name": "Title",
+  "title": "Title",
+  "class": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Form\\Content",
+  "installed": true,
+  "groups": [],
+  "area" : "widget",
+  "icon" : "",
+  "type": "CleverSoft\\CleverBuilder\\Block\\Builder\\Content\\Render\\Content\\Title",
+  "code": "clever-title",
+  "layouts":[
+  ],
+  "content_fields": [
+    {
+      "type": "select",
+      "name": "type",
+      "attribute_type":"class",
+      "element_class":"section-title",
+      "values": [
+        {
+          "value": "section-title-normal",
+          "label": "Normal"
+        },
+        {
+          "value": "section-title-center",
+          "label": "Center"
+        },
+        {
+          "value": "section-title-bold",
+          "label": "Left Bold"
+        },
+        {
+          "value": "section-title-bold-center",
+          "label": "Center Bold"
+        },
+        {
+          "value": "section-title-right",
+          "label": "Right"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Alignment"
+    },
+    {
+      "type": "text",
+      "name": "text",
+      "attribute_type": "html",
+      "element_class":"section-title-main",
+      "required": false,
+      "default": "Add Your Heading Text Here",
+      "visible": true,
+      "label": "Title"
+    },
+    {
+      "type": "select",
+      "name": "border-bottom",
+      "attribute_type": "html",
+      "element_class":"section-title-main",
+      "values": [
+        {
+          "value": "",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Show Border Bottom"
+    },
+    {
+      "type": "select",
+      "name": "tag",
+      "values": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "p",
+          "label": "P"
+        },
+        {
+          "value": "strong",
+          "label": "Strong"
+        },
+        {
+          "value": "li",
+          "label": "Li"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "default": "h3",
+      "label": "Tag"
+    },
+    {
+      "type": "slider",
+      "name": "font_size",
+      "attribute_type": "style",
+      "element_class": "section-title",
+      "code": "font-size",
+      "unit": "px",
+      "min":1,
+      "max":100,
+      "default": 24,
+      "required": false,
+      "visible": true,
+      "label": "Font size (px)"
+    },
+    {
+      "type": "select",
+      "name": "font_weight",
+      "attribute_type": "style",
+      "element_class": "section-title",
+      "code": "font-weight",
+      "values": [
+        {
+        "value": "normal",
+        "label": "Normal"
+        },
+        {
+        "value": "400",
+        "label": "400"
+        },
+        {
+        "value": "500",
+        "label": "500"
+        },
+        {
+        "value": "600",
+        "label": "600"
+        },
+        {
+        "value": "700",
+        "label": "700"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Font weight"
+    },
+    {
+      "type": "select",
+      "name": "responsive",
+      "attribute_type":"class",
+      "values": [
+        {
+          "value": "d-block",
+          "label": "Visible"
+        },
+        {
+          "value": "d-none",
+          "label": "Hidden"
+        },
+        {
+          "value": "d-none d-xl-block",
+          "label": "Only for Desktop"
+        },
+        {
+          "value": "d-md-none",
+          "label": "Only for Mobile"
+        },
+        {
+          "value": "d-sm-none d-md-block d-xl-none",
+          "label": "Only for Tablet"
+        },
+        {
+          "value": "d-xl-none",
+          "label": "Hide for Desktop"
+        },
+        {
+          "value": "d-none d-md-block",
+          "label": "Hide for Mobile"
+        }
+      ],
+      "required": false,
+      "visible": true,
+      "label": "Responsive"
+    },
+    {
+      "type": "text",
+      "name": "link-text",
+      "required": false,
+      "visible": true,
+      "label": "Link Text"
+    },
+    {
+      "type": "text",
+      "name": "link",
+      "required": false,
+      "visible": true,
+      "label": "Link"
+    }
+  ],
+  "style_fields": [
+    {
+      "type": "color",
+      "name": "color",
+      "attribute_type": "style",
+      "element_class": "section-title",
+      "code": "color",
+      "required": false,
+      "visible": true,
+      "label": "Color"
+    },
+    {
+      "type": "slider",
+      "name": "width",
+      "min":0,
+      "max":100,
+      "default": 100,
+      "attribute_type": "style",
+      "code": "max-width",
+      "unit": "%",
+      "required": false,
+      "visible": true,
+      "label": "Width (%)"
+    }
+  ]
+}

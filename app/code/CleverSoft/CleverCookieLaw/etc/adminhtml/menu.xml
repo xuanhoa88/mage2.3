@@ -1,0 +1,7 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="CleverSoft_CleverCookieLaw::cookielaw" title="CleverCookieLaw" module="CleverSoft_CleverCookieLaw" sortOrder="55" parent="CleverSoft_Base::cl_all" resource="CleverSoft_CleverTheme::all" />
+        <add id="CleverSoft_CleverCookieLaw::cookielawsettings" title="Configuration" module="CleverSoft_CleverCookieLaw" sortOrder="0" parent="CleverSoft_CleverCookieLaw::cookielaw" action="adminhtml/system_config/edit/section/cookielaw" resource="CleverSoft_CleverTheme::config_cookielaw" />
+        <add id="CleverSoft_CleverCookieLaw::cookielawrequest" title="Requests" module="CleverSoft_CleverCookieLaw" sortOrder="1" parent="CleverSoft_CleverCookieLaw::cookielaw" action="cookielaw/request" resource="CleverSoft_CleverCookieLaw::request" />
+    </menu>
+</config>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Catalog\Model\Layer\Filter\Item\DataBuilder" type="CleverSoft\CleverLayeredNavigation\Model\Layer\Filter\Item\DataBuilder" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="cleversoft_shopby_page_listing_data_source" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\ResourceModel\Page\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="CleverSoft\CleverLayeredNavigation\Model\ResourceModel\Page\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">cleversoft_clevershopby</argument>
+            <argument name="eventPrefix" xsi:type="string">cleversoft_clevershopby_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">cleversoft_clevershopby_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">CleverSoft\CleverLayeredNavigation\Model\ResourceModel\Page</argument>
+        </arguments>
+    </type>
+</config>

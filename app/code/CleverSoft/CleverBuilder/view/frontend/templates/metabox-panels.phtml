@@ -1,0 +1,38 @@
+<?php
+if($this->getRequest()->getParam('previewUrl')) return;
+$builder_id = uniqid();
+$builder_type = 'editor_attached';
+$builder_supports = array();
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+$panelHelper = $this->helper('CleverSoft\CleverBuilder\Helper\Panels\Panels');
+if (!$helper->isEnabledBuilder() || !$helper->getCustomerEnablePanel()) return;
+$panels_data = $helper->getPanelsData();
+?>
+<div id="cs-panels-panels" class="postbox  attached-to-editor" style="display: none">
+    <div id="cleversoft-panels-metabox"
+    data-builder-type="<?php echo __( $builder_type ) ?>"
+    data-preview-url="<?php echo $panelHelper->previewUrl(); ?>"
+    data-builder-supports="<?php echo __( json_encode( $builder_supports ) ) ?>"
+    <?php if( !empty( $this->getRequest()->getParam['so_live_editor'] ) ) echo 'data-live-editor="1"' ?>
+    >
+    <input type="hidden" class="cleversoft-panels-data-field" id="panels-data-field-<?php echo __($builder_id) ?>" value="<?php echo htmlspecialchars(json_encode($panels_data)) ?>"/>
+    <input type="hidden" name="page_id" id="post_ID" value="<?php echo $helper->getPageId(); ?>">
+</div>
+</div>
+<script>
+    require([
+        'jquery',
+        'wysiwygAdapter',
+        'jquery/ui',
+        'underscore',
+        'backbone',
+        "colorPickerLib",
+        "styling",
+        "imageBrowser",
+        "catTree",
+        "dependency",
+        "sitePanels"
+    ], function($, tinyMCE ,ui,_, Backbone, coP, sty, imgB, catTree, dep, sp) {
+
+    });
+</script>

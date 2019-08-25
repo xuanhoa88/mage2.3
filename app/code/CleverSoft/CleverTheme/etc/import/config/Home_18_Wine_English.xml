@@ -1,0 +1,842 @@
+<default>
+   <cleversofttheme>
+      <responsive>
+         <page_layout>wide-layout</page_layout>
+         <page_maxi_width>1440</page_maxi_width>
+         <rtl_language>0</rtl_language>
+         <iconlazyload/>
+         <promo_box_enable>0</promo_box_enable>
+         <promo_box_text>Summer sale discount off 50%! Shop Now</promo_box_text>
+         <promo_box_link>#</promo_box_link>
+         <threshold>0</threshold>
+      </responsive>
+      <header>
+         <sticky_enable>1</sticky_enable>
+         <compare>1</compare>
+         <wishlist>1</wishlist>
+         <layout>layout1</layout>
+         <full_header_width>0</full_header_width>
+         <img_flag>1</img_flag>
+         <canvas_cart>1</canvas_cart>
+      </header>
+      <category>
+         <aspect_ratio>1</aspect_ratio>
+         <aspect_ratio_size>1:1</aspect_ratio_size>
+         <alt_image>1</alt_image>
+         <alt_image_column>position</alt_image_column>
+         <alt_image_column_value>2</alt_image_column_value>
+         <image_width>300</image_width>
+         <image_height>300</image_height>
+         <thumbnail_width>150</thumbnail_width>
+         <thumbnail_height>150</thumbnail_height>
+         <small_width>320</small_width>
+         <small_height>320</small_height>
+         <medium_width>640</medium_width>
+         <medium_height>640</medium_height>
+         <large_width>1024</large_width>
+         <large_height>1024</large_height>
+      </category>
+      <category_grid>
+         <display_productname>visible</display_productname>
+         <display_name_single_line>0</display_name_single_line>
+         <display_rating>visible</display_rating>
+         <display_addtocart>remove</display_addtocart>
+         <display_addtolinks>0</display_addtolinks>
+         <addtolinks_simple>2</addtolinks_simple>
+         <addtolinks_position>0</addtolinks_position>
+         <column_count>6</column_count>
+         <column_count_1439>4</column_count_1439>
+         <column_count_1199>3</column_count_1199>
+         <column_count_767>2</column_count_767>
+         <equal_height>1</equal_height>
+         <centered>0</centered>
+         <enable_border_boxshadow>0</enable_border_boxshadow>
+         <disable_border_radius>0</disable_border_radius>
+      </category_grid>
+      <infinite_scroll>
+         <ic_type>none</ic_type>
+         <scroll_buffer>10</scroll_buffer>
+         <load_more_button_text>Load More</load_more_button_text>
+         <load_more_post_text>Loading More</load_more_post_text>
+      </infinite_scroll>
+      <product_page>
+         <image_column>6</image_column>
+         <primary_column>6</primary_column>
+         <secondary_column/>
+         <lower_primary_column>12</lower_primary_column>
+         <lower_secondary_column>12</lower_secondary_column>
+         <tabs>1</tabs>
+         <tabs_mode>1</tabs_mode>
+         <tabs_threshold>1024</tabs_threshold>
+         <tabs_collapsed>1</tabs_collapsed>
+         <tabs_style>style1</tabs_style>
+         <collateral_position>lowerPrimCol_1</collateral_position>
+         <collateral_reviews>1</collateral_reviews>
+         <collateral_tags>1</collateral_tags>
+         <collateral_related>0</collateral_related>
+         <collateral_upsell>0</collateral_upsell>
+         <related_position>lowerPrimCol_1</related_position>
+         <related_template>CleverSoft_CleverTheme::product/list/slider.phtml</related_template>
+         <related_breakpoints>[0, 1], [320, 2], [480, 3], [768, 4]</related_breakpoints>
+         <related_timeout>6000</related_timeout>
+         <related_checkbox>0</related_checkbox>
+         <brand_position>secCol_1</brand_position>
+         <prev_next>1</prev_next>
+         <prev_text>&lt;i class=&apos;cs-font clever-icon-caret-left&apos;&gt;&lt;/i&gt;</prev_text>
+         <next_text>&lt;i class=&apos;cs-font clever-icon-caret-right&apos;&gt;&lt;/i&gt;</next_text>
+         <enable_sticky_addtocart>1</enable_sticky_addtocart>
+         <tab_style/>
+         <main_image_width>600</main_image_width>
+         <main_image_height>600</main_image_height>
+         <thumb_image_width>75</thumb_image_width>
+      </product_page>
+      <product_labels>
+         <new>1</new>
+         <new_label_text>New</new_label_text>
+         <sale>1</sale>
+         <sale_label_text>Sale</sale_label_text>
+         <sale_label_percent>1</sale_label_percent>
+      </product_labels>
+      <footer>
+         <links_column_auto_width>1</links_column_auto_width>
+      </footer>
+      <product_slider>
+         <timeout/>
+         <speed/>
+         <move_items/>
+      </product_slider>
+      <magento_blocks>
+         <top_links>0</top_links>
+         <footer_newsletter>0</footer_newsletter>
+      </magento_blocks>
+      <install>
+         <overwrite_blocks>0</overwrite_blocks>
+         <overwrite_pages>0</overwrite_pages>
+      </install>
+   </cleversofttheme>
+   <cleversofttheme_design>
+      <colors>
+         <text_color>#333333</text_color>
+         <link_color>#333333</link_color>
+         <link_hover_color>#9f0145</link_hover_color>
+         <button_bg_color>#333333</button_bg_color>
+         <button_color>#ffffff</button_color>
+         <button_border_color>rgba(0, 0, 0, 0)</button_border_color>
+         <button_hover_color>#ffffff</button_hover_color>
+         <button_bg_hover_color>#9f0145</button_bg_hover_color>
+         <button_border_hover_color>rgba(0, 0, 0, 0)</button_border_hover_color>
+         <label_sale_bg_color>#9f0145</label_sale_bg_color>
+         <label_sale_color>#ffffff</label_sale_color>
+         <price_color>#333333</price_color>
+         <heading_color_title>#000000</heading_color_title>
+         <rating_active_color>#f9bf3b</rating_active_color>
+      </colors>
+      <font>
+         <body_font>0</body_font>
+         <font_size>14px</font_size>
+         <primary_font_family_group>google</primary_font_family_group>
+         <primary_font_family_custom>Cairo</primary_font_family_custom>
+         <primary_font_family>Roboto</primary_font_family>
+         <primary_char_subset/>
+         <primary_font_weight>400</primary_font_weight>
+         <h1_font>0</h1_font>
+         <h1_primary_font_family_group>google</h1_primary_font_family_group>
+         <h2_font>0</h2_font>
+         <h2_primary_font_family_group>google</h2_primary_font_family_group>
+         <h3_font>0</h3_font>
+         <h3_primary_font_family_group>google</h3_primary_font_family_group>
+         <h4_font>0</h4_font>
+         <h4_primary_font_family_group>google</h4_primary_font_family_group>
+         <h5_font>0</h5_font>
+         <h5_primary_font_family_group>google</h5_primary_font_family_group>
+         <h6_font>0</h6_font>
+         <h6_primary_font_family_group>google</h6_primary_font_family_group>
+      </font>
+      <page>
+         <bg_color>#ffffff</bg_color>
+         <bg_image/>
+         <bg_repeat>repeat</bg_repeat>
+         <bg_attachment>scroll</bg_attachment>
+         <bg_positionx>center</bg_positionx>
+         <bg_positiony>top</bg_positiony>
+         <tex>0</tex>
+         <content_padding_side>15</content_padding_side>
+      </page>
+      <header>
+         <color>#333333</color>
+         <link_color>#333333</link_color>
+         <link_hover_color>#9f0145</link_hover_color>
+         <header_opacity>1</header_opacity>
+         <bg_color>#ffffff</bg_color>
+         <bg_image/>
+         <bg_repeat>no-repeat</bg_repeat>
+         <bg_attachment>scroll</bg_attachment>
+         <bg_positionx>center</bg_positionx>
+         <bg_positiony>top</bg_positiony>
+         <padding_top/>
+         <padding_bottom/>
+         <inner_bg_color>#ffffff</inner_bg_color>
+      </header>
+      <header_top>
+         <color>#ffffff</color>
+         <link_color>#ffffff</link_color>
+         <link_hover_color/>
+         <line_height>18</line_height>
+         <bg_color>#000000</bg_color>
+         <padding_top>10</padding_top>
+         <padding_bottom>10</padding_bottom>
+         <inner_bg_color/>
+      </header_top>
+      <header_primary>
+         <line_height>24</line_height>
+         <bg_color>#ffffff</bg_color>
+         <padding_top/>
+         <padding_bottom/>
+         <inner_bg_color/>
+      </header_primary>
+      <m_header>
+         <bg_color/>
+         <padding_top/>
+         <padding_bottom/>
+         <inner_bg_color/>
+         <content_padding_side/>
+      </m_header>
+      <nav>
+         <font_size>13</font_size>
+         <font_uppercase>1</font_uppercase>
+         <sticky_header>#ffffff</sticky_header>
+         <inner_bg_color>#ffffff</inner_bg_color>
+         <bg_color>rgba(0, 0, 0, 0)</bg_color>
+         <color>#333333</color>
+         <hover_bg_color>rgba(0, 0, 0, 0)</hover_bg_color>
+         <hover_color>#9f0145</hover_color>
+         <canvas_bg_content_color>#ffffff</canvas_bg_content_color>
+         <canvas_color>#ffffff</canvas_color>
+         <canvas_hover_color>#ffffff</canvas_hover_color>
+      </nav>
+      <main>
+         <bg_color>#ffffff</bg_color>
+         <tex>0</tex>
+         <padding_top/>
+         <padding_bottom/>
+         <inner_bg_color>#ffffff</inner_bg_color>
+         <content_padding_top>0</content_padding_top>
+         <content_padding_bottom>0</content_padding_bottom>
+         <content_padding_side/>
+      </main>
+      <page_footer>
+         <bg_color>#f4f4f4</bg_color>
+         <link_color>#282828</link_color>
+         <color>#ffffff</color>
+         <hover_color>#282828</hover_color>
+      </page_footer>
+      <footer_container>
+         <bg_color>#3a302f</bg_color>
+         <link_color>#999999</link_color>
+         <color>#999999</color>
+         <hover_color>#9f0145</hover_color>
+      </footer_container>
+      <footer_copyright>
+         <bg_color>#2f2725</bg_color>
+         <color>#c1c1c1</color>
+      </footer_copyright>
+      <product_detail>
+         <bg_color>#f4f4f4</bg_color>
+         <color>#ffffff</color>
+      </product_detail>
+   </cleversofttheme_design>
+   <cleversofttheme_custom_css>
+      <css_swing_editor>
+         <custom_css/>
+         <custom_css_enable>0</custom_css_enable>
+      </css_swing_editor>
+   </cleversofttheme_custom_css>
+   <cookielaw>
+      <general>
+         <enablecookie>1</enablecookie>
+         <type>v-box</type>
+         <bar_position>v-top</bar_position>
+         <box_position>v-bottom-left</box_position>
+         <skin/>
+         <behaviour>0</behaviour>
+         <autohide>0</autohide>
+         <load_after>10</load_after>
+      </general>
+      <content>
+         <custom_message>We use cookies to offer you a better browsing experience, analyze site traffic, personalize content, and serve targeted advertisements. Read about how we use cookies and how you can control them by clicking “Privacy Preferences”. If you continue to use this site, you consent to our use of cookies.</custom_message>
+         <custom_accept>Accept</custom_accept>
+         <custom_more_info>Privacy Preference</custom_more_info>
+         <cms_page>privacy-policy-cookie-restriction-mode</cms_page>
+      </content>
+      <privacy>
+         <tab_title>Privacy Overview</tab_title>
+         <tab_content>&lt;p&gt;This website uses cookies so that we can provide you with the best user experience possible. Cookie information is stored in your browser and performs functions such as recognising you when you return to our website and helping our team to understand which sections of the website you find most interesting and useful.&lt;/p&gt;
+
+&lt;p&gt;You can adjust all of your cookie settings by navigating the tabs on the left hand side.&lt;/p&gt;</tab_content>
+      </privacy>
+      <strictly>
+         <tab_title>Strictly Necessary Cookies</tab_title>
+         <tab_content>Strictly Necessary Cookie should be enabled at all times so that we can save your preferences for cookie settings.</tab_content>
+         <tab_warning>If you disable this cookie, we will not be able to save your preferences. This means that every time you visit this website you will need to enable or disable cookies again.</tab_warning>
+         <cookie_used>cookielaw,mage-cache-sessid, mage-cache-storage, mage-cache-storage-section-invalidation, mage-messages, mage-translation-file-version, mage-translation-storage, store</cookie_used>
+      </strictly>
+      <third_party>
+         <tab_title>3rd Party Cookies</tab_title>
+         <tab_content>These are used to track user interaction and detect potential problems. These help us improve our services by providing analytical data on how users use this site.</tab_content>
+         <cookie_used>_ga, _gid, _gat</cookie_used>
+      </third_party>
+      <additional>
+         <tab_title>Additional Cookies</tab_title>
+         <tab_content>These are used to track user interaction and detect potential problems. These help us improve our services by providing analytical data on how users use this site.</tab_content>
+      </additional>
+      <policy>
+         <tab_title>Cookie Policy</tab_title>
+         <tab_content>&lt;p&gt;When you visit any website, it may store or retrieve information on your browser, mostly in the form of cookies. This information might be about you, your preferences or your device and is mostly used to make the site work as you expect it to. The information does not usually directly identify you, but it can give you a more personalized web experience.&lt;/p&gt;
+
+&lt;p&gt;Because we respect your right to privacy, you can choose not to allow some types of cookies. Click on the different category headings to find out more and change our default settings. However, blocking some types of cookies may impact your experience of the site and the services we are able to offer.&lt;/p&gt;
+
+
+&lt;p&gt;You read and agreed to our
+ &lt;a href=&quot;#&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;privacy policy&lt;/a&gt;&lt;/p&gt;</tab_content>
+      </policy>
+      <integration>
+         <contact_text>By using this form you agree with the storage and handling of your data by this website.</contact_text>
+         <contact_error>Please accept the privacy checkbox.</contact_error>
+         <login_text>By using this form you agree with the storage and handling of your data by this website.</login_text>
+         <login_error>Please accept the privacy checkbox.</login_error>
+         <register_text>By using this form you agree with the storage and handling of your data by this website.</register_text>
+         <register_error>Please accept the privacy checkbox.</register_error>
+         <newsletter_text>By using this form you agree with the storage and handling of your data by this website.</newsletter_text>
+         <newsletter_error>Please accept the privacy checkbox.</newsletter_error>
+         <comment_text>By using this form you agree with the storage and handling of your data by this website.</comment_text>
+         <comment_error>Please accept the privacy checkbox.</comment_error>
+         <review_text>By using this form you agree with the storage and handling of your data by this website.</review_text>
+         <review_error>Please accept the privacy checkbox.</review_error>
+         <checkout_text>By using this form you agree with the storage and handling of your data by this website.</checkout_text>
+         <checkout_error>Please accept the privacy checkbox.</checkout_error>
+      </integration>
+   </cookielaw>
+   <clevernewsletter>
+      <display_options>
+         <enable>1</enable>
+         <background_color>#ffffff</background_color>
+         <background_image>02-12-novetty-newsletter-popup-bg-img_1.png</background_image>
+         <intro>Sign up here to get the latest news, updates and special offers delivered directly to your inbox.</intro>
+         <width>800</width>
+         <height>550</height>
+      </display_options>
+      <selected_pages>
+         <showon_allpage>0</showon_allpage>
+      </selected_pages>
+      <advanced_options>
+         <show_type>2</show_type>
+         <load_after>1</load_after>
+         <scroll_pxl>800</scroll_pxl>
+      </advanced_options>
+   </clevernewsletter>
+   <sociallogin>
+      <general>
+         <enable_for_login>1</enable_for_login>
+         <enable_for_register>1</enable_for_register>
+         <validate_ignore>1</validate_ignore>
+         <enable_photo>1</enable_photo>
+         <redirect_for_login>__referer__</redirect_for_login>
+         <redirect_for_register>__referer__</redirect_for_register>
+      </general>
+      <facebook>
+         <login_btn_text>Login with Facebook</login_btn_text>
+         <register_btn_text>Register with Facebook</register_btn_text>
+      </facebook>
+      <twitter>
+         <login_btn_text>Login with Twitter</login_btn_text>
+         <register_btn_text>Register with Twitter</register_btn_text>
+      </twitter>
+      <google>
+         <login_btn_text>Login with Google</login_btn_text>
+         <register_btn_text>Register with Google</register_btn_text>
+      </google>
+      <linkedin>
+         <login_btn_text>Login with Linkedin</login_btn_text>
+         <register_btn_text>Register with Linkedin</register_btn_text>
+      </linkedin>
+      <instagram>
+         <login_btn_text>Login with Instagram</login_btn_text>
+         <register_btn_text>Register with Instagram</register_btn_text>
+      </instagram>
+   </sociallogin>
+   <clevershopby>
+      <general>
+         <ajax_enabled>1</ajax_enabled>
+         <handle_filter_collapsing>1</handle_filter_collapsing>
+         <enabled>1</enabled>
+         <url>all-products</url>
+      </general>
+      <stock_filter>
+         <enabled>1</enabled>
+         <placed_block>1</placed_block>
+         <position>0</position>
+         <label>Stock</label>
+         <is_expanded>1</is_expanded>
+         <display_mode>0</display_mode>
+      </stock_filter>
+      <rating_filter>
+         <enabled>1</enabled>
+         <placed_block>1</placed_block>
+         <position>0</position>
+         <label>Rating</label>
+         <is_expanded>1</is_expanded>
+         <display_mode>0</display_mode>
+      </rating_filter>
+      <new_filter>
+         <enabled>0</enabled>
+         <placed_block>1</placed_block>
+         <position>0</position>
+         <label>New</label>
+         <is_expanded>0</is_expanded>
+         <display_mode>0</display_mode>
+      </new_filter>
+      <on_sale_filter>
+         <enabled>0</enabled>
+         <placed_block>1</placed_block>
+         <position>0</position>
+         <label>On Sale</label>
+         <is_expanded>0</is_expanded>
+         <display_mode>0</display_mode>
+      </on_sale_filter>
+      <tooltips>
+         <enabled>1</enabled>
+         <image/>
+      </tooltips>
+      <url>
+         <mode>1</mode>
+      </url>
+      <robots>
+         <control_robots>1</control_robots>
+      </robots>
+   </clevershopby>
+   <cleverdeferjs>
+      <general>
+         <enable>1</enable>
+      </general>
+   </cleverdeferjs>
+   <cleversofttheme>
+      <responsive>
+         <page_layout>wide-layout</page_layout>
+         <page_maxi_width>1440</page_maxi_width>
+         <rtl_language>0</rtl_language>
+         <iconlazyload/>
+         <promo_box_enable>0</promo_box_enable>
+         <promo_box_text>Summer sale discount off 50%! Shop Now</promo_box_text>
+         <promo_box_link>#</promo_box_link>
+         <threshold>0</threshold>
+      </responsive>
+      <header>
+         <sticky_enable>1</sticky_enable>
+         <compare>1</compare>
+         <wishlist>1</wishlist>
+         <layout>layout1</layout>
+         <full_header_width>0</full_header_width>
+         <img_flag>1</img_flag>
+         <canvas_cart>1</canvas_cart>
+      </header>
+      <category>
+         <aspect_ratio>1</aspect_ratio>
+         <aspect_ratio_size>1:1</aspect_ratio_size>
+         <alt_image>1</alt_image>
+         <alt_image_column>position</alt_image_column>
+         <alt_image_column_value>2</alt_image_column_value>
+         <image_width>300</image_width>
+         <image_height>300</image_height>
+         <thumbnail_width>150</thumbnail_width>
+         <thumbnail_height>150</thumbnail_height>
+         <small_width>320</small_width>
+         <small_height>320</small_height>
+         <medium_width>640</medium_width>
+         <medium_height>640</medium_height>
+         <large_width>1024</large_width>
+         <large_height>1024</large_height>
+      </category>
+      <category_grid>
+         <display_productname>visible</display_productname>
+         <display_name_single_line>0</display_name_single_line>
+         <display_rating>visible</display_rating>
+         <display_addtocart>remove</display_addtocart>
+         <display_addtolinks>0</display_addtolinks>
+         <addtolinks_simple>2</addtolinks_simple>
+         <addtolinks_position>0</addtolinks_position>
+         <column_count>6</column_count>
+         <column_count_1439>4</column_count_1439>
+         <column_count_1199>3</column_count_1199>
+         <column_count_767>2</column_count_767>
+         <equal_height>1</equal_height>
+         <centered>0</centered>
+         <enable_border_boxshadow>0</enable_border_boxshadow>
+         <disable_border_radius>0</disable_border_radius>
+      </category_grid>
+      <infinite_scroll>
+         <ic_type>none</ic_type>
+         <scroll_buffer>10</scroll_buffer>
+         <load_more_button_text>Load More</load_more_button_text>
+         <load_more_post_text>Loading More</load_more_post_text>
+      </infinite_scroll>
+      <product_page>
+         <image_column>6</image_column>
+         <primary_column>6</primary_column>
+         <secondary_column/>
+         <lower_primary_column>12</lower_primary_column>
+         <lower_secondary_column>12</lower_secondary_column>
+         <tabs>1</tabs>
+         <tabs_mode>1</tabs_mode>
+         <tabs_threshold>1024</tabs_threshold>
+         <tabs_collapsed>1</tabs_collapsed>
+         <tabs_style>style1</tabs_style>
+         <collateral_position>lowerPrimCol_1</collateral_position>
+         <collateral_reviews>1</collateral_reviews>
+         <collateral_tags>1</collateral_tags>
+         <collateral_related>0</collateral_related>
+         <collateral_upsell>0</collateral_upsell>
+         <related_position>lowerPrimCol_1</related_position>
+         <related_template>CleverSoft_CleverTheme::product/list/slider.phtml</related_template>
+         <related_breakpoints>[0, 1], [320, 2], [480, 3], [768, 4]</related_breakpoints>
+         <related_timeout>6000</related_timeout>
+         <related_checkbox>0</related_checkbox>
+         <brand_position>secCol_1</brand_position>
+         <prev_next>1</prev_next>
+         <prev_text>&lt;i class=&apos;cs-font clever-icon-caret-left&apos;&gt;&lt;/i&gt;</prev_text>
+         <next_text>&lt;i class=&apos;cs-font clever-icon-caret-right&apos;&gt;&lt;/i&gt;</next_text>
+         <enable_sticky_addtocart>1</enable_sticky_addtocart>
+         <tab_style/>
+         <main_image_width>600</main_image_width>
+         <main_image_height>600</main_image_height>
+         <thumb_image_width>75</thumb_image_width>
+      </product_page>
+      <product_labels>
+         <new>1</new>
+         <new_label_text>New</new_label_text>
+         <sale>1</sale>
+         <sale_label_text>Sale</sale_label_text>
+         <sale_label_percent>1</sale_label_percent>
+      </product_labels>
+      <footer>
+         <links_column_auto_width>1</links_column_auto_width>
+      </footer>
+      <product_slider>
+         <timeout/>
+         <speed/>
+         <move_items/>
+      </product_slider>
+      <magento_blocks>
+         <top_links>0</top_links>
+         <footer_newsletter>0</footer_newsletter>
+      </magento_blocks>
+      <install>
+         <overwrite_blocks>0</overwrite_blocks>
+         <overwrite_pages>0</overwrite_pages>
+      </install>
+   </cleversofttheme>
+   <cleversofttheme_design>
+      <colors>
+         <text_color>#333333</text_color>
+         <link_color>#333333</link_color>
+         <link_hover_color>#9f0145</link_hover_color>
+         <button_bg_color>#333333</button_bg_color>
+         <button_color>#ffffff</button_color>
+         <button_border_color>rgba(0, 0, 0, 0)</button_border_color>
+         <button_hover_color>#ffffff</button_hover_color>
+         <button_bg_hover_color>#9f0145</button_bg_hover_color>
+         <button_border_hover_color>rgba(0, 0, 0, 0)</button_border_hover_color>
+         <label_sale_bg_color>#9f0145</label_sale_bg_color>
+         <label_sale_color>#ffffff</label_sale_color>
+         <price_color>#333333</price_color>
+         <heading_color_title>#000000</heading_color_title>
+         <rating_active_color>#f9bf3b</rating_active_color>
+      </colors>
+      <font>
+         <body_font>0</body_font>
+         <font_size>14px</font_size>
+         <primary_font_family_group>google</primary_font_family_group>
+         <primary_font_family_custom>Cairo</primary_font_family_custom>
+         <primary_font_family>Roboto</primary_font_family>
+         <primary_char_subset/>
+         <primary_font_weight>400</primary_font_weight>
+         <h1_font>0</h1_font>
+         <h1_primary_font_family_group>google</h1_primary_font_family_group>
+         <h2_font>0</h2_font>
+         <h2_primary_font_family_group>google</h2_primary_font_family_group>
+         <h3_font>0</h3_font>
+         <h3_primary_font_family_group>google</h3_primary_font_family_group>
+         <h4_font>0</h4_font>
+         <h4_primary_font_family_group>google</h4_primary_font_family_group>
+         <h5_font>0</h5_font>
+         <h5_primary_font_family_group>google</h5_primary_font_family_group>
+         <h6_font>0</h6_font>
+         <h6_primary_font_family_group>google</h6_primary_font_family_group>
+      </font>
+      <page>
+         <bg_color>#ffffff</bg_color>
+         <bg_image/>
+         <bg_repeat>repeat</bg_repeat>
+         <bg_attachment>scroll</bg_attachment>
+         <bg_positionx>center</bg_positionx>
+         <bg_positiony>top</bg_positiony>
+         <tex>0</tex>
+         <content_padding_side>15</content_padding_side>
+      </page>
+      <header>
+         <color>#333333</color>
+         <link_color>#333333</link_color>
+         <link_hover_color>#9f0145</link_hover_color>
+         <header_opacity>1</header_opacity>
+         <bg_color>#ffffff</bg_color>
+         <bg_image/>
+         <bg_repeat>no-repeat</bg_repeat>
+         <bg_attachment>scroll</bg_attachment>
+         <bg_positionx>center</bg_positionx>
+         <bg_positiony>top</bg_positiony>
+         <padding_top/>
+         <padding_bottom/>
+         <inner_bg_color>#ffffff</inner_bg_color>
+      </header>
+      <header_top>
+         <color>#ffffff</color>
+         <link_color>#ffffff</link_color>
+         <link_hover_color/>
+         <line_height>18</line_height>
+         <bg_color>#000000</bg_color>
+         <padding_top>10</padding_top>
+         <padding_bottom>10</padding_bottom>
+         <inner_bg_color/>
+      </header_top>
+      <header_primary>
+         <line_height>24</line_height>
+         <bg_color>#ffffff</bg_color>
+         <padding_top/>
+         <padding_bottom/>
+         <inner_bg_color/>
+      </header_primary>
+      <m_header>
+         <bg_color/>
+         <padding_top/>
+         <padding_bottom/>
+         <inner_bg_color/>
+         <content_padding_side/>
+      </m_header>
+      <nav>
+         <font_size>13</font_size>
+         <font_uppercase>1</font_uppercase>
+         <sticky_header>#ffffff</sticky_header>
+         <inner_bg_color>#ffffff</inner_bg_color>
+         <bg_color>rgba(0, 0, 0, 0)</bg_color>
+         <color>#333333</color>
+         <hover_bg_color>rgba(0, 0, 0, 0)</hover_bg_color>
+         <hover_color>#9f0145</hover_color>
+         <canvas_bg_content_color>#ffffff</canvas_bg_content_color>
+         <canvas_color>#ffffff</canvas_color>
+         <canvas_hover_color>#ffffff</canvas_hover_color>
+      </nav>
+      <main>
+         <bg_color>#ffffff</bg_color>
+         <tex>0</tex>
+         <padding_top/>
+         <padding_bottom/>
+         <inner_bg_color>#ffffff</inner_bg_color>
+         <content_padding_top>0</content_padding_top>
+         <content_padding_bottom>0</content_padding_bottom>
+         <content_padding_side/>
+      </main>
+      <page_footer>
+         <bg_color>#f4f4f4</bg_color>
+         <link_color>#282828</link_color>
+         <color>#ffffff</color>
+         <hover_color>#282828</hover_color>
+      </page_footer>
+      <footer_container>
+         <bg_color>#3a302f</bg_color>
+         <link_color>#999999</link_color>
+         <color>#999999</color>
+         <hover_color>#9f0145</hover_color>
+      </footer_container>
+      <footer_copyright>
+         <bg_color>#2f2725</bg_color>
+         <color>#c1c1c1</color>
+      </footer_copyright>
+      <product_detail>
+         <bg_color>#f4f4f4</bg_color>
+         <color>#ffffff</color>
+      </product_detail>
+   </cleversofttheme_design>
+   <cleversofttheme_custom_css>
+      <css_swing_editor>
+         <custom_css/>
+         <custom_css_enable>0</custom_css_enable>
+      </css_swing_editor>
+   </cleversofttheme_custom_css>
+   <cookielaw>
+      <general>
+         <enablecookie>1</enablecookie>
+         <type>v-box</type>
+         <bar_position>v-top</bar_position>
+         <box_position>v-bottom-left</box_position>
+         <skin/>
+         <behaviour>0</behaviour>
+         <autohide>0</autohide>
+         <load_after>10</load_after>
+      </general>
+      <content>
+         <custom_message>We use cookies to offer you a better browsing experience, analyze site traffic, personalize content, and serve targeted advertisements. Read about how we use cookies and how you can control them by clicking “Privacy Preferences”. If you continue to use this site, you consent to our use of cookies.</custom_message>
+         <custom_accept>Accept</custom_accept>
+         <custom_more_info>Privacy Preference</custom_more_info>
+         <cms_page>privacy-policy-cookie-restriction-mode</cms_page>
+      </content>
+      <privacy>
+         <tab_title>Privacy Overview</tab_title>
+         <tab_content>&lt;p&gt;This website uses cookies so that we can provide you with the best user experience possible. Cookie information is stored in your browser and performs functions such as recognising you when you return to our website and helping our team to understand which sections of the website you find most interesting and useful.&lt;/p&gt;
+
+&lt;p&gt;You can adjust all of your cookie settings by navigating the tabs on the left hand side.&lt;/p&gt;</tab_content>
+      </privacy>
+      <strictly>
+         <tab_title>Strictly Necessary Cookies</tab_title>
+         <tab_content>Strictly Necessary Cookie should be enabled at all times so that we can save your preferences for cookie settings.</tab_content>
+         <tab_warning>If you disable this cookie, we will not be able to save your preferences. This means that every time you visit this website you will need to enable or disable cookies again.</tab_warning>
+         <cookie_used>cookielaw,mage-cache-sessid, mage-cache-storage, mage-cache-storage-section-invalidation, mage-messages, mage-translation-file-version, mage-translation-storage, store</cookie_used>
+      </strictly>
+      <third_party>
+         <tab_title>3rd Party Cookies</tab_title>
+         <tab_content>These are used to track user interaction and detect potential problems. These help us improve our services by providing analytical data on how users use this site.</tab_content>
+         <cookie_used>_ga, _gid, _gat</cookie_used>
+      </third_party>
+      <additional>
+         <tab_title>Additional Cookies</tab_title>
+         <tab_content>These are used to track user interaction and detect potential problems. These help us improve our services by providing analytical data on how users use this site.</tab_content>
+      </additional>
+      <policy>
+         <tab_title>Cookie Policy</tab_title>
+         <tab_content>&lt;p&gt;When you visit any website, it may store or retrieve information on your browser, mostly in the form of cookies. This information might be about you, your preferences or your device and is mostly used to make the site work as you expect it to. The information does not usually directly identify you, but it can give you a more personalized web experience.&lt;/p&gt;
+
+&lt;p&gt;Because we respect your right to privacy, you can choose not to allow some types of cookies. Click on the different category headings to find out more and change our default settings. However, blocking some types of cookies may impact your experience of the site and the services we are able to offer.&lt;/p&gt;
+
+
+&lt;p&gt;You read and agreed to our
+ &lt;a href=&quot;#&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;privacy policy&lt;/a&gt;&lt;/p&gt;</tab_content>
+      </policy>
+      <integration>
+         <contact_text>By using this form you agree with the storage and handling of your data by this website.</contact_text>
+         <contact_error>Please accept the privacy checkbox.</contact_error>
+         <login_text>By using this form you agree with the storage and handling of your data by this website.</login_text>
+         <login_error>Please accept the privacy checkbox.</login_error>
+         <register_text>By using this form you agree with the storage and handling of your data by this website.</register_text>
+         <register_error>Please accept the privacy checkbox.</register_error>
+         <newsletter_text>By using this form you agree with the storage and handling of your data by this website.</newsletter_text>
+         <newsletter_error>Please accept the privacy checkbox.</newsletter_error>
+         <comment_text>By using this form you agree with the storage and handling of your data by this website.</comment_text>
+         <comment_error>Please accept the privacy checkbox.</comment_error>
+         <review_text>By using this form you agree with the storage and handling of your data by this website.</review_text>
+         <review_error>Please accept the privacy checkbox.</review_error>
+         <checkout_text>By using this form you agree with the storage and handling of your data by this website.</checkout_text>
+         <checkout_error>Please accept the privacy checkbox.</checkout_error>
+      </integration>
+   </cookielaw>
+   <clevernewsletter>
+      <display_options>
+         <enable>1</enable>
+         <background_color>#ffffff</background_color>
+         <background_image>02-12-novetty-newsletter-popup-bg-img_1.png</background_image>
+         <intro>Sign up here to get the latest news, updates and special offers delivered directly to your inbox.</intro>
+         <width>800</width>
+         <height>550</height>
+      </display_options>
+      <selected_pages>
+         <showon_allpage>0</showon_allpage>
+      </selected_pages>
+      <advanced_options>
+         <show_type>2</show_type>
+         <load_after>1</load_after>
+         <scroll_pxl>800</scroll_pxl>
+      </advanced_options>
+   </clevernewsletter>
+   <sociallogin>
+      <general>
+         <enable_for_login>1</enable_for_login>
+         <enable_for_register>1</enable_for_register>
+         <validate_ignore>1</validate_ignore>
+         <enable_photo>1</enable_photo>
+         <redirect_for_login>__referer__</redirect_for_login>
+         <redirect_for_register>__referer__</redirect_for_register>
+      </general>
+      <facebook>
+         <login_btn_text>Login with Facebook</login_btn_text>
+         <register_btn_text>Register with Facebook</register_btn_text>
+      </facebook>
+      <twitter>
+         <login_btn_text>Login with Twitter</login_btn_text>
+         <register_btn_text>Register with Twitter</register_btn_text>
+      </twitter>
+      <google>
+         <login_btn_text>Login with Google</login_btn_text>
+         <register_btn_text>Register with Google</register_btn_text>
+      </google>
+      <linkedin>
+         <login_btn_text>Login with Linkedin</login_btn_text>
+         <register_btn_text>Register with Linkedin</register_btn_text>
+      </linkedin>
+      <instagram>
+         <login_btn_text>Login with Instagram</login_btn_text>
+         <register_btn_text>Register with Instagram</register_btn_text>
+      </instagram>
+   </sociallogin>
+   <clevershopby>
+      <general>
+         <ajax_enabled>1</ajax_enabled>
+         <handle_filter_collapsing>1</handle_filter_collapsing>
+         <enabled>1</enabled>
+         <url>all-products</url>
+      </general>
+      <stock_filter>
+         <enabled>1</enabled>
+         <placed_block>1</placed_block>
+         <position>0</position>
+         <label>Stock</label>
+         <is_expanded>1</is_expanded>
+         <display_mode>0</display_mode>
+      </stock_filter>
+      <rating_filter>
+         <enabled>1</enabled>
+         <placed_block>1</placed_block>
+         <position>0</position>
+         <label>Rating</label>
+         <is_expanded>1</is_expanded>
+         <display_mode>0</display_mode>
+      </rating_filter>
+      <new_filter>
+         <enabled>0</enabled>
+         <placed_block>1</placed_block>
+         <position>0</position>
+         <label>New</label>
+         <is_expanded>0</is_expanded>
+         <display_mode>0</display_mode>
+      </new_filter>
+      <on_sale_filter>
+         <enabled>0</enabled>
+         <placed_block>1</placed_block>
+         <position>0</position>
+         <label>On Sale</label>
+         <is_expanded>0</is_expanded>
+         <display_mode>0</display_mode>
+      </on_sale_filter>
+      <tooltips>
+         <enabled>1</enabled>
+         <image/>
+      </tooltips>
+      <url>
+         <mode>1</mode>
+      </url>
+      <robots>
+         <control_robots>1</control_robots>
+      </robots>
+   </clevershopby>
+   <cleverdeferjs>
+      <general>
+         <enable>1</enable>
+      </general>
+   </cleverdeferjs>
+</default>

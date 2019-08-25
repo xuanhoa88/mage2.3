@@ -1,0 +1,264 @@
+"Related posts","Related posts"
+Author:,Author:
+"We can't find posts matching the selection.","We can't find posts matching the selection."
+"CONTINUE READING <i class=""fa fa-long-arrow-right"" aria-hidden=""true""></i>","CONTINUE READING <i class=""fa fa-long-arrow-right"" aria-hidden=""true""></i>"
+"See more","See more"
+"Share: ","Share: "
+"You Might Also Like","You Might Also Like"
+"Related Products","Related Products"
+"Add to Cart","Add to Cart"
+"In stock","In stock"
+"Out of stock","Out of stock"
+"Add to Wishlist","Add to Wishlist"
+"Add to Compare","Add to Compare"
+Archives,Archives
+"Archive %s","Archive %s"
+"Blog Category","Blog Category"
+"Latest News","Latest News"
+"RSS Feed","RSS Feed"
+Search,Search
+"Search posts here...","Search posts here..."
+"A world of Inspiration","A world of Inspiration"
+"Read more","Read more"
+Posted:,Posted:
+Categories:,Categories:
+"Read more &#187;","Read more &#187;"
+"Go back to product details","Go back to product details"
+"Customize and Add to Cart","Customize and Add to Cart"
+"* Required Fields","* Required Fields"
+"Your Customization","Your Customization"
+Availability,Availability
+Summary,Summary
+"%1 x %2","%1 x %2"
+Availability:,Availability:
+None,None
+Quantity,Quantity
+"Choose a selection...","Choose a selection..."
+"Customize %1","Customize %1"
+"No options of this product are available.","No options of this product are available."
+SKU,SKU
+"Gift Message","Gift Message"
+From:,From:
+To:,To:
+Message:,Message:
+N/A,N/A
+"Product Name","Product Name"
+Price,Price
+Subtotal,Subtotal
+"Discount Amount","Discount Amount"
+"Row Total","Row Total"
+"Qty Invoiced","Qty Invoiced"
+Ordered,Ordered
+Shipped,Shipped
+Canceled,Canceled
+Refunded,Refunded
+"Qty Shipped","Qty Shipped"
+"Compare Products","Compare Products"
+"Print This Page","Print This Page"
+"Remove Product","Remove Product"
+Product,Product
+"You have no items to compare.","You have no items to compare."
+"Remove This Item","Remove This Item"
+Compare,Compare
+"Clear All","Clear All"
+"Close Window","Close Window"
+Prev,Prev
+Next,Next
+"We can't find products matching the selection.","We can't find products matching the selection."
+"Add to Wishlist","Add to Wishlist"
+"Quick View","Quick View"
+"Quick View","Quick View"
+WishList,WishList
+"We found other products you might like!","We found other products you might like!"
+"More Choices:","More Choices:"
+"New Products","New Products"
+"Check items to add to the cart or","Check items to add to the cart or"
+"select all","select all"
+Filter,Filter
+"Showing %1-%2 of %3","Showing %1-%2 of %3"
+"%1 Item","%1 Item"
+"%1 Items","%1 Items"
+results,results
+Show,Show
+"per page","per page"
+"Sort By","Sort By"
+"Set Ascending Direction","Set Ascending Direction"
+"Set Descending Direction","Set Descending Direction"
+"View as","View as"
+"Learn More","Learn More"
+Qty,Qty
+"More Information","More Information"
+label,label
+Email,Email
+Change,Change
+Delete,Delete
+"Compatible file extensions to upload","Compatible file extensions to upload"
+"Maximum image width","Maximum image width"
+px.,px.
+"Maximum image height","Maximum image height"
+"Maximum number of characters:","Maximum number of characters:"
+"Discount Code","Discount Code"
+"Coupon code","Coupon code"
+"APPLY DISCOUNT","APPLY DISCOUNT"
+"Apply Discount","Apply Discount"
+"Cancel Coupon","Cancel Coupon"
+"Shopping Cart Items","Shopping Cart Items"
+Total,Total
+"UPDATE CART","UPDATE CART"
+Item,Item
+"See price before order confirmation.","See price before order confirmation."
+"What's this?","What's this?"
+"Edit item parameters","Edit item parameters"
+"Remove item","Remove item"
+"<a href=""' . . '"">SHOPPING CART</a> <i class=""fa fa-long-arrow-right"" aria-hidden=""true""></i><span class=""active""> CHECKOUT DETAIL</span> <i class=""fa fa-long-arrow-right"" aria-hidden=""true""></i> <span>ORDER COMPLETE</span>","<a href=""' . . '"">SHOPPING CART</a> <i class=""fa fa-long-arrow-right"" aria-hidden=""true""></i><span class=""active""> CHECKOUT DETAIL</span> <i class=""fa fa-long-arrow-right"" aria-hidden=""true""></i> <span>ORDER COMPLETE</span>"
+"GO TO CHECKOUT","GO TO CHECKOUT"
+"Your order number is: %1.","Your order number is: %1."
+"Your order # is: <span>%1</span>.","Your order # is: <span>%1</span>."
+"We'll email you an order confirmation with details and tracking info.","We'll email you an order confirmation with details and tracking info."
+"Continue Shopping","Continue Shopping"
+"Let’s Talk Together","Let’s Talk Together"
+"You already know what we do. Now all you have to do is get in touch<br> with us. Give us a call, shoot us an email, or drop in for some<br> wonderfully brewed coffee.","You already know what we do. Now all you have to do is get in touch<br> with us. Give us a call, shoot us an email, or drop in for some<br> wonderfully brewed coffee."
+"Send A Message","Send A Message"
+Name,Name
+"Phone Number","Phone Number"
+"What’s on your mind?","What’s on your mind?"
+Submit,Submit
+"Hello, ","Hello, "
+or,or
+"Sign In","Sign In"
+"Sign in / Register","Sign in / Register"
+"Please enter your email below and we will send you the confirmation link.","Please enter your email below and we will send you the confirmation link."
+"Send confirmation link","Send confirmation link"
+"Back to Sign In","Back to Sign In"
+"Please enter your email address below to receive a password reset link.","Please enter your email address below to receive a password reset link."
+"Email *","Email *"
+"Password *","Password *"
+Password,Password
+"Forgot Your Password?","Forgot Your Password?"
+Login,Sign In
+"Subscription option","Subscription option"
+"General Subscription","General Subscription"
+Save,Save
+Back,Back
+"Personal Information","Personal Information"
+"Sign Up for Newsletter","Sign Up for Newsletter"
+"Address Information","Address Information"
+Company,Company
+"Street Address","Street Address"
+"Street Address %1","Street Address %1"
+Address,Address
+City,City
+State/Province,State/Province
+"Please select a region, state or province.","Please select a region, state or province."
+"Zip/Postal Code","Zip/Postal Code"
+Country,Country
+"Sign-in Information","Sign-in Information"
+"Confirm Password","Confirm Password"
+"Create an Account","Create an Account"
+"New Password","New Password"
+"Confirm New Password","Confirm New Password"
+"Set a New Password","Set a New Password"
+"Don’t have an account? Register Now","Don’t have an account? Register Now"
+Gender,Gender
+"Tax/VAT number","Tax/VAT number"
+Currency,Currency
+"Your current currency is: %1.","Your current currency is: %1."
+Continue,Continue
+"Refine By","Refine By"
+Previous,Previous
+Remove,Remove
+"Shop By","Shop By"
+"Shopping Options","Shopping Options"
+Newsletter,Newsletter
+"Email address","Email address"
+"Sign Up","Sign Up"
+Subscribe,Subscribe
+"Write Your Own Review","Write Your Own Review"
+"You're reviewing: ","You're reviewing: "
+"%1 %2","%1 %2"
+Review,Review
+"Only registered users can write reviews. Please, <a href=""%1"">Sign in</a> or <a href=""%2"">create an account</a>","Only registered users can write reviews. Please, <a href=""%1"">Sign in</a> or <a href=""%2"">create an account</a>"
+Rating,Rating
+Reviews,Reviews
+"Add Your Review","Add Your Review"
+"Be the first to review this product","Be the first to review this product"
+"Customer Reviews","Customer Reviews"
+"Review by","Review by"
+"Search for Products","Search for Products"
+"Search entire store here...","Search entire store here..."
+"There are no search terms available.","There are no search terms available."
+Language,Language
+"Help Us Keep Magento Healthy","Help Us Keep Magento Healthy"
+"Report All Bugs","Report All Bugs"
+"Add to cart","Add to cart"
+"JavaScript seems to be disabled in your browser.","JavaScript seems to be disabled in your browser."
+"For the best experience on our site, be sure to turn on Javascript in your browser.","For the best experience on our site, be sure to turn on Javascript in your browser."
+"Local Storage seems to be disabled in your browser.","Local Storage seems to be disabled in your browser."
+"For the best experience on our site, be sure to turn on Local Storage in your browser.","For the best experience on our site, be sure to turn on Local Storage in your browser."
+"This is demo store. No orders will be fulfilled.","This is demo store. No orders will be fulfilled."
+"Items %1 to %2 of %3 total","Items %1 to %2 of %3 total"
+"%1 Item(s)","%1 Item(s)"
+Page,Page
+"You're currently reading page","You're currently reading page"
+Share,Share
+"Incl. Tax","Incl. Tax"
+"Total Incl. Tax","Total Incl. Tax"
+"Excl. Tax","Excl. Tax"
+"Click here to login","Click here to login"
+"Email Address","Email Address"
+"Forgot Password","Forgot Password"
+"Estimated Total","Estimated Total"
+"You already have an account with us. Sign in or continue as guest.","You already have an account with us. Sign in or continue as guest."
+"My Cart","My Cart"
+item,item
+items,items
+"Recently added item(s)","Recently added item(s)"
+"View cart","View cart"
+Checkout,Checkout
+"Your cart is empty.","Your cart is empty."
+"Start shopping now !","Start shopping now !"
+"See Details","See Details"
+"Options Details","Options Details"
+Update,Update
+"Sub Total","Sub Total"
+"Place Order","Place Order"
+"Forgot an Item?","Forgot an Item?"
+"Edit Your Cart","Edit Your Cart"
+Products,Products
+"%name,","%name,"
+"Welcome to %store_name.","Welcome to %store_name."
+"To sign in to our site, use these credentials during checkout or on the <a href=""%customer_url"">My Account</a> page:","To sign in to our site, use these credentials during checkout or on the <a href=""%customer_url"">My Account</a> page:"
+Email:,Email:
+Password:,Password:
+"Password you set when creating account","Password you set when creating account"
+"Forgot your account password? Click <a href=""%reset_url"">here</a> to reset it.","Forgot your account password? Click <a href=""%reset_url"">here</a> to reset it."
+"When you sign in to your account, you will be able to:","When you sign in to your account, you will be able to:"
+"Quick Checkout","Quick Checkout"
+"Proceed through checkout faster","Proceed through checkout faster"
+"Order Status","Order Status"
+"Check the status of orders","Check the status of orders"
+"Manage Addresses","Manage Addresses"
+"Store alternative addresses","Store alternative addresses"
+"For shipping to multiple family members and friends","For shipping to multiple family members and friends"
+"Order History","Order History"
+"View past orders","View past orders"
+"Apply Discount Code","Apply Discount Code"
+"Enter discount code","Enter discount code"
+"Cancel coupon","Cancel coupon"
+Adding...,Adding...
+Added,Added
+"Welcome, %1!","Welcome, %1!"
+Blog,Blog
+none,none
+Overview,Overview
+"You might also like","You might also like"
+Shipping,Shipping
+Discount,Discount
+Tax,Tax
+"Order Total Excl. Tax","Order Total Excl. Tax"
+"Order Total Incl. Tax","Order Total Incl. Tax"
+"Order Total","Order Total"
+"Edit Account Information","Edit Account Information"
+"Password forgotten","Password forgotten"
+Join,Join
+"Search Terms","Search Terms"

@@ -1,0 +1,11 @@
+<script>
+require(['jquery', 'jquery/ui'], function($){
+    $(document).ready( function() {
+        $(".col-pin_ids").find('.admin__control-checkbox').attr('name', 'pin_ids[]');
+        $(".data-grid-th .admin__control-checkbox").click(function() {
+            var elements = $("input[name='pin_ids[]']");
+            elements.prop('checked', this.checked);
+        });
+    });
+});
+</script>

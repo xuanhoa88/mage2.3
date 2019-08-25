@@ -1,0 +1,66 @@
+& when (@media-common = true) {
+    .config-nav-block.cleverextensions-config-tab strong:before {
+        background: url('@{baseDir}CleverSoft_Base/images/cleversoft_logo.png') no-repeat;
+        width: 30px;
+        height: 30px;
+        content: '';
+        display: inline-block;
+        margin-right: 12px;
+        vertical-align: text-bottom;
+    }
+    .cleversoft-button-wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+    a.cleversoft-button-link.cleversoft-button {
+        font-weight: normal;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #ffffff;
+        background-color: #f26324;
+        border-radius: 40px 40px 40px 40px;
+        border-style: solid;
+        border-width: 3px 3px 3px 3px;
+        border-color: #e4e4e4;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.5) inset;
+        font-size: 15px;
+        padding: 12px 24px;
+        display: inline-block;
+        line-height: 1;
+        text-align: center;
+        -webkit-transition: all .5s;
+        -o-transition: all .5s;
+        transition: all .5s;
+    }
+    a.cleversoft-button-link.cleversoft-button:hover {
+        background-color: #61ce70;
+    }
+    span.cleversoft-button-content-wrapper {
+        text-decoration: inherit;
+    }
+    span.cleversoft-button-text {
+        display: inline-block;
+    }
+    .cleversoft-module-version div:first-child {
+        margin-bottom: 25px;
+    }
+    .cleversoft-info-block .module-version.last-version {
+        color: green;
+    }
+    .version-title, .module-version {
+        font-size: 1.7rem;
+        font-weight: 600;
+        letter-spacing: .025em;
+    }
+    .cleversoft-module-version .cleversoft-logo {
+        display: inline-block;
+        position: relative;
+        max-height: 26px;
+        bottom: -5px;
+    }
+    .cleversoft-info-block span.message {
+        display: inline-block;
+    }
+}

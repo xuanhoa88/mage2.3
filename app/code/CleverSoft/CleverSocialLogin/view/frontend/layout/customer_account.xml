@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
+    <body>
+        <referenceBlock name="popup" remove="true"/>
+        <referenceBlock name="builder.user.area" template="CleverSoft_CleverSocialLogin::account/link/logout.phtml"/>
+    </body>
+</page>

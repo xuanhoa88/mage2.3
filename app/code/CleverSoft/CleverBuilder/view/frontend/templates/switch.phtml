@@ -1,0 +1,31 @@
+<?php
+    $file_style = $this->helper('CleverSoft\CleverBuilder\Helper\Styles')->getRootStyleFile();
+?>    
+<?php if(file_exists($file_style)):?>
+    <link rel="stylesheet" media="all" href="<?php echo $this->helper('CleverSoft\CleverBuilder\Helper\Styles')->getWidgetStyleFile();?>" />
+<?php endif;?>
+<?php
+$helper = $this->helper('CleverSoft\CleverBuilder\Helper\Data');
+if($this->getRequest()->getParam('previewUrl')) return;
+if (!$helper->isEnabledBuilder()) return;
+?>
+<div class="clever-builder-buttons-actions">
+    <?php
+    if($helper->getCustomerEnablePanel()) {
+    } else {
+    ?>
+        <a type="button" class="btn turn-on-builder action on" href="<?php echo $helper->getPageUrl(); ?>" action="<?php echo $helper->getLinkSwitch() ?>"><?php echo __('Edit with CleverBuilder'); ?></button></a>
+    <?php } ?>
+</div>
+<p style="width: 100%;clear: both;padding: 0;margin: 0;border: 0;max-height: 0;"></p>
+<script>document.body.className = document.body.className.replace("cleversoft-panels-before-js","");</script>
+<script type="text/x-magento-init">
+        {
+            ".clever-builder-buttons-actions": {
+                "CleverBuilderPanelButtons": {
+                    "turningOn" : "<?php /* @escapeNotVerified */ echo __('Turning On...') ?>",
+                    "turningOff" : "<?php /* @escapeNotVerified */ echo __('Turning Off...') ?>"
+                }
+            }
+        }
+</script>

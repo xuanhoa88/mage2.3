@@ -1,0 +1,131 @@
+<?php
+/**
+ * @category    CleverSoft
+ * @package     CleverLayeredNavigation
+ * @copyright   Copyright © 2017 CleverSoft., JSC. All Rights Reserved.
+ * @author 		ZooExtension.com
+ * @email       magento.cleversoft@gmail.com
+ */
+?>
+<?php
+/** @var \CleverSoft\LayeredNavigation\Model\FilterSetting $filterSetting */
+?>
+<?php if($filterSetting->isShowSearchBox()): ?>
+    <div class="clevershopby-search-box">
+        <input type="text" class="cleversoft_shopby_filter_search_box_<?php echo $filterSetting->getFilterCode();?>" placeholder="<?php echo __("Search")?>">
+    </div>
+<?php endif; ?>
+
+<ol class="items cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode();?>">
+    <?php foreach ($filterItems as $filterItem): ?>
+        <?php if ($filterItem->getCount() > 0): ?>
+            <?php if($filterItem->getChild()):?>
+                <li id="arrow_<?php echo $block->escapeId($filterItem->getValue())?>" class="zoo-toggle-category"><span class="cs-font clever-icon-down"></span></li>
+                <li class="item checkbox-filter" id="checkbox_filter_<?php echo $block->escapeId($filterItem->getValue())?>" data-label="<?php echo $this->escapeHtml($filterItem->getLabel())?>" <?php echo $filterSetting->isSeoSignificant() ? 'data-seo="'.strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $filterItem->getLabel()))).'"' : 'data-code="'.$filterSetting->getFilterCode().'"'?>>
+            <?php else:?>
+                <li class="item checkbox-filter" data-label="<?php echo $this->escapeHtml($filterItem->getLabel())?>" <?php echo $filterSetting->isSeoSignificant() ? 'data-seo="'.strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $filterItem->getLabel()))).'"' : 'data-code="'.$filterSetting->getFilterCode().'"'?> data-value="<?php echo $block->escapeId($filterItem->getValue())?>">
+            <?php endif;?>    
+                    <?php $checked =  $this->checkedFilter($filterItem) ? ' checked' : ''; ?>
+                    <a class="cleversoft_shopby_filter_item_<?php echo $block->escapeId($filterItem->getValue())?>" data-id="<?php echo $block->escapeId($filterItem->getValue())?>" href="<?php echo $block->escapeUrl($filterItem->getUrl()) ?>">
+                        <?php if ($filterSetting->isMultiselect()): ?>
+                            <input type="checkbox" class="<?php echo $checked ?>"/>
+                            <span class="checkbox-material"><span class="check <?php echo $checked ?>"></span></span>
+                        <?php endif; ?>
+                        <?php echo $filterItem->getLabel() ?>
+                        <?php if ($filterSetting->isShowProductQuantities()): ?>
+                            <span class="count pull-right"><?php echo $filterItem->getCount()?></span>
+                        <?php endif; ?>
+                    </a>
+                    <?php
+                    if($filterItem->getChild()) {
+                        $block->resetHtml();
+                        echo $block->getChildCategoriesTemplate($filterItem->getChild(),$filterSetting,false);
+                    }
+                    ?>
+                    <script type="text/x-magento-init">
+                    {
+                        ".cleversoft_shopby_filter_item_<?php echo $block->escapeId($filterItem->getValue())?>": {
+                            "cleverLayeredNavigationFilterItemDefault": {
+                                "isApply": <?php echo $this->helper('CleverSoft\CleverLayeredNavigation\Helper\Data')->isApplyEnabled() ? 1 : 0;?>,
+                                "isMultiSelect": <?php echo $filterSetting->isMultiselect() ? 1 : 0;?>
+                            }
+                        }
+                    }
+                    </script>
+                </li>
+                <script>
+                    require(['jquery'], function($){
+                        $(document).ready( function() {
+                            $("#checkbox_filter_<?php echo $block->escapeId($filterItem->getValue())?> > ol.level2").hide();
+                            $("#arrow_<?php echo $block->escapeId($filterItem->getValue())?>").click(function() {
+                                $(this).toggleClass('active');
+                                console.log('fff');
+                                $("#checkbox_filter_<?php echo $block->escapeId($filterItem->getValue())?> > ol.level2").slideToggle();
+                                if ($('.zoo-toggle-category').hasClass("active")) {
+                                    $('.layered-horizontal .zoo-filter-options-content ol.items.items-children').each(function () {
+                                        var LiN = $(this).children('li').length;
+                                        if (LiN > 5) {
+                                            $('.layered-horizontal .zoo-filter-options-content ol.items.cleversoft_shopby_filter_items_attr_category_ids').css('height', '150px');
+                                            $('.layered-horizontal .zoo-filter-options-content ol.items.cleversoft_shopby_filter_items_attr_category_ids').css('overflow', 'scroll');
+                                            $('.layered-horizontal .zoo-filter-options-content ol.items.cleversoft_shopby_filter_items_attr_category_ids').css('overflow-x', 'hidden');
+                                        }
+                                    });
+                                }
+                                else {
+                                    $('.layered-horizontal .zoo-filter-options-content ol.items.cleversoft_shopby_filter_items_attr_category_ids').css('overflow-y', 'hidden');
+                                }
+                            });
+                        });
+                    });
+                </script>
+        <?php endif; ?>
+    <?php endforeach ?>
+</ol>
+<?php if($filterSetting->isShowSearchBox()): ?>
+    <script type="text/x-magento-init">
+            {
+                ".cleversoft_shopby_filter_search_box_<?php echo $filterSetting->getFilterCode()?>": {
+                    "cleverLayeredNavigationFilterSearch": {
+                        "highlightTemplate": "<span class='clevershopby-hightlighted'>$&</span>",
+                        "itemsSelector": ".cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode();?>"
+                    }
+                }
+            }
+    </script>
+<?php endif; ?>
+
+<?php if($filterSetting->getNumberUnfoldedOptions()): ?>
+    <button class="clevershopby-more-button">
+        <a class="cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode()?>_show_more" data-text-more="<?php echo __("More")?>" data-text-less="<?php echo __("Less")?>" href="javascript:void(0)" data-is-hide="false">
+            <?php echo __("Less")?>
+        </a>
+    </button>
+    <script type="text/x-magento-init">
+            {
+                ".cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode()?>": {
+                    "cleverLayeredNavigationFilterHideMoreOptions": {
+                        "numberUnfoldedOptions": <?php echo $filterSetting->getNumberUnfoldedOptions()?>,
+                        "buttonSelector": ".cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode()?>_show_more"
+                    }
+                }
+            }
+    </script>
+<?php endif; ?>
+
+<?php if($filterSetting->isShowTooltip()): ?>
+    <?php
+    $tooltipTemplate = '<span class="tooltip clevershopby-filter-tooltip" style="float:right" title="{content}"><img src="'.$tooltipUrl.'"/></span>';
+    ?>
+    <script type="text/x-magento-init">
+            {
+                ".cleversoft_shopby_filter_items_<?php echo $filterSetting->getFilterCode()?>": {
+                    "cleverLayeredNavigationFilterAddTooltip": {
+                        "content": <?php echo json_encode($filterSetting->getTooltip())?>,
+                        "tooltipTemplate": <?php echo json_encode($tooltipTemplate)?>
+                    }
+                }
+            }
+    </script>
+<?php endif; ?>
+
+

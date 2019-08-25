@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="widget_instagram" class="CleverSoft\CleverInstagram\Block\Widget\Instagram" placeholder_image="CleverSoft_CleverInstagram::images/clever-instagram.png">
+        <label translate="true">Clever Instagram</label>
+        <description>CleverSoft - Instagram Widget</description>
+        <parameters>
+            <parameter name="getaccesstoken" xsi:type="conditions" visible="true" required="true" sort_order="1"
+                       class="CleverSoft\CleverInstagram\Block\Widget\Adminhtml\Accesstoken">
+                <label translate="true">Access Token</label>
+            </parameter>
+            <parameter name="modetakeimg" xsi:type="select" source_model="CleverSoft\CleverInstagram\Model\Config\Source\ModeImg" required="true" visible="true" sort_order="2" >
+                <label translate="true">Show Photos From</label>
+            </parameter>
+            <parameter name="userid" xsi:type="text" required="true" visible="true" sort_order="3">
+                <label translate="true">User Id</label>
+                <description translate="true">Display Image from a specific User Id.</description>
+                <depends>
+                    <parameter name="modetakeimg" value="userid" />
+                </depends>
+            </parameter>
+            <parameter name="hash_tag" xsi:type="text" required="true" visible="true" sort_order="4">
+                <label translate="true">Hash tag</label>
+                <description translate="true">Display Image from a specific hashtag.</description>
+                <depends>
+                    <parameter name="modetakeimg" value="hashtag" />
+                </depends>
+            </parameter>
+            <parameter name="latitude" xsi:type="text" required="true" visible="true" sort_order="5">
+                <label translate="true">Latitude</label>
+                <description translate="true">Your latitude</description>
+                <depends>
+                    <parameter name="modetakeimg" value="location" />
+                </depends>
+            </parameter>
+            <parameter name="longitude" xsi:type="text" required="true" visible="true" sort_order="6">
+                <label translate="true">Longitude</label>
+                <description translate="true">Your longitude</description>
+                <depends>
+                    <parameter name="modetakeimg" value="location" />
+                </depends>
+            </parameter>
+
+            <parameter name="accessToken" xsi:type="text" required="true" visible="true" sort_order="7">
+                <label translate="true">Access Token</label>
+            </parameter>
+
+            <parameter name="openimg" xsi:type="select" source_model="CleverSoft\CleverInstagram\Model\Config\Source\OpenImage" visible="true" sort_order="8" >
+                <label translate="true">Open Image</label>
+            </parameter>
+            <parameter name="layoutwg" xsi:type="select" source_model="CleverSoft\CleverInstagram\Model\Config\Source\Layoutwg" visible="true" sort_order="9" >
+                <label translate="true">Layout</label>
+            </parameter>
+
+            <parameter name="lazyload" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="10">
+                <label translate="true">Lazy load Image</label>
+            </parameter>
+
+            <parameter name="height_image" xsi:type="text" visible="true" sort_order="11">
+                <label translate="true">Image height (px)</label>
+                <depends>
+                    <parameter name="lazyload" value="1" />
+                </depends>
+            </parameter>
+
+            <parameter name="enable_fullwidth" xsi:type="select" required="true"  visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="12">
+                <label translate="true">Enable FullWidth</label>
+                <description translate="true">Enable If you want to show this to fit to the screen width</description>
+            </parameter>
+            <parameter name="numberimage" xsi:type="text" visible="true" sort_order="13">
+                <label translate="true">Number of Photos</label>
+                <description translate="true">Number of photos to show initially. Maximum of 33. Default is 10</description>
+            </parameter>
+            <parameter name="img_resolution" xsi:type="select" required="true"  visible="true"
+                       source_model="CleverSoft\CleverInstagram\Model\Config\Source\ImgResolution" sort_order="14">
+                <label translate="true">Image Resolution</label>
+            </parameter>
+            <parameter name="navigation_prev" xsi:type="text"  visible="true" sort_order="15">
+                <label translate="true">Prev Navigation</label>
+                <description translate="true">Prev navigation text</description>
+                <depends>
+                    <parameter name="layoutwg" value="carousel" />
+                </depends>
+            </parameter>
+            <parameter name="navigation_next" xsi:type="text"  visible="true" sort_order="16">
+                <label translate="true">Next Navigation</label>
+                <description translate="true">Next navigation text</description>
+                <depends>
+                    <parameter name="layoutwg" value="carousel" />
+                </depends>
+            </parameter>
+            <parameter name="sortby" xsi:type="select" visible="true" source_model="CleverSoft\CleverInstagram\Model\Config\Source\Sortby" sort_order="17">
+                <label translate="true">Sort by</label>
+                <description translate="true">Sort the images in a set order</description>
+            </parameter>
+            <parameter name="autoplay" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="18">
+                <label translate="true">Auto play</label>
+                <depends>
+                    <parameter name="layoutwg" value="carousel" />
+                </depends>
+            </parameter>
+            <parameter name="hoverpause" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="19">
+                <label translate="true">Hover pause</label>
+                <depends>
+                    <parameter name="layoutwg" value="carousel" />
+                </depends>
+            </parameter>
+            <parameter name="autoplaytime" xsi:type="text" visible="true" sort_order="20">
+                <label translate="true">Auto play Timeout (seconds)</label>
+                <depends>
+                    <parameter name="layoutwg" value="carousel" />
+                </depends>
+            </parameter>
+            <parameter name="pagination" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="21">
+                <label translate="true">Show pagination</label>
+                <depends>
+                    <parameter name="layoutwg" value="carousel" />
+                </depends>
+            </parameter>
+            <parameter name="bullet" xsi:type="select" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="22">
+                <label translate="true">Enable bullet</label>
+                <depends>
+                    <parameter name="layoutwg" value="carousel" />
+                </depends>
+            </parameter>
+            <parameter name="nbi480" xsi:type="text" visible="true" sort_order="23">
+                <label translate="true">Number item (480px up)</label>
+                <depends>
+                    <parameter name="layoutwg" value="carousel" />
+                </depends>
+            </parameter>
+            <parameter name="nbi768" xsi:type="text" visible="true" sort_order="24">
+                <label translate="true">Number item (768px up)</label>
+                <depends>
+                    <parameter name="layoutwg" value="carousel" />
+                </depends>
+            </parameter>
+            <parameter name="nbi990" xsi:type="text" visible="true" sort_order="25">
+                <label translate="true">Number item (992px up)</label>
+                <depends>
+                    <parameter name="layoutwg" value="carousel" />
+                </depends>
+            </parameter>
+            <parameter name="nbi1200" xsi:type="text" visible="true" sort_order="26">
+                <label translate="true">Number item (1200px up)</label>
+                <depends>
+                    <parameter name="layoutwg" value="carousel" />
+                </depends>
+            </parameter>
+            <parameter name="imgwidth" xsi:type="text" visible="true" sort_order="27">
+                <label translate="true">Image width (px)</label>
+                <depends>
+                    <parameter name="layoutwg" value="grid" />
+                </depends>
+            </parameter>
+            <parameter name="customclass" xsi:type="text" visible="true" sort_order="28">
+                <label translate="true">Custom Classes</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

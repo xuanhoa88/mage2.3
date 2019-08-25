@@ -1,0 +1,51 @@
+& when (@media-common = true) {
+	.zoo-cookielaw {
+		&__tab {
+			.title {
+				font-size: 20px;
+				font-weight: bold;
+			}
+			.pag {
+				text-align: center;
+			    padding: 30px 0 20px;
+			    a.btn-info {
+			    	text-decoration: none;
+		    	    padding: 0 5px;
+			    	&.active {
+		    		    cursor: default !important;
+		    		    font-weight: bold;
+			    	}
+			    }
+			}
+			tr {
+				&:nth-child(even) {
+				    background: @color-gray95;
+				}
+				th {
+					> input {
+					    margin: 8px 0;
+				        padding: 5px 0;
+					}
+				}
+				td {
+					input {
+						margin: 8px 0;
+					}
+				}
+				th, td {
+				    border: 1px solid @color-gray80;
+				}
+			}
+		}
+		&__title {
+		    padding: 10px 0;
+		}
+	}
+	.gdpr-request-table {
+	    width: 100%;
+	    margin-top: 30px;
+		th, td {
+			width: 25%;
+		}
+	}
+}

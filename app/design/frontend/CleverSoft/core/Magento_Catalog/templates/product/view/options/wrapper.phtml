@@ -1,0 +1,15 @@
+<?php
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+$required = '';
+if ($block->hasRequiredOptions()) {
+    $required = ' data-hasrequired="' . __('* Required Fields') . '"';
+}
+?>
+<div id="product-options-wrapper"<?php /* @escapeNotVerified */ echo $required; ?> class="required">
+        <?php echo $block->getChildHtml('', true);?>
+</div>
